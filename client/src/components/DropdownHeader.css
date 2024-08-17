@@ -1,0 +1,52 @@
+.button-m {
+    color: #eeeeee;
+    display: inline-block;
+}
+
+@keyframes glowing {
+    0% { background-color: rgb(83, 80, 80); box-shadow: 0 0 5px rgb(83, 80, 80); }
+    50% { background-color: rgb(247, 1, 1); box-shadow: 0 0 20px rgb(247, 1, 1); }
+    100% { background-color: rgb(83, 80, 80); box-shadow: 0 0 5px rgb(83, 80, 80); }
+}
+    
+.button-m {
+    animation: glowing 1300ms infinite;
+}
+
+
+@keyframes glowing2 {
+    0% { background-color: rgb(83, 80, 80); box-shadow: 0 0 0 rgb(83, 80, 80); }
+    50% { background-color: rgb(50, 31, 219); box-shadow: 0 0 0 rgb(50, 31, 219); }
+    100% { background-color: rgb(83, 80, 80); box-shadow: 0 0 0 rgb(83, 80, 80); }
+}
+    
+.button-d{
+    animation: glowing2 1000ms infinite;
+}
+
+
+.logo-anim {
+    animation: brightness 0.5s linear infinite;
+}
+
+@keyframes brightness {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.logo-anim2 {
+    animation: brightness2 0.5s linear infinite;
+}
+
+@keyframes brightness2 {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
