@@ -77,11 +77,6 @@ const UsersProvider = ({ children }) => {
 	const [newPretendent, setNewPretendent] = useState(false);
 	const [countPretendent, setCountPretendent] = useState(0)
 
-	const [userWorkers, setUserWorkers] = useState( () => {
-		const savedUserWorkers = localStorage.getItem("userWorkers");
-	   	const parsedUserWorkers = JSON.parse(savedUserWorkers);
-	   	return parsedUserWorkers || "";
-	}); 
 	const [workers, setWorkers] = useState([]); //100 последних специалистов;
 	const [workersAll, setWorkersAll] = useState([]); //все специалисты;
 
@@ -198,7 +193,6 @@ const UsersProvider = ({ children }) => {
 	useEffect(() => {
 		//---------get UserWorkers-----------------------------------------
 		const fetchUserWorkerData = async () => {
-			//console.log("userWorkers: ", userWorkers)
 		
 			//0 все специалисты
 			let all = await getRManagers()
@@ -398,10 +392,10 @@ const UsersProvider = ({ children }) => {
 
 					console.log("sortedClients: ", sortedClients.length)
 		
-					setUserWorkers(sortedClients)
+					setUserRenthub(sortedClients)
 
 					//сохранить кэш
-					localStorage.setItem("userWorkers", JSON.stringify(sortedClients));
+					localStorage.setItem("userRenthub", JSON.stringify(sortedClients));
 				}				
 			})	
 		}
@@ -719,8 +713,6 @@ function isObjectEmpty(obj) {
 			setNewProject,
 			projects,
 			setProjects,
-			userWorkers,
-			setUserWorkers,
 			userRenthub,
 			setUserRenthub,
 			conversations, 
