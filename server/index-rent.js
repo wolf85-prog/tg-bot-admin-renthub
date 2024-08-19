@@ -16,7 +16,7 @@ const bodyParser = require("body-parser");
 const cron = require('node-cron');
 
 //fetch api
-const fetch = require('node-fetch');
+//const fetch = require('node-fetch');
 const axios = require("axios");
 
 //socket.io
