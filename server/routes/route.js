@@ -11,6 +11,11 @@ const { getReports, getReportsId } = require('../controllers/reportController')
 const { getProjects, getProjectsId, getProjectNew, getProjectNewId, getProjectNewCreate, getProjectNewUpdate, getProjectNewDel } = require('../controllers/projectController')
 const { uploadFile, getImage } = require( "../controllers/fileController.js")
 
+const { getRmanagers, getRmanager, editRmanager, getRManagerCount } = require( "../controllers/rmanagersController.js")
+const { newMessageR,delMessageR, getAllMessagesR, getMessagesR, getMessagesRCount, getMessagesR2 } = require( "../controllers/rmessageController.js")
+const { getUsersRenthub, getUserRenthub, editUserRenthub } = require( "../controllers/ruserbotController.js")
+const { newConversationR, getConversationR, getConversationsR } = require( "../controllers/rconversationController.js")
+
 //const { newPlan, getPlan, addTimer } = require('../controllers/planController')
 
 
