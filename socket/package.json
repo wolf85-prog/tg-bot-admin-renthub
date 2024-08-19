@@ -1,10 +1,10 @@
 {
   "name": "socket",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "socket_rent.js",
   "scripts": {
-    "start": "node socket_app.js",
-    "dev": "nodemon socket_app.js"
+    "start": "node socket_rent.js",
+    "dev": "nodemon socket_rent.js"
   },
   "keywords": [],
   "author": "",
