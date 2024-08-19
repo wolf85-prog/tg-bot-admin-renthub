@@ -407,24 +407,6 @@ const UsersProvider = ({ children }) => {
 
 //------------------------------------------------------------------------------------------
 
-//------------------------------------------------------------------------------------------
-
-	
-	//users
-	const _updateUserProp = (userId, prop, value) => {
-		setUsers((users) => {
-			const usersCopy = [...users];
-			let userIndex = users.findIndex((user) => user.chatId === userId);
-			const userObject = usersCopy[userIndex];
-			usersCopy[userIndex] = { ...userObject, [prop]: value };
-			return usersCopy;
-		});
-	};
-
-
-
-//------------------------------------------------------------------------------------------
-
 	//получить сообщение из телеграмма
 	const fetchMessageResponse = async(data) => {
 		//пришло новое сообщение
@@ -451,6 +433,71 @@ const UsersProvider = ({ children }) => {
 
 		}
 
+		setUserRenthub((userWorkers) => {
+			const { senderId, text, type, messageId, convId, replyId, isBot } = data;
+			//console.log("users: ", users)
+			let userIndex = userWorkers.findIndex((user) => user.chatId === senderId.toString());
+			const usersCopy = JSON.parse(JSON.stringify(userWorkers));
+	
+			if (userIndex === -1) {
+				const newUser = {
+					id: usersCopy.length,
+					name: 'Новый менеджер',
+					chatId: `${senderId}`,
+					avatar: '',
+					conversationId: convId,
+					unread: 0, 
+					pinned: false,
+					typing: false,
+					message:  '',
+					date: '2000-01-01T00:00:00',
+					messages: {}, 
+				}	
+				usersCopy.push(newUser)
+				//console.log("usersCopy: ", usersCopy)
+	
+				userIndex = usersCopy.length-1; //usersCopy.findIndex((user) => user.chatId === senderId.toString());
+	
+				//("userIndex new: ", userIndex)
+			}
+			
+			const newMsgObject = {
+				date: new Date().toLocaleDateString(),
+				content: text,
+				image: type === 'image' ? true : false,
+				sender: senderId,
+				time: new Date().toLocaleTimeString(),
+				status: null,
+				id: messageId,
+				reply: replyId,
+				isBot: isBot,  
+			};
+	
+			const currentDate = new Date().toLocaleDateString()
+	
+			if (usersCopy[userIndex].messages[currentDate]) {
+				usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+			} else {
+				usersCopy[userIndex].messages[currentDate] = [];
+				usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+			}
+			
+			const userObject = usersCopy[userIndex];
+			if (isBot) {
+				usersCopy[userIndex] = { ...userObject, ['date']: '2000-01-01T00:00:00', ['message']: newMsgObject.content};
+			} else {
+				usersCopy[userIndex] = { ...userObject, ['unread']: count + 1, ['date']: new Date(), ['message']: newMsgObject.content};
+			}
+			
+	
+			//сортировка
+			const userSort = [...usersCopy].sort((a, b) => {       
+				var dateA = new Date(a.date), dateB = new Date(b.date) 
+				return dateB-dateA  //сортировка по убывающей дате  
+			})
+	
+			return userSort;
+		});
 		
 
 		//_updateUserProp(data.senderId, "uread", value +1);
