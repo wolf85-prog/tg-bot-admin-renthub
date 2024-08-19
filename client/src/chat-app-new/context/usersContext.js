@@ -575,7 +575,7 @@ const UsersProvider = ({ children }) => {
 
 //------------------------------------------------------------------------------------
 	useEffect(() => {
-		socket.on("getMessage", fetchMessageResponse);
+		socket.on("getMessageRent", fetchMessageResponse);
 		
 		socket.on("getAdmin", fetchAdmin);	
 		socket.on("getDelAdmin", fetchDelAdmin);	
