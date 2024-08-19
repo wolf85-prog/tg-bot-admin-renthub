@@ -13,7 +13,7 @@
   "license": "MIT",
   "author": "The CoreUI Team (https://github.com/orgs/coreui/people)",
   "scripts": {
-    "start": "node dashboard.js",
+    "start": "node dashboard-rent.js",
     "build": "react-scripts build",
     "dev": "react-scripts start",
     "changelog": "auto-changelog --starting-version 4.4.0 --commit-limit false --hide-credit",
@@ -63,5 +63,18 @@
     "use-sound": "^4.0.1",
     "uuid": "^9.0.0",
     "web-vitals": "^2.1.4"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/user-event": "^14.4.3",
+    "auto-changelog": "~2.4.0",
+    "react-scripts": "5.0.1",
+    "sass": "^1.54.4",
+    "web-vitals": "^2.1.4"
+  },
+  "engines": {
+    "node": ">=10",
+    "npm": ">=6"
   }
 }
