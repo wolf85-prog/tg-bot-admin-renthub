@@ -35,12 +35,12 @@ const baseURL = process.env.REACT_APP_API_URL
 const webAppAnketa = process.env.REACT_APP_WEBAPP_ANKETA
 
 const Chat = () => {
-	const { userWorkers, setUserAsUnread, addNewMessage2, conversations } = useUsersContext();
+	const { userRenthub, addNewMessage2, conversations } = useUsersContext();
 	const { personW } = useContext(AccountContext);
 	const { setCountMessage } = useUsersContext();
 
 	const chatId = personW.id;
-	let user = userWorkers.filter((user) => user.chatId === chatId.toString())[0];
+	let user = userRenthub.filter((user) => user.chatId === chatId.toString())[0];
 	let convs = conversations.find((conv) => conv.members[0] === chatId.toString());
 
 	const lastMsgRef = useRef(null);
@@ -80,7 +80,7 @@ const Chat = () => {
 		//console.log("personW: ", personW.id)
 		if (user) {
 			scrollToLastMsg();
-			setUserAsUnread(user.chatId);
+			//setUserAsUnread(user.chatId);
 			setCountMessage(0)
 			//обнулить кол-во сообщений
 			//const kol_mess = getCountMessage()
@@ -90,7 +90,7 @@ const Chat = () => {
 
 	useEffect(() => {
 		user && scrollToLastMsg();
-	}, [userWorkers]);
+	}, [userRenthub]);
 
 	useEffect(() => {
 		console.log(selectedElement)
@@ -385,7 +385,7 @@ const Chat = () => {
 		console.log("send passport")
 		//audio.play();
 
-		let client = userWorkers.filter((client) => client.chatId === user.chatId)[0];
+		let client = userRenthub.filter((client) => client.chatId === user.chatId)[0];
 
 		const keyboard = JSON.stringify({
 			inline_keyboard: [
@@ -436,7 +436,7 @@ const Chat = () => {
 		console.log("send rule")
 		//audio.play();
 
-		let client = userWorkers.filter((client) => client.chatId === user.chatId)[0];
+		let client = userRenthub.filter((client) => client.chatId === user.chatId)[0];
 
 		const keyboard = JSON.stringify({
 			inline_keyboard: [
@@ -528,7 +528,7 @@ https://t.me/ULEY_Office_Bot
 		console.log("send poster")
 		//audio.play();
 
-		let client = userWorkers.filter((client) => client.chatId === user.chatId)[0];
+		let client = userRenthub.filter((client) => client.chatId === user.chatId)[0];
 
 		const keyboard = JSON.stringify({
 			inline_keyboard: [

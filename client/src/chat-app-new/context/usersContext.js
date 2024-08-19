@@ -360,7 +360,7 @@ const UsersProvider = ({ children }) => {
 				if (worker) {
 					const newUser = {
 						id: worker.id,
-						username: userbot.username ? userbot.username : '', // user.username ? user.username : '',
+						username: '', // user.username ? user.username : '',
 						name: worker?.userfamily + " " + worker?.username, //notion[0]?.fio ? notion[0]?.fio : '',
 						city: worker?.city, //notion[0]?.city ? notion[0]?.city : '',
 						newcity: worker?.newcity,
@@ -369,7 +369,7 @@ const UsersProvider = ({ children }) => {
 						chatId: worker?.chatId,
 						avatar: worker?.avatar ? worker?.avatar : '', //avatars[0]?.image ? avatars[0]?.image : '', //user.avatar,
 						conversationId: conversationId ? conversationId : 0,
-						block: userbot.block ? userbot.block : '',
+						block: '',
 						blockw: worker?.block,
 						unread: 0, 
 						pinned: false,

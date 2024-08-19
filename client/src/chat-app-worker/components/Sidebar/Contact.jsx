@@ -10,7 +10,7 @@ import block18 from "./../../../assets/images/block18.png";
 
 import { useUsersContext } from "./../../../chat-app-new/context/usersContext";
 
-import { getWMessages2} from '../../../http/workerAPI'
+import { getRMessages2} from '../../../http/renthubAPI'
 
 import { newCountWMessage } from "src/http/adminAPI";
 
@@ -20,8 +20,8 @@ const Contact = ({ contact, worker }) => {
 	const host = process.env.REACT_APP_API_URL
 	
 	//сделать пользователя непрочитанным
-	const { setUserWorkerAsUnread, setCountMessageWork } = useUsersContext();
-	const { userWorkers, setUserWorkers } = useUsersContext();
+	const { setCountMessageWork } = useUsersContext();
+	const { userRenthub, setUserRenthub } = useUsersContext();
 
 	//обработка нажатия на пользователя из списка
     const getUser = async () => {
@@ -31,13 +31,13 @@ const Contact = ({ contact, worker }) => {
 			avatar: contact.avatar
         });
 
-		setUserWorkerAsUnread(contact.chatId)
+		//setUserWorkerAsUnread(contact.chatId)
 		setCountMessageWork('0')
 		//await newCountWMessage(0)
 
 		if (Object.keys(contact.messages).length === 0) {
 			console.log("Сообщения не загружены!")
-			const messages = await getWMessages2(contact.conversationId, 10, 0)
+			const messages = await getRMessages2(contact.conversationId, 10, 0)
 			//console.log("messages: ", messages)
 
 			const arrayMessage = []
@@ -86,9 +86,9 @@ const Contact = ({ contact, worker }) => {
 				//console.log("obj: ", obj)
 
 				//сохранить сообщения в контексте пользователя
-				setUserWorkers((userWorkers) => {
-					let userIndex = userWorkers.findIndex((user) => user.chatId === contact.chatId.toString());
-					const usersCopy = JSON.parse(JSON.stringify(userWorkers));
+				setUserRenthub((userRenthub) => {
+					let userIndex = userRenthub.findIndex((user) => user.chatId === contact.chatId.toString());
+					const usersCopy = JSON.parse(JSON.stringify(userRenthub));
 					usersCopy[userIndex].messages = obj
 
 					return usersCopy;
@@ -137,15 +137,11 @@ const Contact = ({ contact, worker }) => {
 			<div className="sidebar-contact__avatar-wrapper" style={{position: 'relative'}}>
 				{
 					contact.avatar
-					? <> {contact.blockw ? <img src={blockUser} alt='' className="avatar-adm" style={{position: 'absolute', top: '0', zIndex: '2'}} /> : <></>}
-						<img src={`${contact.avatar}`} alt='' onError={onImageError} className="avatar-adm" style={{position: 'absolute', top: '0', zIndex: '0'}} />
-					</>
-					: <> {contact.blockw ? <img src={blockUser} alt='' className="avatar-adm" style={{position: 'absolute', top: '0', zIndex: '2'}} /> : <></>}
-						<img src={avatarDefault} alt='' className="avatar-adm" style={{position: 'absolute', top: '0', zIndex: '0'}} />
-					</>
+					? <img src={`${contact.avatar}`} alt='' onError={onImageError} className="avatar-adm" style={{position: 'absolute', top: '0', zIndex: '0'}} />
+					: <img src={avatarDefault} alt='' className="avatar-adm" style={{position: 'absolute', top: '0', zIndex: '0'}} />
 				}
 				
-				{
+				{/* {
                     worker.length !== 0 ?  
                     ((JSON.parse(worker[0].worklist)).find(item => item.spec === 'Blacklist') ? 
                     <img src={avatarBlacklist} alt='' width={18} style={{position: 'absolute', top: '34px', left: '32px'}}/>
@@ -159,7 +155,7 @@ const Contact = ({ contact, worker }) => {
                     <img src={block18} alt='' width={18} style={{position: 'absolute', top: '-5px', left: '32px', width: '23px'}}/>
                     : "")
                     : ""
-                }
+                } */}
 
 				
 			</div>

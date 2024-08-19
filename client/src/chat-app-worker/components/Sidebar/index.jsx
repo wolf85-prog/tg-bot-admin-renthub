@@ -9,7 +9,7 @@ import { useUsersContext } from "./../../../chat-app-new/context/usersContext";
 import { CSpinner} from '@coreui/react'
 
 const Sidebar = () => {
-	const { userWorkers, workersAll } = useUsersContext();
+	const { userRenthub, workersAll } = useUsersContext();
     const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID 
 	const [contacts, setContacts]= useState([]);
 	const [text, setText]= useState("");
@@ -22,20 +22,20 @@ const Sidebar = () => {
 	useEffect(() => {
 		
 		//сортировка
-		// const userSort = [...userWorkers].sort((a, b) => {       
+		// const userSort = [...userRenthub].sort((a, b) => {       
 		// 	var dateA = new Date(a.date), dateB = new Date(b.date) 
 		// 	return dateB-dateA //сортировка по убывающей дате  
 		// })
 		
 		const arr = []
 
-		for (const item of userWorkers) {		
+		for (const item of userRenthub) {		
 			arr.push(item)
 			if (arr.length === CountWorkers)
 			  break;
 		}
 
-		//console.log("contacts: ", userWorkers)
+		//console.log("contacts: ", userRenthub)
 
 		setContacts(arr)
 		
@@ -43,20 +43,20 @@ const Sidebar = () => {
 			setLoading(false)
 		}		
 		
-	},[userWorkers])
+	},[userRenthub])
 
 	
-	useEffect(() => {
-		const arr = []
-		for (const item of userWorkers) {			
-			arr.push(item)
-			if (arr.length === CountWorkers)
-			  break;
-		}
-		const filteredData = userWorkers.filter(user=> (user.name+user.chatId+user.phone)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
+	// useEffect(() => {
+	// 	const arr = []
+	// 	for (const item of userRenthub) {			
+	// 		arr.push(item)
+	// 		if (arr.length === CountWorkers)
+	// 		  break;
+	// 	}
+	// 	const filteredData = userRenthub.filter(user=> (user.name+user.chatId+user.phone)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
         
-		setContacts(text === '' ? arr : filteredData);      
-    }, [text]);
+	// 	setContacts(text === '' ? arr : filteredData);      
+    // }, [text]);
 
 
 	const onSelected = (index) => {

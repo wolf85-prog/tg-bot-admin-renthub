@@ -22,12 +22,6 @@ const ChatsWorker = () => {
 
 
   return (
-    <div>
-      <AppSidebar />
-      <div className="wrapper d-flex flex-column min-vh-100 bg-uley">
-        <AppHeaderChat />
-        <div className="body flex-grow-1 px-3">
-
             <CContainer lg>
                 <Suspense fallback={<CSpinner color="primary" />}>                 
                   
@@ -41,11 +35,6 @@ const ChatsWorker = () => {
 
                 </Suspense>
             </CContainer>
-
-        </div>
-        <AppFooter />
-      </div>
-    </div>
   )
 }
 

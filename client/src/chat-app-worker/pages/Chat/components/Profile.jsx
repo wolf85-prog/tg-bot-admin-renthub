@@ -116,32 +116,7 @@ const Profile = ({ user, closeSidebar }) => {
 	useEffect(()=>{
 
 		const fetch = async() => {
-			const pretendentArray = await getLastPretendent(user.chatId)
-			//console.log("pretendentArray: ", pretendentArray.length)
-			
-			if (pretendentArray.length > 0) {
-				const projectId = pretendentArray[pretendentArray.length-1]?.projectId
-				const projectId2 = pretendentArray[pretendentArray.length-2]?.projectId
-				const projectId3 = pretendentArray[pretendentArray.length-3]?.projectId
-				//получить CrmId по id проекта
-				const project = await getProjectId(projectId)
-				const project2 = await getProjectId(projectId2)
-				const project3 = await getProjectId(projectId3)
-
-				const crmId = project?.properties ? project?.properties?.Crm_ID.rich_text[0].plain_text : '—'
-				const crmId2 = project?.properties ? project2?.properties?.Crm_ID.rich_text[0].plain_text : '—'
-				const crmId3 = project?.properties ? project3?.properties?.Crm_ID.rich_text[0].plain_text : '—' 
-
-				setCrmId(crmId)
-				setCrmId2(crmId2)
-				setCrmId3(crmId3)
-			} else {
-				setCrmId('—')
-			}	
-			
-			const blocked = await getWorker(user.chatId)
-			//console.log("blocked: ", blocked)
-			setBlockWorker(blocked?.block ? blocked?.block : false)
+			setCrmId('—')	
 		}
 		
 		fetch()
