@@ -24,9 +24,7 @@ const Chats2 = () => {
 
 
   return (
-    <div>
-      <div className="wrapper d-flex flex-column min-vh-100 bg-uley">
-        <div className="body flex-grow-1 px-3">
+
 
             <CContainer lg>
                 <Suspense fallback={<CSpinner color="primary" />}>                 
@@ -41,10 +39,6 @@ const Chats2 = () => {
 
                 </Suspense>
             </CContainer>
-
-        </div>
-      </div>
-    </div>
   )
 }
 
