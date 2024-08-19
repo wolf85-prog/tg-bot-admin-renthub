@@ -49,19 +49,8 @@ const Project = sequelize.define('project', {
     chatId: {type: DataTypes.STRING},
 })
 
-const Distribution = sequelize.define('distribution', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
-    name: {type: DataTypes.STRING},  //название рассылки
-    text: {type: DataTypes.STRING}, //текст сообщения;
-    image: {type: DataTypes.STRING}, //ссылка на картинку;
-    button: {type: DataTypes.STRING}, //текст кнопки;
-    receivers: {type: DataTypes.TEXT}, //массив получателей;
-    datestart: {type: DataTypes.STRING},  //дата начала рассылки
-    delivered: {type: DataTypes.BOOLEAN}, //доставлено
-})
 
-
-const Distributionw = sequelize.define('distributionw', {
+const Distributionr = sequelize.define('distributionr', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
     text: {type: DataTypes.STRING}, //текст сообщения;
     image: {type: DataTypes.STRING}, //ссылка на картинку;
@@ -92,24 +81,6 @@ const Report = sequelize.define('report', {
     delivered: {type: DataTypes.BOOLEAN}, //доставлено
 })
 
-const SoundNotif = sequelize.define('soundnotifs', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
-    name: {type: DataTypes.STRING},  //название проекта
-    text: {type: DataTypes.STRING}, //текст сообщения;
-    date: {type: DataTypes.STRING},  //дата отправки отчета
-    delivered: {type: DataTypes.BOOLEAN}, //доставлено
-})
-
-const Pretendent = sequelize.define('pretendent', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
-    projectId: {type: DataTypes.STRING},  //id проекта
-    workerId: {type: DataTypes.STRING}, //id специалиста;
-    receiverId: {type: DataTypes.STRING}, //чат-id получателя;
-    accept: {type: DataTypes.BOOLEAN}, //принято
-    otclick: {type: DataTypes.INTEGER}, //количество согласий
-    cancel: {type: DataTypes.INTEGER}, // количество отказов
-    blockDistrib: {type: DataTypes.BOOLEAN}, //блокировка рассылки по проекту
-})
 
 const Plan = sequelize.define('plan', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
@@ -139,11 +110,8 @@ module.exports = {
     Message, 
     Conversation, 
     Project, 
-    Distribution,
-    Distributionw,
+    Distributionr,
     Report,
-    SoundNotif,
-    Pretendent,
     Plan,
     CountMessage,
     ProjectNew

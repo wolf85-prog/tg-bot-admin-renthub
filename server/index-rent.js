@@ -23,17 +23,14 @@ const axios = require("axios");
 const {io} = require("socket.io-client")
 const socketUrl = process.env.SOCKET_APP_URL
 
-//мониторинг
-const statusMonitor = require('express-status-monitor');
 
 let tasks = []
 
 // Port that the webserver listens to
-const port = process.env.PORT || 5000;
-const token = process.env.TELEGRAM_API_TOKEN_WORK
+const port = process.env.PORT || 5002;
+const token = process.env.TELEGRAM_API_TOKEN
 const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 const host = process.env.HOST
-const webAppAddStavka = process.env.WEBAPP_STAVKA
 
 const $host = axios.create({
     baseURL: process.env.REACT_APP_API_URL
@@ -41,10 +38,6 @@ const $host = axios.create({
 
 const app = express();
 
-app.use(statusMonitor({
-    title: 'Бэкэнд админки',
-    theme: '../../../../../custom.css',
-})); // Enable Express Status Monitor middleware
 
 app.use(cors())
 app.use(express.json())
