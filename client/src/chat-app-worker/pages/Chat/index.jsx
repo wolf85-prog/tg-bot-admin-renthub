@@ -29,7 +29,7 @@ import {
   } from '@coreui/react'
 
 const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
-const token_work = process.env.REACT_APP_TELEGRAM_API_TOKEN_WORK
+const token_work = process.env.REACT_APP_TELEGRAM_API_TOKEN_RENTHUB
 const host = process.env.REACT_APP_HOST
 const baseURL = process.env.REACT_APP_API_URL
 const webAppAnketa = process.env.REACT_APP_WEBAPP_ANKETA
