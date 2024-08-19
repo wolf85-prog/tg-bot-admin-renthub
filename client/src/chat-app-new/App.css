@@ -1,7 +1,7 @@
 @import url(./App.darktheme.css);
 .app {
     width: 100%;
-    min-height: calc(100vh - 20px);
+    min-height: calc(100vh - 40px);
     background: #dddbd1;
     position: relative;
 }
@@ -23,7 +23,7 @@
 
 .app-content {
     width: 100%;
-    height: calc(100vh - 20px);
+    height: calc(100vh - 40px);
     max-width: 1450px;
     margin: 0 auto;
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .06), 0 2px 5px 0 rgba(0, 0, 0, .2);
@@ -52,6 +52,6 @@
         padding: 20px;
     } */
     .app-content {
-        height: calc(100vh - 20px);
+        height: calc(100vh - 40px);
     }
 }
