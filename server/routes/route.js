@@ -23,30 +23,28 @@ route.get('/user/auth', authMiddleware, userController.check)
 route.get('/user/get', authMiddleware, userController.getAll)
 route.get('/user/get/:id', authMiddleware, userController.getOne)
 
-route.post('/message/add', newMessage)
-route.delete('/message/delete/:id', delMessage)
-route.get('/message/get', getAllMessages)
-route.get('/message/get/:id', getMessages)
-route.get('/message/last/get/:id', getLastMessages)
 
-route.get('/message/count/get', getCountMessages)
+//----------------RENTHUB--------------------------------
+route.get('/ruserbots/get', getUsersRenthub)
+route.get('/ruserbots/get/:id', getUserRenthub)
+route.patch('/ruserbots/update/:id', editUserRenthub)
 
-//кол-во сообщений
-route.get('/message/count/add/:count', newCountMessage)
-route.get('/wmessage/count/add/:count', newCountWMessage)
-route.get('/projects/count/add/:count', newCountProjects)
-route.get('/pretendent/count/add/:count', newCountMessagePretendent)
+route.post('/rmessage/add', newMessageR)
+route.delete('/rmessage/delete/:id', delMessageR)
+route.get('/rmessage/get', getAllMessagesR)
+route.get('/rmessage/get/:id', getMessagesR)
+route.get('/rmessage/get/count/:count', getMessagesRCount)
+route.get('/rmessage2/get/:id/:count/:prev', getMessagesR2) //еще
 
+route.post('/rconversation/add', newConversationR)
+route.get('/rconversation/get/:id', getConversationR)
+route.get('/rconversations/get', getConversationsR)
 
-route.post('/conversation/add', newConversation)
-route.get('/conversation/get/:id', getConversation)
-route.get('/conversations/get', getConversations)
-
-//route.post('/userbots/add', addUser)
-route.get('/userbots/get', getUsers)
-route.get('/userbots/get/:id', getUser)
-route.patch('/userbots/update/:id', editUser)
-route.patch('/userbots/updatefile/:id', editUserAvatar)
+route.get('/rmanagers/get', getRmanagers)
+route.get('/rmanagers/get/:id', getRmanager)
+route.patch('/rmanagers/update/:id', editRmanager)
+//route.get('/rmanager/block/:id', blockWorker)
+route.get('/rmanagers/count/get/:count/:prev', getRManagerCount) //еще
 
 
 

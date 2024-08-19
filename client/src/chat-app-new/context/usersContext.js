@@ -190,165 +190,9 @@ const UsersProvider = ({ children }) => {
 	const audio0 = new Audio(sound0);
 	const audio10 = new Audio(sound10);
 	const audio5 = new Audio(sound5);
-
-//-------------get count messages------------------------------------------
-	// useEffect(() => {
-
-	// 	const fetchData = async () => {
-	// 		const kol = await getCountMessage()
-	// 		console.log("kol: ", kol)
-
-	// 		setCountMessage(kol.managers)
-	// 		setCountMessageWork(kol.workers)
-
-	// 		setCountProjects(kol.projects)
-	// 		setCountPretendent(kol.pretendents)
-	// 	}
-
-	// 	fetchData()
-
-	// }, [])
-
-	// useEffect(() => {
-	// 	const saved = localStorage.getItem("countMessageWork");
-	// 	setCountMessageWork(saved)
-	// })
-
-
-//----------------------------------------------------------------------
-
-	// useEffect(() => {	
-	// 	const saveVolume = localStorage.getItem("soundVolume")
-	// 	if (saveVolume) {
-	// 		setSoundVolume(saveVolume);
-	// 	}
-	// 	//setSoundMute(localStorage.getItem("soundMute"));
-		
-	// }, []);
-
-
-	useEffect(() => {	
-		// storing input name
-		console.log("volume: ", soundVolume)
-
-		localStorage.setItem("soundVolume", soundVolume);
-		localStorage.setItem("soundMute", soundMute);
-		
-	}, [soundVolume, soundMute]);
 	
 
 
-	useEffect(() => {	
-		// storing input name
-		localStorage.setItem("countMessageWork", countMessageWork);
-	}, [countMessageWork]);
-
-//---------get Userbots---------------------------------------------------
-	useEffect(() => {
-		const fetchData = async () => {
-			let response = await getContacts();
-			//console.log("contacts: ", response)
-
-			const arrayContact = []
-
-			response.map(async (user, index) => {
-				
-				let conversationId = await getConversation(user.chatId)
-				let messages = await getMessages(conversationId)
-
-				//console.log("count message: ", messages.length)
-
-				//получить последнее сообщение
-				const messageDates = Object.keys(messages);
-				const recentMessageDate = messageDates[messageDates.length - 1];
-				const message = messages[recentMessageDate];
-
-				const dateMessage = message ? messages[recentMessageDate].createdAt : "2000-01-01T00:00:00";
-				const lastMessage = message ? messages[recentMessageDate].text : "";			
-
-				const arrayMessage = []
-				const allDate = []
-
-				messages.map(message => {
-					const d = new Date(message.createdAt);
-					const year = d.getFullYear();
-					const month = String(d.getMonth()+1).padStart(2, "0");
-					const day = String(d.getDate()).padStart(2, "0");
-					const chas = d.getHours();
-					const minut = String(d.getMinutes()).padStart(2, "0");
-
-					const newDateMessage = `${day}.${month}.${year}`
-
-					const newMessage = {
-						date: newDateMessage,
-						content: message.text,
-						image: message.type === 'image' ? true : false,
-						descript: message.buttons ? message.buttons : '',
-						sender: message.senderId,
-						time: chas + ' : ' + minut,
-						status: 'sent',
-						id:message.messageId,
-						reply:message.replyId,
-					}
-					arrayMessage.push(newMessage)
-					allDate.push(newDateMessage)
-				})
-
-				const dates = [...allDate].filter((el, ind) => ind === allDate.indexOf(el));
-
-				let obj = {};
-				for (let i = 0; i < dates.length; i++) {
-					const arrayDateMessage = []
-					for (let j = 0; j < arrayMessage.length; j++) {
-						if (arrayMessage[j].date === dates[i]) {
-							arrayDateMessage.push(arrayMessage[j])							
-						}
-					}	
-					obj[dates[i]] = arrayDateMessage;
-				}
-
-				let first_name = user.firstname != null ? user.firstname : ''
-				let last_name = user.lastname != null ? user.lastname : ''
-
-				let chatName = user.username ? user.username : first_name + ' ' + last_name
-
-				const newUser = {
-					id: user.id,
-					name: chatName,
-					chatId: user.chatId,
-					avatar: user.avatar,
-					conversationId: conversationId,
-					unread: 0, 
-					pinned: false,
-					typing: false,
-					message:  lastMessage,
-					date: dateMessage,
-					messages: obj, // { "01/01/2023": arrayMessage,"Сегодня":[] },	
-				}
-
-				arrayContact.push(newUser)
-
-				//если элемент массива последний
-				if (index === response.length-1) {
-					const sortedClients = [...arrayContact].sort((a, b) => {       
-						var dateA = new Date(a.date), dateB = new Date(b.date) 
-						return dateB-dateA  //сортировка по убывающей дате  
-					})
-
-					setUsers(sortedClients)
-					
-					//сохранить кэш
-					localStorage.setItem("users", JSON.stringify(sortedClients));
-				}
-			})
-	}
-	
-	fetchData()
-
-	}, [])
-
-
-	
 //---------get Workers----------------------------------------------------
 
 	useEffect(() => {
@@ -357,28 +201,28 @@ const UsersProvider = ({ children }) => {
 			//console.log("userWorkers: ", userWorkers)
 		
 			//0 все специалисты
-			let all = await getWorkers()
+			let all = await getRManagers()
 			const arrayWorkerAll = []
 		
 			all.map(async (user) => {
 				const newWorker = {
-				  id: user.id,
-				  userfamily: user.userfamily,
-				  username: user.username,
-				  phone: user.phone,
-				  dateborn: user.dateborn,
-				  city: user.city, 
-				  newcity: user.newcity, 
-				  companys: user.companys,
-				  stag: user.stag,
-				  worklist:  user.worklist,
-				  chatId: user.chatId,
-				  createDate: user.createdAt,
-				  avatar: user.avatar,
-				  from: user.from,
-				  promoId: user.promoId,
-				  block: user.block,
-				  deleted: user.deleted,
+				id: user.id,
+				userfamily: user.userfamily,
+				username: user.username,
+				phone: user.phone,
+				dateborn: user.dateborn,
+				city: user.city, 
+				newcity: user.newcity, 
+				companys: user.companys,
+				stag: user.stag,
+				worklist:  user.worklist,
+				chatId: user.chatId,
+				createDate: user.createdAt,
+				avatar: user.avatar,
+				from: user.from,
+				promoId: user.promoId,
+				block: user.block,
+				deleted: user.deleted,
 				}
 		
 				arrayWorkerAll.push(newWorker)
@@ -387,30 +231,30 @@ const UsersProvider = ({ children }) => {
 			setWorkersAll(arrayWorkerAll)
 
 			//1 все специалисты 100
-			let response = await getWorkersCount(100, workers.length);
+			let response = await getRManagerCount(100, workers.length);
 			console.log("workers size: ", response.length)
 		
 			const arrayWorker = []
 		
 			response.reverse().map(async (user) => {
 				const newWorker = {
-				  id: user.id,
-				  userfamily: user.userfamily,
-				  username: user.username,
-				  phone: user.phone,
-				  dateborn: user.dateborn,
-				  city: user.city, 
-				  newcity: user.newcity, 
-				  companys: user.companys,
-				  stag: user.stag,
-				  worklist:  user.worklist,
-				  chatId: user.chatId,
-				  createDate: user.createdAt,
-				  avatar: user.avatar,
-				  from: user.from,
-				  promoId: user.promoId,
-				  block: user.block,
-				  deleted: user.deleted,
+				id: user.id,
+				userfamily: user.userfamily,
+				username: user.username,
+				phone: user.phone,
+				dateborn: user.dateborn,
+				city: user.city, 
+				newcity: user.newcity, 
+				companys: user.companys,
+				stag: user.stag,
+				worklist:  user.worklist,
+				chatId: user.chatId,
+				createDate: user.createdAt,
+				avatar: user.avatar,
+				from: user.from,
+				promoId: user.promoId,
+				block: user.block,
+				deleted: user.deleted,
 				}
 		
 				arrayWorker.push(newWorker)
@@ -419,17 +263,17 @@ const UsersProvider = ({ children }) => {
 			setWorkers(arrayWorker)	
 		
 			//2 все пользователи бота
-			let wuserbots = await getWContacts();
+			let wuserbots = await getRContacts();
 			console.log("wuserbots size: ", wuserbots.length)
 			const arrayContact = []
 
 			//3 все беседы (conversations)
-			let convers = await getWConversations()
+			let convers = await getRConversations()
 			console.log("conversations: ", convers.length)
 			setConversations(convers)
 
 			//4 все сообщения бота
-			let messagesAll = await getWMessagesCount(1000) //getWMessagesCount(1000) //getAllWMessages()
+			let messagesAll = await getRMessagesCount(1000) //getWMessagesCount(1000) //getAllWMessages()
 			console.log("messagesAll: ", messagesAll.length)
 
 			let count = 0
@@ -452,7 +296,7 @@ const UsersProvider = ({ children }) => {
 						messages.push(messagesAll[i])
 					
 					if (messages.length === 20)
-					  break;
+					break;
 				}
 
 				//console.log("messages: ", messages)
@@ -566,129 +410,11 @@ const UsersProvider = ({ children }) => {
 		fetchUserWorkerData();
 		
 	},[])
-	
-//------------------------------------------------------------------------------------------
-
-	//get Managers
-	useEffect(() => {
-    	const fetchData = async () => {
-			let response = await getManagers();
-      		console.log("managers context: ", response.length)
-
-			setManagers(response)
-		}
-
-	  	fetchData();
-
-	},[])
 
 //------------------------------------------------------------------------------------------
 
-  	//get DistributionW
-  	useEffect(() => {
-    	const fetchData = async () => {
-			//let response = await getDistributionsW();
-			//1 все рассылки 20
-			let response = await getDistributionsCountW(10, distributionsWork.length);
-      		//console.log("distributionW: ", response.length)
-
-			let response2 = await getDistributionsWPlan();
-      		//console.log("distributionWPlan: ", response2.length)
-
-			//сортировка
-			const messageSort = [...response].sort((a, b) => {       
-				var dateA = new Date(a.datestart), dateB = new Date(b.datestart) 
-				return dateB-dateA  //сортировка по убывающей дате  
-			})
-
-			const messageSort2 = [...response2].sort((a, b) => {       
-				var dateA = new Date(a.datestart), dateB = new Date(b.datestart) 
-				return dateA-dateB  //сортировка по убывающей дате  
-			})
-
-			let all = [...messageSort2, ...messageSort]
-
-			setDistributionsWork(all)
-		}
-
-	  	fetchData();
-
-	},[])
 //------------------------------------------------------------------------------------------
 
-	//get Projects
-	useEffect(() => {
-    	const fetchData = async () => {
-			let projects = await getProjectsApi();
-			//console.log("projects size: ", projects.length)
-
-			setProjects(projects)
-
-			//сохранить кэш
-			localStorage.setItem("projects", JSON.stringify(projects));
-		}
-
-	  	fetchData();
-
-	},[])
-//------------------------------------------------------------------------------------------
-
-	//get Companys
-	useEffect(() => {
-    	const fetchData = async () => {
-			let companys = await getCompanys();
-			//console.log("companys size: ", companys.length)
-
-			setCompanys(companys)
-		}
-
-	  	fetchData();
-
-	},[])
-
-//------------------------------------------------------------------------------------------
-	//звонок по телефону
-	useEffect(()=>{
-		if (showCallCard) {
-			const savedVolume = localStorage.getItem("soundVolume");
-			const savedMute = localStorage.getItem("soundMute");
-
-			if (savedMute === 'false') {
-				console.log("savedMute: ", savedMute)
-				audioCall.volume = parseFloat(savedVolume)
-				audioCall.play();
-			} 
-		} else {
-			//audioCall.pause()
-		}
-
-		if (showCallCardNo) {
-			const savedVolume = localStorage.getItem("soundVolume");
-			const savedMute = localStorage.getItem("soundMute");
-
-			if (savedMute === 'false') {
-				console.log("savedMute: ", savedMute)
-				audioCall2.volume = parseFloat(savedVolume)
-				audioCall2.play();
-			}
-		} else {
-			//audioCall2.pause()
-		}
-		
-	},[showCallCard, showCallCardNo])
-
-
-
-//------------------------------------------------------------------------------------------
-	//подключение админа к сокету и вывод всех подключенных
-	// useEffect(()=>{
-	// 	socket.emit("addUser", chatAdminId)
-	// 	socket.on("getUsers", users => {
-	// 		//console.log("users socket: ", users);
-	// 		setUsersOnline(users)
-	// 	})
-		
-	// },[chatAdminId])
 	
 	//users
 	const _updateUserProp = (userId, prop, value) => {
@@ -701,26 +427,8 @@ const UsersProvider = ({ children }) => {
 		});
 	};
 
-	//workhub
-	const _updateUserWorkerProp = (userId, prop, value) => {
-		setUserWorkers((userWorkers) => {
-			const usersCopy = [...userWorkers];
-			let userIndex = userWorkers.findIndex((user) => user.chatId === userId);
-			const userObject = usersCopy[userIndex];
-			usersCopy[userIndex] = { ...userObject, [prop]: value };
-			return usersCopy;
-		});
-	};
 
-	const setUserAsTyping = (data) => {
-		const { userId } = data;
-		_updateUserProp(userId, "typing", true);
-	};
 
-	const setUserAsNotTyping = (data) => {
-		const { userId } = data;
-		_updateUserProp(userId, "typing", false);
-	};
 //------------------------------------------------------------------------------------------
 
 	//получить сообщение из телеграмма
@@ -931,93 +639,17 @@ const UsersProvider = ({ children }) => {
 		});
 	}
 
-	//получить рассылку
-	const fetchDistribution = async () => {
-		let response = await getDistributionsW();
-		console.log("distributionW: ", response.length)
-
-		let response2 = await getDistributionsWPlan();
-		console.log("distributionWPlan: ", response2.length)
-
-		//сортировка
-		const messageSort = [...response].sort((a, b) => {       
-			var dateA = new Date(a.datestart), dateB = new Date(b.datestart) 
-			return dateB-dateA  //сортировка по убывающей дате  
-		})
-
-		const messageSort2 = [...response2].sort((a, b) => {       
-			var dateA = new Date(a.datestart), dateB = new Date(b.datestart) 
-			return dateA-dateB  //сортировка по убывающей дате  
-		})
-
-		let all = [...messageSort2, ...messageSort]
-
-		setDistributionsWork(all)
-	}
-
-	//получить процесс
-	const fetchProcess = async (dataAll) => {
-		console.log("Ответ о процессе получен: ", dataAll)
-		const { process, data, interval, time } = dataAll
-
-		if (process === '1') {
-			setStatusProcess(data)
-			setIntervalProcess(interval)
-			setTimeProcess(time)
-		}
-		else if (process === '2') {
-			setStatusProcess2(data)
-			setIntervalProcess2(interval)
-			setTimeProcess2(time)
-		}
-		else if (process === '3') {
-			setStatusProcess3(data)
-			setIntervalProcess3(interval)
-			setTimeProcess3(time)
-		}
-		else if (process === '4') {
-			setStatusProcess4(data)
-			setIntervalProcess4(interval)
-			setTimeProcess4(time)
-		}
-		else if (process === '5') {
-			setStatusProcess5(data)
-			setIntervalProcess5(interval)
-			setTimeProcess5(time)
-		}
-		
-	}
 
 //------------------------------------------------------------------------------------
 	useEffect(() => {
 		socket.on("getMessage", fetchMessageResponse);
-		socket.on("getMessageSpec", fetchMessageSpecResponse);
 		
 		socket.on("getAdmin", fetchAdmin);	
 		socket.on("getDelAdmin", fetchDelAdmin);	
 		
-		socket.on("getAdminSpec", fetchAdminSpec);	
-		socket.on("getDelAdminSpec", fetchDelAdminSpec);
-
-		socket.on("getNotif", fetchNotifAdmin);
-
-		socket.on("getDistrib", fetchDistribution);
-
-		socket.on("getProcess", fetchProcess);
-
-		socket.on("start_typing", setUserAsTyping);
-		socket.on("stop_typing", setUserAsNotTyping);
-		
 	}, [socket]);
 
 //------------------------------------------------------------------------------------
-	const setUserAsUnread = (userId) => {
-		_updateUserProp(userId, "unread", 0);
-	};
-
-	const setUserWorkerAsUnread = (userId) => {
-		_updateUserWorkerProp(userId, "unread", 0);
-	};
 
 
 	//отправить сообщение из админки 
@@ -1060,804 +692,6 @@ const UsersProvider = ({ children }) => {
 	}
 
 
-	//обновить список рассылки
-	const addNewDistrib = (task) => {
-		socket.emit("sendDistrib", { 
-			task,
-		})
-	};
-
-
-//=======================================================================
-// 						Workhub
-//=======================================================================
-
-//получить сообщение из телеграмма WorkersBot
-const fetchMessageSpecResponse = async(data) => {
-	
-	console.log("Получено сообзщение от специалиста: ", data)
-	const { isBot} = data;
-
-	let arrWorkers = []
-
-	if (data.text.startsWith('Пользователь нажал кнопку "Принять" в рассылке') && !data.text.includes('_reply_')) {
-		
-		//console.log("Добавился новый претендент: ")
-		//play sound
-		//audioPretendent.play();
-
-		//пришел новый претендент
-		const kol = await getCountMessage()
-		setCountPretendent(count + 1)
-		//const res = await newCountMessagePretendent(kol.pretendents + 1)	
-		console.log("Пришло новый претендент: ", count + 1)
-
-		//get all pretendent
-		let pretendents = await getAllPretendent();
-
-		let workers = await getWorkers()
-      	let projects = await getProjects3();
-      	//setProjects(projects) 
-
-		pretendents.map(async (worker, i) => {
-
-			let userObject = projects.find((proj) => proj.id === worker.projectId);  
-			const projectName = userObject?.name
-
-			let userObject2 = workers.find((item) => item.chatId === worker.receiverId);  
-			const workerName = userObject2?.userfamily + " "+ userObject2?.username
-	
-			const worklist = userObject2?.worklist ? JSON.parse(userObject2?.worklist) : ''
-			const rang = userObject2?.rank ? userObject2?.rank : ''
-			const comment = userObject2?.comment ? userObject2?.comment : ''
-			const phone = userObject2?.phone
-
-			const d = new Date(worker.createdAt).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
-			const d2 = new Date(d)
-
-			const month = String(d2.getMonth()+1).padStart(2, "0");
-			const day = String(d2.getDate()).padStart(2, "0");
-			const chas = d2.getHours();
-			const min = String(d2.getMinutes()).padStart(2, "0");
-			
-			const newDate = `${day}.${month} ${chas}:${min}`;
-		
-			//worklist
-			const newWorker = {
-				date: newDate, //newDate,
-				project: projectName,
-				//worker: workerName, 
-				workerFamily: userObject2?.userfamily,
-				workerName: userObject2?.username,
-				worklist: worklist, //workNotions[0].spec,
-				rang: rang, //workNotions[0]?.rank,
-				comment: comment, //workNotions[0]?.comment,
-				phone: phone, //workNotions[0]?.phone,
-				accept: worker.accept,
-			}
-			arrWorkers.push(newWorker)
-
-			setPretendents(arrWorkers) 
-		})
-
-		//setPretendents(pretendents)
-	}
-	else if (data.text.startsWith('Пользователь нажал кнопку "Отклонить" в рассылке') && !data.text.includes('_reply_')) {
-		//get all pretendent
-		let pretendents = await getAllPretendent();
-		//setPretendents(pretendents)
-		let workers = await getWorkers()
-      	let projects = await getProjects3();
-      	//setProjects(projects) 
-
-		pretendents.map(async (worker, i) => {
-
-			let userObject = projects.find((proj) => proj.id === worker.projectId);  
-			const projectName = userObject?.name
-
-			let userObject2 = workers.find((item) => item.chatId === worker.receiverId);  
-			const workerName = userObject2?.userfamily + " "+ userObject2?.username
-	
-			const worklist = userObject2?.worklist ? JSON.parse(userObject2?.worklist) : ''
-			const rang = userObject2?.rank ? userObject2?.rank : ''
-			const comment = userObject2?.comment ? userObject2?.comment : ''
-			const phone = userObject2?.phone
-
-			const d = new Date(worker.createdAt).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
-			const d2 = new Date(d)
-
-			const month = String(d2.getMonth()+1).padStart(2, "0");
-			const day = String(d2.getDate()).padStart(2, "0");
-			const chas = d2.getHours();
-			const min = String(d2.getMinutes()).padStart(2, "0");
-			
-			const newDate = `${day}.${month} ${chas}:${min}`;
-		
-			//worklist
-			const newWorker = {
-				date: newDate, //newDate,
-				project: projectName,
-				//worker: workerName, 
-				workerFamily: userObject2?.userfamily,
-				workerName: userObject2?.username,
-				worklist: worklist, //workNotions[0].spec,
-				rang: rang, //workNotions[0]?.rank,
-				comment: comment, //workNotions[0]?.comment,
-				phone: phone, //workNotions[0]?.phone,
-				accept: worker.accept,
-			}
-			arrWorkers.push(newWorker)
-
-			setPretendents(arrWorkers) 
-		})
-	}
-	else if (data.text.endsWith('раз нажали кнопку Отклонить') && !data.text.includes('_reply_')) {
-		//без звука
-		console.log("раз нажали кнопку Отклонить в workhub: ")
-	}
-	else if (data.text.startsWith('Твоя ставка отправлена') && !data.text.includes('_reply_')) {
-		//console.log("Твоя ставка отправлена: ")
-		//play sound
-		//audioPretendent.play();
-		const savedVolume = localStorage.getItem("soundVolume");
-		const savedMute = localStorage.getItem("soundMute");
-
-		if (savedMute === 'false') {
-			console.log("savedMute: ", savedMute)
-			audioPretendent.volume = parseFloat(savedVolume)
-			audioPretendent.play();
-		}
-
-		//пришел новый претендент
-		const kol = await getCountMessage()
-		setCountPretendent(count + 1)
-		//const res = await newCountMessagePretendent(kol.pretendents + 1)	
-		console.log("Пришло новый претендент: ", count + 1)
-
-
-		//get all pretendent
-		let pretendents = await getAllPretendent();
-		//setPretendents(pretendents)
-		let workers = await getWorkers()
-      	let projects = await getProjects3();
-      	//setProjects(projects) 
-
-		pretendents.map(async (worker, i) => {
-
-			let userObject = projects.find((proj) => proj.id === worker.projectId);  
-			const projectName = userObject?.name
-
-			let userObject2 = workers.find((item) => item.chatId === worker.receiverId);  
-			const workerName = userObject2?.userfamily + " "+ userObject2?.username
-	
-			const worklist = userObject2?.worklist ? JSON.parse(userObject2?.worklist) : ''
-			const rang = userObject2?.rank ? userObject2?.rank : ''
-			const comment = userObject2?.comment ? userObject2?.comment : ''
-			const phone = userObject2?.phone
-
-			const d = new Date(worker.createdAt).getTime() //+ 10800000 //Текущая дата:  + 3 часа)
-			const d2 = new Date(d)
-
-			const month = String(d2.getMonth()+1).padStart(2, "0");
-			const day = String(d2.getDate()).padStart(2, "0");
-			const chas = d2.getHours();
-			const min = String(d2.getMinutes()).padStart(2, "0");
-			
-			const newDate = `${day}.${month} ${chas}:${min}`;
-		
-			//worklist
-			const newWorker = {
-				date: newDate, //newDate,
-				project: projectName,
-				//worker: workerName, 
-				workerFamily: userObject2?.userfamily,
-				workerName: userObject2?.username,
-				worklist: worklist, //workNotions[0].spec,
-				rang: rang, //workNotions[0]?.rank,
-				comment: comment, //workNotions[0]?.comment,
-				phone: phone, //workNotions[0]?.phone,
-				accept: worker.accept,
-			}
-			arrWorkers.push(newWorker)
-
-			setPretendents(arrWorkers) 
-		})
-	}
-	else {
-			
-		//пришло новое сообщение
-		const kol = await getCountMessage()
-		setCountMessageWork(count + 1)
-		//const res = await newCountWMessage(kol.workers + 1)
-		console.log("Пришло новое сообщение в workhub: ", count + 1)
-
-		if (!isBot || isBot === null) {
-			//play sound
-			//audioMessageW.play();
-			const savedVolume = localStorage.getItem("soundVolume");
-			const savedMute = localStorage.getItem("soundMute");
-
-			if (savedMute === 'false') {
-				console.log("savedMute: ", savedMute)
-				audioMessageW.volume = parseFloat(savedVolume)
-				audioMessageW.play();
-			}	
-		} 
-		
-	}
-
-	setUserWorkers((userWorkers) => {
-		const { senderId, text, type, messageId, convId, replyId, isBot } = data;
-		//console.log("users: ", users)
-		let userIndex = userWorkers.findIndex((user) => user.chatId === senderId.toString());
-		const usersCopy = JSON.parse(JSON.stringify(userWorkers));
-
-		if (userIndex === -1) {
-			const newUser = {
-				id: usersCopy.length,
-				name: 'Новый специалист',
-				chatId: `${senderId}`,
-				avatar: '',
-				conversationId: convId,
-				unread: 0, 
-				pinned: false,
-				typing: false,
-				message:  '',
-				date: '2000-01-01T00:00:00',
-				messages: {}, 
-			}	
-			usersCopy.push(newUser)
-			//console.log("usersCopy: ", usersCopy)
-
-			userIndex = usersCopy.length-1; //usersCopy.findIndex((user) => user.chatId === senderId.toString());
-
-			//("userIndex new: ", userIndex)
-		}
-		
-		const newMsgObject = {
-			date: new Date().toLocaleDateString(),
-			content: text,
-			image: type === 'image' ? true : false,
-			sender: senderId,
-			time: new Date().toLocaleTimeString(),
-			status: null,
-			id: messageId,
-			reply: replyId,
-			isBot: isBot,  
-		};
-
-		const currentDate = new Date().toLocaleDateString()
-
-		if (usersCopy[userIndex].messages[currentDate]) {
-			usersCopy[userIndex].messages[currentDate].push(newMsgObject);
-		} else {
-			usersCopy[userIndex].messages[currentDate] = [];
-			usersCopy[userIndex].messages[currentDate].push(newMsgObject);
-		}
-		
-		const userObject = usersCopy[userIndex];
-		if (isBot) {
-			usersCopy[userIndex] = { ...userObject, ['date']: '2000-01-01T00:00:00', ['message']: newMsgObject.content};
-		} else {
-			usersCopy[userIndex] = { ...userObject, ['unread']: count + 1, ['date']: new Date(), ['message']: newMsgObject.content};
-		}
-		
-
-		//сортировка
-		const userSort = [...usersCopy].sort((a, b) => {       
-			var dateA = new Date(a.date), dateB = new Date(b.date) 
-			return dateB-dateA  //сортировка по убывающей дате  
-		})
-
-		return userSort;
-	});
-
-	//_updateUserProp(data.senderId, "uread", value +1);
-};
-
-
-//получить исходящее сообщение в админку workhub
-const fetchAdminSpec = (data) => {
-	//console.log("Пришло сообщение в Админку: ", data)
-
-	if (data.text.startsWith('Заявка принята! Мы свяжемся с вами в ближайшее время.') && !data.text.includes('_reply_')) {
-		
-		//console.log("Добавился новый претендент: ")
-		//play sound
-		//audioPretendent.play();
-		const savedVolume = localStorage.getItem("soundVolume");
-		const savedMute = localStorage.getItem("soundMute");
-
-		if (savedMute === 'false') {
-			console.log("savedMute: ", savedMute)
-			audioPretendent.volume = parseFloat(savedVolume)
-			audioPretendent.play();
-		}
-	}
-
-	setUserWorkers((userWorkers) => {
-		const { senderId, receiverId, text, type, buttons, messageId, isBot } = data;
-
-		//console.log("userWorkers: ", userWorkers)
-
-		let userIndex = userWorkers.findIndex((user) => user.chatId === receiverId.toString());
-		const usersCopy = JSON.parse(JSON.stringify(userWorkers));
-		//console.log("usersCopy: ", usersCopy)
-
-		const newMsgObject = {
-			date: new Date().toLocaleDateString(),
-			content: text,
-			image: type === 'image' ? true : false,
-			descript: buttons ? buttons : '',
-			sender: senderId,
-			time: new Date().toLocaleTimeString(),
-			status: 'delivered',
-			id: messageId,
-		};
-
-		const currentDate = new Date().toLocaleDateString()
-
-		//if (usersCopy[userIndex].messages[currentDate]) {
-		if (!isObjectEmpty(usersCopy[userIndex].messages)) {
-			if (usersCopy[userIndex].messages[currentDate]) {
-				usersCopy[userIndex].messages[currentDate].push(newMsgObject);
-			} else {
-				usersCopy[userIndex].messages[currentDate] = [];
-				usersCopy[userIndex].messages[currentDate].push(newMsgObject);
-			}
-		} else {
-			usersCopy[userIndex].messages[currentDate] = [];
-			usersCopy[userIndex].messages[currentDate].push(newMsgObject);
-		}
-		
-		const userObject = usersCopy[userIndex];
-		if (isBot) {
-			usersCopy[userIndex] = { ...userObject, ['date']: '2000-01-01T00:00:00', ['message']: newMsgObject.content};
-		} else {
-			usersCopy[userIndex] = { ...userObject, ['date']: new Date(), ['message']: newMsgObject.content};
-		}
-		
-
-		//сортировка
-		const userSort = [...usersCopy].sort((a, b) => {       
-			var dateA = new Date(a.date), dateB = new Date(b.date) 
-			return dateB-dateA  //сортировка по убывающей дате  
-		})
-
-		//console.log(userSort)
-
-		return userSort;
-	});
-}
-
-//получить исходящее сообщение в админку
-const fetchDelAdminSpec = (data) => {
-	//console.log("Удаление сообщение в Админке: ", data)
-
-	setUserWorkers((userWorkers) => {
-		const { messageId, messageDate, chatId } = data;
-
-		let userIndex = userWorkers.findIndex((user) => user.chatId === chatId);
-		const usersCopy = JSON.parse(JSON.stringify(userWorkers));
-
-		const messageIndex = usersCopy[userIndex].messages[messageDate].map(el => el.id).lastIndexOf(messageId);
-		usersCopy[userIndex].messages[messageDate].splice(messageIndex, 1); 
-
-		const userObject = usersCopy[userIndex];
-		const userSort = [...usersCopy]
-
-		return userSort;
-	});
-}
-
-
-//отправить сообщение из админки workhub
-const addNewMessage2 = (userId, message, type, textButton, convId, messageId, isBot) => {
-	console.log("isBot: ", isBot)
-
-	socket.emit("sendAdminSpec", { 
-		senderId: chatAdminId,
-		receiverId: userId,
-		text: message,
-		type: type,
-		buttons: textButton,
-		convId: convId,
-		messageId,
-		isBot: isBot,
-	})
-};
-
-//удалить сообщение из админки workhub
-const delWMessageContext = (messageId, messageDate, chatId) => {
-	socket.emit("delAdminSpec", { 
-		messageId,
-		messageDate,
-		chatId,
-	})
-}
-
-
-//отправить номер процесса и данные
-const sendNumberProcess = (number, data, interval, time) => {
-	console.log("send: ", number, data, interval, time)
-	socket.emit("sendProcess", { 
-		process: number,
-		data: data,
-		interval,
-		time,
-	})
-};
-
-
-//===============================================================
-//                  Notifications
-//===============================================================
-const fetchNotifAdmin = async (dataAll) => {
-	console.log("Получено уведомление: ", dataAll)
-	const { task, 
-		tg_id,
-		fio,
-		sity,
-		year_of_birth, 
-		rating, 
-		projects, 
-		specialities, 
-		comtags, 
-		workers_update,
-		processUpdateD,
-		phone,
-		processDistrib,
-		telegram_id, 
-		srm_id, 
-		chat_link,
-	} = dataAll;
-
-	if (task === 1) {
-		const savedVolume = localStorage.getItem("soundVolume");
-		const savedMute = localStorage.getItem("soundMute");
-		const savedTask = localStorage.getItem("currentTask");
-
-		console.log("savedVolume: ", savedVolume)
-		
-		const currentDate = new Date().getTime()
-		let arrTemp = JSON.parse(savedTask)
-		
-		const newObj = {
-			task: 1,
-			date: currentDate
-		}
-		arrTemp.push(newObj)
-		localStorage.setItem("currentTask", JSON.stringify(arrTemp));
-
-
-
-		if (task !== arrTemp[arrTemp.length-1].task && (currentDate < new Date(arrTemp[arrTemp.length-1].date).getTime()+10000 || currentDate > new Date(arrTemp[arrTemp.length-1].date).getTime()-10000)) {
-			console.log("no play 120")
-			setTimeout(()=> {
-				if (savedMute === 'false') {
-					console.log("savedMute: ", savedMute)
-					audio120.volume = parseFloat(savedVolume)
-					audio120.play();
-				}
-			}, 60000)
-		} else {
-			console.log("play 120")
-			if (savedMute === 'false') {
-				console.log("savedMute: ", savedMute)
-				audio120.volume = parseFloat(savedVolume)
-				audio120.play();
-			}
-		}
-		
-		// setSoundsNotif((soundsNotif) => {	
-		// 	const soundsNotifCopy = JSON.parse(JSON.stringify(soundsNotif));
-		// 	soundsNotifCopy.push("Звуковое оповещение - 120 минут")
-		// 	return soundsNotifCopy;
-		// });	
-
-	} else if (task === 2) {
-		const savedVolume = localStorage.getItem("soundVolume");
-		const savedMute = localStorage.getItem("soundMute");
-		const savedTask = localStorage.getItem("currentTask");
-
-		console.log("savedVolume: ", savedVolume)
-
-		const currentDate = new Date().getTime()
-		let arrTemp = JSON.parse(savedTask)
-
-		
-		if (task !== arrTemp[arrTemp.length-1].task && (currentDate < new Date(arrTemp[arrTemp.length-1].date).getTime()+10000 || currentDate > new Date(arrTemp[arrTemp.length-1].date).getTime()-10000)) {
-			console.log("no play 60")
-			setTimeout(()=> {
-				if (savedMute === 'false') {
-					console.log("savedMute: ", savedMute)
-					audio60.volume = parseFloat(savedVolume)
-					audio60.play();
-				}
-			}, 60000)
-		} else {
-			console.log("play 60")
-			if (savedMute === 'false') {
-				console.log("savedMute: ", savedMute)
-				audio60.volume = parseFloat(savedVolume)
-				audio60.play();
-			}
-		}
-
-		const newObj = {
-			task: 2,
-			date: currentDate
-		}
-		arrTemp.push(newObj)
-		localStorage.setItem("currentTask", JSON.stringify(arrTemp));
-
-		 
-
-		// setSoundsNotif((soundsNotif) => {	
-		// 	const soundsNotifCopy = JSON.parse(JSON.stringify(soundsNotif));
-		// 	soundsNotifCopy.push("Звуковое оповещение - 60 минут")
-		// 	return soundsNotifCopy;
-		// });
-
-	} else if (task === 3) {
-		const savedVolume = localStorage.getItem("soundVolume");
-		const savedMute = localStorage.getItem("soundMute");
-		const savedTask = localStorage.getItem("currentTask");
-
-		const currentDate = new Date().getTime()
-		let arrTemp = JSON.parse(savedTask)
-
-
-		if (task !== arrTemp[arrTemp.length-1].task && (currentDate < new Date(arrTemp[arrTemp.length-1].date).getTime()+10000 || currentDate > new Date(arrTemp[arrTemp.length-1].date).getTime()-10000)) {
-			console.log("no play 30")
-			setTimeout(()=> {
-				if (savedMute === 'false') {
-					audio30.volume = parseFloat(savedVolume)
-					audio30.play();
-				}
-			}, 60000)
-		} else {
-			console.log("play 30")
-			if (savedMute === 'false') {
-				audio30.volume = parseFloat(savedVolume)
-				audio30.play();
-			}
-		}
-
-		const newObj = {
-			task: 3,
-			date: currentDate
-		}
-		arrTemp.push(newObj)
-		localStorage.setItem("currentTask", JSON.stringify(arrTemp));
-
-
-
-		// setSoundsNotif((soundsNotif) => {	
-		// 	const soundsNotifCopy = JSON.parse(JSON.stringify(soundsNotif));
-		// 	soundsNotifCopy.push("Звуковое оповещение - 30 минут")
-		// 	return soundsNotifCopy;
-		// });
-
-	} else if (task === 4) {
-		const savedVolume = localStorage.getItem("soundVolume");
-		const savedMute = localStorage.getItem("soundMute");
-		const savedTask = localStorage.getItem("currentTask");
-
-		const currentDate = new Date().getTime()
-		let arrTemp = JSON.parse(savedTask)
-
-		if (task !== arrTemp[arrTemp.length-1].task && (currentDate < new Date(arrTemp[arrTemp.length-1].date).getTime()+10000 || currentDate > new Date(arrTemp[arrTemp.length-1].date).getTime()-10000)) {
-			console.log("no play 15")
-			setTimeout(()=> {
-				if (savedMute === 'false') {
-					audio15.volume = parseFloat(savedVolume)
-					audio15.play();
-				}
-			}, 60000)
-		} else {
-			console.log("play 15")
-			if (savedMute === 'false') {
-				audio15.volume = parseFloat(savedVolume)
-				audio15.play();
-			}
-		}
-
-
-		const newObj = {
-			task: 4,
-			date: currentDate
-		}
-		arrTemp.push(newObj)
-		localStorage.setItem("currentTask", JSON.stringify(arrTemp));
-
-
-		// setSoundsNotif((soundsNotif) => {	
-		// 	const soundsNotifCopy = JSON.parse(JSON.stringify(soundsNotif));
-		// 	soundsNotifCopy.push("Звуковое оповещение - 15 минут")
-		// 	return soundsNotifCopy;
-		// });
-
-	} else if (task === 5) {
-		const savedVolume = localStorage.getItem("soundVolume");
-		const savedMute = localStorage.getItem("soundMute");
-		const savedTask = localStorage.getItem("currentTask");
-
-		const currentDate = new Date().getTime()
-		let arrTemp = JSON.parse(savedTask)
-
-		if (task !== arrTemp[arrTemp.length-1].task && (currentDate < new Date(arrTemp[arrTemp.length-1].date).getTime()+10000 || currentDate > new Date(arrTemp[arrTemp.length-1].date).getTime()-10000)) {
-			console.log("no play 10")
-			setTimeout(()=> {
-				if (savedMute === 'false') {
-					audio10.volume = parseFloat(savedVolume)
-					audio10.play();
-				}
-			}, 60000)
-		} else {
-			console.log("play 10")
-			if (savedMute === 'false') {
-				audio10.volume = parseFloat(savedVolume)
-				audio10.play();
-			}
-		} 
-
-		const newObj = {
-			task: 5,
-			date: currentDate
-		}
-		arrTemp.push(newObj)
-		localStorage.setItem("currentTask", JSON.stringify(arrTemp));
-
-
-		// setSoundsNotif((soundsNotif) => {	
-		// 	const soundsNotifCopy = JSON.parse(JSON.stringify(soundsNotif));
-		// 	soundsNotifCopy.push("Звуковое оповещение - 10 минут")
-		// 	return soundsNotifCopy;
-		// });
-
-	} else if (task === 6) {
-		const savedVolume = localStorage.getItem("soundVolume");
-		const savedMute = localStorage.getItem("soundMute");
-		const savedTask = localStorage.getItem("currentTask");
-
-		const currentDate = new Date().getTime()
-		let arrTemp = JSON.parse(savedTask)
-
-		if (task !== arrTemp[arrTemp.length-1].task && (currentDate < new Date(arrTemp[arrTemp.length-1].date).getTime()+10000 || currentDate > new Date(arrTemp[arrTemp.length-1].date).getTime()-10000)) {
-			console.log("no play 5")
-			setTimeout(()=> {
-				if (savedMute === 'false') {
-					audio5.volume = parseFloat(savedVolume)
-					audio5.play();
-				}
-			}, 60000)
-		} else {
-			console.log("play 5")
-			if (savedMute === 'false') {
-				audio5.volume = parseFloat(savedVolume)
-				audio5.play();
-			}
-		}
-
-		const newObj = {
-			task: 6,
-			date: currentDate
-		}
-		arrTemp.push(newObj)
-		localStorage.setItem("currentTask", JSON.stringify(arrTemp));
-
-
-		// setSoundsNotif((soundsNotif) => {	
-		// 	const soundsNotifCopy = JSON.parse(JSON.stringify(soundsNotif));
-		// 	soundsNotifCopy.push("Звуковое оповещение - 5 минут")
-		// 	return soundsNotifCopy;
-		// });
-		
-	} else if (task === 7) {
-		const savedVolume = localStorage.getItem("soundVolume");
-		const savedMute = localStorage.getItem("soundMute");
-		const savedTask = localStorage.getItem("currentTask");
-
-		const currentDate = new Date().getTime()
-		let arrTemp = JSON.parse(savedTask)
-
-		if (task !== arrTemp[arrTemp.length-1].task && (currentDate < new Date(arrTemp[arrTemp.length-1].date).getTime()+10000 || currentDate > new Date(arrTemp[arrTemp.length-1].date).getTime()-10000)) {
-			console.log("no play 0")
-			setTimeout(()=> {
-				if (savedMute === 'false') {
-					audio0.volume = parseFloat(savedVolume)
-					audio0.play();
-				}
-			}, 60000)
-		} else {
-			console.log("play 0")
-			if (savedMute === 'false') {
-				audio0.volume = parseFloat(savedVolume)
-				audio0.play();
-			}
-		}
-
-		const newObj = {
-			task: 7,
-			date: currentDate
-		}
-		arrTemp.push(newObj)
-		localStorage.setItem("currentTask", JSON.stringify(arrTemp));
-
-
-		// setSoundsNotif((soundsNotif) => {	
-		// 	const soundsNotifCopy = JSON.parse(JSON.stringify(soundsNotif));
-		// 	soundsNotifCopy.push("Звуковое оповещение - 0 минут")
-		// 	return soundsNotifCopy;
-		// });
-	}
-	else if (task === 100) {
-		const savedVolume = localStorage.getItem("soundVolume");
-		const savedMute = localStorage.getItem("soundMute");
-
-		if (savedMute === 'false') {
-			console.log("savedMute: ", savedMute)
-			audioNarush.volume = parseFloat(savedVolume)
-		   	audioNarush.play();
-		} 
-	}
-	else if (task === 101) {
-		const savedVolume = localStorage.getItem("soundVolume");
-		const savedMute = localStorage.getItem("soundMute");
-
-		if (savedMute === 'false') {
-			console.log("savedMute: ", savedMute)
-			audioNarush2.volume = parseFloat(savedVolume)
-			audioNarush2.play();
-		} 
-	}
-	//звонок специалиста
-	else if (task === 200) {
-		//console.log("fio: ", data)
-		setShowCallCard(true)
-
-
-		const worker = await getWorker(tg_id)
-		//console.log("avatar: ", avatar)
-		setWorkerCall({
-			tg_id,
-			fio,
-            sity,
-            year_of_birth, 
-            rating, 
-            projects, 
-            specialities, 
-            comtags,
-			avatar: worker.avatar,
-		})
-
-
-		setCallIndex(2)
-		setCallIndex2(1)
-	}
-	//неизвестный номер
-	else if (task === 201) {
-		//console.log("fio: ", data)
-		setShowCallCardNo(true)
-
-		setWorkerCallNo(phone)
-
-
-		setCallIndex(1)
-		setCallIndex2(2)
-	}
-	//обновление данных
-	else if (task === 300) {
-		setShowUpdate(processUpdateD)
-		setWorkerUpdate(workers_update)
-	}
-	//рассылка
-	else if (task === 400) {
-		setShowDistrib(processDistrib)
-	}
-
-}
 
 function isObjectEmpty(obj) {
 	return Object.keys(obj).length === 0;
@@ -1869,7 +703,6 @@ function isObjectEmpty(obj) {
 			setUsers,
 			contacts,
 			setContacts,
-			setUserAsUnread, 
 			addNewMessage,
 			delMessageContext,
 			addNewName,
@@ -1888,7 +721,6 @@ function isObjectEmpty(obj) {
 			setProjects,
 			userWorkers,
 			setUserWorkers,
-			setUserWorkerAsUnread,
 			userRenthub,
 			setUserRenthub,
 			conversations, 
@@ -1897,21 +729,8 @@ function isObjectEmpty(obj) {
 			setWorkers,
 			workersAll,
 			setWorkersAll,
-			addNewMessage2,
-			delWMessageContext,
 			countMessageWork,
 			setCountMessageWork,
-			distributionsWork, 
-			setDistributionsWork,
-			addNewDistrib,
-			newPretendent,
-			setNewPretendent,
-			countPretendent, 
-			setCountPretendent,
-			soundsNotif, 
-			setSoundsNotif,
-			pretendents,
-			setPretendents,
 			workerCall,
 			showCallCard,
 			setShowCallCard,
@@ -1939,7 +758,6 @@ function isObjectEmpty(obj) {
 			setSoundVolume,
 			soundMute, 
 			setSoundMute,
-			sendNumberProcess,
 			statusProcess, 
 			statusProcess2, 
 			statusProcess3, 
