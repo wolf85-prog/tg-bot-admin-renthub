@@ -48,6 +48,11 @@ const AppSidebar = () => {
     // Open the link in a new tab with desired features (optional)
     window.open(url, '_blank', 'noopener,noreferrer');
   };
+
+  const handleLinkClick2 = (url) => {
+    // Open the link in a new tab with desired features (optional)
+    window.open(url, '_self', 'noopener,noreferrer');
+  };
   
   let navigation = []
 
@@ -64,30 +69,24 @@ const AppSidebar = () => {
       component: CNavTitle,
       name: '',
     },
-    // {
-    //   component: CNavTitle,
-    //   name: 'Основные разделы',
-    // },
-    // {
-    //   component: CNavItem,
-    //   name: 'Renthub',
-    //   to: '/renthub',
-    //   icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
-    // },
+
     {
-      component: CNavItem,
+      component: CNavLink,
       name: 'Менеджеры',
-      to: '/chat2',
+      //to: '/chat2',
+      onClick: ()=>handleLinkClick2('https://proj.uley.team:3000/chat2'),
       icon: <img src={ChatIcon} style={{width: '21px', marginRight: '20px', marginLeft: '6px'}} />,
       badge: countMessage !== 0 ? {color: 'info', text: countMessage,} : "",
-      style: {backgroundColor: '#0078d421'},
+      style: {backgroundColor: '#0078d421', cursor: 'pointer'},
     },
     
     {
-      component: CNavItem,
+      component: CNavLink,
       name: 'Рассылки',
-      to: '/distribution',
+      //to: '/distribution',
+      onClick: ()=>handleLinkClick2('https://proj.uley.team:3000/distribution'),
       icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
+      style: {cursor: 'pointer'},
     },
     {
       component: CNavLink,
@@ -98,11 +97,13 @@ const AppSidebar = () => {
       style: {cursor: 'pointer'},
     },
     {
-      component: CNavItem,
+      component: CNavLink,
       name: 'Уведомления',
-      to: '/notifications',
+      onClick: ()=>handleLinkClick2('https://proj.uley.team:3000/notifications'),
+      //to: '/notifications',
       icon: <CIcon icon={cilBell} customClassName="nav-icon" />,
       badge: countProjects !== 0 ? {color: 'info', text: countProjects,} : "",
+      style: {cursor: 'pointer'},
     },
 
     {
@@ -110,26 +111,22 @@ const AppSidebar = () => {
       name: '',
     },
 
-    // {
-    //   component: CNavItem,
-    //   name: 'Workhub',
-    //   to: '/workhub',
-    //   icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
-    // },
 
     {
-      component: CNavItem,
+      component: CNavLink,
       name: 'Специалисты',
-      to: '/chatwork',
+      onClick: ()=>handleLinkClick2('https://proj.uley.team:3000/chatwork'),
       icon: <img src={ChatIcon} style={{width: '21px', marginRight: '20px', marginLeft: '6px'}} />,
       badge: countMessageWork !== '0' ? {color: 'info', text: countMessageWork,} : "",
-      style: {backgroundColor: '#0078d421'},
+      style: {backgroundColor: '#0078d421', cursor: 'pointer'},
     },
     {
-      component: CNavItem,
+      component: CNavLink,
       name: 'Рассылки',
-      to: '/distributionw',
+      //to: '/distributionw',
+      onClick: ()=>handleLinkClick2('https://proj.uley.team:3000/distributionw'),
       icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
+      style: {cursor: 'pointer'},
     },
     {
       component: CNavLink,
@@ -140,11 +137,13 @@ const AppSidebar = () => {
       style: {cursor: 'pointer'},
     },
     {
-      component: CNavItem,
+      component: CNavLink,
       name: 'Уведомления',
-      to: '/workers',
+      //to: '/workers',
+      onClick: ()=>handleLinkClick2('https://proj.uley.team:3000/workers'),
       icon: <CIcon icon={cilBell} customClassName="nav-icon" />,
       badge: countPretendent ? {color: 'info', text: countPretendent,} : "",
+      style: {cursor: 'pointer'},
     },
 
     {
