@@ -22,19 +22,30 @@ const ChatsWorker = () => {
 
 
   return (
-            <CContainer lg>
-                <Suspense fallback={<CSpinner color="primary" />}>                 
-                  
-                  <div className="app">
-                    <p className="app__mobile-message"> Доступно только на компьютере 😊. </p> 
-                    <div className="app-content">
-                      <Sidebar />
-                      {Object.keys(personW).length ? <Chat /> : <Home /> }
-                    </div>
-                  </div>
+    <div>
+    <AppSidebar />
+    <div className="wrapper d-flex flex-column min-vh-100 bg-uley">
+      <AppHeaderChat />
+      <div className="body flex-grow-1 px-3">
 
-                </Suspense>
-            </CContainer>
+          <CContainer lg>
+              <Suspense fallback={<CSpinner color="primary" />}>                 
+                
+                <div className="app">
+                  <p className="app__mobile-message"> Доступно только на компьютере 😊. </p> 
+                  <div className="app-content">
+                    <Sidebar />
+                    {Object.keys(personW).length ? <Chat /> : <Home /> }
+                  </div>
+                </div>
+
+              </Suspense>
+          </CContainer>
+
+      </div>
+      <AppFooter />
+    </div>
+  </div>
   )
 }
 
