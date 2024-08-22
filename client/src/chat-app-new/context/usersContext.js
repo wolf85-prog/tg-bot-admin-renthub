@@ -411,7 +411,7 @@ const UsersProvider = ({ children }) => {
 	const fetchMessageResponse = async(data) => {
 		//пришло новое сообщение
 		//const kol = await getCountMessage()
-		//setCountMessage(count+1)
+		setCountMessage(count+1)
 		//const res = await newCountMessage(kol.managers + 1)
 		console.log("Пришло новое сообщение в renthub: ", count + 1)
 		//setShowGetMess(true)
