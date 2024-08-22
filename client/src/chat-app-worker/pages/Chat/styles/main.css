@@ -849,9 +849,12 @@ textarea:focus {
     flex-direction: row-reverse;
 }
 
-.profile__worker {
+.profile__proj {
     margin-bottom: 0;
     text-align: right;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
 }
 
 .profile__avatar-worker {

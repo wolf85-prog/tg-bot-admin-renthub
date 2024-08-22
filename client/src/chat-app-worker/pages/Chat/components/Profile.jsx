@@ -239,17 +239,22 @@ const Profile = ({ user, closeSidebar }) => {
 
 				<li className="profile__actionW">
 					<p className="profile__actionW-left">
-						<span className="profile__action-text--bottom">
-							Проекты
-						</span>
-						<span className="profile__action-text--top" style={{textAlign: 'right'}}>
-							{/* {worker.spec?.map((item)=>item.name).join('')} */}
-							<table className="table-noborder">{worker ? worker.spec?.map((worker, index) => <tr key={index}><td>{worker.name}</td></tr> ) : '—'}</table>
+						<div style={{display: 'flex', justifyContent: 'space-between'}}>
+							<span className="profile__action-text--bottom">
+								Проекты
+							</span>
+							<span className="profile__action-text--top" style={{marginRight: '15px'}}>0</span>
+						</div>
+						
+						<span className="profile__action-text--top profile__notion" style={{textAlign: 'right'}}>
+							—
+							{/* <table className="table-noborder">{worker ? worker.spec?.map((worker, index) => <tr key={index}><td>{worker.name}</td></tr> ) : '—'}</table> */}
 						</span>	
 					</p>
+
 				</li>
 
-				<li className="profile__actionW">
+				{/* <li className="profile__actionW">
 					<p className="profile__actionW-left">
 						<span className="profile__action-text--bottom">
 							Последний отклик на проект
@@ -265,7 +270,7 @@ const Profile = ({ user, closeSidebar }) => {
 							{crmId}
 						</span>
 					</p>
-				</li>			
+				</li>			 */}
 			</ul>
 
 			<div 
