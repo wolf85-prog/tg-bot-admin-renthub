@@ -162,6 +162,19 @@ const Profile = ({ user, closeSidebar }) => {
 				<li className="profile__actionW">
 					<p className="profile__actionW-left">
 						<span className="profile__action-text--bottom">
+							Компания
+						</span>
+						<span className="profile__action-text--top profile__notion">
+							{user ? 
+							(user.phone !== '' ? user.phone : "—")
+							: "—"}
+						</span>
+					</p>
+				</li>
+
+				<li className="profile__actionW">
+					<p className="profile__actionW-left">
+						<span className="profile__action-text--bottom">
 							Телефон
 						</span>
 						<span className="profile__action-text--top profile__notion">
@@ -170,7 +183,20 @@ const Profile = ({ user, closeSidebar }) => {
 							: "—"}
 						</span>
 					</p>
-				</li>			
+				</li>	
+
+				<li className="profile__actionW">
+					<p className="profile__actionW-left">
+						<span className="profile__action-text--bottom">
+							Должность
+						</span>
+						<span className="profile__action-text--top profile__notion">
+						{user ? 
+							(user.newcity !== '' ? user.newcity : "—")
+							: "—"}
+						</span>	
+					</p>
+				</li>		
 
 				<li className="profile__actionW">
 					<p className="profile__actionW-left">
@@ -188,7 +214,7 @@ const Profile = ({ user, closeSidebar }) => {
 				<li className="profile__actionW">
 					<p className="profile__actionW-left">
 						<span className="profile__action-text--bottom">
-							Дата рождения
+							Сфера деятельности
 						</span>
 						<span className="profile__action-text--top profile__notion">
 							{user ? 
@@ -201,7 +227,7 @@ const Profile = ({ user, closeSidebar }) => {
 				<li className="profile__actionW">
 					<p className="profile__actionW-left">
 						<span className="profile__action-text--bottom">
-							Telegram ID
+							Ник / ID
 						</span>
 						
 						<span className="profile__action-text--top profile__notion">
@@ -214,7 +240,7 @@ const Profile = ({ user, closeSidebar }) => {
 				<li className="profile__actionW">
 					<p className="profile__actionW-left">
 						<span className="profile__action-text--bottom">
-							Специальность
+							Проекты
 						</span>
 						<span className="profile__action-text--top" style={{textAlign: 'right'}}>
 							{/* {worker.spec?.map((item)=>item.name).join('')} */}
