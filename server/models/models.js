@@ -50,7 +50,7 @@ const Project = sequelize.define('project', {
 })
 
 
-const Distributionr = sequelize.define('distributionr', {
+const Distribution = sequelize.define('distribution', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
     text: {type: DataTypes.STRING}, //текст сообщения;
     image: {type: DataTypes.STRING}, //ссылка на картинку;
@@ -110,7 +110,7 @@ module.exports = {
     Message, 
     Conversation, 
     Project, 
-    Distributionr,
+    Distribution,
     Report,
     Plan,
     CountMessage,
