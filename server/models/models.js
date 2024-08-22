@@ -9,31 +9,6 @@ const User = sequelize.define('user', {
     role: {type: DataTypes.STRING, defaultValue: "USER"},
 })
 
-const UserBot = sequelize.define('userbot', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    firstname: {type: DataTypes.STRING},
-    lastname: {type: DataTypes.STRING},
-    chatId: {type: DataTypes.STRING, unique: true},
-    username: {type: DataTypes.STRING},
-    avatar: {type: DataTypes.STRING},
-})
-
-const Message = sequelize.define('message', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    conversationId: {type: DataTypes.STRING},
-    senderId: {type: DataTypes.STRING},
-    receiverId: {type: DataTypes.STRING},    
-    text: {type: DataTypes.TEXT},     //текст сообщения;
-    type: {type: DataTypes.STRING},      //тип сообщения;
-    is_bot: {type: DataTypes.BOOLEAN},
-    messageId: {type: DataTypes.STRING},
-    buttons: {type: DataTypes.STRING},   //названия кнопок;
-    replyId: {type: DataTypes.STRING}, //id пересылаемого сообщения
-})
-
-const Conversation = sequelize.define('conversation', {
-    members: {type: DataTypes.ARRAY(DataTypes.STRING)},
-})
 
 const Project = sequelize.define('project', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
@@ -106,9 +81,6 @@ const ProjectNew = sequelize.define('projectnew', {
 
 module.exports = {
     User, 
-    UserBot, 
-    Message, 
-    Conversation, 
     Project, 
     Distribution,
     Report,
