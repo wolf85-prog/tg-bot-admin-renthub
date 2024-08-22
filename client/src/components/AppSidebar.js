@@ -30,11 +30,11 @@ const AppSidebar = () => {
   const unfoldable = useSelector((state) => state.sidebarUnfoldable)
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
-  const { countMessage, countProjects, countMessageWork, showGetMess } = useUsersContext();
+  const { countMessage, newProject, countProjects, countMessageWork, countPretendent, showGetMess } = useUsersContext();
 
   const [count, setCount ] = useState(0);
   const [countMesW, setCountMesW ] = useState(0);
-  //console.log("countMessage: ", countMessageWork)
+  console.log("countMessage: ", countMessageWork)
 
 
   // useEffect(async() => {
