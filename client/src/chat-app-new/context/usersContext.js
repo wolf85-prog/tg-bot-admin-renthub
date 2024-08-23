@@ -80,11 +80,7 @@ const UsersProvider = ({ children }) => {
 	const [workers, setWorkers] = useState([]); //100 последних специалистов;
 	const [workersAll, setWorkersAll] = useState([]); //все специалисты;
 
-	const [userRenthub, setUserRenthub] = useState( () => {
-		const savedUserRenthub = localStorage.getItem("userRenthub");
-	   	const parsedUserRenthub = JSON.parse(savedUserRenthub);
-	   	return parsedUserRenthub || "";
-	}); 
+	const [userRenthub, setUserRenthub] = useState([]); 
 	const [rmanagers, setRmanagers] = useState([]); //100 последних менеджеров;
 	const [rmanagersAll, setRmanagersAll] = useState([]); //все менеджеры;
 
