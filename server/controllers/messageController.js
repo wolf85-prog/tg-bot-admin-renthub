@@ -1,4 +1,4 @@
-const Message = require('../models/Message')
+const {Message} = require('../models/renthub')
 const {CountMessage} = require('../models/models')
 const ApiError = require('../error/ApiError')
 const uuid = require('uuid')

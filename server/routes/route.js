@@ -16,7 +16,6 @@ const { newMessageR,delMessageR, getAllMessagesR, getMessagesR, getMessagesRCoun
 const { getUsersRenthub, getUserRenthub, editUserRenthub } = require( "../controllers/ruserbotController.js")
 const { newConversationR, getConversationR, getConversationsR } = require( "../controllers/rconversationController.js")
 
-//const { newPlan, getPlan, addTimer } = require('../controllers/planController')
 
 
 const upload = require('../middleware/file')
