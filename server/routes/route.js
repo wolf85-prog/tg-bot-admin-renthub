@@ -2,11 +2,7 @@ const Router = require('express')
 const route = new Router()
 const userController = require('../controllers/userController')
 const authMiddleware = require('../middleware/authMiddleware')
-const { newMessage, delMessage, getMessages, getLastMessages, getAllMessages, getCountMessages, 
-    newCountMessage, newCountWMessage, newCountProjects, newCountMessagePretendent,
- } = require('../controllers/messageController')
-const { newConversation, getConversation, getConversations } = require('../controllers/conversationController')
-const { addUser, getUsers, getUser, editUser, editUserAvatar} = require('../controllers/userbotController')
+
 const { getReports, getReportsId } = require('../controllers/reportController')
 const { getProjects, getProjectsId, getProjectNew, getProjectNewId, getProjectNewCreate, getProjectNewUpdate, getProjectNewDel } = require('../controllers/projectController')
 const { uploadFile, getImage } = require( "../controllers/fileController.js")

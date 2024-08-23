@@ -1,4 +1,4 @@
-const {Report, SoundNotif} = require('../models/models')
+const {Report} = require('../models/models')
 const ApiError = require('../error/ApiError')
 const { Op } = require('sequelize')
 

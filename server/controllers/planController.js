@@ -1,4 +1,4 @@
-const {Plan, Distributionw, Pretendent} = require('../models/models')
+const {Plan, Distribution} = require('../models/models')
 const ApiError = require('../error/ApiError')
 const uuid = require('uuid')
 const path = require('path')
