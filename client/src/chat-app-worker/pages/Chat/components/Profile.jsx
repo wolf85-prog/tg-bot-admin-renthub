@@ -21,6 +21,7 @@ import {
 import { $host } from './../../../../http/index';
 import sendSound from './../../../../chat-app-new/assets/sounds/sendmessage.mp3';
 import ishodCall from './../../../../assets/sound/ishod.mp3';
+import { getManagerNotion } from "src/http/renthubAPI";
 
 const Profile = ({ user, closeSidebar }) => {
 
@@ -32,7 +33,8 @@ const Profile = ({ user, closeSidebar }) => {
 	const webAppAnketa = process.env.REACT_APP_WEBAPP_ANKETA
 
 	const [username, setUsername] = useState("")
-	const [worker, setWorker] = useState("")
+	//const [worker, setWorker] = useState("")
+	const [manager, setManager] = useState("")
 	const [avatar, setAvatar] = useState("")
 	const [form, setForm] = useState(false)
 	const { addNewName, addNewAvatar } = useUsersContext();
@@ -69,9 +71,9 @@ const Profile = ({ user, closeSidebar }) => {
 		//получить данные из ноушена по телеграм id
 		const fetchData = async () => {
 			//console.log("user: ", user)
-			const fio_notion = await getWorkerNotionId(user.chatId)
+			const fio_notion = await getManagerNotion(user.chatId)
 			//console.log("worker: ", fio_notion[0])
-			setWorker(fio_notion[0])
+			setManager(fio_notion[0])
 
 			//const avatars = await getWorkerChildrenId(fio_notion[0]?.id)
 			//const avatars = await getWorker(user.chatId)

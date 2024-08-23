@@ -1,4 +1,4 @@
-import {$authHost, $host, $host_worker} from "./index";
+import {$authHost, $host, $host_renthub} from "./index";
 
 export const getRManagers = async () =>{
     try {
@@ -183,5 +183,16 @@ export const uploadFile = async (data) =>{
     } catch (error) {
         console.log("error while calling uploadFile api",error.message);
         
+    }
+}
+
+
+export const getManagerNotion = async (id) =>{
+    try {
+       let response = await $host_renthub.get(`managers`);
+       //console.log(response);
+       return response.data;
+    } catch (error) {
+        console.log("error while calling getManagerNotion api", error.message);
     }
 }

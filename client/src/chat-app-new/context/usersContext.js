@@ -188,11 +188,11 @@ const UsersProvider = ({ children }) => {
 	
 
 
-//---------get Workers----------------------------------------------------
+//---------get Managers----------------------------------------------------
 
 	useEffect(() => {
-		//---------get UserWorkers-----------------------------------------
-		const fetchUserWorkerData = async () => {
+		//---------get UserManagerы-----------------------------------------
+		const fetchUserManagerData = async () => {
 		
 			//0 все специалисты
 			let all = await getRManagers()
@@ -400,8 +400,8 @@ const UsersProvider = ({ children }) => {
 			})	
 		}
 		
-		//все сообщения специалистов
-		fetchUserWorkerData();
+		//все сообщения менеджеров
+		fetchUserManagerData();
 		
 	},[])
 
