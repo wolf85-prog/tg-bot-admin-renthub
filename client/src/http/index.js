@@ -40,6 +40,7 @@ export {
     $host_bot,
     $host_bottest,
     $host_worker,
+    $host_renthub,
     $host_call,
     $authHost
 }
