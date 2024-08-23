@@ -67,12 +67,13 @@ const Profile = ({ user, closeSidebar }) => {
 
 	useEffect(() => {
 		setImg(`${host}${user.avatar}`)
+		//console.log(user)
 
 		//получить данные из ноушена по телеграм id
 		const fetchData = async () => {
 			//console.log("user: ", user)
 			const fio_notion = await getManagerNotion(user.chatId)
-			//console.log("worker: ", fio_notion[0])
+			//console.log("manager: ", fio_notion[0])
 			setManager(fio_notion[0])
 
 			//const avatars = await getWorkerChildrenId(fio_notion[0]?.id)
@@ -156,7 +157,7 @@ const Profile = ({ user, closeSidebar }) => {
 							: <img src={defaultAvatar} alt={user?.name} width='100%' height={heightImage.width} style={{objectFit: 'cover'}} />
 					}
 				</div>
-				<h2 className="profile__name" style={{textAlign: 'center'}}>{user.name}</h2>
+				<h2 className="profile__name" style={{textAlign: 'center'}}>{manager.name}</h2>
 			</div>
 
 			<ul className="profile__sectionW profile__section--actions">	
@@ -180,8 +181,8 @@ const Profile = ({ user, closeSidebar }) => {
 							Телефон
 						</span>
 						<span className="profile__action-text--top profile__notion">
-							{user ? 
-							(user.phone !== '' ? user.phone : "—")
+							{manager ? 
+							(manager.phone !== null ? manager.phone : "—")
 							: "—"}
 						</span>
 					</p>
@@ -193,8 +194,8 @@ const Profile = ({ user, closeSidebar }) => {
 							Должность
 						</span>
 						<span className="profile__action-text--top profile__notion">
-						{user ? 
-							(user.newcity !== '' ? user.newcity : "—")
+						{manager ? 
+							(manager.doljnost !== null ? manager.doljnost : "—")
 							: "—"}
 						</span>	
 					</p>
@@ -206,8 +207,8 @@ const Profile = ({ user, closeSidebar }) => {
 							Город
 						</span>
 						<span className="profile__action-text--top profile__notion">
-						{user ? 
-							(user.newcity !== '' ? user.newcity : "—")
+						{manager ? 
+							(manager.city !== null ? manager.city : "—")
 							: "—"}
 						</span>	
 					</p>

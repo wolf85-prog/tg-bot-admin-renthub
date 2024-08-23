@@ -30,26 +30,26 @@ route.get('/user/get/:id', authMiddleware, userController.getOne)
 
 
 //----------------RENTHUB--------------------------------
-route.get('/ruserbots/get', getUsersRenthub)
-route.get('/ruserbots/get/:id', getUserRenthub)
-route.patch('/ruserbots/update/:id', editUserRenthub)
+route.get('/userbots/get', getUsersRenthub)
+route.get('/userbots/get/:id', getUserRenthub)
+route.patch('/userbots/update/:id', editUserRenthub)
 
-route.post('/rmessage/add', newMessageR)
-route.delete('/rmessage/delete/:id', delMessageR)
-route.get('/rmessage/get', getAllMessagesR)
-route.get('/rmessage/get/:id', getMessagesR)
-route.get('/rmessage/get/count/:count', getMessagesRCount)
-route.get('/rmessage2/get/:id/:count/:prev', getMessagesR2) //еще
+route.post('/message/add', newMessageR)
+route.delete('/message/delete/:id', delMessageR)
+route.get('/message/get', getAllMessagesR)
+route.get('/message/get/:id', getMessagesR)
+route.get('/message/get/count/:count', getMessagesRCount)
+route.get('/message2/get/:id/:count/:prev', getMessagesR2) //еще
 
-route.post('/rconversation/add', newConversationR)
-route.get('/rconversation/get/:id', getConversationR)
-route.get('/rconversations/get', getConversationsR)
+route.post('/conversation/add', newConversationR)
+route.get('/conversation/get/:id', getConversationR)
+route.get('/conversations/get', getConversationsR)
 
-route.get('/rmanagers/get', getRmanagers)
-route.get('/rmanagers/get/:id', getRmanager)
-route.patch('/rmanagers/update/:id', editRmanager)
-//route.get('/rmanager/block/:id', blockWorker)
-route.get('/rmanagers/count/get/:count/:prev', getRManagerCount) //еще
+route.get('/managers/get', getRmanagers)
+route.get('/managers/get/:id', getRmanager)
+route.patch('/managers/update/:id', editRmanager)
+//route.get('/manager/block/:id', blockWorker)
+route.get('/managers/count/get/:count/:prev', getRManagerCount) //еще
 
 
 
