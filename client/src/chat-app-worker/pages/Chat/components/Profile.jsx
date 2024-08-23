@@ -157,7 +157,7 @@ const Profile = ({ user, closeSidebar }) => {
 							: <img src={defaultAvatar} alt={user?.name} width='100%' height={heightImage.width} style={{objectFit: 'cover'}} />
 					}
 				</div>
-				<h2 className="profile__name" style={{textAlign: 'center'}}>{manager.name}</h2>
+				<h2 className="profile__name" style={{textAlign: 'center'}}>{user.name}</h2>
 			</div>
 
 			<ul className="profile__sectionW profile__section--actions">	
@@ -169,7 +169,7 @@ const Profile = ({ user, closeSidebar }) => {
 						</span>
 						<span className="profile__action-text--top profile__notion">
 							{user ? 
-							(user.phone !== '' ? user.phone : "—")
+							(user.company !== '' ? user.company : "—")
 							: "—"}
 						</span>
 					</p>
@@ -181,8 +181,8 @@ const Profile = ({ user, closeSidebar }) => {
 							Телефон
 						</span>
 						<span className="profile__action-text--top profile__notion">
-							{manager ? 
-							(manager.phone !== null ? manager.phone : "—")
+							{user ? 
+							(user.phone !== null ? user.phone : "—")
 							: "—"}
 						</span>
 					</p>
@@ -194,8 +194,8 @@ const Profile = ({ user, closeSidebar }) => {
 							Должность
 						</span>
 						<span className="profile__action-text--top profile__notion">
-						{manager ? 
-							(manager.doljnost !== null ? manager.doljnost : "—")
+						{user ? 
+							(user.doljnost !== null ? user.doljnost : "—")
 							: "—"}
 						</span>	
 					</p>
@@ -207,8 +207,8 @@ const Profile = ({ user, closeSidebar }) => {
 							Город
 						</span>
 						<span className="profile__action-text--top profile__notion">
-						{manager ? 
-							(manager.city !== null ? manager.city : "—")
+						{user ? 
+							(user.city !== null ? user.city : "—")
 							: "—"}
 						</span>	
 					</p>
