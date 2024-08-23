@@ -11,7 +11,7 @@ export const getRManagers = async () =>{
 
 export const getRManagerCount = async (count, prev) =>{
     try {
-       let response = await $host.get(`api/rmanagers/count/get/${count}/${prev}`);
+       let response = await $host.get(`api/managers/count/get/${count}/${prev}`);
        return response.data;
     } catch (error) {
         console.log("error while calling getWorkersCount api", error.message);
@@ -20,7 +20,7 @@ export const getRManagerCount = async (count, prev) =>{
 
 export const getRManager = async (id) =>{
     try {
-       let response = await $host.get(`api/rmanagers/get/${id}`);
+       let response = await $host.get(`api/managers/get/${id}`);
        return response.data;
     } catch (error) {
         console.log("error while calling getWorker api", error.message);
@@ -29,7 +29,7 @@ export const getRManager = async (id) =>{
 
 export const getRContacts = async () =>{
     try {
-       let response = await $host.get('api/ruserbots/get');
+       let response = await $host.get('api/userbots/get');
        //console.log(response);
        return response.data;
     } catch (error) {
@@ -39,7 +39,7 @@ export const getRContacts = async () =>{
 
 export const getRContactId = async (id) =>{
     try {
-       let response = await $host.get(`api/ruserbots/get/${id}`);
+       let response = await $host.get(`api/userbots/get/${id}`);
        //console.log(response);
        return response.data;
     } catch (error) {
@@ -49,7 +49,7 @@ export const getRContactId = async (id) =>{
 
 export const editRContact = async (data, id) =>{
     try {
-       let response = await $host.patch(`api/ruserbots/update/${id}`, data);
+       let response = await $host.patch(`api/userbots/update/${id}`, data);
        console.log(response);
        return response.data;
     } catch (error) {
@@ -59,7 +59,7 @@ export const editRContact = async (data, id) =>{
 
 export const editContactAvatar = async (data, id) =>{
     try {
-       let response = await $host.patch(`api/ruserbots/updatefile/${id}`, data);
+       let response = await $host.patch(`api/userbots/updatefile/${id}`, data);
        console.log("response: ", response);
        return response.data;
     } catch (error) {
@@ -69,7 +69,7 @@ export const editContactAvatar = async (data, id) =>{
 
 export const setRConversation= async (data)=>{
     try {
-        await $host.post('api/rconversation/add', data);
+        await $host.post('api/conversation/add', data);
     } catch (error) {
         console.log("error while calling setConversation api", error.message);
         
@@ -78,7 +78,7 @@ export const setRConversation= async (data)=>{
 
 export const getRConversation= async (id)=>{
     try {
-       let response= await $host.get(`api/rconversation/get/${id}`);
+       let response= await $host.get(`api/conversation/get/${id}`);
        if (response.data === null) {
             return null;
        }
@@ -90,7 +90,7 @@ export const getRConversation= async (id)=>{
 
 export const getRConversations= async ()=>{
     try {
-       let response= await $host.get(`api/rconversations/get`);
+       let response= await $host.get(`api/conversations/get`);
        return response.data;
     } catch (error) {
         console.log("error while calling getConversation api", error.message);       
@@ -100,7 +100,7 @@ export const getRConversations= async ()=>{
 // message
 export const newRMessage = async (data) =>{
     try {
-        await $host.post(`api/rmessage/add`, data); 
+        await $host.post(`api/message/add`, data); 
     } catch (error) {
         console.log("error while calling newMessage api",error.message);
     }
@@ -108,7 +108,7 @@ export const newRMessage = async (data) =>{
 
 export const delRMessage = async (id) =>{
     try {
-        await $host.delete(`api/rmessage/delete/${id}`); 
+        await $host.delete(`api/message/delete/${id}`); 
     } catch (error) {
         console.log("error while calling delMessage api",error.message);
     }
@@ -119,7 +119,7 @@ export const getRMessages = async(id)=>{
     try {
         let response
         if (id !== null) {
-            response = await $host.get(`api/rmessage/get/${id}`);
+            response = await $host.get(`api/message/get/${id}`);
         } else {
             return [] 
         }
@@ -135,7 +135,7 @@ export const getRMessages2 = async(id, count, prev)=>{
     try {
         let response
         if (id !== null) {
-            response = await $host.get(`api/rmessage2/get/${id}/${count}/${prev}`);
+            response = await $host.get(`api/message2/get/${id}/${count}/${prev}`);
         } else {
             return [] 
         }
@@ -149,7 +149,7 @@ export const getRMessages2 = async(id, count, prev)=>{
 
 export const getAllRMessages = async()=>{
     try {
-        let response= await $host.get(`api/rmessage/get`);
+        let response= await $host.get(`api/message/get`);
         
         return response.data;
     } catch (error) {
@@ -160,7 +160,7 @@ export const getAllRMessages = async()=>{
 
 export const getRMessagesCount = async(count)=>{
     try {
-        let response= await $host.get(`api/rmessage/get/count/${count}`);
+        let response= await $host.get(`api/message/get/count/${count}`);
         
         return response.data;
     } catch (error) {
