@@ -58,7 +58,7 @@ const AppSidebar = () => {
 
   navigation = [ //показывать бейдж
     {
-      component: CNavItem,
+      component: CNavLink,
       name: 'Пункт управления',
       //to: '/dashboard',
       onClick: ()=>handleLinkClick2('https://proj.uley.team:3000/dashboard'),
