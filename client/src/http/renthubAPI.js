@@ -27,6 +27,25 @@ export const getRManager = async (id) =>{
     }
 }
 
+
+export const getRCompanyName = async (id) =>{
+    try {
+       let response = await $host.get(`company/name/${id}`);
+       return response.data;
+    } catch (error) {
+        console.log("error while calling getCompanyName api", error.message);
+    }
+}
+
+export const getRCompanys = async () =>{
+    try {
+       let response = await $host_renthub.get(`companys`);
+       return response.data;
+    } catch (error) {
+        console.log("error while calling getCompany api", error.message);
+    }
+}
+
 export const getRContacts = async () =>{
     try {
        let response = await $host.get('api/userbots/get');

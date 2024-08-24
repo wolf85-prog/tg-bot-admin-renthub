@@ -219,11 +219,9 @@ const Profile = ({ user, closeSidebar }) => {
 						<span className="profile__action-text--bottom">
 							Сфера деятельности
 						</span>
-						<span className="profile__action-text--top profile__notion">
-							{user ? 
-							(user.age !== '' ? user.age : "—")
-							: "—"}
-						</span>
+						<span className="profile__action-text--top profile__notion" style={{textAlign: 'right'}}>
+							<table className="table-noborder">{user ? JSON.parse(user.bisnes).map((man, index) => <tr key={index}><td>{man.name !== 'Blacklist' ? man.name : ''}</td></tr> ) : '—'}</table> 
+						</span>	
 					</p>
 				</li>
 
@@ -249,31 +247,13 @@ const Profile = ({ user, closeSidebar }) => {
 							<span className="profile__action-text--top" style={{marginRight: '15px'}}>0</span>
 						</div>
 						
-						<span className="profile__action-text--top profile__notion" style={{textAlign: 'right'}}>
+						{/* <span className="profile__action-text--top profile__notion" style={{textAlign: 'right'}}>
 							—
-							{/* <table className="table-noborder">{worker ? worker.spec?.map((worker, index) => <tr key={index}><td>{worker.name}</td></tr> ) : '—'}</table> */}
-						</span>	
+							<table className="table-noborder">{worker ? worker.spec?.map((worker, index) => <tr key={index}><td>{worker.name}</td></tr> ) : '—'}</table> 
+						</span>	*/}
 					</p>
 
 				</li>
-
-				{/* <li className="profile__actionW">
-					<p className="profile__actionW-left">
-						<span className="profile__action-text--bottom">
-							Последний отклик на проект
-						</span>
-						
-						<span className="profile__action-text--top profile__notion">
-							{crmId3}
-						</span>
-						<span className="profile__action-text--top profile__notion">
-							{crmId2}
-						</span>
-						<span className="profile__action-text--top profile__notion">
-							{crmId}
-						</span>
-					</p>
-				</li>			 */}
 			</ul>
 
 			<div 

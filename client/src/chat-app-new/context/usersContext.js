@@ -9,7 +9,7 @@ import { getAllPretendent, getWContacts, getWConversation,
 
 import { getRManagers, getRManager, getRManagerCount, newRMessage, getRContacts, getRConversation, 
 	getRConversations, getRMessages, getRenthub, getAllRMessages, 
-	getRMessagesCount } from '../../http/renthubAPI'
+	getRMessagesCount, getRCompanys } from '../../http/renthubAPI'
 
 import { getDistributions, 
 	getDistributionsW, 
@@ -193,17 +193,29 @@ const UsersProvider = ({ children }) => {
 			//0 все специалисты
 			let all = await getRManagers()
 			const arrayWorkerAll = []
+
+			//массив компаний
+			let comps = await getRCompanys()
+			//console.log("comps: ", comps)
+			
 		
 			all.map(async (user) => {
+				//поиск компании по id
+				let compName
+				if (comps) {
+					compName = comps.find(item=> item.id === user.company)
+					//console.log("compName: ", compName)
+				}	
+
 				const newWorker = {
 					id: user.id,
 					fio: user.fio,
 					phone: user.phone,
 					doljnost: user.dojnost,
 					city: user.city, 
-					company: user.company,
+					company: compName ? compName.title : '',
 					projects: user.projects,
-					worklist:  user.worklist,
+					bisnes:  user.worklist,
 					chatId: user.chatId,
 					createDate: user.createdAt,
 					avatar: user.avatar,
@@ -218,12 +230,17 @@ const UsersProvider = ({ children }) => {
 			setWorkersAll(arrayWorkerAll)
 
 			//1 все специалисты 100
-			let response = await getRManagerCount(100, workers.length);
-			console.log("workers size: ", response.length)
+			let response = await getRManagerCount(100, userRenthub.length);
+			console.log("manager size: ", response)
 		
 			const arrayWorker = []
 		
 			response.reverse().map(async (user) => {
+				//поиск компании по id
+				// let compName
+				// if (comps) {
+				// 	compName = comps.find(item=> item.id === user.company)
+				// }	
 				const newWorker = {
 					id: user.id,
 					fio: user.fio,
@@ -232,7 +249,7 @@ const UsersProvider = ({ children }) => {
 					city: user.city, 
 					company: user.company,
 					projects: user.projects,
-					worklist:  user.worklist,
+					bisnes:  user.worklist,
 					chatId: user.chatId,
 					createDate: user.createdAt,
 					avatar: user.avatar,
@@ -263,8 +280,8 @@ const UsersProvider = ({ children }) => {
 			let count = 0
 			convers.forEach(async (user, index) => {
 		
-				let worker = arrayWorkerAll.find((item)=> item.chatId === user.members[0])
-				let userbot = wuserbots.find((item)=> item.chatId === worker?.chatId)	
+				let manager = arrayWorkerAll.find((item)=> item.chatId === user.members[0])
+				let userbot = wuserbots.find((item)=> item.chatId === manager?.chatId)	
 					
 				let conversationId = user.id //await getWConversation(user.members[0])
 
@@ -347,19 +364,21 @@ const UsersProvider = ({ children }) => {
 					obj[dates[i]] = arrayDateMessage;
 				}	
 				
-				if (worker) {
+				if (manager) {
 					const newUser = {
-						id: worker.id,
+						id: manager.id,
 						username: '', // user.username ? user.username : '',
-						name: worker?.fio, //notion[0]?.fio ? notion[0]?.fio : '',
-						city: worker?.city, //notion[0]?.city ? notion[0]?.city : '',
-						phone: worker?.phone, //notion[0]?.phone ? notion[0]?.phone : '',
-						doljnost: worker?.doljnost, //notion[0]?.phone ? notion[0]?.phone : '',
-						chatId: worker?.chatId,
-						avatar: worker?.avatar ? worker?.avatar : '', //avatars[0]?.image ? avatars[0]?.image : '', //user.avatar,
+						name: manager?.fio, //notion[0]?.fio ? notion[0]?.fio : '',
+						city: manager?.city, //notion[0]?.city ? notion[0]?.city : '',
+						phone: manager?.phone, //notion[0]?.phone ? notion[0]?.phone : '',
+						doljnost: manager?.doljnost, //notion[0]?.phone ? notion[0]?.phone : '',
+						company: manager?.company,
+						bisnes: manager?.bisnes,
+						chatId: manager?.chatId,
+						avatar: manager?.avatar ? manager?.avatar : '', //avatars[0]?.image ? avatars[0]?.image : '', //user.avatar,
 						conversationId: conversationId ? conversationId : 0,
 						block: '',
-						blockw: worker?.block,
+						blockw: manager?.block,
 						unread: 0, 
 						pinned: false,
 						typing: false,
