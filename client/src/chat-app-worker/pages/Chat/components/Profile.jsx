@@ -263,22 +263,22 @@ const Profile = ({ user, closeSidebar }) => {
 			>
 				{/* <CIcon icon={cilPhone} className="profile__success-icon" /> */}
 				<Icon id="phone" className="profile__success-icon" />
-				<p className="profile__success-text profile__worker">Позвонить</p>
+				<p className="profile__success-text profile__proj">Позвонить</p>
 			</div>
 
 			<div className="profile__sectionW profile__sectionW--danger">
 				<Icon id="block" className="profile__danger-icon" />
-				<p className="profile__danger-text profile__worker" style={{cursor: 'pointer'}} onClick={clickSetBlocked}>{blockWorker ? 'Разблокировать' : 'Заблокировать'}</p>
+				<p className="profile__danger-text profile__proj" style={{cursor: 'pointer'}} onClick={clickSetBlocked}>{blockWorker ? 'Разблокировать' : 'Заблокировать'}</p>
 			</div>
 
 			<div className="profile__sectionW profile__sectionW--danger">
 				<Icon id="delete" className="profile__danger-icon" />
-				<p className="profile__danger-text profile__worker"> Очистить переписку </p>
+				<p className="profile__danger-text profile__proj"> Очистить переписку </p>
 			</div>
 
 			<div className="profile__sectionW profile__sectionW--danger">
 				<Icon id="delete" className="profile__danger-icon" />
-				<p className="profile__danger-text profile__worker"> Удалить чат </p>
+				<p className="profile__danger-text profile__proj"> Удалить чат </p>
 			</div>
 		</div>
 	);
