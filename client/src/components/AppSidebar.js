@@ -60,10 +60,11 @@ const AppSidebar = () => {
     {
       component: CNavItem,
       name: 'Пункт управления',
-      to: '/dashboard',
+      //to: '/dashboard',
+      onClick: ()=>handleLinkClick2('https://proj.uley.team:3000/dashboard'),
       // icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
       icon: <img src={CompIcon} style={{width: '25px', marginRight: '18px', marginLeft: '4px'}} />,
-      style: {backgroundColor: '#2a2f32'}, //1b2227 //1f282c
+      style: {backgroundColor: '#2a2f32', cursor: 'pointer'}, //1b2227 //1f282c
     },
     {
       component: CNavTitle,
