@@ -1,5 +1,14 @@
 import {$authHost, $host, $host_renthub} from "./index";
 
+export const getRUserbot = async () =>{
+    try {
+       let response = await $host.get('api/userbots/get');
+       return response.data;
+    } catch (error) {
+        console.log("error while calling getWorkers api", error.message);
+    }
+}
+
 export const getRManagers = async () =>{
     try {
        let response = await $host.get('api/managers/get');

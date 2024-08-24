@@ -9,7 +9,8 @@ import { getAllPretendent, getWContacts, getWConversation,
 
 import { getRManagers, getRManager, getRManagerCount, newRMessage, getRContacts, getRConversation, 
 	getRConversations, getRMessages, getRenthub, getAllRMessages, 
-	getRMessagesCount, getRCompanys } from '../../http/renthubAPI'
+	getRMessagesCount, getRCompanys, 
+	getRUserbot} from '../../http/renthubAPI'
 
 import { getDistributions, 
 	getDistributionsW, 
@@ -194,6 +195,8 @@ const UsersProvider = ({ children }) => {
 			let all = await getRManagers()
 			const arrayWorkerAll = []
 
+			let userbot = await getRUserbot()
+
 			//массив компаний
 			let comps = await getRCompanys()
 			//console.log("comps: ", comps)
@@ -207,9 +210,12 @@ const UsersProvider = ({ children }) => {
 					//console.log("compName: ", compName)
 				}	
 
+				const res = userbot.find(item2 => item2.chatId === user.chatId)
+
 				const newWorker = {
 					id: user.id,
 					fio: user.fio,
+					username: res.username,
 					phone: user.phone,
 					doljnost: user.dojnost,
 					city: user.city, 
@@ -244,6 +250,7 @@ const UsersProvider = ({ children }) => {
 				const newWorker = {
 					id: user.id,
 					fio: user.fio,
+					username: user.username,
 					phone: user.phone,
 					doljnost: user.dojnost,
 					city: user.city, 
@@ -367,7 +374,7 @@ const UsersProvider = ({ children }) => {
 				if (manager) {
 					const newUser = {
 						id: manager.id,
-						username: '', // user.username ? user.username : '',
+						username: manager.username ? manager.username : '',
 						name: manager?.fio, //notion[0]?.fio ? notion[0]?.fio : '',
 						city: manager?.city, //notion[0]?.city ? notion[0]?.city : '',
 						phone: manager?.phone, //notion[0]?.phone ? notion[0]?.phone : '',
