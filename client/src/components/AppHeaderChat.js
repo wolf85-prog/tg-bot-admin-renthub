@@ -41,7 +41,7 @@ import Delete2 from "./../assets/images/cart2.png";
 
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
 import { AppHeaderDropdown } from './header/index'
-import { getUpdateWorkers, getUpdateAvatars } from './../http/adminAPI';
+import { getUpdateManagers } from './../http/adminAPI';
 
 import MyModalSmall from './MyModalSmall/MyModalSmall'
 import Close from "./../assets/images/close.svg"
@@ -149,7 +149,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
 
       //обновление данных
       setWorkerUpdate(0)
-      const resUpdate = await getUpdateWorkers()
+      const resUpdate = await getUpdateManagers()
     }
     
   }

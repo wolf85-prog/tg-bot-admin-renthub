@@ -613,9 +613,9 @@ export const getSendCall = async(tg_id)=>{
 //------------------------------------------------------------------------------------------
 
 //update
-export const getUpdateWorkers = async()=>{
+export const getUpdateManagers = async()=>{
     try {
-        const response = await $host.get('api/workers/update/get');
+        const response = await $host.get('api/managers/update/get');
         //console.log("update: ", response.data);
         return response.data;
     } catch (error) {

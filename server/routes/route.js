@@ -4,11 +4,14 @@ const userController = require('../controllers/userController')
 const authMiddleware = require('../middleware/authMiddleware')
 
 const { getReports, getReportsId } = require('../controllers/reportController')
-const { getProjects, getProjectsId, getProjectNew, getProjectNewId, getProjectNewCreate, getProjectNewUpdate, getProjectNewDel } = require('../controllers/projectController')
+const { getProjects, getProjectsId, getProjectNew, getProjectNewId, getProjectNewCreate, 
+    getProjectNewUpdate, getProjectNewDel } = require('../controllers/projectController')
 const { uploadFile, getImage } = require( "../controllers/fileController.js")
 
-const { getRmanagers, getRmanager, editRmanager, getRManagerCount } = require( "../controllers/rmanagersController.js")
-const { newMessageR,delMessageR, getAllMessagesR, getMessagesR, getMessagesRCount, getMessagesR2 } = require( "../controllers/rmessageController.js")
+const { getRmanagers, getRmanager, editRmanager, 
+    getRManagerCount, updateManagers } = require( "../controllers/rmanagersController.js")
+const { newMessageR,delMessageR, getAllMessagesR, getMessagesR, 
+    getMessagesRCount, getMessagesR2 } = require( "../controllers/rmessageController.js")
 const { getUsersRenthub, getUserRenthub, editUserRenthub } = require( "../controllers/ruserbotController.js")
 const { newConversationR, getConversationR, getConversationsR } = require( "../controllers/rconversationController.js")
 
@@ -65,6 +68,9 @@ route.post('/projectnew/del', getProjectNewDel)
 // route.post("/file/distrib", uploadDistrib.single("photo"), uploadFile);
 route.get("/file/:filename", getImage);
 
+
+//-----------------Обновление данных профиля---------------------------------
+route.get('/managers/update/get', updateManagers)
 
 
 module.exports = route
