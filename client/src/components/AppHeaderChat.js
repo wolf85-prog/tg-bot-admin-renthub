@@ -50,6 +50,8 @@ const AppHeaderChat = () => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
+  const host = process.env.REACT_APP_HOST_ADMIN
+
   const { workerUpdate, setWorkerUpdate, avatarUpdate, setAvatarUpdate, showUpdate, showUpdate2, setShowUpdate, setShowUpdate2, 
     workerCall, showCallCard, setShowCallCard, workerCallNo, showCallCardNo, setShowCallCardNo, callIndex, callIndex2, 
     soundVolume, setSoundVolume, soundMute, setSoundMute, showDistrib, setShowDistrib} = useUsersContext();
@@ -157,6 +159,12 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
     window.open(url, '_blank', 'noopener,noreferrer');
   };
 
+  const handleLinkClick2 = (url) => {
+    console.log(url)
+    // Open the link in a new tab with desired features (optional)
+    window.open(url, '_self', 'noopener,noreferrer');
+  };
+
   const clickMute = () => {
     setSoundMute(!soundMute)
   }
@@ -182,15 +190,30 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
         </CHeaderBrand>
         <CHeaderNav className="d-none d-md-flex me-auto">
           <CNavItem>
-            <CNavLink to="/dashboard" component={NavLink}>
-              Пункт управления
+            <CNavLink 
+              //to="/dashboard" 
+              onClick={()=>handleLinkClick2(`${host}/dashboard`)} 
+              component={NavLink}>
+                Пункт управления
             </CNavLink>
           </CNavItem>
           <CNavItem>
-            <CNavLink href="/chat2">Менеджеры</CNavLink>
+            <CNavLink 
+              onClick={()=>handleLinkClick2(`${host}/chat2`)} 
+              //href="/chat2"
+              component={NavLink}
+            >
+                Менеджеры
+            </CNavLink>
           </CNavItem>
           <CNavItem>
-            <CNavLink href="/chat3">Проекты</CNavLink>
+            <CNavLink 
+              onClick={()=>handleLinkClick2(`${host}/chat3`)} 
+              //href="/chat2"
+              component={NavLink}
+            >
+              Проекты
+            </CNavLink>
           </CNavItem>
         </CHeaderNav>
         

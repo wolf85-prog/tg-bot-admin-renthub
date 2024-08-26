@@ -623,16 +623,6 @@ export const getUpdateWorkers = async()=>{
     }
 }
 
-//update avatar
-export const getUpdateAvatars= async()=>{
-    try {
-        const response = await $host.get('api/workers/update/avatar/get');
-        //console.log("update: ", response.data);
-        return response.data;
-    } catch (error) {
-        console.log("error while calling getUpdateAvatars api", error.message);
-    }
-}
 
 //-------------------------------------------------------------------
 
