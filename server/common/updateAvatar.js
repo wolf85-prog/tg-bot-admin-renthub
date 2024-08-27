@@ -21,7 +21,7 @@ module.exports = async function updateAvatar(avatar, manager) {
             //if (avatar) {  
 
                 //найти старое фото
-                var fileName = manager.chatId; 
+                var fileName = manager.tgID; 
                 fs.readdir(directory, function(err,list){
                     if(err) throw err;
                     for(var i=0; i<list.length; i++)
@@ -38,7 +38,7 @@ module.exports = async function updateAvatar(avatar, manager) {
                 });
 
                 //сохранить новое фото
-                const file = fs.createWriteStream('/var/www/proj.uley.team/avatars/managers/avatar_' + manager.chatId + '_' + currentDate + '.jpg');
+                const file = fs.createWriteStream('/var/www/proj.uley.team/avatars/managers/avatar_' + manager.tgID + '_' + currentDate + '.jpg');
                 
                 const transformer = sharp()
                 .resize(500)
@@ -54,20 +54,20 @@ module.exports = async function updateAvatar(avatar, manager) {
                         file.close();
                         console.log("Download Completed");
 
-                        const url = `${host}/avatars/managers/avatar_` + manager.chatId + '_' + currentDate + '.jpg'
+                        const url = `${host}/avatars/managers/avatar_` + manager.tgID + '_' + currentDate + '.jpg'
 
                         //обновить бд
                         const res = await Manager.update({ 
                             avatar: url,
                         },
                         { 
-                            where: {chatId: manager.chatId} 
+                            where: {chatId: manager.tgID} 
                         })
 
                         if (res) {
                             console.log("Аватар обновлен! ", url, manager.id) 
                         }else {
-                            console.log("Ошибка обновления! ", manager.chatId) 
+                            console.log("Ошибка обновления! ", manager.tgID) 
                         }
                     });
                 });
