@@ -144,17 +144,17 @@ async updateManagers(req, res) {
 
 
         //if (Object.keys(workersN).length !== 0) {
-        if (managersN && managersN.length > 0) {
-            const managerProf = managersN.filter((item)=> item.profile && item.profile !== null)
-            console.log("managerProf: ", managerProf.length) 
+        if (managers && managers.length > 0) {
+            //const managerProf = managersN.filter((item)=> item.profile && item.profile !== null)
+            //console.log("managerProf: ", managerProf.length) 
 
             //обновить аватар
             let j = 0
             let proc = 0
             //while (j < workersProf.length) { 
-            managerProf.map(async(man, index)=>{
+            managers.map(async(man, index)=>{
                 setTimeout(()=> {
-                    const manApp = managers.find((item)=> item.chatId === man.tgID?.toString())
+                    const manApp = managersN.find((item)=> item.tgID === man.chatId?.toString())
                     const avatar = man.profile.files && man.profile.files.length ? (man.profile?.files[0].file ? man.profile?.files[0].file.url : man.profile?.files[0].external.url) : null
                     
                     if (manApp) {
