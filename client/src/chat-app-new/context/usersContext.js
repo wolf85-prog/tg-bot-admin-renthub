@@ -624,6 +624,25 @@ const UsersProvider = ({ children }) => {
 		
 	}, [socket]);
 
+//----------------------------------------------------------
+
+
+	const setUserRentAsUnread = (userId) => {
+		_updateUserRentProp(userId, "unread", 0);
+	};
+
+
+	//renthub
+	const _updateUserRentProp = (userId, prop, value) => {
+		setUserRenthub((userRenthub) => {
+			const usersCopy = [...userRenthub];
+			let userIndex = userRenthub.findIndex((user) => user.chatId === userId);
+			const userObject = usersCopy[userIndex];
+			usersCopy[userIndex] = { ...userObject, [prop]: value };
+			return usersCopy;
+		});
+	};
+
 //------------------------------------------------------------------------------------
 
 
@@ -753,6 +772,7 @@ function isObjectEmpty(obj) {
 			setProjects,
 			userRenthub,
 			setUserRenthub,
+			setUserRentAsUnread,
 			conversations, 
 			setConversations,
 			workers,
