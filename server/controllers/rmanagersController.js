@@ -8,6 +8,10 @@ require("dotenv").config();
 //const databaseWorkerId = process.env.NOTION_DATABASE_WORKERS_ID
 
 const {specData} = require('../data/specData');
+const getWorkersNotion = require('../common/getWorkersNotion');
+const getWorkersNotion100 = require('../common/getWorkersNotion100');
+const getWorkersNotion100s = require('../common/getWorkersNotion100s');
+const updateAvatar = require('../common/updateAvatar');
 
 const host = process.env.HOST
 
