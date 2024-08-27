@@ -127,7 +127,7 @@ async updateManagers(req, res) {
     }) 
 
     try {
-        console.log("START GET WORKERS ALL...")
+        console.log("START GET MANAGERS ALL...")
 
         const managers = await Manager.findAll({
             order: [

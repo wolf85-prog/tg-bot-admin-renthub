@@ -31,13 +31,13 @@ module.exports = async function getManagersNotion() {
                 fio: manager.properties["ФИО"].title[0]?.plain_text,
                 tgID: manager.properties.ID.rich_text[0]?.plain_text,
                 phone: manager.properties["Телефон"].phone_number,              
-                comment: manager.properties["Комментарий"].rich_text[0] ?page.properties["Комментарий"].rich_text[0].plain_text : null,
-                city: manager.properties["Город"].multi_select[0] ? page.properties["Город"].multi_select[0].name : null,
-                comteg: manager.properties["КомТег"].multi_select[0] ? page.properties["КомТег"].multi_select[0].name : null,
+                comment: manager.properties["Комментарий"].rich_text[0] ? manager.properties["Комментарий"].rich_text[0].plain_text : null,
+                city: manager.properties["Город"].multi_select[0] ? manager.properties["Город"].multi_select[0].name : null,
+                comteg: manager.properties["КомТег"].multi_select[0] ? manager.properties["КомТег"].multi_select[0].name : null,
                 bisnes: manager.properties["Сфера деятельности"].multi_select,
                 projects: manager.properties["Проекты"].number,
-                doljnost: manager.properties["Должность"].select ? page.properties["Должность"].select.name : null,
-                companyId: manager.properties["Компания"].relation[0] ? page.properties["Компания"].relation[0].id : null,
+                doljnost: manager.properties["Должность"].select ? manager.properties["Должность"].select.name : null,
+                companyId: manager.properties["Компания"].relation[0] ? manager.properties["Компания"].relation[0].id : null,
                 profile: manager.properties["Профиль"],
             };
         });
