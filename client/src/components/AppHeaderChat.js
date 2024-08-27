@@ -52,7 +52,7 @@ const AppHeaderChat = () => {
 
   const host = process.env.REACT_APP_HOST_ADMIN
 
-  const { workerUpdate, setWorkerUpdate, avatarUpdate, setAvatarUpdate, showUpdate, showUpdate2, setShowUpdate, setShowUpdate2, 
+  const { managerUpdate, setManagerUpdate, showUpdate, setShowUpdate, 
     workerCall, showCallCard, setShowCallCard, workerCallNo, showCallCardNo, setShowCallCardNo, callIndex, callIndex2, 
     soundVolume, setSoundVolume, soundMute, setSoundMute, showDistrib, setShowDistrib} = useUsersContext();
 
@@ -148,7 +148,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
       }
 
       //обновление данных
-      setWorkerUpdate(0)
+      setManagerUpdate(0)
       const resUpdate = await getUpdateManagers()
     }
     
@@ -364,8 +364,8 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
                   }}>
                       <div className='dark-theme' style={{display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: '200px'}}>
                             <div style={{width:'100%', position: 'relative', textAlign: 'center'}}>
-                              <CProgress color="primery" height={10} value={workerUpdate}/>
-                              <span style={{position: 'absolute', top: '-3px', fontSize: '10px'}}>{workerUpdate}%</span>
+                              <CProgress color="primery" height={10} value={managerUpdate}/>
+                              <span style={{position: 'absolute', top: '-3px', fontSize: '10px'}}>{managerUpdate}%</span>
                             </div>
                             <CButton onClick={updateD} className={showUpdate ? 'button-d' : ''} color="dark" style={{marginLeft: '10px', fontSize: '8px', width:'20px', height: '20px', padding: '0'}}>
                               Д

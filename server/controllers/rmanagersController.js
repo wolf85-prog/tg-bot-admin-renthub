@@ -144,42 +144,42 @@ async updateManagers(req, res) {
             //обновить аватар
             let j = 0
             let proc = 0
-            // managers.map(async(man, index)=>{
-            //     setTimeout(()=> {
-            //         const manApp = managersN.find((item)=> item.tgID === man.chatId?.toString())
-            //         console.log("manApp: ", manApp)
-            //         const avatar = manApp.profile.files && manApp.profile.files.length ? (manApp.profile?.files[0].file ? manApp.profile?.files[0].file.url : manApp.profile?.files[0].external.url) : null
+            managers.map(async(man, index)=>{
+                setTimeout(()=> {
+                    const manApp = managersN.find((item)=> item.tgID === man.chatId?.toString())
+                    console.log("manApp: ", manApp)
+                    const avatar = manApp.profile.files && manApp.profile.files.length ? (manApp.profile?.files[0].file ? manApp.profile?.files[0].file.url : manApp.profile?.files[0].external.url) : null
                     
-            //         if (manApp) {
-            //             updateAvatar(avatar, manApp)
-            //             console.log("Менеджер найден!", index)  
-            //         } else {
-            //             console.log("Менеджер не найден!", index)  
-            //         }
+                    if (manApp) {
+                        updateAvatar(avatar, manApp)
+                        console.log("Менеджер найден!", index)  
+                    } else {
+                        console.log("Менеджер не найден!", index)  
+                    }
 
-            //         proc = Math.round((index+1)*100/managers.length)
+                    proc = Math.round((index+1)*100/managers.length)
 
-            //         if (index === (managers.length)) {
-            //             console.log("Обновление данных завершено: i=", index, proc)
-            //             socket.emit("sendNotifRent", {
-            //                 task: 302,
-            //                 managers_update: proc,
-            //                 processUpdateD: false,
-            //             })  
-            //             socket.disconnect()
+                    if (index === (managers.length)) {
+                        console.log("Обновление данных завершено: i=", index, proc)
+                        socket.emit("sendNotifRent", {
+                            task: 302,
+                            managers_update: proc,
+                            processUpdateD: false,
+                        })  
+                        socket.disconnect()
                         
-            //         } else {
-            //             console.log("Идет обновление данных...: i=", index, proc)                      
-            //             //setTimeout(()=> {
-            //                 socket.emit("sendNotifRent", {
-            //                     task: 302,
-            //                     managers_update: proc,
-            //                     processUpdateD: true,
-            //                 })  
-            //             //}, 10000 * i)
-            //         }
-            //     }, 1000 * ++index)   
-            // })
+                    } else {
+                        console.log("Идет обновление данных...: i=", index, proc)                      
+                        //setTimeout(()=> {
+                            socket.emit("sendNotifRent", {
+                                task: 302,
+                                managers_update: proc,
+                                processUpdateD: true,
+                            })  
+                        //}, 10000 * i)
+                    }
+                }, 1000 * ++index)   
+            })
 
             //обновить данные
             console.log("ОБНОВЛЕНИЕ ДАННЫХ МЕНЕДЖЕРОВ")
@@ -271,7 +271,9 @@ async updateManagers(req, res) {
                 //}
 
                 }, 500 * ++i)   
-            })              
+            })  
+            
+            return res.status(200).json("Managers update successfully");
         } else {
             console.log("Ошибка получения данных из таблицы 'Менеджеры' Notion!") 
         }         
