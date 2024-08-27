@@ -593,7 +593,7 @@ const UsersProvider = ({ children }) => {
 	useEffect(() => {
 		socket.on("getMessageRent", fetchMessageResponse);
 		
-		socket.on("getAdmin", fetchAdmin);	
+		socket.on("getAdminRent", fetchAdmin);	
 		socket.on("getDelAdmin", fetchDelAdmin);
 		
 		socket.on("getNotifRent", fetchNotifAdmin);
@@ -606,7 +606,7 @@ const UsersProvider = ({ children }) => {
 	//отправить сообщение из админки 
 	const addNewMessage = (userId, message, type, textButton, convId, messageId, isBot) => {
 
-		socket.emit("sendAdmin", { 
+		socket.emit("sendAdminRent", { 
 			senderId: chatAdminId,
 			receiverId: userId,
 			text: message,
