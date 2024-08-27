@@ -193,7 +193,7 @@ const UsersProvider = ({ children }) => {
 		
 			//0 все специалисты
 			let all = await getRManagers()
-			//console.log("all: ", all)
+			console.log("all: ", all)
 			const arrayWorkerAll = []
 
 			let userbot = await getRUserbot()
