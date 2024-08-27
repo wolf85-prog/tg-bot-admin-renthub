@@ -194,7 +194,7 @@ const AppSidebar = () => {
     {
       component: CNavItem,
       name: 'Менеджеры 2.0',
-      to: '/chat3',
+      to: '/chatwork',
       icon: <img src={ChatIcon} style={{width: '21px', marginRight: '20px', marginLeft: '6px'}} />,
       badge: countMessageRent !== 0 ? {color: 'info', text: countMessageRent,} : "",
       style: {backgroundColor: '#0078d421', color: '#e55353', cursor: 'pointer'},

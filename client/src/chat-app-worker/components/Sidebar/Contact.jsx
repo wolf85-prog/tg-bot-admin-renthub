@@ -161,7 +161,7 @@ const Contact = ({ contact, worker }) => {
 			</div>
 			<div className="sidebar-contact__content">
 				<div className="sidebar-contact__top-content">
-					<h2 className="sidebar-contact__name">{contact.name}</h2>
+					<h2 className="sidebar-contact__name">{contact.company} | {contact.name.split(' ')[0]} {contact.name.split(' ')[1]}</h2>
 					<span className="sidebar-contact__time">
 						{lastMessage === ''  ? '' : formatTime(lastMessage.time)}
 					</span>

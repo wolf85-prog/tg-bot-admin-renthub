@@ -588,6 +588,7 @@ https://t.me/ULEY_Office_Bot
 
 				<Header
 					user={personW}
+					userH={user}
 					openProfileSidebar={() => openSidebar(setShowProfileSidebar)}
 					openSearchSidebar={() => openSidebar(setShowSearchSidebar)}
 					closeSidebar={() => closeSidebar(setShowProfileSidebar)}

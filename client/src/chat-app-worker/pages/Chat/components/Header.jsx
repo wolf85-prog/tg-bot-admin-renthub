@@ -13,7 +13,7 @@ import ishodCall from './../../../../assets/sound/ishod.mp3';
 
 import { getSendCall } from './../../../../http/adminAPI';
   
-const Header = ({ user, openProfileSidebar, openSearchSidebar, closeSidebar, showCloseButton, clearFile, setClearFile, clickClearFile  }) => {
+const Header = ({ user, userH, openProfileSidebar, openSearchSidebar, closeSidebar, showCloseButton, clearFile, setClearFile, clickClearFile  }) => {
 
 	const [press, setPress] = useState(false)
 
@@ -68,7 +68,7 @@ const Header = ({ user, openProfileSidebar, openSearchSidebar, closeSidebar, sho
 			</div>
 
 			<div className="chat__contact-wrapper" onClick={openProfileSidebar}>
-				<h2 className="chat__contact-name"> {user?.name}</h2>
+				<h2 className="chat__contact-name">{userH?.company} | {user?.name.split(' ')[0]} {user?.name.split(' ')[1]} {user?.name.split(' ')[2] ? user?.name.split(' ')[2] : ''} </h2>
 				<p className="chat__contact-desc">
 					{user.typing ? "печатает..." : "данные контакта"}
 				</p>
