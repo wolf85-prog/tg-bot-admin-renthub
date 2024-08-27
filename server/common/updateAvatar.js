@@ -1,5 +1,5 @@
 require("dotenv").config();
-const {Worker} = require('../models/workers')
+const {Manager} = require('../models/renthub')
 const https = require('https');
 const fs = require('fs');
 const path = require('path')
@@ -8,20 +8,20 @@ const sharp = require('sharp');
 const host = process.env.HOST
 
 //получить id блока заданной страницы по id
-module.exports = async function updateAvatar(avatar, worker) {
+module.exports = async function updateAvatar(avatar, manager) {
     //обновление аватара
     if (avatar) {
-        console.log("UPDATE avatar: ", avatar, worker.id) 
+        console.log("UPDATE avatar: ", avatar, manager.id) 
         try {
             //сохранить фото на сервере
             const date = new Date()
             const currentDate = `${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()}T${date.getHours()}:${date.getMinutes()}`
-            const directory = "/var/www/proj.uley.team/avatars";
+            const directory = "/var/www/proj.uley.team/avatars/managers";
 
             //if (avatar) {  
 
                 //найти старое фото
-                var fileName = worker.chatId; 
+                var fileName = manager.chatId; 
                 fs.readdir(directory, function(err,list){
                     if(err) throw err;
                     for(var i=0; i<list.length; i++)
@@ -38,7 +38,7 @@ module.exports = async function updateAvatar(avatar, worker) {
                 });
 
                 //сохранить новое фото
-                const file = fs.createWriteStream('/var/www/proj.uley.team/avatars/avatar_' + worker.chatId + '_' + currentDate + '.jpg');
+                const file = fs.createWriteStream('/var/www/proj.uley.team/avatars/managers/avatar_' + manager.chatId + '_' + currentDate + '.jpg');
                 
                 const transformer = sharp()
                 .resize(500)
@@ -54,20 +54,20 @@ module.exports = async function updateAvatar(avatar, worker) {
                         file.close();
                         console.log("Download Completed");
 
-                        const url = `${host}/avatars/avatar_` + worker.chatId + '_' + currentDate + '.jpg'
+                        const url = `${host}/avatars/managers/avatar_` + manager.chatId + '_' + currentDate + '.jpg'
 
                         //обновить бд
-                        const res = await Worker.update({ 
+                        const res = await Manager.update({ 
                             avatar: url,
                         },
                         { 
-                            where: {chatId: worker.chatId} 
+                            where: {chatId: manager.chatId} 
                         })
 
                         if (res) {
-                            console.log("Аватар обновлен! ", url, worker.id) 
+                            console.log("Аватар обновлен! ", url, manager.id) 
                         }else {
-                            console.log("Ошибка обновления! ", worker.chatId) 
+                            console.log("Ошибка обновления! ", manager.chatId) 
                         }
                     });
                 });
@@ -79,7 +79,7 @@ module.exports = async function updateAvatar(avatar, worker) {
         }
             
     } else {
-        console.log("Аватар не найден в Notion!", worker.chatId) 
+        console.log("Аватар не найден в Notion!", manager.chatId) 
     }
                         
 }
