@@ -8,7 +8,7 @@ require("dotenv").config();
 //const databaseWorkerId = process.env.NOTION_DATABASE_WORKERS_ID
 
 const {specData} = require('../data/specData');
-const getWorkersNotion = require('../common/getWorkersNotion');
+const getManagersNotion = require('../common/getManagersNotion');
 const getWorkersNotion100 = require('../common/getWorkersNotion100');
 const getWorkersNotion100s = require('../common/getWorkersNotion100s');
 const updateAvatar = require('../common/updateAvatar');
@@ -137,7 +137,7 @@ async updateManagers(req, res) {
         console.log("managers: ", managers.length)  
 
         //получить всех специалистов из ноушен
-        const managersN = await getWorkersNotion()
+        const managersN = await getManagersNotion()
         console.log("managersN: ", managersN.length)  
 
          
