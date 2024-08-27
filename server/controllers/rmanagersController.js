@@ -165,9 +165,9 @@ async updateManagers(req, res) {
                         console.log("Менеджер не найден!", index)  
                     }
 
-                    proc = Math.round((index+1)*100/managerProf.length)
+                    proc = Math.round((index+1)*100/managers.length)
 
-                    if (index === (managerProf.length)) {
+                    if (index === (managers.length)) {
                         console.log("Обновление данных завершено: i=", index, proc)
                         socket.emit("sendNotifRent", {
                             task: 302,
