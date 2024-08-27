@@ -20,7 +20,7 @@ const Contact = ({ contact, worker }) => {
 	const host = process.env.REACT_APP_API_URL
 	
 	//сделать пользователя непрочитанным
-	const { setCountMessageWork } = useUsersContext();
+	const { setCountMessageRent } = useUsersContext();
 	const { userRenthub, setUserRenthub } = useUsersContext();
 
 	//обработка нажатия на пользователя из списка
@@ -32,7 +32,7 @@ const Contact = ({ contact, worker }) => {
         });
 
 		//setUserWorkerAsUnread(contact.chatId)
-		setCountMessageWork('0')
+		setCountMessageRent('0')
 		//await newCountWMessage(0)
 
 		if (Object.keys(contact.messages).length === 0) {

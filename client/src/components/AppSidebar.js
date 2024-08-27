@@ -32,7 +32,7 @@ const AppSidebar = () => {
 
   const host = process.env.REACT_APP_HOST_ADMIN
 
-  const { countMessage, newProject, countProjects, countMessageWork, countPretendent, showGetMess } = useUsersContext();
+  const { countMessage, countMessageRent, newProject, countProjects, countMessageWork, countPretendent, showGetMess } = useUsersContext();
 
   const [count, setCount ] = useState(0);
   const [countMesW, setCountMesW ] = useState(0);
@@ -196,7 +196,7 @@ const AppSidebar = () => {
       name: 'Менеджеры 2.0',
       to: '/chat3',
       icon: <img src={ChatIcon} style={{width: '21px', marginRight: '20px', marginLeft: '6px'}} />,
-      badge: countMessage !== 0 ? {color: 'info', text: countMessage,} : "",
+      badge: countMessageRent !== 0 ? {color: 'info', text: countMessageRent,} : "",
       style: {backgroundColor: '#0078d421', color: '#e55353', cursor: 'pointer'},
     },
     

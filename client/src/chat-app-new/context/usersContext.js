@@ -93,6 +93,8 @@ const UsersProvider = ({ children }) => {
 		return initialValue || 0;
 	});
 
+	const [countMessageRent, setCountMessageRent] = useState(0)
+
 
 	const [distributionsWork, setDistributionsWork] = useState([]); 
 
@@ -424,10 +426,30 @@ const UsersProvider = ({ children }) => {
 //------------------------------------------------------------------------------------------
 
 	//получить сообщение из телеграмма
-	const fetchMessageResponse = async(data) => {
+
+	//получить сообщение из телеграмма
+	const fetchMessage = async(data) => {
+		//пришло новое сообщение
+		const kol = await getCountMessage()
+		setCountMessage(count+1)
+		//const res = await newCountMessage(kol.managers + 1)
+		console.log("Пришло новое сообщение: ", count + 1)
+		setShowGetMess(true)
+
+	};
+
+	const fetchMessageSpecResponse = async(data) => {
+		//пришло новое сообщение
+		//const kol = await getCountMessageWork()
+		setCountMessageWork(count+1)
+		//const res = await newCountMessage(kol.managers + 1)
+		console.log("Пришло новое сообщение в workhub: ", count + 1)
+	};
+
+	const fetchMessageRentResponse = async(data) => {
 		//пришло новое сообщение
 		//const kol = await getCountMessage()
-		setCountMessage(count+1)
+		setCountMessageRent(count+1)
 		//const res = await newCountMessage(kol.managers + 1)
 		console.log("Пришло новое сообщение в renthub: ", count + 1)
 		//setShowGetMess(true)
@@ -591,7 +613,9 @@ const UsersProvider = ({ children }) => {
 
 //------------------------------------------------------------------------------------
 	useEffect(() => {
-		socket.on("getMessageRent", fetchMessageResponse);
+		socket.on("getMessage", fetchMessage);
+		socket.on("getMessageSpec", fetchMessageSpecResponse);
+		socket.on("getMessageRent", fetchMessageRentResponse);
 		
 		socket.on("getAdminRent", fetchAdmin);	
 		socket.on("getDelAdmin", fetchDelAdmin);
@@ -788,6 +812,8 @@ function isObjectEmpty(obj) {
 			setTimeProcess3,
 			setTimeProcess4,
 			setTimeProcess5,
+			countMessageRent,
+			setCountMessageRent,
 		}}>
 			{children}
 		</UsersContext.Provider>
