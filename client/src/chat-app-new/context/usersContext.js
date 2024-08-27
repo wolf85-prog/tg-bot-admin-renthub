@@ -113,7 +113,7 @@ const UsersProvider = ({ children }) => {
 	const [callIndex2, setCallIndex2] = useState(0)
 	//update workers
 	const [showUpdate, setShowUpdate] = useState(false);
-	const [workerUpdate, setWorkerUpdate] = useState(100);
+	const [managerUpdate, setManagerUpdate] = useState(100);
 	//update avatar
 	const [showUpdate2, setShowUpdate2] = useState(false);
 	const [avatarUpdate, setAvatarUpdate] = useState(100);
@@ -594,7 +594,9 @@ const UsersProvider = ({ children }) => {
 		socket.on("getMessageRent", fetchMessageResponse);
 		
 		socket.on("getAdmin", fetchAdmin);	
-		socket.on("getDelAdmin", fetchDelAdmin);	
+		socket.on("getDelAdmin", fetchDelAdmin);
+		
+		socket.on("getNotifRent", fetchNotifAdmin);
 		
 	}, [socket]);
 
@@ -641,6 +643,63 @@ const UsersProvider = ({ children }) => {
 	}
 
 
+	//===============================================================
+//                  Notifications
+//===============================================================
+const fetchNotifAdmin = async (dataAll) => {
+	console.log("Получено уведомление: ", dataAll)
+	const { task, 
+		managers_update,
+		processUpdateD,
+		processDistrib,
+	} = dataAll;
+
+	
+	//звонок специалиста
+	if (task === 202) {
+		//console.log("fio: ", data)
+		setShowCallCard(true)
+
+		// const worker = await getWorker(tg_id)
+		// //console.log("avatar: ", avatar)
+		// setWorkerCall({
+		// 	tg_id,
+		// 	fio,
+        //     sity,
+        //     year_of_birth, 
+        //     rating, 
+        //     projects, 
+        //     specialities, 
+        //     comtags,
+		// 	avatar: worker.avatar,
+		// })
+
+
+		setCallIndex(2)
+		setCallIndex2(1)
+	}
+	//неизвестный номер
+	else if (task === 203) {
+		//console.log("fio: ", data)
+		setShowCallCardNo(true)
+
+		//setWorkerCallNo(phone)
+
+
+		setCallIndex(1)
+		setCallIndex2(2)
+	}
+	//обновление данных
+	else if (task === 302) {
+		setShowUpdate(processUpdateD)
+		setManagerUpdate(managers_update)
+	}
+	//рассылка
+	else if (task === 402) {
+		setShowDistrib(processDistrib)
+	}
+
+}
 
 function isObjectEmpty(obj) {
 	return Object.keys(obj).length === 0;
@@ -690,10 +749,8 @@ function isObjectEmpty(obj) {
 			setShowUpdate,
 			showUpdate2,
 			setShowUpdate2,
-			workerUpdate,
-			setWorkerUpdate,
-			avatarUpdate,
-			setAvatarUpdate,
+			managerUpdate,
+			setManagerUpdate,
 			showDistrib,
 			setShowDistrib,
 			projectsNew,
