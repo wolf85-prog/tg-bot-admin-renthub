@@ -155,7 +155,8 @@ async updateManagers(req, res) {
             managers.map(async(man, index)=>{
                 setTimeout(()=> {
                     const manApp = managersN.find((item)=> item.tgID === man.chatId?.toString())
-                    const avatar = man.profile.files && man.profile.files.length ? (man.profile?.files[0].file ? man.profile?.files[0].file.url : man.profile?.files[0].external.url) : null
+                    console.log("manApp: ", manApp)
+                    const avatar = manApp.profile.files && manApp.profile.files.length ? (manApp.profile?.files[0].file ? manApp.profile?.files[0].file.url : manApp.profile?.files[0].external.url) : null
                     
                     if (manApp) {
                         updateAvatar(avatar, manApp.dataValues)
