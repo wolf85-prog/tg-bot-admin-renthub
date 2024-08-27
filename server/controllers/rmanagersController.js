@@ -159,7 +159,7 @@ async updateManagers(req, res) {
                     const avatar = manApp.profile.files && manApp.profile.files.length ? (manApp.profile?.files[0].file ? manApp.profile?.files[0].file.url : manApp.profile?.files[0].external.url) : null
                     
                     if (manApp) {
-                        updateAvatar(avatar, manApp.dataValues)
+                        updateAvatar(avatar, manApp)
                         console.log("Менеджер найден!", index)  
                     } else {
                         console.log("Менеджер не найден!", index)  
