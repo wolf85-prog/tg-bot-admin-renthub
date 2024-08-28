@@ -1,5 +1,5 @@
 const { Distribution }= require('../models/models')
-const {Message, Conversation, Worker} = require('../models/workers')
+const {Message, Conversation} = require('../models/renthub')
 const ApiError = require('../error/ApiError')
 
 const { Op } = require('sequelize')
