@@ -15,8 +15,8 @@ const { newMessageR,delMessageR, getAllMessagesR, getMessagesR,
 const { getUsersRenthub, getUserRenthub, editUserRenthub } = require( "../controllers/ruserbotController.js")
 const { newConversationR, getConversationR, getConversationsR } = require( "../controllers/rconversationController.js")
 
-const {newDistributionR, getDistributionsR, getDistributionsRPlan, getDistributionsR, 
-    delDistributionR, delDistributionRPlan, editDistribR, editDistribRAll, 
+const {newDistributionR, getDistributionsR, getDistributionsRPlan, delDistributionR, 
+    delDistributionRPlan, editDistribR, editDistribRAll, 
     editDistribRPlan, delMessagesDistribR, getDistributionsCount} = require("../controllers/distributionController.js")
 
 const upload = require('../middleware/file')

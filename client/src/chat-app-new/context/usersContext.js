@@ -191,6 +191,7 @@ const UsersProvider = ({ children }) => {
 			//0 все специалисты
 			let all = await getRManagers()
 			console.log("all: ", all)
+			
 			const arrayWorkerAll = []
 
 			let userbot = await getRUserbot()
@@ -198,7 +199,6 @@ const UsersProvider = ({ children }) => {
 			//массив компаний
 			let comps = await getRCompanys()
 			//console.log("comps: ", comps)
-			
 		
 			all.map(async (user) => {
 				//поиск компании по id
