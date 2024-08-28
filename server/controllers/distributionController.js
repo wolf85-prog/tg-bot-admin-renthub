@@ -5,7 +5,7 @@ const ApiError = require('../error/ApiError')
 const { Op } = require('sequelize')
 
 //fetch api
-const fetch = require('node-fetch');
+//const fetch = require('node-fetch');
 const axios = require("axios");
 
 const webAppAddStavka = process.env.WEBAPP_STAVKA
