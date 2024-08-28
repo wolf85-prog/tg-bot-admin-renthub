@@ -224,3 +224,81 @@ export const getManagerNotion = async (id) =>{
         console.log("error while calling getManagerNotion api", error.message);
     }
 }
+
+//--------------------------------------------------------------------------
+//distribution
+//--------------------------------------------------------------------------
+
+export const getDistributionsCountR = async(count, prev)=>{
+    try {
+        let response = await $host.get(`api/distributionsr/count/get/${count}/${prev}`);
+        //console.log(response);
+        return response.data;
+     } catch (error) {
+         console.log("error while calling getDistributionsCountR api", error.message);
+     }
+}
+
+export const getDistributionsRPlan = async()=>{
+    try {
+        let response = await $host.get(`api/distributionsr/plan/get`);
+        //console.log(response);
+        return response.data;
+     } catch (error) {
+         console.log("error while calling getDistributionsRPlan api", error.message);
+     }
+}
+
+export const newDistributionR = async (data) =>{
+    try {
+        let response = await $host.post(`api/distributionr/add`, data); 
+        return response.data;
+    } catch (error) {
+        console.log("error while calling newDistributionR api",error.message);
+    }
+}
+
+export const getDistributionsR = async()=>{
+    try {
+        let response = await $host.get('api/distributionsr/get');
+        //console.log(response);
+        return response.data;
+     } catch (error) {
+         console.log("error while calling newDistributionR api", error.message);
+     }
+}
+
+export const delDistributionR = async (id) =>{
+    try {
+        await $host.delete(`api/distributionsr/delete/${id}`); 
+    } catch (error) {
+        console.log("error while calling delDistributionR api",error.message);
+    }
+}
+
+export const delDistributionRPlan = async (data) =>{
+    try {
+        await $host.post(`api/distributionsr/delete`, data); 
+    } catch (error) {
+        console.log("error while calling delDistributionRPlan api",error.message);
+    }
+}
+
+export const newPlan = async (data) => {
+    try {
+        let response =  await $host.post(`api/plan/add`, data); 
+        console.log("planAPI: ", response.data);
+    } catch (error) {
+        console.log("error while calling newPlan api", error.message);
+    }
+}
+
+export const getPlan = async (date) => {
+    try {
+        let response =  await $host.get('api/plan/get/' + date); 
+        //console.log("planAPI: ", response.data);
+        return response.data;
+    } catch (error) {
+        console.log("error while calling getPlan api", error.message);
+    }
+}

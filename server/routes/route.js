@@ -15,7 +15,9 @@ const { newMessageR,delMessageR, getAllMessagesR, getMessagesR,
 const { getUsersRenthub, getUserRenthub, editUserRenthub } = require( "../controllers/ruserbotController.js")
 const { newConversationR, getConversationR, getConversationsR } = require( "../controllers/rconversationController.js")
 
-
+const {newDistributionR, getDistributionsR, getDistributionsRPlan, getDistributionsR, 
+    delDistributionR, delDistributionRPlan, editDistribR, editDistribRAll, 
+    editDistribRPlan, delMessagesDistribR, getDistributionsCount} = require("../controllers/distributionController.js")
 
 const upload = require('../middleware/file')
 const uploadDistrib = require('../middleware/fileDistrib') //папка для файлов в рассылках
@@ -71,6 +73,22 @@ route.get("/file/:filename", getImage);
 
 //-----------------Обновление данных профиля---------------------------------
 route.get('/managers/update/get', updateManagers)
+
+//----------------------------Рассылки-------------------------------------
+route.post('/distributionr/add', newDistributionR)
+route.get('/distributionr/get', getDistributionsR)
+route.get('/distributionr/plan/get', getDistributionsRPlan)
+route.get('/distributionr/get/:id', getDistributionsR)
+route.delete('/distributionr/delete/:id', delDistributionR)
+route.post('/distributionr/delete', delDistributionRPlan)
+route.patch('/distributionr/update/:id', editDistribR)
+route.patch('/distributionsrall/update/:id', editDistribRAll)
+route.post('/distributionr/plan/update', editDistribRPlan)
+
+//route.get('/distributionr/send/:id', sendDistribR)
+route.get('/distributionr/delmessages/:id', delMessagesDistribR)
+
+route.get('/distributionr/count/get/:count/:prev', getDistributionsCount) //еще
 
 
 module.exports = route

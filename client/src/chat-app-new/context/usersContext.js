@@ -10,7 +10,7 @@ import { getAllPretendent, getWContacts, getWConversation,
 import { getRManagers, getRManager, getRManagerCount, newRMessage, getRContacts, getRConversation, 
 	getRConversations, getRMessages, getRenthub, getAllRMessages, 
 	getRMessagesCount, getRCompanys, 
-	getRUserbot} from '../../http/renthubAPI'
+	getRUserbot, getDistributionsCountR, getDistributionsRPlan,} from '../../http/renthubAPI'
 
 import { getDistributions, 
 	getDistributionsW, 
@@ -74,9 +74,7 @@ const UsersProvider = ({ children }) => {
 	const [newProject, setNewProject]= useState(false);
 	const [countProjects, setCountProjects] = useState(0)
 
-	const [pretendents, setPretendents] = useState([])
-	const [newPretendent, setNewPretendent] = useState(false);
-	const [countPretendent, setCountPretendent] = useState(0)
+	const [distributionsRent, setDistributionsRent] = useState([]); 
 
 	const [workers, setWorkers] = useState([]); //100 последних специалистов;
 	const [workersAll, setWorkersAll] = useState([]); //все специалисты;
@@ -94,9 +92,6 @@ const UsersProvider = ({ children }) => {
 	});
 
 	const [countMessageRent, setCountMessageRent] = useState(0)
-
-
-	const [distributionsWork, setDistributionsWork] = useState([]); 
 
 	const [conversations, setConversations] = useState([]); 
 	const [wuserbots, setWuserbots] = useState([]); 
@@ -425,6 +420,43 @@ const UsersProvider = ({ children }) => {
 
 //------------------------------------------------------------------------------------------
 
+	//get DistributionW
+	useEffect(() => {
+		const fetchData = async () => {
+			//1 все рассылки 20
+			let response = await getDistributionsCountR(10, distributionsRent.length);
+			//console.log("distributionW: ", response.length)
+
+			let response2 = await getDistributionsRPlan();
+			//console.log("distributionWPlan: ", response2.length)
+
+			//сортировка
+			const messageSort = [...response].sort((a, b) => {       
+				var dateA = new Date(a.datestart), dateB = new Date(b.datestart) 
+				return dateB-dateA  //сортировка по убывающей дате  
+			})
+
+			const messageSort2 = [...response2].sort((a, b) => {       
+				var dateA = new Date(a.datestart), dateB = new Date(b.datestart) 
+				return dateA-dateB  //сортировка по убывающей дате  
+			})
+
+			let all = [...messageSort2, ...messageSort]
+
+			setDistributionsRent(all)
+		}
+
+		fetchData();
+
+	},[])
+
+	//обновить список рассылки
+	const addNewDistrib = (task) => {
+		socket.emit("sendDistrib", { 
+			task,
+		})
+	};
+//------------------------------------------------------------------------------------
 	//получить сообщение из телеграмма
 
 	//получить сообщение из телеграмма
@@ -761,6 +793,9 @@ function isObjectEmpty(obj) {
 			usersOnline,
 			// distributions, 
 			// setDistributions,
+			addNewDistrib,
+			distributionsRent, 
+			setDistributionsRent,
 			managers,
 			companys,
 			count,
