@@ -378,7 +378,7 @@ class DistributionController {
                             const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
                             //const url_send_msg = `https://api.telegram.org/bot${token}/getChat?chat_id=${user}`
                             
-                            console.log("Отправка текста...")
+                            console.log("Отправка текста...", url_send_msg)
                             
                             sendTextToTelegram = await $host.get(url_send_msg)
                                     .catch(async(err) => {
