@@ -77,7 +77,7 @@ route.get('/managers/update/get', updateManagers)
 //----------------------------Рассылки-------------------------------------
 route.post('/distributionr/add', newDistributionR)
 route.get('/distributionr/get', getDistributionsR)
-route.get('/distributionrs/plan/get', getDistributionsRPlan)
+route.get('/distributionsr/plan/get', getDistributionsRPlan)
 route.get('/distributionr/get/:id', getDistributionsR)
 route.delete('/distributionr/delete/:id', delDistributionR)
 route.post('/distributionr/delete', delDistributionRPlan)
