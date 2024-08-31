@@ -196,7 +196,7 @@ async updateManagers(req, res) {
                             //specData.map((category)=> {
                                 //if (category.icon === item.name) {
                                     const obj = {
-                                        cat: item.mane,
+                                        cat: item.name,
                                     }
                                     specArr.push(obj) 
                                 //}
