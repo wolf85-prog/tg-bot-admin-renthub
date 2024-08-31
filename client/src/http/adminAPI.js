@@ -368,7 +368,7 @@ export const newDistributionR = async (data) =>{
         let response = await $host.post(`api/distributionr/add`, data); 
         return response.data;
     } catch (error) {
-        console.log("error while calling newDistributionW api",error.message);
+        console.log("error while calling newDistributionR api",error.message);
     }
 }
 
