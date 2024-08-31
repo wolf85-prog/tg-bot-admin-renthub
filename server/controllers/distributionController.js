@@ -9,7 +9,7 @@ const { Op } = require('sequelize')
 const axios = require("axios");
 
 const webAppAddStavka = process.env.WEBAPP_STAVKA
-const token = process.env.TELEGRAM_API_TOKEN_WORK
+const token = process.env.TELEGRAM_API_TOKEN
 const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 const host = process.env.HOST
 
