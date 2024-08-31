@@ -30,9 +30,9 @@ import { useUsersContext } from "../chat-app-new/context/usersContext";
 import { $host, $host_bottest } from '../http/index';
 import { useNavigate } from 'react-router-dom';
 import { 
-  newDistributionW, 
-  getDistributionsW,
-  getDistributionW, 
+  newDistributionR, 
+  getDistributionsR,
+  getDistributionR, 
   getWorkerId, 
   getProjects3, 
   getBlocks, 
@@ -659,7 +659,35 @@ const onAddCategory = (e) => {
     const result2 = [...arrTemp]
     console.log("result: ", arrCategory)
     console.log("categoryAll: ", arrTemp)
-    console.log("deleted: ", delWorkers)
+    console.log("clients: ", clients)
+
+    if (cat_name === 'All') {
+      clients.map((worker)=> {
+        arrSelect.push(worker.chatId)
+        arrSelectAll.push(worker)
+      })
+      //console.log("arrSelect: ", arrSelect)
+    } else {
+      clients.map((worker)=> {
+        JSON.parse(worker.worklist).map((work) => {
+          result2.map((cat)=> {
+            //console.log(work.cat, cat)
+            if (work.cat === cat) {
+              arrSelect.push(worker.chatId)
+              arrSelectAll.push(worker)
+            } 
+          })
+        })
+      })
+    }
+
+    //выбрать уникальных специалистов
+    const arr = [...arrSelect].filter((el, ind) => ind === arrSelect.indexOf(el));
+
+    setSelected(arr)
+    setSelectedCat(arr)
+    console.log("selected: ", arr)
+    setLoaderCount(false)
     
   }
   
@@ -1152,7 +1180,7 @@ const onChangeSelectCity = (e) => {
     setVisibleModal(!visibleModal)
 
     if (selected.length !== 0 && proj || selected.length !== 0 && text) {
-      navigate('/distributionw_planer', {
+      navigate('/distributionr_planer', {
         state: {
           labelProj: label,
           project: proj,
@@ -1219,11 +1247,11 @@ const onChangeSelectCity = (e) => {
       console.log("message send button: ", message);
 
       //сохранение рассылки в базе данных
-      const distrNew = await newDistributionW(message)
+      const distrNew = await newDistributionR(message)
       console.log("distrNew: ", distrNew.id)
       //console.log(hostServerTest + 'distributionsw/send/' + distrNew.id +'&'+ typeFile)
       //const res = await $host.get(hostServer + 'api/distributionsw/send/' + distrNew.id); 
-      const res = await $host_bottest.get(hostServerTest + 'distributionsw/send/' + distrNew.id +'/'+ typeFile);
+      const res = await $host.get(hostServer + 'distributionsw/send/' + distrNew.id +'/'+ typeFile);
       //const res = await $host_bottest.get(hostServerTest + 'distributionsw/send/' + distrNew.id);
 
       setShowSend(false)
@@ -1239,8 +1267,6 @@ const onChangeSelectCity = (e) => {
       setValue('')
 
       setValueSelect(0)
-
-      //setTimeout(() => navigate('/distributionw'), 1000);
 
     }
     else {

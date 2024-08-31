@@ -363,18 +363,18 @@ export const editDistribution = async (data, id) =>{
 //--------------------------------------------------------------------------
 //distribution2
 //--------------------------------------------------------------------------
-export const newDistributionW = async (data) =>{
+export const newDistributionR = async (data) =>{
     try {
-        let response = await $host.post(`api/distributionw/add`, data); 
+        let response = await $host.post(`api/distributionr/add`, data); 
         return response.data;
     } catch (error) {
         console.log("error while calling newDistributionW api",error.message);
     }
 }
 
-export const getDistributionsW = async()=>{
+export const getDistributionsR = async()=>{
     try {
-        let response = await $host.get('api/distributionsw/get');
+        let response = await $host.get('api/distributionsr/get');
         //console.log(response);
         return response.data;
      } catch (error) {
@@ -382,9 +382,9 @@ export const getDistributionsW = async()=>{
      }
 }
 
-export const getDistributionsCountW = async(count, prev)=>{
+export const getDistributionsCountR = async(count, prev)=>{
     try {
-        let response = await $host.get(`api/distributionsw/count/get/${count}/${prev}`);
+        let response = await $host.get(`api/distributionsr/count/get/${count}/${prev}`);
         //console.log(response);
         return response.data;
      } catch (error) {
@@ -392,9 +392,9 @@ export const getDistributionsCountW = async(count, prev)=>{
      }
 }
 
-export const getDistributionsWPlan = async()=>{
+export const getDistributionsRPlan = async()=>{
     try {
-        let response = await $host.get(`api/distributionsw/plan/get`);
+        let response = await $host.get(`api/distributionsr/plan/get`);
         //console.log(response);
         return response.data;
      } catch (error) {
@@ -402,9 +402,9 @@ export const getDistributionsWPlan = async()=>{
      }
 }
 
-export const getDistributionW = async(id)=>{
+export const getDistributionR = async(id)=>{
     try {
-        let response = await $host.get(`api/distributionw/get/${id}`)
+        let response = await $host.get(`api/distributionr/get/${id}`)
         //console.log(response);
         return response.data;
      } catch (error) {
@@ -412,25 +412,25 @@ export const getDistributionW = async(id)=>{
      }
 }
 
-export const delDistributionW = async (id) =>{
+export const delDistributionR = async (id) =>{
     try {
-        await $host.delete(`api/distributionsw/delete/${id}`); 
+        await $host.delete(`api/distributionsr/delete/${id}`); 
     } catch (error) {
         console.log("error while calling delMessage api",error.message);
     }
 }
 
-export const delDistributionWPlan = async (data) =>{
+export const delDistributionRPlan = async (data) =>{
     try {
-        await $host.post(`api/distributionsw/delete`, data); 
+        await $host.post(`api/distributionsr/delete`, data); 
     } catch (error) {
         console.log("error while calling delMessage api",error.message);
     }
 }
 
-export const editDistributionW = async (data, id) =>{
+export const editDistributionR = async (data, id) =>{
     try {
-        await $host.patch(`api/distributionsw/update/${id}`, data); 
+        await $host.patch(`api/distributionsr/update/${id}`, data); 
     } catch (error) {
         console.log("error while calling editDistributionW api",error.message);
     }
@@ -452,33 +452,12 @@ export const editDistributionWAll = async (data, id) =>{
     }
 }
 
-export const editDistributionWPlan = async (data) =>{
+export const editDistributionRPlan = async (data) =>{
     try {
-        await $host.post(`api/distributionsw/plan/update`, data); 
+        await $host.post(`api/distributionsr/plan/update`, data); 
     } catch (error) {
         console.log("error while calling editDistributionW api",error.message);
     }
-}
-
-
-//pretendent
-export const newPretendent = async (data) =>{
-    try {
-        let response = await $host.post(`api/pretendent/add`, data);
-        return response.data; 
-    } catch (error) {
-        console.log("error while calling newDistribution api",error.message);
-    }
-}
-
-export const getPretendentId = async(id)=>{
-    try {
-        let response = await $host.get(`api/pretendent/get/${id}`);
-        //console.log(response);
-        return response.data;
-     } catch (error) {
-         console.log("error while calling getPretendentId api", error.message);
-     }
 }
 
 
@@ -519,14 +498,6 @@ export const newCountProjects = async (count) =>{
     }
 }
 
-// pretendent
-export const newCountMessagePretendent = async (count) =>{
-    try {
-        await $host.get(`api/pretendent/count/add/${count}`); 
-    } catch (error) {
-        console.log("error while calling newCountMessagePretendent api",error.message);
-    }
-}
 
 
 //--------------------------------------------------------------------------------------
@@ -546,15 +517,6 @@ export const editCountWMessage = async (count) =>{
         await $host.get(`api/wmessage/count/update`); 
     } catch (error) {
         console.log("error while calling newCountWMessage api",error.message);
-    }
-}
-
-// pretendent
-export const editCountMessagePretendent = async (count) =>{
-    try {
-        await $host.get(`api/pretendent/count/update`); 
-    } catch (error) {
-        console.log("error while calling newCountMessagePretendent api",error.message);
     }
 }
 
@@ -620,20 +582,6 @@ export const getUpdateManagers = async()=>{
         return response.data;
     } catch (error) {
         console.log("error while calling getUpdateWorkers api", error.message);
-    }
-}
-
-
-//-------------------------------------------------------------------
-
-//api бд
-export const getPretendent= async (data) =>{
-    try {
-        let response = await $host.post('api/pretendent/get', data);
-        //console.log("projectsAPI: ", response.data);
-        return response.data;
-    } catch (error) {
-        console.log("error while calling getPretendent api", error.message);
     }
 }
 
