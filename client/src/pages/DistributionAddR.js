@@ -348,90 +348,90 @@ const setCategoryItem = (arr2) => {
 
 //ф-я получения категорий проекта
 const getCategoryFromNotion = async(projectId) => {
-  if (projectId !== '0') {
-    let count_title;
-    setLoader(true)
-    const blockId = await getBlocks(projectId);
+  // if (projectId !== '0') {
+  //   let count_title;
+    //setLoader(true)
+    // const blockId = await getBlocks(projectId);
 
-    if (blockId) {
-      const databaseBlock = await getDatabaseId(blockId.data); 
-      setLoader(false)
-      const categories2 = [...databaseBlock.data]
+    // if (blockId) {
+    //   const databaseBlock = await getDatabaseId(blockId.data); 
+    //   setLoader(false)
+    //   const categories2 = [...databaseBlock.data]
 
-      console.log("Основной состав: ", categories2)
+    //   console.log("Основной состав: ", categories2)
 
-      specData.map((category)=> {
-        category.models.map((spec)=> {
-          count_title = 0;
+    //   specData.map((category)=> {
+    //     category.models.map((spec)=> {
+    //       count_title = 0;
 
-          if (databaseBlock.data.length > 0) {   
-            databaseBlock.data.map((db) => {
-              if (spec.name === db.spec) {  //cat (латиница)
-                count_title++
-              }
-            })
+    //       if (databaseBlock.data.length > 0) {   
+    //         databaseBlock.data.map((db) => {
+    //           if (spec.name === db.spec) {  //cat (латиница)
+    //             count_title++
+    //           }
+    //         })
             
-            if (count_title !== 0) {
-              const obj = {
-                id: category.id,
-                title: category.name,
-                name: category.icon,
-                count: count_title,
-              }
-              arr_count.push(obj)
-            }         
-          }
-        })
-      })  
+    //         if (count_title !== 0) {
+    //           const obj = {
+    //             id: category.id,
+    //             title: category.name,
+    //             name: category.icon,
+    //             count: count_title,
+    //           }
+    //           arr_count.push(obj)
+    //         }         
+    //       }
+    //     })
+    //   })  
 
-      console.log("arr_count: ", arr_count)
-      setArrLength(arr_count.length)
+    //   console.log("arr_count: ", arr_count)
+    //   setArrLength(arr_count.length)
 
-      let unique = unDuplicateArrayObjects(arr_count, 'id')
+    //   let unique = unDuplicateArrayObjects(arr_count, 'id')
 
-      const arr2 = []
-      const arr3 = []
-      const arr4 = []
-      unique.map((item)=> {
-          const obj = {
-            label: item.title,
-            value: item.id,
-            name: item.name
-          }
-          arr2.push(obj)
-          arr3.push(item.title)
-          arr4.push(item.name)
-      })
-      console.log("arr2: ", arr2)
-      console.log("categoryAll2: ", arr4)
+    //   const arr2 = []
+    //   const arr3 = []
+    //   const arr4 = []
+    //   unique.map((item)=> {
+    //       const obj = {
+    //         label: item.title,
+    //         value: item.id,
+    //         name: item.name
+    //       }
+    //       arr2.push(obj)
+    //       arr3.push(item.title)
+    //       arr4.push(item.name)
+    //   })
+    //   console.log("arr2: ", arr2)
+    //   console.log("categoryAll2: ", arr4)
       
-      setCategoryAll(arr3)
-      setCategoryAll2(arr4)
+    //   setCategoryAll(arr3)
+    //   setCategoryAll2(arr4)
 
-      //ф-я установки списка категорий
-      setCategoryItem(arr2)
+    //   //ф-я установки списка категорий
+    //   setCategoryItem(arr2)
       
-      //список специалистов с массивом специальностей (категорий)
-      delWorkers.map((worker)=> {
-        JSON.parse(worker.worklist).map((work) => {
-          arr_count.map((cat)=>{
-            //console.log("work: ", work.cat)
-            //console.log("cat: ", cat.title)
-            if (work.cat === cat.name) { //cat.name (латиница)
-              arrSelect.push(worker.chatId)
-            } 
-          })
-        })
-      })
-      //выбрать уникальных специалистов
-      const arr = [...arrSelect].filter((el, ind) => ind === arrSelect.indexOf(el));
-      setSelected(arr)
-      setSelectedCat(arr)
-      console.log("selected: ", arr)     
-    }
-  } else {
-    setValueSelect(0)
-  }
+    //   //список специалистов с массивом специальностей (категорий)
+    //   delWorkers.map((worker)=> {
+    //     JSON.parse(worker.worklist).map((work) => {
+    //       arr_count.map((cat)=>{
+    //         //console.log("work: ", work.cat)
+    //         //console.log("cat: ", cat.title)
+    //         if (work.cat === cat.name) { //cat.name (латиница)
+    //           arrSelect.push(worker.chatId)
+    //         } 
+    //       })
+    //     })
+    //   })
+    //   //выбрать уникальных специалистов
+    //   const arr = [...arrSelect].filter((el, ind) => ind === arrSelect.indexOf(el));
+    //   setSelected(arr)
+    //   setSelectedCat(arr)
+    //   console.log("selected: ", arr)     
+  //   }
+  // } else {
+  //   setValueSelect(0)
+  // }
 }
 
 
@@ -439,26 +439,26 @@ const getCategoryFromNotion = async(projectId) => {
 const onHandlingProject = async(projectId, save, projects, uuidProj) => {
   const arrProjects = []
 
-  // setUuidDistrib(uuidProj ? uuidProj : uuidv4())
-  // console.log("uuid: ", uuidv4()) // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
-  // console.log("uuidSave: ", uuidProj) // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
-  // console.log("projectId: ", projectId)
-  // console.log("projects: ", projects)
+  setUuidDistrib(uuidProj ? uuidProj : uuidv4())
+  console.log("uuid: ", uuidv4()) // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
+  console.log("uuidSave: ", uuidProj) // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
+  console.log("projectId: ", projectId)
+  console.log("projects: ", projects)
 
-  // //для планировщика рассылок
-  // setProj(projectId)
+  //для планировщика рассылок
+  setProj(projectId)
   
-  // //для селектов (value)
-  // setValueProject(projectId)
+  //для селектов (value)
+  setValueProject(projectId)
   
-  // console.log("contacts: ", contacts)
+  console.log("contacts: ", contacts)
 
-  // const obj = contacts.find((item)=>item.value === projectId)
-  // console.log("obj: ", obj)
-  // setLabelName(obj)
+  const obj = contacts.find((item)=>item.value === projectId)
+  console.log("obj: ", obj)
+  setLabelName(obj)
 
 
-  // await getCategoryFromNotion(projectId)
+  await getCategoryFromNotion(projectId)
 
   setShowCity(true)
 
@@ -1243,6 +1243,7 @@ const onChangeSelectCity = (e) => {
         editButton: showEditButtonAdd,
         stavka: onButtonStavka,  
         target: target,
+        type: 1
       }
       console.log("message send button: ", message);
 
