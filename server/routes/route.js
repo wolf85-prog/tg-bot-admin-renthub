@@ -16,7 +16,7 @@ const { getUsersRenthub, getUserRenthub, editUserRenthub } = require( "../contro
 const { newConversationR, getConversationR, getConversationsR } = require( "../controllers/rconversationController.js")
 
 const {newDistributionR, getDistributionsR, getDistributionsRPlan, delDistributionR, 
-    delDistributionRPlan, editDistribR, editDistribRAll, 
+    delDistributionRPlan, editDistribR, editDistribRAll, sendDistribR,
     editDistribRPlan, delMessagesDistribR, getDistributionsCount} = require("../controllers/distributionController.js")
 
 const upload = require('../middleware/file')
@@ -85,7 +85,7 @@ route.patch('/distributionr/update/:id', editDistribR)
 route.patch('/distributionsrall/update/:id', editDistribRAll)
 route.post('/distributionr/plan/update', editDistribRPlan)
 
-//route.get('/distributionr/send/:id', sendDistribR)
+route.get('/distributionr/send/:id', sendDistribR)
 route.get('/distributionr/delmessages/:id', delMessagesDistribR)
 
 route.get('/distributionr/count/get/:count/:prev', getDistributionsCount) //еще

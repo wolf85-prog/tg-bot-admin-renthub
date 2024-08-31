@@ -1248,10 +1248,10 @@ const onChangeSelectCity = (e) => {
 
       //сохранение рассылки в базе данных
       const distrNew = await newDistributionR(message)
-      console.log("distrNew: ", distrNew.id)
+      console.log("distrNew: ", distrNew?.id)
       //console.log(hostServerTest + 'distributionsw/send/' + distrNew.id +'&'+ typeFile)
-      //const res = await $host.get(hostServer + 'api/distributionsw/send/' + distrNew.id); 
-      const res = await $host.get(hostServer + 'distributionsw/send/' + distrNew.id +'/'+ typeFile);
+      const res = await $host.get(hostServer + 'api/distributionsr/send/' + distrNew?.id); 
+      //const res = await $host.get(hostServer + 'distributionsr/send/' + distrNew?.id +'/'+ typeFile);
       //const res = await $host_bottest.get(hostServerTest + 'distributionsw/send/' + distrNew.id);
 
       setShowSend(false)
