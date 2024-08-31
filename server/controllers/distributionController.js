@@ -1,5 +1,5 @@
 const { Distribution }= require('../models/models')
-const {Message, Conversation} = require('../models/renthub')
+const {Message, Conversation, Manager} = require('../models/renthub')
 const ApiError = require('../error/ApiError')
 
 const { Op } = require('sequelize')
@@ -289,7 +289,7 @@ class DistributionController {
                     }) 
 
                     //найти специалиста
-                    const blockedWork = await Worker.findOne({
+                    const blockedWork = await Manager.findOne({
                         where: {
                             chatId: user
                         },
@@ -383,7 +383,7 @@ class DistributionController {
                             sendTextToTelegram = await $host.get(url_send_msg)
                                     .catch(async(err) => {
                                         if (err.response.status === 403 && err.response.data.description === "Forbidden: bot was blocked by the user") {
-                                            await Worker.update({ 
+                                            await Manager.update({ 
                                                 deleted: true  
                                             },
                                             {
@@ -423,7 +423,7 @@ class DistributionController {
                             sendPhotoToTelegram = await $host.get(url_send_photo)
                                 .catch(async(err) => {
                                     if (err.response.status === 403 && err.response.data.description === "Forbidden: bot was blocked by the user") {
-                                        await Worker.update({ 
+                                        await Manager.update({ 
                                             deleted: true  
                                         },
                                         {
