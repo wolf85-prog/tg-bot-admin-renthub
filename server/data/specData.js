@@ -2,7 +2,7 @@ module.exports = {
     specData: [
        {
            id: 1,
-           name: 'SOUND',
+           name: 'Звуковое оборудование',
            icon: 'Sound',
            models: [
                {id: 1, name: 'Звукорежиссер',},
@@ -15,7 +15,7 @@ module.exports = {
        },
        {
            id: 2,
-           name: 'LIGHT',
+           name: 'Световое оборудование',
            icon: 'Light',
            models: [
                {id: 1, name: 'Художник по свету',},
@@ -26,7 +26,7 @@ module.exports = {
        },
        {
            id: 3,
-           name: 'VIDEO',
+           name: 'Видеооборудование',
            icon: 'Video',
            models: [
                {id: 1, name: 'Инженер VMix',},
@@ -41,7 +41,7 @@ module.exports = {
        },
        {
             id: 4,
-            name: 'PHOTO',
+            name: 'Фотооборудование',
             icon: 'Photo',
             models: [
                 {id: 1, name: 'Свадебная съемка',},
@@ -53,7 +53,7 @@ module.exports = {
         },
         {
             id: 5,
-            name: 'PROMO',
+            name: 'Промоагенство',
             icon: 'Promo',
             models: [
                 {id: 1, name: 'Модель',},
@@ -64,7 +64,7 @@ module.exports = {
         },
         {
             id: 6,
-            name: 'CATERING',
+            name: 'Кейтеринг',
             icon: 'Catering',
             models: [
                 {id: 1, name: 'Официант',},
@@ -76,7 +76,7 @@ module.exports = {
         }, 
         {
             id: 7,
-            name: 'STAGEHANDS',
+            name: 'Грузоперевозки',
             icon: 'Stagehands',
             models: [
                 {id: 1, name: 'Помощник \/ Грузчик',},
@@ -84,8 +84,8 @@ module.exports = {
         },
        {
            id: 8,
-           name: 'RIGGERS',
-           icon: 'Riggers \/ Ground',
+           name: 'Промышленный альпинизм',
+           icon: 'Riggers',
            models: [
                {id: 1, name: 'Верхний Риггер',},
                {id: 2, name: 'Нижний Риггер',},
@@ -95,7 +95,7 @@ module.exports = {
        },
        {
            id: 9,
-           name: 'TRUCKS',
+           name: 'Продакшн артистов',
            icon: 'Trucks',
            models: [
                {id: 1, name: 'C личным ТС [B\/C]',},
@@ -106,7 +106,7 @@ module.exports = {
        },
        {
             id: 10,
-            name: 'PARTY',
+            name: 'Event-менеджер',
             icon: 'Party',
             models: [
                 {id: 1, name: 'Кавер-бенд',},
@@ -120,7 +120,7 @@ module.exports = {
         },
         {
             id: 11,
-            name: 'GAMES',
+            name: 'Игры и аттракционы',
             icon: 'Games',
             models: [
                 {id: 1, name: 'Квесты',},
@@ -133,7 +133,7 @@ module.exports = {
         },
         {
            id: 12,
-           name: 'PRODUCTION',
+           name: 'Технический продакшн',
            icon: 'Production',
            models: [
                {id: 1, name: 'Мероприятие под ключ',},

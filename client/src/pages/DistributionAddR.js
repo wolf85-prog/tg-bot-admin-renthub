@@ -73,7 +73,7 @@ const DistributionAddR = () => {
   const hostServer = process.env.REACT_APP_API_URL
   const hostServerTest = process.env.REACT_APP_ADMIN_API_URL_TEST
 
-  const { userWorkers: clients, workersAll, projectsNew } = useUsersContext();
+  const { userRenthub: clients, workersAll, projectsNew } = useUsersContext();
   const { addNewDistrib, addNewMessage2, distributionsWork, setDistributionsWork, delMessageContext } = useUsersContext();
   const [contacts, setContacts]= useState([{value: 0, name: "Выбрать...", label: 'Выбрать...',}]);
   const [contacts2, setContacts2]= useState([{value: 0, name: "Выбрать...", label: 'Выбрать...',}]);
@@ -193,16 +193,16 @@ const DistributionAddR = () => {
   //--------------------------------------------------------------
 
   //get filter delete workers
-  useEffect(() => {
-    console.log("workersAll: ", workersAll)
-    //массив без удаленных пользователей
-    const arrDel = workersAll.filter(item => item.deleted !== true)
-    setDelWorkers(arrDel)
+  // useEffect(() => {
+  //   console.log("workersAll: ", workersAll)
+  //   //массив без удаленных пользователей
+  //   const arrDel = workersAll.filter(item => item.deleted !== true)
+  //   setDelWorkers(arrDel)
 
-    const arrNotDel = workersAll.filter(item => item.deleted === true)
-    setDelNotWorkers(arrNotDel)
+  //   const arrNotDel = workersAll.filter(item => item.deleted === true)
+  //   setDelNotWorkers(arrNotDel)
 
-  }, [workersAll])
+  // }, [workersAll])
 
 //----------------------------------------------------------------------------------
    //проекты с названием
@@ -439,26 +439,26 @@ const getCategoryFromNotion = async(projectId) => {
 const onHandlingProject = async(projectId, save, projects, uuidProj) => {
   const arrProjects = []
 
-  setUuidDistrib(uuidProj ? uuidProj : uuidv4())
-  console.log("uuid: ", uuidv4()) // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
-  console.log("uuidSave: ", uuidProj) // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
-  console.log("projectId: ", projectId)
-  console.log("projects: ", projects)
+  // setUuidDistrib(uuidProj ? uuidProj : uuidv4())
+  // console.log("uuid: ", uuidv4()) // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
+  // console.log("uuidSave: ", uuidProj) // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
+  // console.log("projectId: ", projectId)
+  // console.log("projects: ", projects)
 
-  //для планировщика рассылок
-  setProj(projectId)
+  // //для планировщика рассылок
+  // setProj(projectId)
   
-  //для селектов (value)
-  setValueProject(projectId)
+  // //для селектов (value)
+  // setValueProject(projectId)
   
-  console.log("contacts: ", contacts)
+  // console.log("contacts: ", contacts)
 
-  const obj = contacts.find((item)=>item.value === projectId)
-  console.log("obj: ", obj)
-  setLabelName(obj)
+  // const obj = contacts.find((item)=>item.value === projectId)
+  // console.log("obj: ", obj)
+  // setLabelName(obj)
 
 
-  await getCategoryFromNotion(projectId)
+  // await getCategoryFromNotion(projectId)
 
   setShowCity(true)
 
@@ -660,64 +660,6 @@ const onAddCategory = (e) => {
     console.log("result: ", arrCategory)
     console.log("categoryAll: ", arrTemp)
     console.log("deleted: ", delWorkers)
-
-    if (cat_name === 'All') {
-      delWorkers.map((worker)=> {
-        arrSelect.push(worker.chatId)
-        arrSelectAll.push(worker)
-      })
-      //console.log("arrSelect: ", arrSelect)
-    } else if (cat_name === 'Delete') {
-      console.log("Удаленные")
-      delNotWorkers.map((worker)=> {
-        arrSelect.push(worker.chatId)
-      })
-    } else {
-      delWorkers.map((worker)=> {
-        JSON.parse(worker.worklist).map((work) => {
-          result.map((cat)=> {
-            if (work.cat === cat) {
-              arrSelect.push(worker.chatId)
-              //console.log(worker)
-              arrSelectAll.push(worker)
-            } 
-          })
-        })
-      })
-      console.log("arrSelect: ", arrSelect)
-      //console.log("arrSelectAll: ", arrSelectAll)
-    } 
-    
-    //выбрать уникальных специалистов
-    const arr = [...arrSelect].filter((el, ind) => ind === arrSelect.indexOf(el));
-    //const arr2 = [...arrSelectAll].filter((el, ind) => ind === arrSelectAll.indexOf(el));
-
-    //выбрать специалистов без блокировки
-    let arrNew = []
-    //let arrNew2 = []
-
-    //Фильтрация по заблокировавшим рассылки
-    arr.map(async(item, index)=>{
-      const newObj = {
-        projectId: proj, 
-        receiverId: item
-      }
-      const res = await getPretendent(newObj)
-
-      if (res && res.blockDistrib === true) {
-        console.log("res: ", res)
-      } else {
-        //console.log("item: ", item)
-        arrNew.push(item.toString())
-      }
-
-      if (index === arr.length-1) {
-        setSelected(arrNew)
-        setSelectedCat(arrNew)
-        console.log("selected: ", arrNew, index)
-        setLoaderCount(false)
-      }
-    })
     
   }
   
@@ -753,21 +695,6 @@ const onAddCategory2 = (e) => {
     const result2 = [...categoryAll, ...arrTemp2]
     console.log("result: ", result)
     console.log("categoryAll: ", result2)
-
-    delWorkers.map((worker)=> {
-      JSON.parse(worker.worklist).map((work) => {
-        result.map((cat)=> {
-          if (work.cat === cat) {
-            arrSelect.push(worker.chatId)
-          } 
-        })
-      })
-    })
-    //выбрать уникальных специалистов
-    const arr = [...arrSelect].filter((el, ind) => ind === arrSelect.indexOf(el));
-    
-    setSelected(arr)
-    console.log(arr)
   }
 }
 
@@ -799,20 +726,6 @@ const onAddCategory3 = (e) => {
     console.log("result: ", result)
     console.log("categoryAll: ", result2)
 
-    delWorkers.map((worker)=> {
-      JSON.parse(worker.worklist).map((work) => {
-        result.map((cat)=> {
-          if (work.cat === cat) {
-            arrSelect.push(worker.chatId)
-          } 
-        })
-      })
-    })
-    //выбрать уникальных специалистов
-    const arr = [...arrSelect].filter((el, ind) => ind === arrSelect.indexOf(el));
-    
-    setSelected(arr)
-    console.log(arr)
   }
 }
 

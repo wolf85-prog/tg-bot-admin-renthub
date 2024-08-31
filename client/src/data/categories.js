@@ -6,27 +6,27 @@ const categories = [
       value: '0',
     },
     {
-      label: 'Звук',
+      label: 'Звуковое оборудование',
       name: 'Sound',
       value: '1',
     },
     {
-      label: 'Свет',
+      label: 'Световое оборудование',
       name: 'Light',
       value: '2',
     },
     {
-      label: 'Видео',
+      label: 'Видеооборудование',
       name: 'Video',
       value: '3',
     },
     {
-      label: 'Фото',
+      label: 'Фотооборудование',
       name: 'Photo',
       value: '4',
     },
     {
-      label: 'Промо / Кастинг',
+      label: 'Промоагенство',
       name: 'Promo',
       value: '5',
     },
@@ -36,27 +36,27 @@ const categories = [
       value: '6',
     },
     {
-      label: 'Помощники / Грузчики',
+      label: 'Грузоперевозки',
       name: 'Stagehands',
       value: '7',
     },
     {
-      label: 'Риггер / Граунд',
-      name: 'Riggers \/ Ground',
+      label: 'Промышленный альпинизм',
+      name: 'Riggers',
       value: '8',
     },
     {
-      label: 'Водители',
-      name: 'Trucks',
+      label: 'Продакшн артистов',
+      name: 'Party',
       value: '9',
     },
     {
-      label: 'Артисты',
-      name: 'Party',
+      label: 'Event-менеджер',
+      name: 'Event',
       value: '10',
     },
     {
-      label: 'Игры',
+      label: 'Игры и аттракционы',
       name: 'Games',
       value: '11',
     },
@@ -66,29 +66,34 @@ const categories = [
       value: '12',
     },
     {
+      label: 'Менеджер «U.L.E.Y»',
+      name: 'Manager',
+      value: '13',
+    },
+    {
       label: '__________________________',
       disabled: true,
-      value: '13',
+      value: '14',
     },
     {
       label: 'Вне категории',
       name: 'NoTag',
-      value: '14',
+      value: '15',
     },   
     {
       label: 'Удаленные',
       name: 'Delete',
-      value: '15',
+      value: '16',
     }, 
     {
       label: 'Тест',
       name: 'Test',
-      value: '16',
+      value: '17',
     },
     {
       label: 'Все',
       name: 'All',
-      value: '17',
+      value: '18',
     }, 
     
 ]

@@ -192,45 +192,35 @@ async updateManagers(req, res) {
                     if (workerN && workerN.length > 0) {
                         console.log("Менеджер в ноушен найден!", i)
                         //список специалистов
-                        // workerN[0].spec.map((item) => {
-                        //     specData.map((category)=> {
-                        //         category.models.map((work)=> {
-                        //             if (work.name === item.name){
-                        //                 const obj = {
-                        //                     spec: item.name,
-                        //                     cat: category.icon,
-                        //                 }
-                        //                 specArr.push(obj)
-                        //             }
-                        //         })
-                        //         if (category.icon === item.name) {
-                        //             const obj = {
-                        //                 spec: item.name,
-                        //                 cat: category.icon,
-                        //             }
-                        //             specArr.push(obj) 
-                        //         }
-                        //     })
-                        //     if (item.name === 'Blacklist') {
-                        //         const obj = {
-                        //             spec: item.name,
-                        //             cat: 'Blacklist',
-                        //         }
-                        //         specArr.push(obj) 
-                        //     }
-                        //     if (item.name === '+18') {
-                        //         const obj = {
-                        //             spec: item.name,
-                        //             cat: '+18',
-                        //         }
-                        //         specArr.push(obj) 
-                        //     }
-                        // })
+                        workerN[0].bisnes.map((item) => {
+                            //specData.map((category)=> {
+                                //if (category.icon === item.name) {
+                                    const obj = {
+                                        cat: item.mane,
+                                    }
+                                    specArr.push(obj) 
+                                //}
+                            //})
+                            // if (item.name === 'Blacklist') {
+                            //     const obj = {
+                            //         spec: item.name,
+                            //         cat: 'Blacklist',
+                            //     }
+                            //     specArr.push(obj) 
+                            // }
+                            // if (item.name === '+18') {
+                            //     const obj = {
+                            //         spec: item.name,
+                            //         cat: '+18',
+                            //     }
+                            //     specArr.push(obj) 
+                            // }
+                        })
     
                         if (workerN[0].bisnes.length > 0) {
                             //обновить бд
                             const res = await Manager.update({ 
-                                worklist: JSON.stringify(workerN[0].bisnes)  
+                                worklist: JSON.stringify(specArr)  
                             },
                             { 
                                 where: {chatId: man.chatId} 
