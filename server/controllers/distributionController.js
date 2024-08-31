@@ -507,7 +507,7 @@ class DistributionController {
                         } else {
                             // Подключаемся к серверу socket
                             let socket = io(socketUrl);
-                            socket.emit("addUser", user)
+                            //socket.emit("addUser", user)
                             
                             //отправить сообщение в админку
                             socket.emit("sendAdminSpec", { 
