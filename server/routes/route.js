@@ -88,7 +88,7 @@ route.post('/distributionr/plan/update', editDistribRPlan)
 route.get('/distributionsr/send/:id', sendDistribR)
 route.get('/distributionr/delmessages/:id', delMessagesDistribR)
 
-route.get('/distributionr/count/get/:count/:prev', getDistributionsCount) //еще
+route.get('/distributionsr/count/get/:count/:prev', getDistributionsCount) //еще
 
 
 module.exports = route
