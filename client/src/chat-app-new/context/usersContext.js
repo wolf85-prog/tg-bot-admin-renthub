@@ -168,8 +168,8 @@ const UsersProvider = ({ children }) => {
 		const fetchUserManagerData = async () => {
 		
 			//0 все специалисты
-			let all = await getRManagers()
-			console.log("Managers: ", all)
+			let managers = await getRManagers()
+			console.log("Managers: ", managers)
 			
 			const arrayWorkerAll = []
 
@@ -177,14 +177,14 @@ const UsersProvider = ({ children }) => {
 
 			//массив компаний
 			let comps = await getRCompanys()
-			//console.log("comps: ", comps)
+			console.log("comps: ", comps)
 		
-			all.map(async (user) => {
+			managers.map(async (user) => {
 				//поиск компании по id
 				let compName
 				if (comps) {
-					compName = comps.find(item=> item.id === user.company)
-					//console.log("compName: ", compName)
+					compName = comps.find(item=> item.id === parseInt(user.companyId))
+					console.log("compName: ", compName)
 				}	
 
 				const res = userbot.find(item2 => item2.chatId === user.chatId)

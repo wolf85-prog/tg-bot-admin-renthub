@@ -19,6 +19,9 @@ const {newDistributionR, getDistributionsR, getDistributionsRPlan, delDistributi
     delDistributionRPlan, editDistribR, editDistribRAll, sendDistribR,
     editDistribRPlan, delMessagesDistribR, getDistributionsCount} = require("../controllers/distributionController.js")
 
+    const { getCompanys, getCompanyCount, editCompany, getCompanyId, addCompany, 
+        deleteCompany, getCompanyCountAll } = require('../controllers/companysController')
+
 const upload = require('../middleware/file')
 const uploadDistrib = require('../middleware/fileDistrib') //папка для файлов в рассылках
 
@@ -51,7 +54,14 @@ route.patch('/managers/update/:id', editRmanager)
 //route.get('/manager/block/:id', blockWorker)
 route.get('/managers/count/get/:count/:prev', getRManagerCount) //еще
 
-
+//----------------- Компании ---------------------------------
+route.get('/companys/get', getCompanys)
+route.get("/companys/:id", getCompanyId);
+route.get('/companys/count/get/:count/:prev', getCompanyCount) //еще
+route.patch('/companys/update/:id', editCompany)
+route.get("/companys/delete/:id", deleteCompany);
+route.post("/companys/add", addCompany);
+route.get("/companys/count/get", getCompanyCountAll);
 
 //-------------------------------------------------------------------
 route.get('/reports/get', getReports)

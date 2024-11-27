@@ -48,10 +48,10 @@ export const getRCompanyName = async (id) =>{
 
 export const getRCompanys = async () =>{
     try {
-       let response = await $host_renthub.get(`companys`);
+       let response = await $host.get(`api/companys/get`);
        return response.data;
     } catch (error) {
-        console.log("error while calling getCompany api", error.message);
+        console.log("error while calling getRCompanys api", error.message);
     }
 }
 
