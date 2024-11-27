@@ -184,7 +184,7 @@ const UsersProvider = ({ children }) => {
 				let compName
 				if (comps) {
 					compName = comps.find(item=> item.id === parseInt(user.companyId))
-					console.log("compName: ", compName)
+					console.log("compName: ", compName?.title)
 				}	
 
 				const res = userbot.find(item2 => item2.chatId === user.chatId)
@@ -196,13 +196,12 @@ const UsersProvider = ({ children }) => {
 					phone: user.phone,
 					doljnost: user.dojnost,
 					city: user.city, 
-					company: compName ? compName.title : '',
+					company: compName ? compName?.title : '',
 					projects: user.projects,
 					worklist:  user.worklist,
 					chatId: user.chatId,
 					createDate: user.createdAt,
 					avatar: user.avatar,
-					from: user.from,
 					block: user.block,
 					deleted: user.deleted,
 				}
@@ -218,12 +217,7 @@ const UsersProvider = ({ children }) => {
 		
 			const arrayWorker = []
 		
-			response.reverse().map(async (user) => {
-				//поиск компании по id
-				// let compName
-				// if (comps) {
-				// 	compName = comps.find(item=> item.id === user.company)
-				// }	
+			response.reverse().map(async (user) => {	
 				const newWorker = {
 					id: user.id,
 					fio: user.fio,
@@ -231,13 +225,12 @@ const UsersProvider = ({ children }) => {
 					phone: user.phone,
 					doljnost: user.dojnost,
 					city: user.city, 
-					company: user.company,
+					company: user.companyId,
 					projects: user.projects,
 					worklist:  user.worklist,
 					chatId: user.chatId,
 					createDate: user.createdAt,
 					avatar: user.avatar,
-					from: user.from,
 					block: user.block,
 					deleted: user.deleted,
 				}
@@ -265,6 +258,7 @@ const UsersProvider = ({ children }) => {
 			convers.forEach(async (user, index) => {
 		
 				let manager = arrayWorkerAll.find((item)=> item.chatId === user.members[0])
+				console.log("manager: ", manager)
 				let userbot = wuserbots.find((item)=> item.chatId === manager?.chatId)	
 					
 				let conversationId = user.id //await getWConversation(user.members[0])
@@ -352,10 +346,10 @@ const UsersProvider = ({ children }) => {
 					const newUser = {
 						id: manager.id,
 						username: manager.username ? manager.username : '',
-						name: manager?.fio, //notion[0]?.fio ? notion[0]?.fio : '',
-						city: manager?.city, //notion[0]?.city ? notion[0]?.city : '',
-						phone: manager?.phone, //notion[0]?.phone ? notion[0]?.phone : '',
-						doljnost: manager?.doljnost, //notion[0]?.phone ? notion[0]?.phone : '',
+						name: manager?.fio, 
+						city: manager?.city, 
+						phone: manager?.phone, 
+						doljnost: manager?.doljnost, 
 						company: manager?.company,
 						worklist: manager?.worklist,
 						chatId: manager?.chatId,
