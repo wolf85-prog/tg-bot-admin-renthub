@@ -169,7 +169,7 @@ const UsersProvider = ({ children }) => {
 		
 			//0 все специалисты
 			let managers = await getRManagers()
-			console.log("Managers: ", managers)
+			//console.log("Managers: ", managers)
 			
 			const arrayWorkerAll = []
 
@@ -177,14 +177,14 @@ const UsersProvider = ({ children }) => {
 
 			//массив компаний
 			let comps = await getRCompanys()
-			console.log("comps: ", comps)
+			//console.log("comps: ", comps)
 		
 			managers.map(async (user) => {
 				//поиск компании по id
 				let compName
 				if (comps) {
-					compName = comps.find(item=> item.id === parseInt(user.companyId))
-					console.log("compName: ", compName?.title)
+					compName = comps.find(item=> item.id === parseInt(user.companyId) || item.GUID === user.companyId)
+					//console.log("compName: ", compName?.title)
 				}	
 
 				const res = userbot.find(item2 => item2.chatId === user.chatId)
@@ -208,12 +208,14 @@ const UsersProvider = ({ children }) => {
 		
 				arrayWorkerAll.push(newWorker)
 			})
+
+			//console.log("arrayWorkerAll: ", arrayWorkerAll)
 		
 			setWorkersAll(arrayWorkerAll)
 
 			//1 все специалисты 100
 			let response = await getRManagerCount(100, userRenthub.length);
-			console.log("manager size: ", response)
+			//console.log("manager size: ", response)
 		
 			const arrayWorker = []
 		
@@ -242,23 +244,23 @@ const UsersProvider = ({ children }) => {
 		
 			//2 все пользователи бота
 			let wuserbots = await getRContacts();
-			console.log("wuserbots size: ", wuserbots.length)
+			//console.log("wuserbots size: ", wuserbots.length)
 			const arrayContact = []
 
 			//3 все беседы (conversations)
 			let convers = await getRConversations()
-			console.log("conversations: ", convers.length)
+			//console.log("conversations: ", convers.length)
 			setConversations(convers)
 
 			//4 все сообщения бота
 			let messagesAll = await getRMessagesCount(1000) //getWMessagesCount(1000) //getAllWMessages()
-			console.log("messagesAll: ", messagesAll.length)
+			//console.log("messagesAll: ", messagesAll.length)
 
 			let count = 0
 			convers.forEach(async (user, index) => {
 		
 				let manager = arrayWorkerAll.find((item)=> item.chatId === user.members[0])
-				console.log("manager: ", manager)
+				//console.log("manager: ", manager)
 				let userbot = wuserbots.find((item)=> item.chatId === manager?.chatId)	
 					
 				let conversationId = user.id //await getWConversation(user.members[0])
@@ -376,7 +378,7 @@ const UsersProvider = ({ children }) => {
 						return dateB-dateA  //сортировка по убывающей дате  
 					})
 
-					console.log("sortedClients: ", sortedClients.length)
+					//console.log("sortedClients: ", sortedClients.length)
 		
 					setUserRenthub(sortedClients)
 

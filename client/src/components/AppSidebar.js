@@ -36,15 +36,7 @@ const AppSidebar = () => {
 
   const [count, setCount ] = useState(0);
   const [countMesW, setCountMesW ] = useState(0);
-  console.log("countMessage: ", countMessageWork)
-
-
-  // useEffect(async() => {
-  //   const res = await getCountMessage()
-  //   console.log("res appsidebar: ", res)
-  //   setCount(res.pretendents)
-  //   setCountMesW(res.workers)
-  // },[countMessage, newProject, countMessageWork, countPretendent])
+  //console.log("countMessage: ", countMessageWork)
 
   const handleLinkClick = (url) => {
     // Open the link in a new tab with desired features (optional)
