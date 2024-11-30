@@ -3,6 +3,7 @@ import {Routes, Route } from 'react-router-dom';
 import {authRoutes} from "./routes_start";
 import {observer} from "mobx-react-lite";
 import PrivateRoute from './PrivateRoute';
+import DistributionRPlaner from './pages/DistributionRPlaner';
 
 
 // Pages
@@ -33,6 +34,7 @@ const AppRouter = observer(() => {
       <Route exact path="/chatwork" name="Renthub" element={<ChatWorker />} />
       <Route exact path="/distributionr" name="Renthub" element={<DistributionR />} />
       <Route exact path="/distributionr_add" name="Renthub" element={<DistributionAddR />} />
+      <Route exact path="/distributionr_planer" name="Renthub" element={<DistributionRPlaner />} />
       <Route exact path="/managers" name="Renthub" element={<Managers />} />
     </Routes>
   );

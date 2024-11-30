@@ -47,6 +47,8 @@ import {
   getProjectNewUpdate,
   getProjectNewDel,  
   getProjectCash,
+  getProjectsNewApi,
+  getProjectsNewApi2,
 } from '../http/adminAPI';
 
 import { uploadFile, delMessage, distribFile } from '../http/chatAPI';
@@ -175,20 +177,21 @@ const DistributionAddR = () => {
 
 //-----------------------------------------------------------------------------------
   //загрузка новых проектов
-  // useEffect(() => {
-  //   const fetchData = async () => {
+  useEffect(() => {
+    const fetchData = async () => {
 
-  //     let projects = await getProjectNewCash();
-  //     console.log("Загрузка проектов из БД ...")
-  //     console.log("projects planer: ", projects)
-  //     console.log("clients: ", clients)
+      //let projects = await getProjectsNewApi() //getProjectNewCash();
+      let projects = await getProjectsNewApi2() //getProjectNewCash();
+      console.log("Загрузка проектов из БД ...")
+      console.log("projects planer: ", projects)
+      console.log("clients: ", clients)
 
-  //     setProjects(projects)
-  //     setLoaderStart(false)  
-  //   }
+      setProjects(projects)
+      setLoaderStart(false)  
+    }
 
-  //   fetchData();  
-  // },[])
+    fetchData();  
+  },[])
 
   //--------------------------------------------------------------
 
@@ -216,7 +219,7 @@ const DistributionAddR = () => {
     if (projects && projects.length > 0) {
       projects.map((project) => {
         if (project != null) {
-          const d = new Date(project.datestart);
+          const d = new Date(project.dateStart);
           const month = String(d.getMonth()+1).padStart(2, "0");
           const day = String(d.getDate()).padStart(2, "0");
 
@@ -234,7 +237,7 @@ const DistributionAddR = () => {
       })
 
       setContacts(arrProjects)    
-    }  
+    }   
   }, [projects]);
   
 
@@ -453,7 +456,7 @@ const onHandlingProject = async(projectId, save, projects, uuidProj) => {
   
   console.log("contacts: ", contacts)
 
-  const obj = contacts.find((item)=>item.value === projectId)
+  const obj = contacts.find((item)=>item.value === parseInt(projectId))
   console.log("obj: ", obj)
   setLabelName(obj)
 
@@ -1179,7 +1182,8 @@ const onChangeSelectCity = (e) => {
   const onPlanerShow = async(label, proj, text, cats, count, poster, uuidDistrib) => {
     setVisibleModal(!visibleModal)
 
-    if (selected.length !== 0 && proj || selected.length !== 0 && text) {
+    if (selected.length !== 0 && proj) {
+    //if (selected.length !== 0 && proj || selected.length !== 0 && text) {
       navigate('/distributionr_planer', {
         state: {
           labelProj: label,

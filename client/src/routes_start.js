@@ -18,9 +18,9 @@ import {
 
 const Managers = React.lazy(() => import('./pages/Managers'))
 const DistributionR = React.lazy(() => import('./pages/DistributionR'))
-//const DistributionAddR = React.lazy(() => import('./pages/DistributionAddR'))
-//const DistributionEditR = React.lazy(() => import('./pages/DistributionEditR'))
-//const DistributionRPlaner = React.lazy(() => import('./pages/DistributionRPlaner'))
+const DistributionAddR = React.lazy(() => import('./pages/DistributionAddR'))
+const DistributionEditR = React.lazy(() => import('./pages/DistributionEditR'))
+const DistributionRPlaner = React.lazy(() => import('./pages/DistributionRPlaner'))
 
 export const authRoutes = [
     // { path: ADMIN_ROUTE, name: 'Панель управления', Component: Admin },

@@ -598,3 +598,22 @@ export const getProcess= async (count, on) =>{
         console.log("error while calling getProcess api", error.message);
     }
 }
+
+
+export const getProjectsNewApi = async () =>{
+    try {
+       let response = await $host.get('api/projects/new/get');
+       return response.data;
+    } catch (error) {
+        console.log("error while calling getProjectsApi api", error.message);
+    }
+}
+
+export const getProjectsNewApi2 = async () =>{
+    try {
+       let response = await $host.get('api/projectnew/get');
+       return response.data;
+    } catch (error) {
+        console.log("error while calling getProjectsNewApi2 api", error.message);
+    }
+}

@@ -30,9 +30,9 @@ import { $host } from '../http/index';
 import { useNavigate } from 'react-router-dom';
 
 import { 
-  newDistributionW, 
-  getDistributionsW,
-  getDistributionW, 
+  newDistributionR, 
+  getDistributionsR,
+  getDistributionR, 
   getWorkerId, 
   getProjects3, 
   getBlocks, 
@@ -197,7 +197,7 @@ const DistributionEditR = () => {
         console.log("Ред. кнопка: ", editButton)
         console.log("Ссылка: ", target2)
         
-        const distrib = await getDistributionW(distribId)
+        const distrib = await getDistributionR(distribId)
         onHandlingProject(projId, true, projects, uuidProj)
 
         const catItems = categoriesitem.split(',')
@@ -1249,7 +1249,7 @@ const delCategory7 = (category) => {
       console.log("message send button: ", message);
 
       //сохранение рассылки в базе данных
-      const distrNew = await newDistributionW(message)
+      const distrNew = await newDistributionR(message)
       console.log("distrNew: ", distrNew.id)
 
       // selected.map(async (user, index) => { 

@@ -32,12 +32,12 @@ import {
   newPlan, 
   getPlan, 
   addTimer,
-  newDistributionW, 
-  getDistributionsW, 
-  getDistributionsWPlan, 
-  delDistributionWPlan,
-  editDistributionWPlan,
-  editDistributionW,
+  newDistributionR,
+  getDistributionsR, 
+  getDistributionsRPlan, 
+  delDistributionRPlan,
+  //editDistributionWPlan,
+  //editDistributionW,
 } from 'src/http/adminAPI';
 
 const DistributionRPlaner = () => {
@@ -481,7 +481,7 @@ const [dates888, setDates888] = useState([
 
   const navigate = useNavigate();
   const backPage = () => {
-       navigate('/distributionw');
+       navigate('/distributionr');
   } 
 
   useEffect(() => {
@@ -7543,15 +7543,15 @@ const clickShowEditTime8 = (t, ind, tab) => {
     }
 
     //(удалить предыдущие записи запланированных рассылок)
-    const res = await delDistributionWPlan(obj) //editDistributionWPlan(obj)
-    const res2 = await delDistributionWPlan(obj2) //editDistributionWPlan(obj2)
+    const res = await delDistributionRPlan(obj) //editDistributionWPlan(obj)
+    const res2 = await delDistributionRPlan(obj2) //editDistributionWPlan(obj2)
 
-    const res3 = await delDistributionWPlan(obj3) //editDistributionWPlan(obj2)
-    const res4 = await delDistributionWPlan(obj4) //editDistributionWPlan(obj2)
-    const res5 = await delDistributionWPlan(obj5) //editDistributionWPlan(obj2)
-    const res6 = await delDistributionWPlan(obj6) //editDistributionWPlan(obj2)
-    const res7 = await delDistributionWPlan(obj7) //editDistributionWPlan(obj2)
-    const res8 = await delDistributionWPlan(obj8) //editDistributionWPlan(obj2)
+    const res3 = await delDistributionRPlan(obj3) //editDistributionWPlan(obj2)
+    const res4 = await delDistributionRPlan(obj4) //editDistributionWPlan(obj2)
+    const res5 = await delDistributionRPlan(obj5) //editDistributionWPlan(obj2)
+    const res6 = await delDistributionRPlan(obj6) //editDistributionWPlan(obj2)
+    const res7 = await delDistributionRPlan(obj7) //editDistributionWPlan(obj2)
+    const res8 = await delDistributionRPlan(obj8) //editDistributionWPlan(obj2)
     
 
     //1. сохранить все галочки и название проектов в массиве
@@ -7679,7 +7679,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
           type: type,
         }
         //сохранение рассылки в базе данных
-        const dataDistrib = await newDistributionW(message) 
+        const dataDistrib = await newDistributionR(message) 
         console.log("Рассылка: ", dataDistrib)      
       } 
     })
@@ -7708,7 +7708,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
           type: type,
         }
         //сохранение рассылки в базе данных
-        const dataDistrib2 = await newDistributionW(message)
+        const dataDistrib2 = await newDistributionR(message)
         console.log("Рассылка2: ", dataDistrib2)
       } 
     })
@@ -7737,7 +7737,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
           type: type,
         }
         //сохранение рассылки в базе данных
-        const dataDistrib3 = await newDistributionW(message)
+        const dataDistrib3 = await newDistributionR(message)
         console.log("Рассылка3: ", dataDistrib3)
       } 
     })
@@ -7766,7 +7766,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
           type: type,
         }
         //сохранение рассылки в базе данных
-        const dataDistrib4 = await newDistributionW(message)
+        const dataDistrib4 = await newDistributionR(message)
         console.log("Рассылка4: ", dataDistrib4)
       } 
     })
@@ -7795,7 +7795,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
           type: type,
         }
         //сохранение рассылки в базе данных
-        const dataDistrib5 = await newDistributionW(message)
+        const dataDistrib5 = await newDistributionR(message)
         console.log("Рассылка5: ", dataDistrib5)
       } 
     })
@@ -7824,7 +7824,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
           type: type,
         }
         //сохранение рассылки в базе данных
-        const dataDistrib6 = await newDistributionW(message)
+        const dataDistrib6 = await newDistributionR(message)
         console.log("Рассылка6: ", dataDistrib6)
       } 
     })
@@ -7853,7 +7853,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
           type: type,
         }
         //сохранение рассылки в базе данных
-        const dataDistrib7 = await newDistributionW(message)
+        const dataDistrib7 = await newDistributionR(message)
         console.log("Рассылка7: ", dataDistrib7)
       } 
     })
@@ -7882,7 +7882,7 @@ const clickShowEditTime8 = (t, ind, tab) => {
           type: type,
         }
         //сохранение рассылки в базе данных
-        const dataDistrib8 = await newDistributionW(message)
+        const dataDistrib8 = await newDistributionR(message)
         console.log("Рассылка8: ", dataDistrib8)
       } 
     })
