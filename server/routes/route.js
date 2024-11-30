@@ -76,7 +76,7 @@ route.post('/projectnew/add', getProjectNewCreate)
 route.post('/projectnew/update', getProjectNewUpdate)
 route.post('/projectnew/del', getProjectNewDel)
 
-// route.post("/file/upload", upload.single("photo"), uploadFile);
+route.post("/file/upload", upload.single("photo"), uploadFile);
 // route.post("/file/distrib", uploadDistrib.single("photo"), uploadFile);
 route.get("/file/:filename", getImage);
 
