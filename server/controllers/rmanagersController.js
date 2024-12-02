@@ -81,10 +81,10 @@ class RmanagersController {
                 return;
             }
 
-            const {username} = req.body
+            const {username, sfera} = req.body
 
             const newUser = await Manager.update(
-                { username },
+                { username, sfera },
                 { where: {chatId: id} })
             return res.status(200).json(newUser);
         } catch (error) {
