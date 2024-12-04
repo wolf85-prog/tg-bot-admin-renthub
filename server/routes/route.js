@@ -9,7 +9,7 @@ const { getProjects, getProjectsId, getProjectNew, getProjectNewId, getProjectNe
 const { uploadFile, getImage } = require( "../controllers/fileController.js")
 
 const { getRmanagers, getRmanager, editRmanager, 
-    getRManagerCount, updateManagers } = require( "../controllers/rmanagersController.js")
+    getRManagerCount, updateManagers, addRmanager } = require( "../controllers/rmanagersController.js")
 const { newMessageR,delMessageR, getAllMessagesR, getMessagesR, 
     getMessagesRCount, getMessagesR2 } = require( "../controllers/rmessageController.js")
 const { getUsersRenthub, getUserRenthub, editUserRenthub } = require( "../controllers/ruserbotController.js")
@@ -52,6 +52,7 @@ route.get('/managers/get', getRmanagers)
 route.get('/managers/get/:id', getRmanager)
 route.patch('/managers/update/:id', editRmanager)
 //route.get('/manager/block/:id', blockWorker)
+route.post("/managers/add", addRmanager);
 route.get('/managers/count/get/:count/:prev', getRManagerCount) //еще
 
 //----------------- Компании ---------------------------------

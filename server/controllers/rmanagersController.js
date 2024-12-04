@@ -92,6 +92,18 @@ class RmanagersController {
         }
     }
 
+    async addRmanager(req, res) {       
+        try {    
+
+            const {fio} = req.body
+
+            const newUser = await Manager.create({fio})
+            return res.status(200).json(newUser);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
     // async blockWorker(req, res) { 
     //     const {id} = req.params      
     //     try {    
