@@ -672,10 +672,10 @@ const onAddCategory = (e) => {
       //console.log("arrSelect: ", arrSelect)
     } else {
       clients.map((worker)=> {
-        worker.sfera && JSON.parse(worker.sfera).map((work) => {
+        worker.worklist && JSON.parse(worker.worklist).map((work) => {
           result2.map((cat)=> {
             //console.log(work.cat, cat)
-            if (work.name === cat) {
+            if (work.cat === cat) {
               arrSelect.push(worker.chatId)
               arrSelectAll.push(worker)
             } 
