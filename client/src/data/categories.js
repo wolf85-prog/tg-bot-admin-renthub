@@ -16,28 +16,28 @@ const categories = [
       value: '2',
     },
     {
-      label: 'Видео',
+      label: 'Видео / фото',
       name: 'Video',
       value: '3',
     },
     {
-      label: 'Сценические конструкции',
+      label: 'Сцена',
       name: 'Scena',
       value: '4',
     },
     {
-      label: 'Энергия',
+      label: 'Энергетика',
       name: 'Energy',
       value: '5',
     },
     {
-      label: 'Фотооборудование',
-      name: 'Photo',
+      label: 'Декорации',
+      name: 'Decor',
       value: '6',
     },
     {
-      label: 'Промоагенство',
-      name: 'Promo',
+      label: 'Грузоперевозки',
+      name: 'Stagehands',
       value: '7',
     },
     {
@@ -46,13 +46,13 @@ const categories = [
       value: '8',
     },
     {
-      label: 'Грузоперевозки',
-      name: 'Stagehands',
+      label: 'Игры и аттракционы',
+      name: 'Games',
       value: '9',
     },
     {
-      label: 'Промышленный альпинизм',
-      name: 'Riggers',
+      label: 'Промо / рекламное агентство',
+      name: 'Promo',
       value: '10',
     },
     {
@@ -66,44 +66,39 @@ const categories = [
       value: '12',
     },
     {
-      label: 'Игры и аттракционы',
-      name: 'Games',
+      label: 'Технический продакшн',
+      name: 'Production',
       value: '13',
     },
     {
-      label: 'Технический продакшн',
-      name: 'Production',
+      label: 'Продакшн артистов',
+      name: 'prodaction',
       value: '14',
-    },
-    {
-      label: 'Менеджер «U.L.E.Y»',
-      name: 'Manager',
-      value: '15',
     },
     {
       label: '__________________________',
       disabled: true,
-      value: '16',
+      value: '15',
     },
     {
       label: 'Вне категории',
       name: 'NoTag',
-      value: '17',
+      value: '16',
     },   
     {
       label: 'Удаленные',
       name: 'Delete',
-      value: '18',
+      value: '17',
     }, 
     {
-      label: 'Тест',
-      name: 'Test',
-      value: '19',
+      label: 'Менеджер «U.L.E.Y»',
+      name: 'Manager',
+      value: '18',
     },
     {
       label: 'Все',
       name: 'All',
-      value: '20',
+      value: '19',
     }, 
     
 ]
