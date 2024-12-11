@@ -56,13 +56,13 @@ const categories = [
       value: '10',
     },
     {
-      label: 'Продакшн артистов',
-      name: 'Party',
+      label: 'Event-агенство',
+      name: 'Event',
       value: '11',
     },
     {
-      label: 'Евент-менеджер',
-      name: 'Event',
+      label: 'Модельное агентство',
+      name: 'Models',
       value: '12',
     },
     {
@@ -72,7 +72,7 @@ const categories = [
     },
     {
       label: 'Продакшн артистов',
-      name: 'prodaction',
+      name: 'Trucks',
       value: '14',
     },
     {
