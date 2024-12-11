@@ -56,7 +56,7 @@ const categories = [
       value: '10',
     },
     {
-      label: 'Event-агенство',
+      label: 'Event-агентство',
       name: 'Event',
       value: '11',
     },
