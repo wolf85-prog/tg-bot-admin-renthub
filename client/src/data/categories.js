@@ -30,6 +30,7 @@ const categories = [
       name: 'Energy',
       value: '5',
     },
+
     {
       label: 'Декорации',
       name: 'Decor',
@@ -51,54 +52,60 @@ const categories = [
       value: '9',
     },
     {
-      label: 'Промо / рекламное агентство',
-      name: 'Promo',
+      label: 'Спецэффекты',
+      name: 'Speceffect',
       value: '10',
+    },
+
+    {
+      label: 'Модельное агентство',
+      name: 'Models',
+      value: '11',
     },
     {
       label: 'Event-агентство',
       name: 'Event',
-      value: '11',
-    },
-    {
-      label: 'Модельное агентство',
-      name: 'Models',
       value: '12',
     },
     {
+      label: 'Промо / рекламное агентство',
+      name: 'Promo',
+      value: '13',
+    }, 
+    {
       label: 'Технический продакшн',
       name: 'Production',
-      value: '13',
+      value: '14',
     },
     {
       label: 'Продакшн артистов',
       name: 'Trucks',
-      value: '14',
+      value: '15',
     },
     {
       label: '__________________________',
       disabled: true,
-      value: '15',
+      value: '16',
     },
     {
       label: 'Вне категории',
       name: 'NoTag',
-      value: '16',
+      value: '17',
     },   
     {
       label: 'Удаленные',
       name: 'Delete',
-      value: '17',
+      value: '18',
     }, 
     {
       label: 'Менеджер «U.L.E.Y»',
       name: 'Manager',
-      value: '18',
+      value: '19',
     },
     {
       label: 'Все',
       name: 'All',
-      value: '19',
+      value: '20',
     }, 
     
 ]
