@@ -28,7 +28,7 @@ import deleteIcon from 'src/assets/images/delete.png'
 import editIcon from 'src/assets/images/pencil.png'
 import copyIcon from 'src/assets/images/copy.png'
 import { useUsersContext } from "../chat-app-new/context/usersContext";
-import { delDistributionR, getDistributionsCountR, getPlan, newPlan } from 'src/http/renthubAPI';
+import { delDistributionR, getDistributionsCountR, getDistributionsRPlan, getPlan, newPlan } from 'src/http/renthubAPI';
 
 import MyModal from "../components/MyModal/MyModal";
 import Close from "../assets/images/close.svg"
@@ -212,12 +212,36 @@ const DistributionR = () => {
 
   const clickNext = async() => {
 
-    //1 все рассылки
-		let response = await getDistributionsCountR(100, distributionsRent.length);
-    console.log("distrib size: ", response.length)
+    const fetchData = async () => {
+			//1 все рассылки 20
+			let response = await getDistributionsCountR(100, distributionsRent.length);
+			//console.log("distributionW: ", response.length)
 
-    const arrayDistrib = []
-		
+			let response2 = await getDistributionsRPlan();
+			//console.log("distributionWPlan: ", response2.length)
+
+			//сортировка
+			const messageSort = [...response].sort((a, b) => {       
+				var dateA = new Date(a.datestart), dateB = new Date(b.datestart) 
+				return dateB-dateA  //сортировка по убывающей дате  
+			})
+
+			const messageSort2 = [...response2].sort((a, b) => {       
+				var dateA = new Date(a.datestart), dateB = new Date(b.datestart) 
+				return dateA-dateB  //сортировка по убывающей дате  
+			})
+
+			let all = [...messageSort2, ...messageSort]
+
+			setDistributionsRent(all)
+		}
+
+    //1 все рассылки
+		// let response = await getDistributionsCountR(100, distributionsRent.length);
+    // console.log("distrib size: ", response.length)
+
+    // const arrayDistrib = []
+		fetchData()
   }
 
   return (
