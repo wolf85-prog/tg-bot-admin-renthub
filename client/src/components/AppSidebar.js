@@ -113,7 +113,7 @@ const AppSidebar = () => {
       component: CNavLink,
       name: 'Менеджеры',
       //to: '/chat2',
-      onClick: ()=>handleLinkClick2(`${host}/chat2`),
+      onClick: ()=>handleLinkClick2(`${host}/chatwork`),
       icon: <img src={ChatIcon} style={{width: '21px', marginRight: '20px', marginLeft: '6px'}} />,
       badge: countMessage !== 0 ? {color: 'info', text: countMessage,} : "",
       style: {backgroundColor: '#0078d421', cursor: 'pointer'},
@@ -123,18 +123,18 @@ const AppSidebar = () => {
       component: CNavLink,
       name: 'Рассылки',
       //to: '/distribution',
-      onClick: ()=>handleLinkClick2(`${host}/distribution`),
+      onClick: ()=>handleLinkClick2(`${host}/distributionr`),
       icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
       style: {cursor: 'pointer'},
     },
     {
       component: CNavLink,
       name: 'Профиль',
-      //href: 'https://www.notion.so/amusienko/33fcbbc27387418685165c230762d66a?v=5bd43abe35da4c48893e45fb2f94c893',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
-      onClick: ()=>handleLinkClick('https://www.notion.so/amusienko/33fcbbc27387418685165c230762d66a?v=5bd43abe35da4c48893e45fb2f94c893'),
+      onClick: ()=>handleLinkClick2('https://proj.uley.team:3000/managers'),
       style: {cursor: 'pointer'},
     },
+    
     {
       component: CNavLink,
       name: 'Уведомления',
@@ -206,30 +206,28 @@ const AppSidebar = () => {
 
     {
       component: CNavItem,
-      name: 'Менеджеры 2.0',
-      to: '/chatwork',
+      name: 'Архив',
+      onClick: ()=>handleLinkClick2(`${host}/chat2`),
       icon: <img src={ChatIcon} style={{width: '21px', marginRight: '20px', marginLeft: '6px'}} />,
       badge: countMessageRent !== 0 ? {color: 'info', text: countMessageRent,} : "",
       style: {backgroundColor: '#0078d421', color: '#e55353', cursor: 'pointer'},
     },
     
-    {
-      component: CNavItem,
-      name: 'Рассылки',
-      to: '/distributionr',
-      icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
-      style: {color: '#e55353'},
-    },
-    {
-      component: CNavItem,
-      name: 'Уведомления',
-      to: '/managers',
-      icon: <CIcon icon={cilBell} customClassName="nav-icon" />,
-      badge: countProjects !== 0 ? {color: 'info', text: countProjects,} : "",
-      style: {color: '#e55353'},
-    },
-
-    
+    // {
+    //   component: CNavItem,
+    //   name: 'Рассылки',
+    //   to: '/distributionr',
+    //   icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
+    //   style: {color: '#e55353'},
+    // },
+    // {
+    //   component: CNavItem,
+    //   name: 'Уведомления',
+    //   to: '/managers',
+    //   icon: <CIcon icon={cilBell} customClassName="nav-icon" />,
+    //   badge: countProjects !== 0 ? {color: 'info', text: countProjects,} : "",
+    //   style: {color: '#e55353'},
+    // },
     
   ]
 
