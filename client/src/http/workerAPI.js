@@ -177,7 +177,7 @@ export const getWConversations= async ()=>{
 // message
 export const newMessage = async (data) =>{
     try {
-        await $host.post(`api/wmessage/add`, data); 
+        await $host.post(`api/message/add`, data); 
     } catch (error) {
         console.log("error while calling newMessage api",error.message);
     }
@@ -185,7 +185,7 @@ export const newMessage = async (data) =>{
 
 export const delWMessage = async (id) =>{
     try {
-        await $host.delete(`api/wmessage/delete/${id}`); 
+        await $host.delete(`api/message/delete/${id}`); 
     } catch (error) {
         console.log("error while calling delMessage api",error.message);
     }
@@ -196,7 +196,7 @@ export const getWMessages = async(id)=>{
     try {
         let response
         if (id !== null) {
-            response = await $host.get(`api/wmessage/get/${id}`);
+            response = await $host.get(`api/message/get/${id}`);
         } else {
             return [] 
         }
@@ -212,7 +212,7 @@ export const getWMessages2 = async(id, count, prev)=>{
     try {
         let response
         if (id !== null) {
-            response = await $host.get(`api/wmessage2/get/${id}/${count}/${prev}`);
+            response = await $host.get(`api/message2/get/${id}/${count}/${prev}`);
         } else {
             return [] 
         }
@@ -226,7 +226,7 @@ export const getWMessages2 = async(id, count, prev)=>{
 
 export const getAllWMessages = async()=>{
     try {
-        let response= await $host.get(`api/wmessage/get`);
+        let response= await $host.get(`api/message/get`);
         
         return response.data;
     } catch (error) {
@@ -237,7 +237,7 @@ export const getAllWMessages = async()=>{
 
 export const getWMessagesCount = async(count)=>{
     try {
-        let response= await $host.get(`api/wmessage/get/count/${count}`);
+        let response= await $host.get(`api/message/get/count/${count}`);
         
         return response.data;
     } catch (error) {

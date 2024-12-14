@@ -93,7 +93,7 @@ const Sidebar = () => {
 				<div className="sidebar__avatar-wrapper">
 					<img src={avatar} alt='U.L.E.Y' className="avatar-adm" />
 				</div>
-				<div>Менеджеры 2.0</div>
+				<div>Менеджеры</div>
 				<div className="sidebar__actions">
 					<OptionsBtn
 						className="sidebar__action"

@@ -12,7 +12,8 @@ import Profile from "./components/Profile";
 import Convo from "./components/Convo";
 import { useUsersContext } from "./../../../chat-app-new/context/usersContext";
 import { AccountContext } from './../../../chat-app-new/context/AccountProvider';
-import { newMessage, uploadFile } from "src/http/workerAPI";
+import { uploadFile } from "src/http/workerAPI";
+import { newRMessage } from "src/http/renthubAPI";
 import { newCountWMessage, getCountMessage } from "src/http/adminAPI";
 import { $host } from './../../../http/index'
 import sendSound from './../../../chat-app-new/assets/sounds/sendmessage.mp3';
@@ -364,7 +365,7 @@ const Chat = () => {
 			console.log("message send: ", message);
 
 			//сохранение сообщения в базе данных
-			await newMessage(message)	
+			await newRMessage(message)	
 		}
 	}
 
@@ -425,7 +426,7 @@ const Chat = () => {
 		// console.log("message send: ", message);
 	
 		//сохранение сообщения в базе данных
-		await newMessage(message)
+		await newRMessage(message)
 	
 		//сохранить в контексте
 		addNewMessage(user.chatId, text, 'text', 'Согласен предоставить персональные данные', client.conversationId, sendToTelegram.data.result.message_id);
@@ -516,7 +517,7 @@ https://t.me/ULEY_Office_Bot
 			
 	
 		//сохранение сообщения в базе данных
-		await newMessage(message)
+		await newRMessage(message)
 	
 		//сохранить в контексте
 		addNewMessage(user.chatId, 'Сценарий "Первый проект"', 'text', '', client.conversationId, sendToTelegram.data.result.message_id);
@@ -562,7 +563,7 @@ https://t.me/ULEY_Office_Bot
 			
 	
 		//сохранение сообщения в базе данных
-		await newMessage(message)
+		await newRMessage(message)
 	
 		//сохранить в контексте
 		addNewMessage(user.chatId, poster, 'image', '', client.conversationId, sendToTelegram.data.result.message_id);
