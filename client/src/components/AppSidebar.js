@@ -131,7 +131,7 @@ const AppSidebar = () => {
       component: CNavLink,
       name: 'Профиль',
       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
-      onClick: ()=>handleLinkClick2('https://proj.uley.team:3000/managers'),
+      onClick: ()=>handleLinkClick2(`${host}/managers`),
       style: {cursor: 'pointer'},
     },
     
