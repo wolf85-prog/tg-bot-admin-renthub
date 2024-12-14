@@ -110,20 +110,20 @@ const AppSidebar = () => {
 
 
     {
-      component: CNavLink,
+      component: CNavItem,
       name: 'Менеджеры',
-      //to: '/chat2',
-      onClick: ()=>handleLinkClick2(`${host}/chatrent`),
+      to: '/chatrent',
+      //onClick: ()=>handleLinkClick2(`${host}/chatrent`),
       icon: <img src={ChatIcon} style={{width: '21px', marginRight: '20px', marginLeft: '6px'}} />,
       badge: countMessage !== 0 ? {color: 'info', text: countMessage,} : "",
       style: {backgroundColor: '#0078d421', cursor: 'pointer'},
     },
     
     {
-      component: CNavLink,
+      component: CNavItem,
       name: 'Рассылки',
-      //to: '/distribution',
-      onClick: ()=>handleLinkClick2(`${host}/distributionr`),
+      to: '/distributionr',
+      //onClick: ()=>handleLinkClick2(`${host}/distributionr`),
       icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
       style: {cursor: 'pointer'},
     },
@@ -136,10 +136,10 @@ const AppSidebar = () => {
     },
     
     {
-      component: CNavLink,
+      component: CNavItem,
       name: 'Уведомления',
-      onClick: ()=>handleLinkClick2(`${host}/notifications`),
-      //to: '/notifications',
+      //onClick: ()=>handleLinkClick2(`${host}/notifications`),
+      to: '/notifications',
       icon: <CIcon icon={cilBell} customClassName="nav-icon" />,
       badge: countProjects !== 0 ? {color: 'info', text: countProjects,} : "",
       style: {cursor: 'pointer'},
