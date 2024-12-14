@@ -154,7 +154,7 @@ const AppSidebar = () => {
     {
       component: CNavLink,
       name: 'Специалисты',
-      onClick: ()=>handleLinkClick2(`${host}/chatrent`),
+      onClick: ()=>handleLinkClick2(`${host}/chatwork`),
       icon: <img src={ChatIcon} style={{width: '21px', marginRight: '20px', marginLeft: '6px'}} />,
       badge: countMessageWork !== '0' ? {color: 'info', text: countMessageWork,} : "",
       style: {backgroundColor: '#0078d421', cursor: 'pointer'},
