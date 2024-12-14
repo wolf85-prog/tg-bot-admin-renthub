@@ -14,7 +14,7 @@ const routes = [
   // { path: '/dashboard', name: 'Пункт управления / ', Component: Admin },
   // { path: "/chat", name: 'Чаты', Component: Chats },
   // { path: "/chat2", name: 'Чаты 2.0', Component: Chats2 },
-  { path: "/chatwork", name: 'Workhub', Component: ChatWorker }, 
+  { path: "/chatrent", name: 'Renthub', Component: ChatWorker }, 
   { path: "/managers", name: 'Renthub / Уведомления', Component: Managers },
   { path: '/distributionr', name: 'Renthub / Рассылки', Component: DistributionR },
   { path: '/distributionr_add', name: 'Renthub / Рассылки', Component: DistributionAddR },
