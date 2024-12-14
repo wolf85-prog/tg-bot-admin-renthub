@@ -461,7 +461,7 @@ const UsersProvider = ({ children }) => {
 		//const kol = await getCountMessage()
 		setCountMessageRent(count+1)
 		//const res = await newCountMessage(kol.managers + 1)
-		console.log("Пришло новое сообщение в renthub: ", count + 1)
+		//console.log("Пришло новое сообщение в renthub: ", count + 1)
 		//setShowGetMess(true)
 
 
@@ -471,13 +471,21 @@ const UsersProvider = ({ children }) => {
 	
 		}
 		else {
-			console.log("Пришло новое сообщение: ", count+1)
+			console.log("Пришло новое сообщение в renthub: ", count+1)
 			//play sound
-			
+			const savedVolume = localStorage.getItem("soundVolume");
+			const savedMute = localStorage.getItem("soundMute");
+
+			if (savedMute === 'false') {
+				console.log("savedMute: ", savedMute)
+				audioMessage.volume = parseFloat(savedVolume)
+				audioMessage.play();
+			}
+
 			//пришло новое сообщение
 			
 			//const res = await newCountWMessage(kol.workers + 1)
-			console.log("Пришло новое сообщение в workhub: ", count + 1)
+			//console.log("Пришло новое сообщение в workhub: ", count + 1)
 
 		}
 
