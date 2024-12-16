@@ -1,6 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const sequelize = require('./db')
+const {Conversation} = require("./models/renthub");
 const {Plan, Distributionw, Reportdistribw} = require('./models/models')
 const { Op } = require('sequelize')
 const cors = require('cors')
@@ -21,7 +22,6 @@ const axios = require("axios");
 //socket.io
 const {io} = require("socket.io-client")
 const socketUrl = process.env.SOCKET_APP_URL
-
 
 let tasks = []
 

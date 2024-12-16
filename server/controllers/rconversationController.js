@@ -1,4 +1,4 @@
-const {Conversation} = require("../models/renthub");
+const {Conversationr} = require("../models/renthub");
 const { Op } = require('sequelize')
 const ApiError = require('../error/ApiError')
 
@@ -10,7 +10,7 @@ class RconversationController {
             const {senderId, receiverId} = req.body
 
             //найти беседу
-            const exist = await Conversation.findOne({
+            const exist = await Conversationr.findOne({
                 where: { 
                     members: {
                         [Op.contains]: [senderId]
@@ -34,7 +34,7 @@ class RconversationController {
         try {
             const chatId = req.params.id
     
-            const conversation = await Conversation.findOne({
+            const conversation = await Conversationr.findOne({
                 where: {
                     members: {
                         [Op.contains]: [chatId]
@@ -49,7 +49,7 @@ class RconversationController {
 
     async getConversationsR(req, res) {  
         try {   
-            const conversations = await Conversation.findAll({
+            const conversations = await Conversationr.findAll({
                 order: [
                     ['id', 'DESC'],
                 ],
