@@ -19,7 +19,7 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 	const { personW } = useContext(AccountContext);
 	
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID 
-	const tokenR = process.env.REACT_APP_TELEGRAM_API_TOKEN_PROJECT
+	const tokenR = process.env.REACT_APP_TELEGRAM_API_TOKEN_RENTHUB
 
 	const [showImage, setShowImage] = useState([false])
 	const [loading, setLoading]= useState(false);
