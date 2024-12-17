@@ -636,7 +636,7 @@ const UsersProvider = ({ children }) => {
 		socket.on("getMessageRent", fetchMessageRentResponse);
 		
 		socket.on("getAdminRent", fetchAdmin);	
-		socket.on("getDelAdmin", fetchDelAdmin);
+		socket.on("getDelAdminRent", fetchDelAdminRent);
 		
 		socket.on("getNotifRent", fetchNotifAdmin);
 		
@@ -678,6 +678,26 @@ const UsersProvider = ({ children }) => {
 			isBot: isBot,
 		})
 	};
+
+	//получить исходящее сообщение в админку
+	const fetchDelAdminRent = (data) => {
+		console.log("Удаление сообщение в Админке: ", data)
+
+		setUserRenthub((userRenthub) => {
+			const { messageId, messageDate, chatId } = data;
+
+			let userIndex = userRenthub.findIndex((user) => user.chatId === chatId);
+			const usersCopy = JSON.parse(JSON.stringify(userRenthub));
+
+			const messageIndex = usersCopy[userIndex].messages[messageDate].map(el => el.id).lastIndexOf(messageId);
+			usersCopy[userIndex].messages[messageDate].splice(messageIndex, 1); 
+
+			const userObject = usersCopy[userIndex];
+			const userSort = [...usersCopy]
+
+			return userSort;
+		});
+	}
 
 
 	//удалить сообщение из админки renthub
