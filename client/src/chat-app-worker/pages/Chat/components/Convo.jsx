@@ -11,6 +11,7 @@ import { AccountContext } from './../../../../chat-app-new/context/AccountProvid
 import { useUsersContext } from "../../../../chat-app-new/context/usersContext";
 import { $host } from './../../../../http/index'
 import { delWMessage, getWMessages2 } from "src/http/workerAPI";
+import { getRMessages } from "src/http/renthubAPI";
 import Dropdown from 'react-bootstrap/Dropdown';
 import imageIcon from "./../../../assets/images/sp-i-m-image-placeholder.svg";
 
@@ -18,7 +19,7 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 	const { personW } = useContext(AccountContext);
 	
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID 
-	const tokenW = process.env.REACT_APP_TELEGRAM_API_TOKEN_WORK
+	const tokenR = process.env.REACT_APP_TELEGRAM_API_TOKEN_PROJECT
 
 	const [showImage, setShowImage] = useState([false])
 	const [loading, setLoading]= useState(false);
@@ -34,7 +35,7 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 	let replyMessage;
 	let array = []
 
-	const { delWMessageContext } = useUsersContext();
+	const { delMessageContext } = useUsersContext();
 
 	useEffect(() => {
 		setDates(Object.keys(allMessages))  //['01/01/2023', 'Сегодня']
@@ -256,12 +257,12 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 		console.log("message: ", message)
 
 		//удалить сообщение через сокет
-		delWMessageContext(message.id, message.date, message.chatId)
+		delMessageContext(message.id, message.date, message.chatId)
 
 		//удалить сообщение в базе данных
-		await delWMessage(message.id)
+		await getRMessages(message.id)
 
-		const url_del_msg = `https://api.telegram.org/bot${tokenW}/deleteMessage?chat_id=${personW.id}&message_id=${message.id}`
+		const url_del_msg = `https://api.telegram.org/bot${tokenR}/deleteMessage?chat_id=${personW.id}&message_id=${message.id}`
 
 		const delToTelegram = await $host.get(url_del_msg);
 
