@@ -679,8 +679,10 @@ const UsersProvider = ({ children }) => {
 		})
 	};
 
-	const delMessageContext = (messageId, messageDate, chatId) => {
-		socket.emit("delAdmin", { 
+
+	//удалить сообщение из админки renthub
+	const delRMessageContext = (messageId, messageDate, chatId) => {
+		socket.emit("delAdminRent", { 
 			messageId,
 			messageDate,
 			chatId,
@@ -773,7 +775,7 @@ function isObjectEmpty(obj) {
 			contacts,
 			setContacts,
 			addNewMessage,
-			delMessageContext,
+			delRMessageContext,
 			addNewName,
 			addNewAvatar,
 			usersOnline,

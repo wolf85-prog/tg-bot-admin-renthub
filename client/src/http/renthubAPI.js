@@ -154,7 +154,7 @@ export const getRMessages = async(id)=>{
          
         return response.data;
     } catch (error) {
-        console.log("error while calling getMessages api",error.message);
+        console.log("error while calling getRMessages api",error.message);
         
     }
 }

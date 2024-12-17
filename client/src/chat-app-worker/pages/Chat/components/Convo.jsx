@@ -10,8 +10,8 @@ import formatTime from "./../../../../chat-app-new/utils/formatTime";
 import { AccountContext } from './../../../../chat-app-new/context/AccountProvider';
 import { useUsersContext } from "../../../../chat-app-new/context/usersContext";
 import { $host } from './../../../../http/index'
-import { delWMessage, getWMessages2 } from "src/http/workerAPI";
-import { getRMessages } from "src/http/renthubAPI";
+import { getWMessages2 } from "src/http/workerAPI";
+import { delRMessage } from "src/http/renthubAPI";
 import Dropdown from 'react-bootstrap/Dropdown';
 import imageIcon from "./../../../assets/images/sp-i-m-image-placeholder.svg";
 
@@ -35,7 +35,7 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 	let replyMessage;
 	let array = []
 
-	const { delMessageContext } = useUsersContext();
+	const { delRMessageContext } = useUsersContext();
 
 	useEffect(() => {
 		setDates(Object.keys(allMessages))  //['01/01/2023', 'Сегодня']
@@ -257,10 +257,10 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 		console.log("message: ", message)
 
 		//удалить сообщение через сокет
-		delMessageContext(message.id, message.date, message.chatId)
+		delRMessageContext(message.id, message.date, message.chatId)
 
 		//удалить сообщение в базе данных
-		await getRMessages(message.id)
+		await delRMessage(message.id)
 
 		const url_del_msg = `https://api.telegram.org/bot${tokenR}/deleteMessage?chat_id=${personW.id}&message_id=${message.id}`
 
