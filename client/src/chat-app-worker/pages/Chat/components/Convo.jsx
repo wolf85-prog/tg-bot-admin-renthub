@@ -6,6 +6,7 @@ import { CSpinner } from '@coreui/react'
 // import pdf from "./../../../assets/images/PDFicon.png";
 import docIcon from "./../../../../chat-app-new/assets/images/DOCicon.jpg";
 import xlsIcon from "./../../../../chat-app-new/assets/images/XLSicon.png";
+import pdf from "./../../../../chat-app-new/assets/images/PDFicon.png";
 import formatTime from "./../../../../chat-app-new/utils/formatTime";
 import { AccountContext } from './../../../../chat-app-new/context/AccountProvider';
 import { useUsersContext } from "../../../../chat-app-new/context/usersContext";
