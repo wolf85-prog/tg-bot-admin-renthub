@@ -73,6 +73,7 @@ const DistributionAddR = () => {
   const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
   const webAppAddStavka = process.env.REACT_APP_WEBAPP_STAVKA
   const hostServer = process.env.REACT_APP_API_URL
+  const hostServerOld = process.env.REACT_APP_API_URL_OLD
   const hostServerTest = process.env.REACT_APP_ADMIN_API_URL_TEST
 
   const { userRenthub: clients, workersAll, projectsNew } = useUsersContext();
@@ -470,18 +471,18 @@ const onHandlingProject = async(projectId, save, projects, uuidProj) => {
 const clickProjects = async() => {
   const fetchData = async () => {
     let projects2 = await getProjectNewCash();
-    let projects3 = await getProjectCash();
+    //let projects3 = await getProjectCash();
     //console.log("projects3: ", projects3)
     setProjects(projects2)
 
     console.log("Загрузка проектов из БД ...")
     try {  
         //notion
-        const projects = await getProjectNewDate()
+        const projects = await getProjectNew()
         console.log("projects: ", projects)  
 
-        const projectsNew = await getProjectNew()
-        console.log("projectsNew: ", projectsNew)
+        //const projectsNew = await getProjectNew()
+        //console.log("projectsNew: ", projectsNew)
 
         //добавление новых проектов
         if (projects && projects.length > 0) {
@@ -507,16 +508,16 @@ const clickProjects = async() => {
             })
 
             //удаление старых проектов
-            projectsNew.map(async(project, index)=> {
-                const projectOld = projects.find(item => item.id === project.id)
-                //console.log("projectOld: ", projectOld)
-                if (projectOld === undefined) {
-                    await getProjectNewDel({
-                            id: project.id,
-                        })
-                    console.log("Удаленный проект: ", index)
-                }
-            })
+            // projectsNew.map(async(project, index)=> {
+            //     const projectOld = projects.find(item => item.id === project.id)
+            //     //console.log("projectOld: ", projectOld)
+            //     if (projectOld === undefined) {
+            //         await getProjectNewDel({
+            //                 id: project.id,
+            //             })
+            //         console.log("Удаленный проект: ", index)
+            //     }
+            // })
         }  
 
     } catch (error) {

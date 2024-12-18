@@ -4,6 +4,10 @@ const $host = axios.create({
     baseURL: process.env.REACT_APP_API_URL
 })
 
+const $host_old = axios.create({
+    baseURL: process.env.REACT_APP_API_URL_OLD
+})
+
 const $host_bot = axios.create({
     baseURL: process.env.REACT_APP_ADMIN_API_URL
 })
@@ -37,6 +41,7 @@ $authHost.interceptors.request.use(authInterceptor)
 
 export {
     $host,
+    $host_old,
     $host_bot,
     $host_bottest,
     $host_worker,

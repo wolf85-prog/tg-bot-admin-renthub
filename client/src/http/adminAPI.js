@@ -1,4 +1,4 @@
-import {$authHost, $host, $host_bot, $host_bottest, $host_call} from "./index";
+import {$authHost, $host, $host_bot, $host_bottest, $host_call, $host_old} from "./index";
 
 
 export const getManagers = async () =>{
@@ -139,7 +139,7 @@ export const addTimer = async (data) => {
 
 export const getProjectNew = async () => {
     try {
-        let response =  await $host.get(`api/projectnew/get`);
+        let response =  await $host_old.get(`api/projectnew/get`);
         //console.log("planAPI: ", response.data);
         return response.data;
     } catch (error) {
