@@ -334,20 +334,18 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 								: undefined;
 						return (
 							<>
-								{message.image 
-								? (	//картинки
+								{message.image ? (	//картинки		
 									<div
 										className={`chat__msg chat__img-wrapper ${
 											message.sender !== chatAdminId ? "chat__msg_img--rxd" : "chat__msg_img--sent"
 										}`}
 										ref={assignRef()}
 									>
-										{message.content.endsWith('.pdf') 
-										? ( //pdf
-										<figure>
-											{/* <img src={pdf} width={30}/>
-											<a href={message.content} target="_blank" rel="noreferrer">{message.content}</a>*/}
-											<iframe src={message.content} height="235px" width="100%" title="myFramePdf"/>
+										{message.content.endsWith('.pdf') ? ( //pdf		
+										<figure >
+											<img src={pdf} width={30}/>
+											<a href={message.content} target="_blank" rel="noreferrer">{message.content}</a>
+											{/* <iframe src={message.content} height="235px" width="100%" title="myFramePdf"/> */}
 										</figure>) : 
 											message.content.endsWith('.xlsx') 
 											? <figure> 
