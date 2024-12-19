@@ -70,16 +70,11 @@ const Conversation = sequelize.define('conversation', {
     members: {type: DataTypes.ARRAY(DataTypes.STRING)},
 })
 
-const Conversationr = sequelize.define('conversationr', {
-    members: {type: DataTypes.ARRAY(DataTypes.STRING)},
-})
-
 
 module.exports = {
     UserBot, 
     Message, 
     Conversation, 
-    Conversationr,
     Manager,
     Company,
 }
