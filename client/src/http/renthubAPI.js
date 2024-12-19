@@ -1,8 +1,8 @@
-import {$authHost, $host, $host_renthub} from "./index";
+import {$authHost, $host, $host_renthub, $host_old} from "./index";
 
 export const getRUserbot = async () =>{
     try {
-       let response = await $host.get('api/userbots/get');
+       let response = await $host_old.get('api/userbots/get');
        return response.data;
     } catch (error) {
         console.log("error while calling getWorkers api", error.message);
