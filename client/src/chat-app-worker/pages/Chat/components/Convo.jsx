@@ -347,6 +347,34 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 											<img src={pdf} width={30}/>
 											<a href={message.content} target="_blank" rel="noreferrer">{message.content.includes("pre") ? "Предварительная смета" : (message.content.includes("final") ? "Финальная смета" : message.content) }</a>
 											{/* <iframe src={message.content} height="235px" width="100%" title="myFramePdf"/> */}
+											
+											{/* footer */}
+											<span className="chat__msg_img-footer">
+													<span>{formatTime(message.time)}</span>
+														{!message.sender && (
+															<Icon
+																id={
+																	message?.status === "sent"
+																		? "singleTick"
+																		: "doubleTick"
+																}
+																aria-label={message?.status}
+																className={`chat__msg-status-icon ${
+																	message?.status === "read"
+																		? "chat__msg-status-icon--blue"
+																		: ""
+																}`}
+															/>
+														)}
+												</span>
+
+												<Dropdown onSelect={change}>
+													<Dropdown.Toggle as={CustomToggleBottom} id="dropdown-custom-components">											
+													</Dropdown.Toggle>
+													<Dropdown.Menu as={CustomMenuBottom}>
+													<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: personW.id})}>Удалить</Dropdown.Item>
+													</Dropdown.Menu>
+												</Dropdown>	
 										</figure>) : 
 											message.content.endsWith('.xlsx') 
 											? <figure> 
