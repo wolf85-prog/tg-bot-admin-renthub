@@ -630,12 +630,17 @@ const onAddCategory = (e) => {
         arrSelectAll.push(worker)
       })
       //console.log("arrSelect: ", arrSelect)
+    } else if (cat_name === 'Delete') {
+      console.log("Удаленные", delNotWorkers.length)
+      delNotWorkers.map((worker)=> {
+        arrSelect.push(worker.chatId)
+      })
     } else {
       clients.map((worker)=> {
         worker.worklist && JSON.parse(worker.worklist).map((work) => {
           result2.map((cat)=> {
             //console.log(work.cat, cat)
-            if (work.cat === cat) {
+            if (work.cat === cat || work.cat === "Менеджер «U.L.E.Y»" || worker.deleted === true) {
               arrSelect.push(worker.chatId)
               arrSelectAll.push(worker)
             } 
