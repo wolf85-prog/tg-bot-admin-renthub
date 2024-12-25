@@ -640,7 +640,7 @@ const onAddCategory = (e) => {
         worker.worklist && JSON.parse(worker.worklist).map((work) => {
           result2.map((cat)=> {
             //console.log(work.cat, cat)
-            if (work.cat === cat || work.cat === "Менеджер «U.L.E.Y»" || worker.deleted === true) {
+            if (work.cat === cat || work.cat === "Менеджер «U.L.E.Y»") {
               arrSelect.push(worker.chatId)
               arrSelectAll.push(worker)
             } 
