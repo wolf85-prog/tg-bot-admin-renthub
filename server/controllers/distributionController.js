@@ -626,30 +626,14 @@ class DistributionController {
                             });
                         }
 
-                        let keyboard2
-
-                        if (stavkaButton) {
-                            keyboard2 = JSON.stringify({
+                        let keyboard2 = JSON.stringify({
                             inline_keyboard: [
                                 [
-                                    {"text": 'Принять', callback_data:'/accept ' + valueProject},
-                                    {"text": 'Отклонить', callback_data:'/cancel ' + valueProject},
-                                ],
-                                [
-                                    {"text": "Предложить свою ставку", web_app: {url: webAppAddStavka + '/' + valueProject}},
+                                    {"text": 'Vk', url: 'https://vk.com/uley.team'},
+                                    {"text": 'Telegram', url: 'https://t.me/uley_team'},
                                 ],
                             ]
-                            });
-                        } else {
-                            keyboard2 = JSON.stringify({
-                            inline_keyboard: [
-                                [
-                                    {"text": 'Принять', callback_data:'/accept ' + valueProject},
-                                    {"text": 'Отклонить', callback_data:'/cancel ' + valueProject},
-                                ],
-                            ]
-                            });
-                        }
+                        });
         
                         //отправить в телеграмм
                         let sendTextToTelegram
@@ -699,7 +683,7 @@ class DistributionController {
                                 )
                             }                    
                         } else {
-                            url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${image}&reply_markup=${editButton ? keyboard : keyboard2}`
+                            url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${image}&reply_markup=${keyboard2}`
                             console.log("url_send_photo2: ", url_send_photo)
 
                             sendPhotoToTelegram = await $host.get(url_send_photo)

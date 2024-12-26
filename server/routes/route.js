@@ -97,7 +97,7 @@ route.patch('/distributionsrall/update/:id', editDistribRAll)
 route.post('/distributionr/plan/update', editDistribRPlan)
 
 route.get('/distributionsr/send/:id', sendDistribR)
-route.get('/distributionsw/custom/send/:id', sendDistribR2)
+route.get('/distributionsr/custom/send/:id', sendDistribR2)
 
 route.get('/distributionr/delmessages/:id', delMessagesDistribR)
 
