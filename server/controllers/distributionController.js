@@ -672,15 +672,15 @@ class DistributionController {
                                 arrUsers[index-1].mess = sendTextToTelegram.data?.result?.message_id 
 
                                 //обновить бд рассылку
-                                const newDistrib = await Distribution.update(
-                                    {   
-                                        delivered: true,
-                                        deleted: false,  
-                                        report: JSON.stringify(arrUsers),  
-                                        success: countSuccess
-                                    },
-                                    { where: {id: id} }
-                                )
+                                // const newDistrib = await Distribution.update(
+                                //     {   
+                                //         delivered: true,
+                                //         deleted: false,  
+                                //         report: JSON.stringify(arrUsers),  
+                                //         success: countSuccess
+                                //     },
+                                //     { where: {id: id} }
+                                // )
                             }                    
                         } else {
                             url_send_photo = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${image}&reply_markup=${keyboard2}`
@@ -712,12 +712,12 @@ class DistributionController {
                                 arrUsers[index-1].mess = sendPhotoToTelegram.data?.result?.message_id   
 
                                 //обновить бд рассылку
-                                const newDistrib = await Distribution.update(
-                                    { delivered: true,
-                                        report: JSON.stringify(arrUsers),  
-                                        success: countSuccess},
-                                    { where: {id: id} }
-                                )
+                                // const newDistrib = await Distribution.update(
+                                //     { delivered: true,
+                                //         report: JSON.stringify(arrUsers),  
+                                //         success: countSuccess},
+                                //     { where: {id: id} }
+                                // )
                             }
                         }
                     
@@ -757,10 +757,10 @@ class DistributionController {
                         if(!image) {
                             // Подключаемся к серверу socket
                             let socket = io(socketUrl);
-                            socket.emit("addUser", user)
+                            //socket.emit("addUser", user)
                             
                             //отправить сообщение в админку
-                            socket.emit("sendAdminSpec", { 
+                            socket.emit("sendAdminRent", { 
                                 senderId: chatAdminId,
                                 receiverId: user,
                                 text: text,
@@ -776,7 +776,7 @@ class DistributionController {
                             //socket.emit("addUser", user)
                             
                             //отправить сообщение в админку
-                            socket.emit("sendAdminSpec", { 
+                            socket.emit("sendAdminRent", { 
                                 senderId: chatAdminId,
                                 receiverId: user,
                                 text: image,
@@ -788,6 +788,17 @@ class DistributionController {
                             })
                         }
                     }  
+
+                    if (index === (selected.length)) {
+                        //обновить бд рассылку
+                        const newDistrib = await Distribution.update(
+                            { delivered: true,
+                                report: JSON.stringify(arrUsers),  
+                                success: countSuccess},
+                            { where: {id: id} }
+                        )
+                        console.log("newDistrib: ", newDistrib)
+                    }
 
                 }, 1000 * ++index) 
 
