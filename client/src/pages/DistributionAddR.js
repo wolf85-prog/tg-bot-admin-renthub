@@ -1786,8 +1786,15 @@ const onChangeSelectCity = (e) => {
                                         }             
                                       </div>
                                       <div>
-                                        <CButton color="primary"  onClick={onSendText}>Разослать сейчас</CButton>
-                              
+                                        {/* <CButton color="primary"  onClick={onSendText}>Разослать сейчас</CButton> */}
+                                        {planShow ? 
+                                          <CButton color="primary"  onClick={onSendText}>Разослать сейчас</CButton>
+                                          :<Link to={''} state={{ project: `${proj}`, }}>
+                                            <CButton color="secondary">
+                                              {showUpload ? <CSpinner style={{width: '20px', height: '20px'}}/> : 'Разослать сейчас'}
+                                              </CButton>
+                                          </Link>
+                                        }
                                         
                                         <CModal alignment="center" visible={visibleModal} onClose={() => setVisibleModal(false)}>
                                           <CModalHeader>
