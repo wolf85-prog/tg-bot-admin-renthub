@@ -251,7 +251,7 @@ class DistributionController {
 
 
     //send message
-    async sendDistribR2(req, res) {
+    async sendDistribR(req, res) {
         const {id} = req.params  
         let arrUsers = []
         let countSuccess = 0
@@ -533,7 +533,7 @@ class DistributionController {
         }
     }
 
-    async sendDistribR(req, res) {
+    async sendDistribR2(req, res) {
         const {id} = req.params  
         let arrUsers = []
         let countSuccess = 0

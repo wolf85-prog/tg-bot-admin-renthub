@@ -1221,8 +1221,8 @@ const onChangeSelectCity = (e) => {
       console.log("distrNew: ", distrNew?.id)
       //console.log(hostServerTest + 'distributionsw/send/' + distrNew.id +'&'+ typeFile)
       
-      //const res = await $host.get(hostServer + 'api/distributionsr/send/' + distrNew?.id); 
-      const res = await $host.get(hostServer + 'api/distributionsr/custom/send/' + distrNew?.id); 
+      const res = await $host.get(hostServer + 'api/distributionsr/send/' + distrNew?.id); 
+      //const res = await $host.get(hostServer + 'api/distributionsr/custom/send/' + distrNew?.id); 
       
       //const res = await $host.get(hostServer + 'distributionsr/send/' + distrNew?.id +'/'+ typeFile);
       //const res = await $host_bottest.get(hostServerTest + 'distributionsw/send/' + distrNew.id);
