@@ -184,7 +184,8 @@ const UsersProvider = ({ children }) => {
 				//поиск компании по id
 				let compName = ''
 				if (comps && user.companyId) {
-					compName = comps.find(item=> item.id === parseInt(user.companyId) || item.GUID === user.companyId)
+					//compName = comps.find(item=> item.id === parseInt(user.companyId) || item.GUID === user.companyId)
+					compName = comps.find(item=>user.companyId !== null && (item.id.toString() === user.companyId || item.GUID === user.companyId))
 					console.log("compName: ", compName?.title)
 				}	
 
