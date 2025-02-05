@@ -56,7 +56,7 @@ const Sidebar = () => {
 			if (arr.length === CountWorkers)
 			  break;
 		}
-		const filteredData = userRenthub.filter(user=> (user.name+user.chatId+user.phone)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
+		const filteredData = userRenthub.filter(user=> (user.name + user.chatId + user.phone + user.company + user.username)?.replace(/[её]/g, '(е|ё)').toLowerCase().includes(text.replace(/[её]/g, '(е|ё)').toLowerCase()));
         
 		setContacts(text === '' ? arr : filteredData);      
     }, [text]);
