@@ -362,8 +362,8 @@ class DistributionController {
                             keyboard2 = JSON.stringify({
                             inline_keyboard: [
                                 [
-                                    {"text": 'Принять', callback_data:'/accept ' + valueProject},
-                                    {"text": 'Отклонить', callback_data:'/cancel ' + valueProject},
+                                    {"text": 'Подать заявку', web_app: {url: webAppAddStavka}},
+                                    // {"text": 'Отклонить', callback_data:'/cancel ' + valueProject},
                                 ],
                             ]
                             });
