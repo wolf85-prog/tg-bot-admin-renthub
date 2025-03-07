@@ -189,12 +189,12 @@ const UsersProvider = ({ children }) => {
 					console.log("compName: ", compName?.title)
 				}	
 
-				const res = userbot.find(item2 => item2.chatId === user.chatId)
+				//const res = userbot.find(item2 => item2.chatId === user.chatId)
 
 				const newWorker = {
 					id: user.id,
 					fio: user.fio,
-					username: res ? res.username : '',
+					username: '',//res ? res.username : '',
 					phone: user.phone,
 					doljnost: user.dojnost,
 					city: user.city, 
