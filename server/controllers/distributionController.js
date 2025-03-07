@@ -338,7 +338,7 @@ class DistributionController {
                             keyboard = JSON.stringify({
                                 inline_keyboard: [
                                     [
-                                        {"text": textButton, web_app: {url: target}}, 
+                                        {"text": textButton, callback_data:'/report'}, //web_app: {url: target}}, 
                                     ],
                                 ]
                             });
