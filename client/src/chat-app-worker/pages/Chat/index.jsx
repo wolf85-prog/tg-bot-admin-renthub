@@ -312,7 +312,12 @@ const Chat = () => {
 					// } else {
 						const url_send_doc = `https://api.telegram.org/bot${token_work}/sendDocument?chat_id=${personW.id}&document=${host+image}`
 						//console.log("url_send_doc: ", url_send_doc)
-						sendPhotoToTelegram = await $host.get(url_send_doc);
+						//sendPhotoToTelegram = await $host.get(url_send_doc);
+						const form = new FormData();
+						form.append("chat_id", personW.id); // добавление имени файла
+						form.append("document", file); // добавление файла
+						//const form = new FormData();
+						sendToTelegram = await $host.post(`https://api.telegram.org/bot${token_work}/sendDocument`, form, {headers: { 'Content-Type': 'multipart/form-data' },})
 					//}		
 				} else if (fileType === 'image') {
 					// if (image.slice(-3) !== 'png' || image.slice(-3)!=='jpg' || image.slice(-3)!=='peg' || image.slice(-3) !== 'PNG' || image.slice(-3)!=='JPG' || image.slice(-3)!=='PEG') {
