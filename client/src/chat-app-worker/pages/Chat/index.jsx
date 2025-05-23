@@ -325,7 +325,7 @@ const Chat = () => {
 					// } else {
 						const url_send_photo = `https://api.telegram.org/bot${token_work}/sendPhoto?chat_id=${personW.id}&photo=${host+image}`
 						//console.log("url_send_photo: ", url_send_photo)
-						sendPhotoToTelegram = await $host.get(url_send_photo);
+						sendToTelegram = await $host.get(url_send_photo);
 					//}		
 				}	
 			}
@@ -351,6 +351,9 @@ const Chat = () => {
 					messageId: sendToTelegram.data.result.message_id,
 				}
 
+				//сохранение сообщения в базе данных
+				await newRMessage(message)	
+
 				//сохранить в контексте
 				addNewMessage(user.chatId, mess, 'text', '', convs.id, sendToTelegram.data.result.message_id, null);
 			} else {
@@ -361,16 +364,18 @@ const Chat = () => {
 					type: "image",
 					text: host + image,
 					isBot: null,
-					messageId: sendPhotoToTelegram.data.result.message_id,
+					messageId: sendToTelegram.data.result.message_id,
 				}
 
+				//сохранение сообщения в базе данных
+				await newRMessage(message)	
+
 				//сохранить в контексте
-				addNewMessage(user.chatId, host + image, 'image', '', convs.id, sendPhotoToTelegram.data.result.message_id, null);
+				addNewMessage(user.chatId, host + image, 'image', '', convs.id, sendToTelegram.data.result.message_id, null);
 			}
 			console.log("message send: ", message);
 
-			//сохранение сообщения в базе данных
-			await newRMessage(message)	
+			
 		}
 	}
 
