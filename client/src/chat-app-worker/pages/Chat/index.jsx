@@ -341,6 +341,7 @@ const Chat = () => {
 
 			let message = {};
 			if(!file) {
+				console.log("text")
 				message = {
 					senderId: chatAdminId, 
 					receiverId: user.chatId,
@@ -357,6 +358,7 @@ const Chat = () => {
 				//сохранить в контексте
 				addNewMessage(user.chatId, mess, 'text', '', convs.id, sendToTelegram.data.result.message_id, null);
 			} else {
+				console.log("image")
 				message = {
 					senderId: chatAdminId, 
 					receiverId: user.chatId,
