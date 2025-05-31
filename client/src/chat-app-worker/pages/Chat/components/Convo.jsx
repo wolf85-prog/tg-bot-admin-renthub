@@ -295,6 +295,17 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 
     }
 
+	const findLinksWithPrefix = (text)=> {
+		const prefix = "http://" // Список известных префиксов ссылок
+
+		const regex = new RegExp(`\\b${prefix}.*\\b`, 'i'); // \\b - граница слова, 'i' - без учета регистра
+		const match = text.match(regex);
+		if (match) {
+			return match[0];
+		}
+		return null;
+	}
+
 
 	return dates.map((date, dateIndex) => {
 		const messages = newMessages[date] //allMessages[date]; 
@@ -481,14 +492,31 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 													
 												</div>
 											</div>
-											: <></>}
+											: <span>
+												{/* {
+												message.content?.includes('https://') 
+												? 
+												(message.content.split(" ").map((item, index) => (
+													item.startsWith('https://') ?
+													<a key={index} className="chat__href" href={item} target="_blank" rel="noreferrer">{item}</a> 
+													: <span key={index}>{item}</span>	
+												))
+												: message.content)} */}
+											</span>
+											}
 											<span>
 												{/* {message.content?.startsWith('http') 
 												? <a className="chat__href" href={message.content} target="_blank" rel="noreferrer">{message.content}</a> 
 												: message.content.includes('_reply_') ? message.content.split('_reply_')[1] : message.content}  */}
 												{message.content?.includes('_reply_') 
 												? message.content.split('_reply_')[1] 
-												: message.content}
+												: (message.content.split('\n').map((item, index) => (
+														item.startsWith('https://') ?
+														<a key={index} className="chat__href" href={item} target="_blank" rel="noreferrer">{item.length > 20 ? item.substring(0, 20) + "..." : item}</a> 
+														: <span key={index}>{item + ' '}</span>	
+														))
+													)
+												}
 											</span>
 											<span className="chat__msg-filler"> </span>
 											<span className="chat__msg-footer">
@@ -507,9 +535,7 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 									<p className="chat__msg chat__msg--sent" ref={assignRef()}>
 										<div ref={el => msgRef.current[message.id] = el}>
 											<span>
-												{message.content?.startsWith('http') 
-												? <a className="chat__href" href={message.content} target="_blank" rel="noreferrer">{message.content}</a> 
-												: message.content}
+												{message.content}
 											</span>
 											<span className="chat__msg-filler"> </span>
 											<span className="chat__msg-footer">
