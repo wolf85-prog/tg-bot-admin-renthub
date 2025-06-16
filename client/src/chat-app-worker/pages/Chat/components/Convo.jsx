@@ -510,10 +510,14 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 												: message.content.includes('_reply_') ? message.content.split('_reply_')[1] : message.content}  */}
 												{message.content?.includes('_reply_') 
 												? message.content.split('_reply_')[1] 
-												: (message.content.split('\n').map((item, index) => (
+												: 
+													(message.content.split(' ').map((item, index) => (
 														item.startsWith('https://') ?
 														<a key={index} className="chat__href" href={item} target="_blank" rel="noreferrer">{item.length > 20 ? item.substring(0, 20) + "..." : item}</a> 
-														: <span key={index}>{item + ' '}</span>	
+														: (item.length > 25 ? 
+															<a key={index} className="chat__href" href={item} target="_blank" rel="noreferrer">{item.substring(0, 25) + "..."}</a>
+															:<span key={index}>{item + ' '}</span>
+														   )	
 														))
 													)
 												}
