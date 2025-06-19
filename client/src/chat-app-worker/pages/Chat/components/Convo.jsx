@@ -377,6 +377,38 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 																}`}
 															/>
 														)}
+											</span>
+
+											<Dropdown onSelect={change}>
+												<Dropdown.Toggle as={CustomToggleBottom} id="dropdown-custom-components">											
+												</Dropdown.Toggle>
+												<Dropdown.Menu as={CustomMenuBottom}>
+												<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: personW.id})}>Удалить</Dropdown.Item>
+												</Dropdown.Menu>
+											</Dropdown>	
+										</figure>) : 
+											message.content.endsWith('.xlsx') 
+											? <figure> 
+												<img src={xlsIcon} width={30}/>
+												<a href={message.content} target="_blank" rel="noreferrer">{message.content}</a> 
+												{/* footer */}
+												<span className="chat__msg_img-footer">
+														<span>{formatTime(message.time)}</span>
+															{!message.sender && (
+																<Icon
+																	id={
+																		message?.status === "sent"
+																			? "singleTick"
+																			: "doubleTick"
+																	}
+																	aria-label={message?.status}
+																	className={`chat__msg-status-icon ${
+																		message?.status === "read"
+																			? "chat__msg-status-icon--blue"
+																			: ""
+																	}`}
+																/>
+															)}
 												</span>
 
 												<Dropdown onSelect={change}>
@@ -386,16 +418,38 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 													<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: personW.id})}>Удалить</Dropdown.Item>
 													</Dropdown.Menu>
 												</Dropdown>	
-										</figure>) : 
-											message.content.endsWith('.xlsx') 
-											? <figure> 
-												<img src={xlsIcon} width={30}/>
-												<a href={message.content} target="_blank" rel="noreferrer">{message.content}</a> 
 											</figure> 
 											: message.content.endsWith('.docx') 
 											? <figure> 
 												<img src={docIcon} width={30}/>
 												<a href={message.content} target="_blank" rel="noreferrer">{message.content}</a> 
+												{/* footer */}
+												<span className="chat__msg_img-footer">
+														<span>{formatTime(message.time)}</span>
+															{!message.sender && (
+																<Icon
+																	id={
+																		message?.status === "sent"
+																			? "singleTick"
+																			: "doubleTick"
+																	}
+																	aria-label={message?.status}
+																	className={`chat__msg-status-icon ${
+																		message?.status === "read"
+																			? "chat__msg-status-icon--blue"
+																			: ""
+																	}`}
+																/>
+															)}
+												</span>
+
+												<Dropdown onSelect={change}>
+													<Dropdown.Toggle as={CustomToggleBottom} id="dropdown-custom-components">											
+													</Dropdown.Toggle>
+													<Dropdown.Menu as={CustomMenuBottom}>
+													<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: personW.id})}>Удалить</Dropdown.Item>
+													</Dropdown.Menu>
+												</Dropdown>	
 											</figure> 
 											: (
 											<figure style={{margin:showImage[msgIndex + personW.id] ? '0 0 3rem': '0 0 1rem', position: 'relative'}}>
