@@ -28,6 +28,7 @@ import {
 	CModalBody,
 	CModalFooter
   } from '@coreui/react'
+import { sendMessageToTelegram, sendPhotoToTelegram } from "src/http/telegramAPI";
 
 const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 const token_work = process.env.REACT_APP_TELEGRAM_API_TOKEN_RENTHUB
@@ -294,9 +295,9 @@ const Chat = () => {
 			// const sendToTelegram = await $host.get(url_send_msg);
 
 			if(!file) {
-				const url_send_msg = `https://api.telegram.org/bot${token_work}/sendMessage?chat_id=${personW.id}&parse_mode=html&text=${temp}`
-				
-				sendToTelegram = await $host.get(url_send_msg);
+				// const url_send_msg = `https://api.telegram.org/bot${token_work}/sendMessage?chat_id=${personW.id}&parse_mode=html&text=${temp}`				
+				// sendToTelegram = await $host.get(url_send_msg);
+				sendToTelegram = await sendMessageToTelegram({user: personW.id, text: temp})
 			} else {
 				if (fileType === 'doc') { //(image.slice(-3) === 'gif' || image.slice(-3)==='zip') {
 					// if (image.slice(-3) === 'ocx' || image.slice(-3)==='doc' || image.slice(-3)==='lsx' || image.slice(-3)==='xls' || image.slice(-3)==='iff' || image.slice(-3)==='IFF') {
@@ -323,9 +324,9 @@ const Chat = () => {
 					// if (image.slice(-3) !== 'png' || image.slice(-3)!=='jpg' || image.slice(-3)!=='peg' || image.slice(-3) !== 'PNG' || image.slice(-3)!=='JPG' || image.slice(-3)!=='PEG') {
 					// 	setShowErrorFile(true)
 					// } else {
-						const url_send_photo = `https://api.telegram.org/bot${token_work}/sendPhoto?chat_id=${personW.id}&photo=${host+image}`
-						//console.log("url_send_photo: ", url_send_photo)
-						sendToTelegram = await $host.get(url_send_photo);
+						// const url_send_photo = `https://api.telegram.org/bot${token_work}/sendPhoto?chat_id=${personW.id}&photo=${host+image}`
+						// sendToTelegram = await $host.get(url_send_photo);
+						sendToTelegram = await sendPhotoToTelegram({user: personW.id, image: host+image})
 					//}		
 				}	
 			}
@@ -416,9 +417,9 @@ const Chat = () => {
 		if (selectedElement === '1') {
 			//send photo
 			let anketa = 'https://proj.uley.team/upload/2023-11-10T15:12:36.770Z.png' //poster anketa
-			const url_send_photo = `https://api.telegram.org/bot${token_work}/sendPhoto?chat_id=${user.chatId}&photo=${anketa}&reply_markup=${keyboard}`
-			console.log(url_send_photo)	
-			sendToTelegram = await $host.get(url_send_photo);
+			// const url_send_photo = `https://api.telegram.org/bot${token_work}/sendPhoto?chat_id=${user.chatId}&photo=${anketa}&reply_markup=${keyboard}`
+			// sendToTelegram = await $host.get(url_send_photo);
+			sendToTelegram = await sendPhotoToTelegram({user: user.chatId, image: anketa, keyboard: keyboard})
 		} 
 		
 
@@ -508,9 +509,9 @@ https://t.me/ULEY_Office_Bot
 		temp = temp.replace(/</g, '%3c'); 		 //экранирование <
 		
 		//Правила
-		const url_send_text = `https://api.telegram.org/bot${token_work}/sendMessage?chat_id=${user.chatId}&parse_mode=html&text=${temp}`
-		//console.log(url_send_text)	
-		sendToTelegram = await $host.get(url_send_text);
+		// const url_send_text = `https://api.telegram.org/bot${token_work}/sendMessage?chat_id=${user.chatId}&parse_mode=html&text=${temp}`	
+		// sendToTelegram = await $host.get(url_send_text);
+		sendToTelegram = await sendMessageToTelegram({user: user.chatId, text: temp})
 		
 
 		//отправить в админку
@@ -554,9 +555,9 @@ https://t.me/ULEY_Office_Bot
 		let sendToTelegram
 		
 		//Постер
-		const url_send_photo = `https://api.telegram.org/bot${token_work}/sendPhoto?chat_id=${user.chatId}&photo=${poster}&reply_markup=${keyboard}`
-		console.log(url_send_photo)	
-		sendToTelegram = await $host.get(url_send_photo);
+		// const url_send_photo = `https://api.telegram.org/bot${token_work}/sendPhoto?chat_id=${user.chatId}&photo=${poster}&reply_markup=${keyboard}`
+		// sendToTelegram = await $host.get(url_send_photo);
+		sendToTelegram = await sendPhotoToTelegram({user: user.chatId, image: poster, keyboard: keyboard})
 		
 
 		//отправить в админку

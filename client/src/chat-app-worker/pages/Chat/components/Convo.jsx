@@ -15,6 +15,7 @@ import { getWMessages2 } from "src/http/workerAPI";
 import { delRMessage } from "src/http/renthubAPI";
 import Dropdown from 'react-bootstrap/Dropdown';
 import imageIcon from "./../../../assets/images/sp-i-m-image-placeholder.svg";
+import { delMessageToTelegram } from "src/http/telegramAPI";
 
 const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 	const { personW } = useContext(AccountContext);
@@ -263,9 +264,9 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 		//удалить сообщение в базе данных
 		await delRMessage(message.id)
 
-		const url_del_msg = `https://api.telegram.org/bot${tokenR}/deleteMessage?chat_id=${personW.id}&message_id=${message.id}`
-
-		const delToTelegram = await $host.get(url_del_msg);
+		//const url_del_msg = `https://api.telegram.org/bot${tokenR}/deleteMessage?chat_id=${personW.id}&message_id=${message.id}`
+		//const delToTelegram = await $host.get(url_del_msg);
+		const delToTelegram = await delMessageToTelegram({user: personW.id, messageId: message.id})
 
 		console.log("Удаляемое сообщение: ", message.id)
 		console.log("Дата сообщения: ", message.date)

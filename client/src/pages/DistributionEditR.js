@@ -55,6 +55,7 @@ import noimage2 from './../assets/images/images.png';
 import treug from './../assets/images/treugolnik.png';
 import { locale } from 'core-js/web';
 import { v4 as uuidv4 } from 'uuid';
+import { delMessageToTelegram } from 'src/http/telegramAPI'
 
 const DistributionEditR = () => {
   const [poster, setPoster]= useState('');
@@ -1307,9 +1308,9 @@ const delCategory7 = (category) => {
         await delWMessage(item.mess)
       } 
 
-      const url_del_msg = `https://api.telegram.org/bot${token}/deleteMessage?chat_id=${item.user}&message_id=${item.mess}`
-
-      const delToTelegram = await $host.get(url_del_msg);
+      // const url_del_msg = `https://api.telegram.org/bot${token}/deleteMessage?chat_id=${item.user}&message_id=${item.mess}`
+      // const delToTelegram = await $host.get(url_del_msg);
+      const delToTelegram = await delMessageToTelegram({user: item.user, messageId: item.mess})
 
 
       //Выводим сообщение об успешном удалении
