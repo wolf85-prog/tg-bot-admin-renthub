@@ -22,8 +22,7 @@ const {newDistributionR, getDistributionsR, getDistributionsRPlan, delDistributi
 const { getCompanys, getCompanyCount, editCompany, getCompanyId, addCompany, 
         deleteCompany, getCompanyCountAll } = require('../controllers/companysController')
 
-const { sendMessageToTelegram, sendPhotoToTelegram, sendDocumentToTelegram, sendDocumentFormToTelegram,
-    sendVideoToTelegram, sendAudioToTelegram, delMessageToTelegram } = require('../controllers/telegramController')
+const { sendMessageToTelegram } = require('../controllers/telegramController')
 
 const upload = require('../middleware/file')
 const uploadDistrib = require('../middleware/fileDistrib') //папка для файлов в рассылках
@@ -109,12 +108,12 @@ route.get('/distributionsr/count/get/:count/:prev', getDistributionsCount) //е�
 
 //----------------- Telegram Renthub---------------------------------
 route.post(`/botrenthub/sendmessage`, sendMessageToTelegram)
-route.post(`/botrenthub/sendphoto`, sendPhotoToTelegram)
-route.post(`/botrenthub/senddocument`, sendDocumentToTelegram)
-route.post(`/botrenthub/senddocumentform`, sendDocumentFormToTelegram)
-route.post(`/botrenthub/sendvideo`, sendVideoToTelegram)
-route.post(`/botrenthub/sendaudio`, sendAudioToTelegram)
-route.post(`/botrenthub/delmessage`, delMessageToTelegram)
+// route.post(`/botrenthub/sendphoto`, sendPhotoToTelegram)
+// route.post(`/botrenthub/senddocument`, sendDocumentToTelegram)
+// route.post(`/botrenthub/senddocumentform`, sendDocumentFormToTelegram)
+// route.post(`/botrenthub/sendvideo`, sendVideoToTelegram)
+// route.post(`/botrenthub/sendaudio`, sendAudioToTelegram)
+// route.post(`/botrenthub/delmessage`, delMessageToTelegram)
 
 
 module.exports = route
