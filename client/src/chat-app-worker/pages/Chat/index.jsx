@@ -289,7 +289,6 @@ const Chat = () => {
 			temp = temp.replace(/</g, '%3c'); 		 //экранирование <
 			
 			let sendToTelegram
-			let sendPhotoToTelegram
 
 			// const url_send_msg = `https://api.telegram.org/bot${token_work}/sendMessage?chat_id=${personW.id}&parse_mode=html&text=${temp}`
 			// const sendToTelegram = await $host.get(url_send_msg);
