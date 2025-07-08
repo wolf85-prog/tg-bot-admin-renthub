@@ -60,7 +60,7 @@ class TelegramController {
         try {   
             const url_send_msg = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${image}&reply_markup=${keyboard ? keyboard : ''}`
                             
-            console.log("Отправка фото в телеграм...")
+            console.log("Отправка фото в телеграм...", url_send_msg)
                             
             const ressend = await $host.get(url_send_msg)
 
