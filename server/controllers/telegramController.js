@@ -28,8 +28,9 @@ class TelegramController {
                             
             console.log("Отправка текста в телеграм...")
                             
-            await $host.get(url_send_msg)
+            const ressend = await $host.get(url_send_msg)
 
+            return res.status(200).json(ressend.data);
         } catch (error) {
             return res.status(500).json(error.message);
         }
@@ -44,8 +45,9 @@ class TelegramController {
                             
             console.log("Удаление сообщения в телеграм...")
                             
-            await $host.get(url_send_msg)
+            const ressend = await $host.get(url_send_msg)
 
+            return res.status(200).json(ressend.data);
         } catch (error) {
             return res.status(500).json(error.message);
         }
@@ -60,8 +62,9 @@ class TelegramController {
                             
             console.log("Отправка фото в телеграм...")
                             
-            await $host.get(url_send_msg)
+            const ressend = await $host.get(url_send_msg)
 
+            return res.status(200).json(ressend.data);
         } catch (error) {
             return res.status(500).json(error.message);
         }
@@ -76,8 +79,9 @@ class TelegramController {
                             
             console.log("Отправка документы в телеграм...")
                             
-            await $host.get(url_send_msg)
+            const ressend = await $host.get(url_send_msg)
 
+            return res.status(200).json(ressend.data);
         } catch (error) {
             return res.status(500).json(error.message);
         }
@@ -91,8 +95,9 @@ class TelegramController {
                             
             console.log("Отправка документа через форму в телеграм...")
                             
-            await $host.get(`https://api.telegram.org/bot${token}/sendDocument`, form, {headers: headers,})
+            const ressend = await $host.get(`https://api.telegram.org/bot${token}/sendDocument`, form, {headers: headers,})
 
+            return res.status(200).json(ressend.data);
         } catch (error) {
             return res.status(500).json(error.message);
         }
@@ -107,8 +112,9 @@ class TelegramController {
                             
             console.log("Отправка видео в телеграм...")
                             
-            await $host.get(url_send_msg)
+            const ressend = await $host.get(url_send_msg)
 
+            return res.status(200).json(ressend.data);
         } catch (error) {
             return res.status(500).json(error.message);
         }
@@ -123,15 +129,13 @@ class TelegramController {
                             
             console.log("Отправка аудио в телеграм...")
                             
-            await $host.get(url_send_msg)
+            const ressend = await $host.get(url_send_msg)
 
+            return res.status(200).json(ressend.data);
         } catch (error) {
             return res.status(500).json(error.message);
         }
     }
-
-    
-
 
 }
 
