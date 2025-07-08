@@ -1,6 +1,6 @@
 const ApiError = require('../error/ApiError')
 
-const { Op } = require('sequelize')
+//const { Op } = require('sequelize')
 
 //fetch api
 const fetch = require('node-fetch');
@@ -14,8 +14,8 @@ const $host = axios.create({
 })
 
 //socket.io
-const {io} = require("socket.io-client")
-const socketUrl = process.env.SOCKET_APP_URL
+//const {io} = require("socket.io-client")
+//const socketUrl = process.env.SOCKET_APP_URL
 
 class TelegramController {
 

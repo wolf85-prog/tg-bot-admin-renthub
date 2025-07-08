@@ -23,8 +23,7 @@ const { getCompanys, getCompanyCount, editCompany, getCompanyId, addCompany,
         deleteCompany, getCompanyCountAll } = require('../controllers/companysController')
 
 const { sendMessageToTelegram, sendPhotoToTelegram, sendDocumentToTelegram, sendDocumentFormToTelegram,
-    sendVideoToTelegram, sendAudioToTelegram, delMessageToTelegram, 
-    sendMessageToTelegram2, sendPhotoToTelegram2 } = require('../controllers/telegramController')
+    sendVideoToTelegram, sendAudioToTelegram, delMessageToTelegram } = require('../controllers/telegramController')
 
 const upload = require('../middleware/file')
 const uploadDistrib = require('../middleware/fileDistrib') //папка для файлов в рассылках
