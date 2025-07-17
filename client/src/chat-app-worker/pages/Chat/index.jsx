@@ -318,21 +318,21 @@ const Chat = () => {
 						// const url_send_doc = `https://api.telegram.org/bot${token_work}/sendDocument?chat_id=${personW.id}&document=${host+image}`
 						// //console.log("url_send_doc: ", url_send_doc)
 						// //sendPhotoToTelegram = await $host.get(url_send_doc);
-						// const form = new FormData();
-						// form.append("chat_id", personW.id); // добавление имени файла
-						// form.append("document", file); // добавление файла
-						// //const form = new FormData();
-						// sendToTelegram = await $host.post(`https://api.telegram.org/bot${token_work}/sendDocument`, form, {headers: { 'Content-Type': 'multipart/form-data' },})
+						const form = new FormData();
+						form.append("chat_id", personW.id); // добавление имени файла
+						form.append("document", file); // добавление файла
+						//const form = new FormData();
+						sendToTelegram = await $host.post(`https://api.telegram.org/bot${token_work}/sendDocument`, form, {headers: { 'Content-Type': 'multipart/form-data' },})
 					//}		
 
-					sendToTelegram = await sendDocumentFormToTelegram({chatId: personW.id, path: pathFile, filename:originalName})
+					//sendToTelegram = await sendDocumentFormToTelegram({chatId: personW.id, path: pathFile, filename:originalName})
 				} else if (fileType === 'image') {
 					// if (image.slice(-3) !== 'png' || image.slice(-3)!=='jpg' || image.slice(-3)!=='peg' || image.slice(-3) !== 'PNG' || image.slice(-3)!=='JPG' || image.slice(-3)!=='PEG') {
 					// 	setShowErrorFile(true)
 					// } else {
-						// const url_send_photo = `https://api.telegram.org/bot${token_work}/sendPhoto?chat_id=${personW.id}&photo=${host+image}`
-						// sendToTelegram = await $host.get(url_send_photo);
-						sendToTelegram = await sendPhotoToTelegram({user: personW.id, image: host+image})
+						const url_send_photo = `https://api.telegram.org/bot${token_work}/sendPhoto?chat_id=${personW.id}&photo=${host+image}`
+						sendToTelegram = await $host.get(url_send_photo);
+						//sendToTelegram = await sendPhotoToTelegram({user: personW.id, image: host+image})
 					//}		
 				}	
 			}
