@@ -89,13 +89,18 @@ class TelegramController {
 
     //send document form
     async sendDocumentFormToTelegram(req, res) {
-        const {form, headers} = req.body 
+        const {path, filename, chatId} = req.body
+        
+        const form = new FormData();
+		form.append("chat_id", chatId); // добавление имени файла
+		form.append("document", fs.createReadStream(path), filename); // добавление файла
+ 
 
         try {   
                             
             console.log("Отправка документа через форму в телеграм...")
                             
-            const ressend = await $host.get(`https://api.telegram.org/bot${token}/sendDocument`, form, {headers: headers,})
+            const ressend = await $host.get(`https://api.telegram.org/bot${token}/sendDocument`, form)
 
             return res.status(200).json(ressend.data);
         } catch (error) {

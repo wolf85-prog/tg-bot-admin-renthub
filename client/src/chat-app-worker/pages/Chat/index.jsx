@@ -28,7 +28,7 @@ import {
 	CModalBody,
 	CModalFooter
   } from '@coreui/react'
-import { sendMessageToTelegram, sendPhotoToTelegram } from "src/http/telegramAPI";
+import { sendMessageToTelegram, sendPhotoToTelegram, sendDocumentFormToTelegram } from "src/http/telegramAPI";
 
 const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 const token_work = process.env.REACT_APP_TELEGRAM_API_TOKEN_RENTHUB
@@ -56,6 +56,8 @@ const Chat = () => {
 	const [fileType, setFileType] = useState("");
 	const [showPicker, setShowPicker] = useState(false)
 	const [chosenEmoji, setChosenEmoji] = useState('');
+	const [pathFile, setPathFile] = useState("");
+	const [originalName, setOriginalName] = useState("");
 
 	const [clearFile, setClearFile] = useState(false)
 	const [showCloseButton, setShowCloseButton] = useState(false)
@@ -224,6 +226,9 @@ const Chat = () => {
                setImage(response.data.path.split('.team')[1]);
 			   //сообщение с ссылкой на файл
 			   setMess(host + response.data.path.split('.team')[1])
+
+			   setPathFile(response.data.path)
+			   setOriginalName(response.data.originalname)
             }
         }
         getImage();
@@ -319,6 +324,8 @@ const Chat = () => {
 						// //const form = new FormData();
 						// sendToTelegram = await $host.post(`https://api.telegram.org/bot${token_work}/sendDocument`, form, {headers: { 'Content-Type': 'multipart/form-data' },})
 					//}		
+
+					sendToTelegram = await sendDocumentFormToTelegram({chatId: personW.id, path: pathFile, filename:originalName})
 				} else if (fileType === 'image') {
 					// if (image.slice(-3) !== 'png' || image.slice(-3)!=='jpg' || image.slice(-3)!=='peg' || image.slice(-3) !== 'PNG' || image.slice(-3)!=='JPG' || image.slice(-3)!=='PEG') {
 					// 	setShowErrorFile(true)

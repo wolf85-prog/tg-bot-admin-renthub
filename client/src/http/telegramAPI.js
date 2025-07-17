@@ -44,7 +44,7 @@ export const sendDocumentFormToTelegram = async (data) =>{
     try {
        let response = await $host.post('api/botrenthub/senddocumentform', data);
        //console.log(response);
-       return response;
+       return response.data;
     } catch (error) {
         console.log("error while calling sendDocumentFormToTelegram api", error.message);
     }
