@@ -204,7 +204,7 @@ const UsersProvider = ({ children }) => {
 					sfera: user.sfera,
 					chatId: user.chatId,
 					createDate: user.createdAt,
-					avatar: user.avatar,
+					avatar: user.avatar ? user.avatar : (compName ? compName.profile : ''),
 					block: user.block,
 					deleted: user.deleted,
 				}
