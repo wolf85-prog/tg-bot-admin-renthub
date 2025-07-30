@@ -169,7 +169,7 @@ const UsersProvider = ({ children }) => {
 		
 			//0 все специалисты
 			let managers = await getRManagers()
-			console.log("Managers: ", managers)
+			//console.log("Managers: ", managers)
 			
 			const arrayWorkerAll = []
 
@@ -177,16 +177,16 @@ const UsersProvider = ({ children }) => {
 
 			//массив компаний
 			let comps = await getRCompanys()
-			console.log("comps: ", comps)
+			//console.log("comps: ", comps)
 		
 			managers.map(async (user) => {
-				console.log("user: ", user)
+				//console.log("user: ", user)
 				//поиск компании по id
 				let compName = ''
 				if (comps && user.companyId) {
 					//compName = comps.find(item=> item.id === parseInt(user.companyId) || item.GUID === user.companyId)
 					compName = comps.find(item=>user.companyId !== null && (item.id.toString() === user.companyId || item.GUID === user.companyId))
-					console.log("compName: ", compName?.title)
+					//console.log("compName: ", compName?.title)
 				}	
 
 				//const res = userbot.find(item2 => item2.chatId === user.chatId)
@@ -196,7 +196,7 @@ const UsersProvider = ({ children }) => {
 					fio: user.fio,
 					username: '',//res ? res.username : '',
 					phone: user.phone,
-					doljnost: user.dojnost,
+					dolgnost: user.dolgnost,
 					city: user.city, 
 					company: compName ? compName?.title : '',
 					projects: user.projects,
@@ -228,7 +228,7 @@ const UsersProvider = ({ children }) => {
 					fio: user.fio,
 					username: user.username,
 					phone: user.phone,
-					doljnost: user.dojnost,
+					dolgnost: user.dolgnost,
 					city: user.city, 
 					company: user.companyId,
 					projects: user.projects,
@@ -357,7 +357,7 @@ const UsersProvider = ({ children }) => {
 						name: manager?.fio, 
 						city: manager?.city, 
 						phone: manager?.phone, 
-						doljnost: manager?.doljnost, 
+						dolgnost: manager?.dolgnost, 
 						company: manager?.company,
 						worklist: manager?.worklist,
 						sfera: manager?.sfera,

@@ -195,7 +195,7 @@ const Profile = ({ user, closeSidebar }) => {
 						</span>
 						<span className="profile__action-text--top profile__notion">
 						{user ? 
-							(user.doljnost !== null ? user.doljnost : "—")
+							(user.dolgnost ? user.dolgnost : "—")
 							: "—"}
 						</span>	
 					</p>
@@ -220,7 +220,7 @@ const Profile = ({ user, closeSidebar }) => {
 							Сфера деятельности
 						</span>
 						<span className="profile__action-text--top profile__notion" style={{textAlign: 'right'}}>
-							<table className="table-noborder">{user.bisnes ? JSON.parse(user.bisnes).map((man, index) => <tr key={index}><td>{man.name}</td></tr> ) : '—'}</table> 
+							<table className="table-noborder">{user.sfera ? JSON.parse(user.sfera).map((man, index) => <tr key={index}><td>{man.name}</td></tr> ) : '—'}</table> 
 						</span>	
 					</p>
 				</li>

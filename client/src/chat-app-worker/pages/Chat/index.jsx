@@ -37,7 +37,7 @@ const baseURL = process.env.REACT_APP_API_URL
 const webAppAnketa = process.env.REACT_APP_WEBAPP_ANKETA
 
 const Chat = () => {
-	const { userRenthub, addNewMessage, conversations } = useUsersContext();
+	const { userRenthub, addNewMessage, conversations, workersAll } = useUsersContext();
 	const { personW } = useContext(AccountContext);
 	const { setCountMessage } = useUsersContext();
 
@@ -609,6 +609,7 @@ https://t.me/ULEY_Office_Bot
 				<Header
 					user={personW}
 					userH={user}
+					manager={workersAll.filter((item)=> item.chatId === user.chatId)}
 					openProfileSidebar={() => openSidebar(setShowProfileSidebar)}
 					openSearchSidebar={() => openSidebar(setShowSearchSidebar)}
 					closeSidebar={() => closeSidebar(setShowProfileSidebar)}

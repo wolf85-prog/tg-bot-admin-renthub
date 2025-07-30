@@ -1,7 +1,10 @@
 import React, { useState, useContext, useEffect, useRef }  from "react";
+import { Link, useLocation } from 'react-router-dom'
 import Icon from "./../../../components/Icon";
 import OptionsBtn from "./../../../components/OptionsButton";
 import avatarDefault from "./../../../../chat-app-new/assets/images/no-avatar.png";
+import editIcon from './../../../../assets/images/pencil.png'
+
 import { 
 	CButton
   } from '@coreui/react'
@@ -13,7 +16,7 @@ import ishodCall from './../../../../assets/sound/ishod.mp3';
 
 import { getSendCall } from './../../../../http/adminAPI';
   
-const Header = ({ user, userH, openProfileSidebar, openSearchSidebar, closeSidebar, showCloseButton, clearFile, setClearFile, clickClearFile  }) => {
+const Header = ({ user, userH, manager, openProfileSidebar, openSearchSidebar, closeSidebar, showCloseButton, clearFile, setClearFile, clickClearFile  }) => {
 
 	const [press, setPress] = useState(false)
 
@@ -75,6 +78,16 @@ const Header = ({ user, userH, openProfileSidebar, openSearchSidebar, closeSideb
 			</div>
 			<div className="chat__actions">
 				{clearFile ? <CButton color="danger" onClick={clickClearFile}>Очистить</CButton> : ''}
+
+				<Link to={'http://proj.uley.team:3000/managers'} state={{ managerId: manager[0]?.id, }}>
+					<button
+						className="chat__action"
+						aria-label="profile"
+						//onClick={()=>console.log(user?.id)}
+					>
+						<img src={editIcon} width={18} alt='' style={{verticalAlign: 'text-bottom'}} />
+					</button>
+				</Link>
 
 				<button
 					className="chat__action"
