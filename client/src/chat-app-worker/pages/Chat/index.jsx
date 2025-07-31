@@ -35,6 +35,7 @@ const token_work = process.env.REACT_APP_TELEGRAM_API_TOKEN_RENTHUB
 const host = process.env.REACT_APP_HOST
 const baseURL = process.env.REACT_APP_API_URL
 const webAppAnketa = process.env.REACT_APP_WEBAPP_ANKETA
+const webAppUrl = process.env.REACT_APP_WEBAPP_URL;
 
 const Chat = () => {
 	const { userRenthub, addNewMessage, conversations, workersAll } = useUsersContext();
@@ -102,9 +103,47 @@ const Chat = () => {
 		setScenari(selectedElement)
 
 		let text = ''
+
+		//Приветстиве
+		if (selectedElement === 1) {
+			text = '🔵 Сценарий «Приветствие»'
+			console.log(text)
+			setMess(text)
+		}
+
+		//Дорогие коллеги
+		else if (selectedElement === 2) {
+			text = '🔵 Cценарий «Дорогие коллеги»'
+			setMess(text)
+		}
+
+		//Новости
+		else if (selectedElement === 3) {
+			text = '🔵 Сценарий «Новости»'
+			setMess(text)
+		}
+
+		//Список паспортных данных
+		else if (selectedElement === 4) {
+			text = '🔵 Сценарий «Список паспортных данных»'
+			console.log(text)
+			setMess(text)
+		}
+
+		//Реквизиты №1
+		else if (selectedElement === 5) {
+			text = '🔵 Cценарий «Реквизиты №1»'
+			setMess(text)
+		}
+
+		//Реквизиты №2
+		else if (selectedElement === 6) {
+			text = '🔵 Сценарий «Реквизиты №2»'
+			setMess(text)
+		}
 		
 		//Стандартный ответ
-		if (selectedElement === '0') {
+		else if (selectedElement === '0') {
 			text = `${user.name.split(' ')[1]}, я юный чат-бот и еще не всё умею. Любой вопрос поможет решить наш оператор: +7 (499) 500-14-11`
 			setMess(text)
 		}
@@ -268,7 +307,172 @@ const Chat = () => {
 	//функция отправки сообщения
 	const sendText = async () => {
 		console.log("selectedElement: ", selectedElement)
-		if (selectedElement === '1') { //выбран паспорт
+
+		let temp=mess.replace(/\n/g, '%0A'); //экранирование переноса строки
+			temp = temp.replace(/#/g, '%23'); 		 //экранирование решетки
+			temp = temp.replace(/&/g, '%26'); 		 //экранирование &
+			temp = temp.replace(/\+/g, '%2b'); 		 //экранирование +
+			temp = temp.replace(/>/g, '%3e'); 		 //экранирование >
+			temp = temp.replace(/</g, '%3c'); 
+
+		if (selectedElement === 1 || temp === 'Приветствие' || temp === 'приветствие') { //выбран Правила
+			//отправка сценария
+			console.log("отправка сценария: ", selectedElement, temp)
+			//setSelectedElement(1)
+
+			//let sendToTelegram = await sendMessageToTelegram({user: personW.id, text: temp})
+			const message = {
+				senderId: chatAdminId, 
+				receiverId: personW.id,
+				conversationId: convs.id,
+				type: "text",
+				text: '🔵 Сценарий «Приветствие»',
+				isBot: null,
+				messageId: null,
+			}
+				
+			// console.log("message send: ", message);
+		
+			//сохранение сообщения в базе данных
+			await newRMessage(message)
+		
+			//сохранить в контексте
+			addNewMessage(personW.id, '🔵 Сценарий «Приветствие»', 'text', '', convs.id, null, null);
+				
+			sendScenariy1()
+
+		} else if (selectedElement === 2 || temp === 'Дорогие коллеги' || temp === 'дорогие коллеги') { //выбран Правила
+			//отправка сценария
+			console.log("отправка сценария: ", selectedElement, temp)
+			//setSelectedElement(1)
+
+			//let sendToTelegram = await sendMessageToTelegram({user: personW.id, text: temp})
+			const message = {
+				senderId: chatAdminId, 
+				receiverId: personW.id,
+				conversationId: convs.id,
+				type: "text",
+				text: '🔵 Сценарий «Дорогие коллеги»',
+				isBot: null,
+				messageId: null,
+			}
+				
+			// console.log("message send: ", message);
+		
+			//сохранение сообщения в базе данных
+			await newRMessage(message)
+		
+			//сохранить в контексте
+			addNewMessage(personW.id, '🔵 Сценарий «Дорогие коллеги»', 'text', '', convs.id, null, null);
+				
+			sendScenariy2()
+
+		} else if (selectedElement === 3 || temp === 'Новости' || temp === 'новости') { //выбран Правила
+			//отправка сценария
+			console.log("отправка сценария: ", selectedElement, temp)
+			//setSelectedElement(1)
+
+			//let sendToTelegram = await sendMessageToTelegram({user: personW.id, text: temp})
+			const message = {
+				senderId: chatAdminId, 
+				receiverId: personW.id,
+				conversationId: convs.id,
+				type: "text",
+				text: '🔵 Сценарий «Новости»',
+				isBot: null,
+				messageId: null,
+			}
+				
+			// console.log("message send: ", message);
+		
+			//сохранение сообщения в базе данных
+			await newRMessage(message)
+		
+			//сохранить в контексте
+			addNewMessage(personW.id, '🔵 Сценарий «Новости»', 'text', '', convs.id, null, null);
+				
+			sendScenariy3()
+
+		} else if (selectedElement === 4 || temp === 'Паспорт' || temp === 'паспорт') { //выбран Правила
+			//отправка сценария
+			console.log("отправка сценария: ", selectedElement, temp)
+			//setSelectedElement(1)
+
+			//let sendToTelegram = await sendMessageToTelegram({user: personW.id, text: temp})
+			const message = {
+				senderId: chatAdminId, 
+				receiverId: personW.id,
+				conversationId: convs.id,
+				type: "text",
+				text: '🔵 Сценарий «Список паспортных данных»',
+				isBot: null,
+				messageId: null,
+			}
+				
+			// console.log("message send: ", message);
+		
+			//сохранение сообщения в базе данных
+			await newRMessage(message)
+		
+			//сохранить в контексте
+			addNewMessage(personW.id, '🔵 Сценарий «Список паспортных данных»', 'text', '', convs.id, null, null);
+				
+			sendScenariy4()
+
+		} else if (selectedElement === 5 || temp === 'Реквизиты1' || temp === 'реквизиты1') { //выбран Правила
+			//отправка сценария
+			console.log("отправка сценария: ", selectedElement, temp)
+			//setSelectedElement(1)
+
+			//let sendToTelegram = await sendMessageToTelegram({user: personW.id, text: temp})
+			const message = {
+				senderId: chatAdminId, 
+				receiverId: personW.id,
+				conversationId: convs.id,
+				type: "text",
+				text: '🔵 Сценарий «Реквизиты №1»',
+				isBot: null,
+				messageId: null,
+			}
+				
+			// console.log("message send: ", message);
+		
+			//сохранение сообщения в базе данных
+			await newRMessage(message)
+		
+			//сохранить в контексте
+			addNewMessage(personW.id, '🔵 Сценарий «Реквизиты №1»', 'text', '', convs.id, null, null);
+				
+			sendScenariy5()
+
+		} else if (selectedElement === 6 || temp === 'Реквизиты2' || temp === 'реквизиты2') { //выбран Правила
+			//отправка сценария
+			console.log("отправка сценария: ", selectedElement, temp)
+			//setSelectedElement(1)
+
+			//let sendToTelegram = await sendMessageToTelegram({user: personW.id, text: temp})
+			const message = {
+				senderId: chatAdminId, 
+				receiverId: personW.id,
+				conversationId: convs.id,
+				type: "text",
+				text: '🔵 Сценарий «Реквизиты №2»',
+				isBot: null,
+				messageId: null,
+			}
+				
+			// console.log("message send: ", message);
+		
+			//сохранение сообщения в базе данных
+			await newRMessage(message)
+		
+			//сохранить в контексте
+			addNewMessage(personW.id, '🔵 Сценарий «Реквизиты №2»', 'text', '', convs.id, null, null);
+				
+			sendScenariy6()
+		
+		}
+		else if (selectedElement === '1') { //выбран паспорт
 			//отправка сценария
 			console.log("отправка сценария: ", selectedElement)
 			sendMyMessage()
@@ -399,6 +603,219 @@ const Chat = () => {
 		setSelectedElement('')
 	};
 
+
+	//отправка сценария
+	const sendScenariy1 = async() => {
+		console.log("send scenariy1")
+		//audio.play();
+
+		//let client = userWorkers.find((client) => client.chatId === user.chatId);
+
+		const keyboard = JSON.stringify({
+			inline_keyboard: [
+				[
+					{"text": "Поехали", web_app: {url: webAppUrl}},
+				],
+			]
+		});
+
+		//отправить в телеграмм
+		
+		//Правила
+		if (selectedElement === 1 || mess === 'Приветствие' || mess === 'приветствие') {
+			//send photo
+			let poster1 = 'https://proj.uley.team/upload/posters/hello_renthub.jpg' //poster 1
+
+			let arr = [poster1]
+
+			arr.map(async(item, index)=> {
+				setTimeout(async()=> {
+					await sendPhotoToTelegram({user: user.chatId, photo: item, keyboard: keyboard})
+
+					// setTimeout(async()=> {
+                    //     await delMessageToTelegram({user: user.chatId, messageId: sendToTelegram?.data.result.message_id}) 
+                    // }, 1200000) //20 мин.
+				}, 500 * ++index)
+			})			
+		} 
+    }
+
+	const sendScenariy2 = async() => {
+		console.log("send scenariy2")
+		//audio.play();
+
+		//let client = userWorkers.find((client) => client.chatId === user.chatId);
+
+		const keyboard = JSON.stringify({
+			inline_keyboard: [
+				[
+					{"text": "Поехали", web_app: {url: webAppUrl}},
+				],
+			]
+		});
+
+		//отправить в телеграмм
+		
+		//Правила
+		if (selectedElement === 2 || mess === 'Дорогие коллеги' || mess === 'дорогие коллеги') {
+			//send photo
+			let poster1 = 'https://proj.uley.team/upload/posters/kollegi.jpg' //poster 1
+
+			let arr = [poster1]
+
+			arr.map(async(item, index)=> {
+				setTimeout(async()=> {
+					await sendPhotoToTelegram({user: user.chatId, photo: item, keyboard: keyboard})
+
+					// setTimeout(async()=> {
+                    //     await delMessageToTelegram({user: user.chatId, messageId: sendToTelegram?.data.result.message_id}) 
+                    // }, 1200000) //20 мин.
+				}, 500 * ++index)
+			})			
+		} 
+    }
+
+	const sendScenariy3 = async() => {
+		console.log("send scenariy3")
+		//audio.play();
+
+		//let client = userWorkers.find((client) => client.chatId === user.chatId);
+
+		const keyboard = JSON.stringify({
+			inline_keyboard: [
+				[
+					{"text": "VK", url:'https://vk.com/uley.team'},
+                    {"text": "Telegram", url:'https://t.me/uley_team'},
+				],
+			]
+		});
+
+		//отправить в телеграмм
+		
+		//Правила
+		if (selectedElement === 3 || mess === 'Новости' || mess === 'новости') {
+			//send photo
+			let poster1 = 'https://proj.uley.team/upload/posters/3/news.jpg' //poster 1
+
+			let arr = [poster1]
+
+			arr.map(async(item, index)=> {
+				setTimeout(async()=> {
+					await sendPhotoToTelegram({user: user.chatId, photo: item, keyboard: keyboard})
+
+					// setTimeout(async()=> {
+                    //     await delMessageToTelegram({user: user.chatId, messageId: sendToTelegram?.data.result.message_id}) 
+                    // }, 1200000) //20 мин.
+				}, 500 * ++index)
+			})			
+		} 
+    }
+
+	const sendScenariy4 = async() => {
+		console.log("send scenariy4")
+		//audio.play();
+
+		//let client = userWorkers.find((client) => client.chatId === user.chatId);
+
+		const keyboard = JSON.stringify({
+			inline_keyboard: [
+				[
+					{"text": "XLSX", url:'https://ya.ru'},
+                    {"text": "PDF", url:'https://ya.ru'},
+				],
+			]
+		});
+
+		//отправить в телеграмм
+		
+		//Правила
+		if (selectedElement === 4 || mess === 'Паспорт' || mess === 'паспорт') {
+			//send photo
+			let poster1 = 'https://proj.uley.team/upload/posters/akred.jpg' //poster 1
+
+			let arr = [poster1]
+
+			arr.map(async(item, index)=> {
+				setTimeout(async()=> {
+					await sendPhotoToTelegram({user: user.chatId, photo: item, keyboard: keyboard})
+
+					// setTimeout(async()=> {
+                    //     await delMessageToTelegram({user: user.chatId, messageId: sendToTelegram?.data.result.message_id}) 
+                    // }, 1200000) //20 мин.
+				}, 500 * ++index)
+			})			
+		} 
+    }
+
+	const sendScenariy5 = async() => {
+		console.log("send scenariy5")
+		//audio.play();
+
+		//let client = userWorkers.find((client) => client.chatId === user.chatId);
+
+		const keyboard = JSON.stringify({
+			inline_keyboard: [
+				[
+					{"text": "ЭДО", url:'https://ya.ru'},
+				],
+			]
+		});
+
+		//отправить в телеграмм
+		
+		//Правила
+		if (selectedElement === 5 || mess === 'Реквизиты1' || mess === 'реквизиты1') {
+			//send photo
+			let poster1 = 'https://proj.uley.team/upload/posters/rekviz_beznal.jpg' //poster 1
+
+			let arr = [poster1]
+
+			arr.map(async(item, index)=> {
+				setTimeout(async()=> {
+					await sendPhotoToTelegram({user: user.chatId, photo: item, keyboard: keyboard})
+
+					// setTimeout(async()=> {
+                    //     await delMessageToTelegram({user: user.chatId, messageId: sendToTelegram?.data.result.message_id}) 
+                    // }, 1200000) //20 мин.
+				}, 500 * ++index)
+			})			
+		} 
+    }
+
+	const sendScenariy6 = async() => {
+		console.log("send scenariy6")
+		//audio.play();
+
+		//let client = userWorkers.find((client) => client.chatId === user.chatId);
+
+		const keyboard = JSON.stringify({
+			inline_keyboard: [
+				[
+					{"text": "Реквизиты", copy_text: {text: '+79057935149'}},
+				],
+			]
+		});
+
+		//отправить в телеграмм
+		
+		//Правила
+		if (selectedElement === 6 || mess === 'Реквизиты2' || mess === 'реквизиты2') {
+			//send photo
+			let poster1 = 'https://proj.uley.team/upload/posters/rekviz_nal.jpg' //poster 1
+
+			let arr = [poster1]
+
+			arr.map(async(item, index)=> {
+				setTimeout(async()=> {
+					await sendPhotoToTelegram({user: user.chatId, photo: item, keyboard: keyboard})
+
+					// setTimeout(async()=> {
+                    //     await delMessageToTelegram({user: user.chatId, messageId: sendToTelegram?.data.result.message_id}) 
+                    // }, 1200000) //20 мин.
+				}, 500 * ++index)
+			})			
+		} 
+    }
 
 	//отправка сценария
 	const sendMyMessage = async() => {

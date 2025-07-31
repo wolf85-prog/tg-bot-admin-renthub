@@ -26,6 +26,8 @@ const ChatInput = ({
 	setSelectedElement,
 }) => {
 
+	const [showSave, setShowSave] = useState(false);
+
 	const textAreaRef = useRef(null);
 	useAutosizeTextArea(textAreaRef.current, mess);
 
@@ -83,6 +85,7 @@ const ChatInput = ({
 
 	const change = async (eventkey) => {
 		//alert(`you chosen: ${eventkey}`)
+		console.log(eventkey)
 		setSelectedElement(eventkey)
 	}
 
@@ -184,7 +187,7 @@ const ChatInput = ({
 				</Dropdown> */}
 
 				<DropdownButton
-					onSelect={change}
+					//onSelect={change}
 					as={ButtonGroup}
 					id={`dropdown-button-drop-up`}
 					drop='up'
@@ -192,6 +195,39 @@ const ChatInput = ({
 					title=''
 					// 
 				>
+					<Dropdown.Item class="dropdown-menu" onMouseOver={()=>setShowSave(true)} onMouseOut={()=>setShowSave(false)}>
+						Блок №1 
+						<span style={{position: 'absolute', right: '15px'}}>
+							&raquo;
+						</span>
+						<ul className="dropdown-menu dropdown-submenu" style={{display: showSave ? 'block' : 'none'}}>
+							<Dropdown.Item onClick={()=>change(1)}>
+							Приветствие
+							</Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(2)}>
+							Дорогие коллеги
+							</Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(3)}>
+							Новости
+							</Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(4)}>
+							СПИСОК ПАСПОРТНЫХ ДАННЫХ
+							</Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(5)}>
+							Реквизиты №1
+							</Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(6)}>
+							Реквизиты №2
+							</Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(7)}>
+							Инструкция подачи заявки
+							</Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(8)}>
+							Продолжаем поиски
+							</Dropdown.Item>
+						</ul>						
+					</Dropdown.Item>
+
 					<Dropdown.Item class="dropdown-menu" eventKey="0">Стандартный ответ</Dropdown.Item>
 					<Dropdown.Item eventKey="1">Паспорт</Dropdown.Item>
 					<Dropdown.Item eventKey="2">Кнопка с номером</Dropdown.Item>
