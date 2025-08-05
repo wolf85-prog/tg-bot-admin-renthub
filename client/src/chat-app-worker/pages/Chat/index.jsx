@@ -315,7 +315,7 @@ const Chat = () => {
 			temp = temp.replace(/>/g, '%3e'); 		 //экранирование >
 			temp = temp.replace(/</g, '%3c'); 
 
-		if (selectedElement === 1 || temp === 'Приветствие' || temp === 'приветствие') { //выбран Правила
+		if (selectedElement === 1) { //выбран Правила
 			//отправка сценария
 			console.log("отправка сценария: ", selectedElement, temp)
 			//setSelectedElement(1)
@@ -341,7 +341,7 @@ const Chat = () => {
 				
 			sendScenariy1()
 
-		} else if (selectedElement === 2 || temp === 'Дорогие коллеги' || temp === 'дорогие коллеги') { //выбран Правила
+		} else if (selectedElement === 2) { //выбран Правила
 			//отправка сценария
 			console.log("отправка сценария: ", selectedElement, temp)
 			//setSelectedElement(1)
@@ -356,8 +356,6 @@ const Chat = () => {
 				isBot: null,
 				messageId: null,
 			}
-				
-			// console.log("message send: ", message);
 		
 			//сохранение сообщения в базе данных
 			await newRMessage(message)
@@ -622,7 +620,7 @@ const Chat = () => {
 		//отправить в телеграмм
 		
 		//Правила
-		if (selectedElement === 1 || mess === 'Приветствие' || mess === 'приветствие') {
+		if (selectedElement === 1) {
 			//send photo
 			let poster1 = 'https://proj.uley.team/upload/posters/hello_renthub.jpg' //poster 1
 
@@ -631,10 +629,6 @@ const Chat = () => {
 			arr.map(async(item, index)=> {
 				setTimeout(async()=> {
 					await sendPhotoToTelegram({user: user.chatId, photo: item, keyboard: keyboard})
-
-					// setTimeout(async()=> {
-                    //     await delMessageToTelegram({user: user.chatId, messageId: sendToTelegram?.data.result.message_id}) 
-                    // }, 1200000) //20 мин.
 				}, 500 * ++index)
 			})			
 		} 
@@ -644,20 +638,10 @@ const Chat = () => {
 		console.log("send scenariy2")
 		//audio.play();
 
-		//let client = userWorkers.find((client) => client.chatId === user.chatId);
-
-		const keyboard = JSON.stringify({
-			inline_keyboard: [
-				[
-					{"text": "Поехали", web_app: {url: webAppUrl}},
-				],
-			]
-		});
-
 		//отправить в телеграмм
 		
 		//Правила
-		if (selectedElement === 2 || mess === 'Дорогие коллеги' || mess === 'дорогие коллеги') {
+		if (selectedElement === 2) {
 			//send photo
 			let poster1 = 'https://proj.uley.team/upload/posters/kollegi.jpg' //poster 1
 
@@ -665,11 +649,7 @@ const Chat = () => {
 
 			arr.map(async(item, index)=> {
 				setTimeout(async()=> {
-					await sendPhotoToTelegram({user: user.chatId, photo: item, keyboard: keyboard})
-
-					// setTimeout(async()=> {
-                    //     await delMessageToTelegram({user: user.chatId, messageId: sendToTelegram?.data.result.message_id}) 
-                    // }, 1200000) //20 мин.
+					await sendPhotoToTelegram({user: user.chatId, photo: item, keyboard: ''})
 				}, 500 * ++index)
 			})			
 		} 
@@ -756,7 +736,7 @@ const Chat = () => {
 		const keyboard = JSON.stringify({
 			inline_keyboard: [
 				[
-					{"text": "ЭДО", url:'https://ya.ru'},
+					{"text": "Открыть", url:'https://uley.team/property'},
 				],
 			]
 		});
@@ -791,7 +771,7 @@ const Chat = () => {
 		const keyboard = JSON.stringify({
 			inline_keyboard: [
 				[
-					{"text": "Реквизиты", copy_text: {text: '+79057935149'}},
+					{"text": "Скопировать номер", copy_text: {text: '+7(905)793-51-49'}},
 				],
 			]
 		});

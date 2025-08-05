@@ -211,7 +211,7 @@ const ChatInput = ({
 							Новости
 							</Dropdown.Item>
 							<Dropdown.Item onClick={()=>change(4)}>
-							СПИСОК ПАСПОРТНЫХ ДАННЫХ
+							Список паспортных данных
 							</Dropdown.Item>
 							<Dropdown.Item onClick={()=>change(5)}>
 							Реквизиты №1
