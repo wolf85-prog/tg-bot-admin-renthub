@@ -1,29 +1,24 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
-import media from "./../../../../chat-app-new/assets/images/placeholder.jpeg";
-import Checkbox from "./../../../components/Checkbox";
-import Icon from "./../../../components/Icon";
-import { editContact, uploadFile, editContactAvatar } from './../../../../http/chatAPI';
-import { getWorkerNotionId, getWorkerChildrenId, getLastPretendent, getProjectId, blockedWorkers, getWorker } from './../../../../http/workerAPI';
-import { getSendCall } from './../../../../http/adminAPI';
 import { useUsersContext } from "../../../../chat-app-new/context/usersContext";
 import { AccountContext } from './../../../../chat-app-new/context/AccountProvider';
+import { Dropdown, DropdownButton, ButtonGroup } from 'react-bootstrap'
+
+
+import Icon from "./../../../components/Icon";
+import { getLastPretendent, getProjectId, blockedWorkers, getWorker } from './../../../../http/workerAPI';
+import { getSendCall } from './../../../../http/adminAPI';
+
 import defaultAvatar from "./../../../../chat-app-new/assets/images/no-avatar.png";
-import CIcon from '@coreui/icons-react'
-import {
-  cilPen,
-  cilMediaPlay,
-  cilPhone
-} from '@coreui/icons'
-import { 
-	CFormSelect,
-  } from '@coreui/react'
+import Trubka from './../../../../assets/images/trubka_green.png';
 
 import { $host } from './../../../../http/index';
 import sendSound from './../../../../chat-app-new/assets/sounds/sendmessage.mp3';
 import ishodCall from './../../../../assets/sound/ishod.mp3';
-import { getManagerNotion } from "src/http/renthubAPI";
+
 
 const Profile = ({ user, closeSidebar }) => {
+
+	const { workersAll, setManagerIshod, setShowCallCardManager } = useUsersContext()
 
 	//console.log('user: ', user)
 	const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
@@ -146,6 +141,119 @@ const Profile = ({ user, closeSidebar }) => {
 		audioIshodCall.play();
 		await getSendCall(id)
 	}
+	
+	const CustomMenu = React.forwardRef(
+			({ children, style, className, 'aria-labelledby': labeledBy }, ref) => {
+			  const [value, setValue] = useState('')
+		
+			  return (
+				<div
+				  ref={ref}
+				  style={{
+					backgroundColor: '#20272b',
+					position: 'absolute',
+					top: '65px',
+					left: '15px',
+					borderRadius: '6px',
+					padding: '0 0 0 0',
+					fontSize: '14px',      
+					minWidth: '50px',
+				  }}
+				  className={className}
+				  aria-labelledby={labeledBy}
+				>
+				  <ul className="list-unstyled" style={{ marginBottom: '0', padding: '5px 10px' }}>
+					{React.Children.toArray(children).filter(
+					  (child) => !value || child.props.children?.toLowerCase().startsWith(value),
+					)}
+				  </ul>
+				</div>
+			  )
+			},
+	)
+	CustomMenu.displayName = 'Edit'
+	
+	const CustomToggleCall = React.forwardRef(({ children, onClick }, ref) => (
+			<img
+			  src={Trubka}
+			  alt=""
+			  ref={ref}
+			  onClick={(e) => {
+				e.preventDefault()
+				onClick(e)
+			  }}
+			  width={25}
+			  style={{ cursor: 'pointer'}}
+			>
+			  {children}
+			</img>
+		))
+		
+	CustomToggleCall.displayName = 'Call'
+
+	const CustomToggleCall2 = React.forwardRef(({ children, onClick }, ref) => (
+			<p 
+				className="profile__success-text profile__worker" 
+				ref={ref}
+				onClick={(e) => {
+					e.preventDefault()
+					onClick(e)
+				}}>Позвонить
+			  {children}
+			</p>
+		))
+		
+	CustomToggleCall2.displayName = 'Call2'
+
+	const CustomMenu2 = React.forwardRef(
+			({ children, style, className, 'aria-labelledby': labeledBy }, ref) => {
+			  const [value, setValue] = useState('')
+		
+			  return (
+				<div
+				  ref={ref}
+				  style={{
+					backgroundColor: '#20272b',
+					position: 'absolute',
+					top: '65px',
+					right: '65px',
+					borderRadius: '6px',
+					padding: '0 0 0 0',
+					fontSize: '14px',      
+					minWidth: '50px',
+				  }}
+				  className={className}
+				  aria-labelledby={labeledBy}
+				>
+				  <ul className="list-unstyled" style={{ marginBottom: '0', padding: '5px 10px' }}>
+					{React.Children.toArray(children).filter(
+					  (child) => !value || child.props.children?.toLowerCase().startsWith(value),
+					)}
+				  </ul>
+				</div>
+			  )
+			},
+	)
+	CustomMenu2.displayName = 'Edit2'
+
+
+	const changeCallManager = async (eventkey) => {
+        if (eventkey.split(' ')[0] === '101' || eventkey === '101') {
+          console.log(eventkey)
+      
+          const manager = parseInt(eventkey.split(' ')[1]) //mainspec.find((item, index) => index === parseInt(eventkey.split(' ')[2]))
+      
+          if (manager) {
+            const managerItem = workersAll.find(item2=> item2.chatId === manager.toString())
+            //console.log("worker id: ", workersAll, worker)
+            if (managerItem) {
+              setManagerIshod({fio: managerItem?.fio, city: managerItem?.city, avatar: managerItem?.avatar})
+              setShowCallCardManager(true)
+              clickToCall(manager, 's')
+            }
+          }
+        }
+    }
 
 	return (
 		<div className="profile">
@@ -258,12 +366,47 @@ const Profile = ({ user, closeSidebar }) => {
 
 			<div 
 				className="profile__sectionW profile__section--success" 
-				onClick={()=>clickToCall(user.chatId)} 
 				style={{cursor: 'pointer', backgroundColor: press ? '#0e1518' : '#131c21'}} 
 			>
 				{/* <CIcon icon={cilPhone} className="profile__success-icon" /> */}
-				<Icon id="phone" className="profile__success-icon" />
-				<p className="profile__success-text profile__proj">Позвонить</p>
+				{/* <Icon id="phone" className="profile__success-icon" />
+				<p className="profile__success-text profile__proj">Позвонить</p> */}
+				<Dropdown onSelect={changeCallManager}>
+					<Dropdown.Toggle
+						as={CustomToggleCall}
+						//id="dropdown-custom-components"
+						key={user?.chatId}
+						id={`dropdown-button-drop-${user?.chatId}`}
+						drop={'up'}
+					></Dropdown.Toggle>
+					<Dropdown.Menu as={CustomMenu}>
+					<Dropdown.Item eventKey={`101 ${user?.chatId}`}>
+						Менеджер №1
+					</Dropdown.Item>
+					<Dropdown.Item eventKey={`102 ${user?.chatId}`}>
+						Менеджер №2
+					</Dropdown.Item>
+					</Dropdown.Menu>
+				</Dropdown>
+
+				{/* <p className="profile__success-text profile__worker">Позвонить</p> */}
+				<Dropdown onSelect={changeCallManager}>
+					<Dropdown.Toggle
+						as={CustomToggleCall2}
+						//id="dropdown-custom-components"
+						key={user?.chatId}
+						id={`dropdown-button-drop-${user?.chatId}`}
+						drop={'up'}
+					></Dropdown.Toggle>
+					<Dropdown.Menu as={CustomMenu2}>
+					<Dropdown.Item eventKey={`101 ${user?.chatId}`}>
+						Менеджер №1
+					</Dropdown.Item>
+					<Dropdown.Item eventKey={`102 ${user?.chatId}`}>
+						Менеджер №2
+					</Dropdown.Item>
+					</Dropdown.Menu>
+				</Dropdown>
 			</div>
 
 			<div className="profile__sectionW profile__sectionW--danger">

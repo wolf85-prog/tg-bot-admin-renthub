@@ -1,9 +1,14 @@
 import React, { useState, useContext, useEffect, useRef }  from "react";
 import { Link, useLocation } from 'react-router-dom'
+import { Dropdown, DropdownButton, ButtonGroup } from 'react-bootstrap'
+
+import { useUsersContext } from '../../../../chat-app-new/context/usersContext'
+
 import Icon from "./../../../components/Icon";
 import OptionsBtn from "./../../../components/OptionsButton";
 import avatarDefault from "./../../../../chat-app-new/assets/images/no-avatar.png";
 import editIcon from './../../../../assets/images/pencil.png'
+import Trubka from './../../../../assets/images/trubka.png'
 
 import { 
 	CButton
@@ -19,6 +24,8 @@ import { getSendCall } from './../../../../http/adminAPI';
 const Header = ({ user, userH, manager, openProfileSidebar, openSearchSidebar, closeSidebar, showCloseButton, clearFile, setClearFile, clickClearFile  }) => {
 
 	const [press, setPress] = useState(false)
+
+	const { workersAll, setManagerIshod, setShowCallCardManager } = useUsersContext()
 
 	const audio = new Audio(sendSound);
 	const audioIshodCall = new Audio(ishodCall);
@@ -60,6 +67,74 @@ const Header = ({ user, userH, manager, openProfileSidebar, openSearchSidebar, c
 		await getSendCall(id)
 	}
 
+	const CustomMenu = React.forwardRef(
+		({ children, style, className, 'aria-labelledby': labeledBy }, ref) => {
+		  const [value, setValue] = useState('')
+	
+		  return (
+			<div
+			  ref={ref}
+			  style={{
+				backgroundColor: '#20272b',
+				position: 'absolute',
+				top: '65px',
+				left: '15px',
+				borderRadius: '6px',
+				padding: '0 0 0 0',
+				fontSize: '14px',      
+				minWidth: '50px',
+			  }}
+			  className={className}
+			  aria-labelledby={labeledBy}
+			>
+			  <ul className="list-unstyled" style={{ marginBottom: '0', padding: '5px 10px' }}>
+				{React.Children.toArray(children).filter(
+				  (child) => !value || child.props.children?.toLowerCase().startsWith(value),
+				)}
+			  </ul>
+			</div>
+		  )
+		},
+	)
+	CustomMenu.displayName = 'Edit'
+
+	const CustomToggleCall = React.forwardRef(({ children, onClick }, ref) => (
+		<img
+		  src={Trubka}
+		  alt=""
+		  ref={ref}
+		  onClick={(e) => {
+			e.preventDefault()
+			onClick(e)
+		  }}
+		  width={15}
+		  style={{ cursor: 'pointer', width: '20px', marginLeft: '15px' }}
+		>
+		  {children}
+		</img>
+	  ))
+	
+	CustomToggleCall.displayName = 'Call'
+
+
+	const changeCallManager = async (eventkey) => {
+		if (eventkey.split(' ')[0] === '101' || eventkey === '101') {
+		  console.log(eventkey)
+	
+		  const managerChatId = parseInt(eventkey.split(' ')[1]) //mainspec.find((item, index) => index === parseInt(eventkey.split(' ')[2]))
+	
+		  if (managerChatId) {
+			const worker = workersAll.find(item2=> item2.chatId === managerChatId.toString())
+			//console.log("worker id: ", workersAll, worker)
+			if (worker) {
+			  setManagerIshod({fio: worker?.fio, city: worker?.city, avatar: worker?.avatar})
+			  setShowCallCardManager(true)
+			  clickToCall(managerChatId, 'm')
+			}
+		  }
+		}
+	}
+
 	return (
 		<header className="headerB chat__header">
 			<div className="chat__avatar-wrapper" onClick={openProfileSidebar}>
@@ -79,6 +154,24 @@ const Header = ({ user, userH, manager, openProfileSidebar, openSearchSidebar, c
 			<div className="chat__actions">
 				{clearFile ? <CButton color="danger" onClick={clickClearFile}>Очистить</CButton> : ''}
 
+				<Dropdown onSelect={changeCallManager}>
+					<Dropdown.Toggle
+						as={CustomToggleCall}
+						//id="dropdown-custom-components"
+						key={user?.id}
+						id={`dropdown-button-drop-${user?.id}`}
+						drop={'up'}
+					></Dropdown.Toggle>
+					<Dropdown.Menu as={CustomMenu}>
+					<Dropdown.Item eventKey={`101 ${user?.id}`}>
+						Менеджер №1
+					</Dropdown.Item>
+					<Dropdown.Item eventKey={`102 ${user?.id}`}>
+						Менеджер №2
+					</Dropdown.Item>
+					</Dropdown.Menu>
+				</Dropdown>
+
 				<Link to={'http://proj.uley.team:3000/managers'} state={{ managerId: manager[0]?.id, }}>
 					<button
 						className="chat__action"
@@ -89,14 +182,14 @@ const Header = ({ user, userH, manager, openProfileSidebar, openSearchSidebar, c
 					</button>
 				</Link>
 
-				<button
+				{/*<button
 					className="chat__action"
 					aria-label="Phone"
 					onClick={()=>clickToCall(user?.id)} 
 					style={{transform: 'rotate(90deg)', color: '#aaabad'}}
 				>
 					<CIcon icon={cilPhone} size="lg"/>
-				</button>
+				</button>*/}
 				
 				<button
 					className="chat__action"

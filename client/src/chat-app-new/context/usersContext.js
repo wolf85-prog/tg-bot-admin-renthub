@@ -104,6 +104,9 @@ const UsersProvider = ({ children }) => {
 	const [showCallCard, setShowCallCard] = useState(false);
 	const [workerCall, setWorkerCall] = useState('');
 
+	const [showCallCardManager, setShowCallCardManager] = useState(false);
+	const [managerIshod, setManagerIshod] = useState({});
+
 	const [showCallCardNo, setShowCallCardNo] = useState(false);
 	const [workerCallNo, setWorkerCallNo] = useState('');
 	const [callIndex, setCallIndex] = useState(0)
@@ -169,7 +172,7 @@ const UsersProvider = ({ children }) => {
 		
 			//0 все специалисты
 			let managers = await getRManagers()
-			//console.log("Managers: ", managers)
+			console.log("Managers: ", managers)
 			
 			const arrayWorkerAll = []
 
@@ -836,6 +839,12 @@ function isObjectEmpty(obj) {
 			workerCallNo,
 			callIndex,
 			callIndex2,
+
+			managerIshod, 
+			setManagerIshod, 
+			showCallCardManager, 
+			setShowCallCardManager,
+
 			showUpdate,
 			setShowUpdate,
 			showUpdate2,

@@ -38,6 +38,7 @@ import Error from "./../assets/images/error.png";
 import Error2 from "./../assets/images/error2.png";
 import Delete from "./../assets/images/cart.png";
 import Delete2 from "./../assets/images/cart2.png";
+import ULEY from "./../assets/images/home_chat.png";
 
 import { useUsersContext } from "./../chat-app-new/context/usersContext";
 import { AppHeaderDropdown } from './header/index'
@@ -55,6 +56,8 @@ const AppHeaderChat = () => {
   const { managerUpdate, setManagerUpdate, showUpdate, setShowUpdate, 
     workerCall, showCallCard, setShowCallCard, workerCallNo, showCallCardNo, setShowCallCardNo, callIndex, callIndex2, 
     soundVolume, setSoundVolume, soundMute, setSoundMute, showDistrib, setShowDistrib} = useUsersContext();
+
+    const { managerIshod, setManagerIshod, showCallCardManager, setShowCallCardManager} = useUsersContext();
 
   const [soundCount, setSoundCount] = useState(100)
   const [showBar, setShowBar] = useState(false)
@@ -386,6 +389,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
                 <CIcon icon={cilPhone} size="lg"/>
               </CNavLink>
             </CTooltip>
+            {/* входящий заказчик */}
             <div style={{
               display: showCallCard ? 'block' : 'none', 
               position: 'absolute', top: '65px', right: '0', 
@@ -482,6 +486,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
                 </div>
             </div> 
             
+            {/* неизвестный номер */}
             <div style={{
               display: showCallCardNo ? 'block' : 'none', 
               position: 'absolute', top: '65px', right: '0', 
@@ -517,6 +522,75 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
                   />
                 </div>
             </div>
+
+            {/* Исходящий менеджер */}
+                        <div style={{
+                          display: showCallCardManager ? 'block' : 'none', 
+                          position: 'absolute', top: '65px', right: '0', 
+                          width: '900px', height: '330px', 
+                          backgroundColor: '#2a2f32', 
+                          borderRadius: '15px', 
+                          border: '1px solid #4b4b4b',
+                          padding: '8px',
+                          zIndex: callIndex}
+                        }>
+                            <div className="d-flex" style={{justifyContent: 'space-between'}}>
+                              <CToastBody>
+                                <div style={{display: 'flex'}}>
+                                  {managerIshod?.avatar ? 
+                                  <img src={managerIshod.avatar} alt='' style={{borderRadius: '15px', objectFit: 'cover'}} width={314} height={314}/>
+                                  : <img src={ULEY} alt='' style={{borderRadius: '15px', objectFit: 'cover'}} width={314} height={314}/>
+                                  }
+                                  <CToastClose onClick={()=>setShowCallCardManager(false)} white style={{position: 'absolute'}}/>
+                                  <div style={{display: 'flex', flexDirection: 'column', marginLeft: '20px'}}>
+                                    <span style={{color: '#fff', fontSize: '33px', position: 'absolute', top: '0px'}}>{managerIshod?.fio ? managerIshod.fio?.split(' ')[0] : ''}</span>
+                                    <span style={{color: '#fff', fontSize: '33px', position: 'absolute', top: '37px'}}>{managerIshod?.fio ? managerIshod.fio?.split(' ')[1] : ''} {managerIshod?.fio ? managerIshod.fio?.split(' ')[2]: ''}</span>
+                                    
+                                    <span style={{fontSize: '20px', color: '#858585', fontWeight: '700', marginTop: '85px'}}>{managerIshod?.dateborn ? '01.01.'+ managerIshod?.dateborn.split('-')[0] : ''}</span>
+                                    <span style={{fontSize: '20px', color: '#858585', fontWeight: '700'}}>{managerIshod?.city}</span>
+                                    <ul style={{listStyle: 'disc', paddingLeft: '20px'}}>
+                                      <li style={{fontSize: '16px', color: '#858585', paddingTop: '3px'}}>
+                                        Проекты: {managerIshod?.projects ? managerIshod.projects : '0'}
+                                      </li>
+                                      <li style={{fontSize: '16px', color: '#858585', paddingTop: '3px'}}>
+                                        Заказчик
+                                      </li>
+                                      {/* <li style={{fontSize: '16px', color: '#858585', paddingTop: '3px'}}>
+                                        {workerIshod?.worklist && JSON.parse(workerIshod.worklist).map((item, index)=> (
+                                          <span key={index}>{item.spec} {index === JSON.parse(workerIshod.worklist).length-1 ? '' : '| '}</span>
+                                        ))}
+                                      </li>
+                                      <li style={{fontSize: '16px', color: '#858585', paddingTop: '3px'}}>
+                                        {workerIshod?.skill && JSON.parse(workerIshod.skill).map((item, index)=> (
+                                          <span key={index}>{item.name} {index === JSON.parse(workerIshod.skill).length-1 ? '' : '| '}</span>
+                                        ))}
+                                      </li> */}
+                                    </ul>
+                        
+                                    {/* <ul style={{listStyle: 'disc', paddingLeft: '20px', paddingTop: '5px', position: 'absolute', bottom: '-3px'}}>
+                                      <li style={{fontSize: '16px', color: 'red', width:'500px'}}>
+                                        <div style={{whiteSpace: 'nowrap', overflow: 'hidden'}}>
+                                          {workerIshod?.comteg && JSON.parse(workerIshod?.comteg).map((item, index)=> (
+                                                <span key={index}>{item.name} {index === JSON.parse(workerIshod.comteg).length-1 ? '' : '| '}</span>
+                                          ))}
+                                        </div>
+                                                    
+                                      </li>
+                                    </ul> */}
+                                  </div>
+                                </div>
+            
+                              </CToastBody>
+                              {/* <CToastClose onClick={()=>setShowCallCard(false)} white style={{marginTop: '0px', marginRight: '0px'}}/> */}
+                              <img 
+                                src={Trubka} 
+                                onClick={()=>setShowCallCard(false)} 
+                                width={70} alt='' 
+                                style={{position: 'absolute', top: '20px', right: '20px'}}
+                              />
+                            </div>
+                        </div>
+
           </CNavItem>
 
           {/* Next*/}
