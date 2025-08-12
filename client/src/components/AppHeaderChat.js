@@ -221,6 +221,13 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
         </CHeaderNav>
         
         <CHeaderNav style={{marginTop: 'auto', display: 'flex', alignItems: 'center'}}>
+          {/* Идет рассылка */}
+          <CNavItem>
+            <CButton className={showDistrib ? 'button-m' : ''} color="dark" style={{marginRight: '20px', color: showDistrib ? '' : 'gray', background: 'rgb(83, 80, 80)', fontSize: '12px', width: '150px', height: '23px', paddingTop: '1px', paddingRight: '0px', paddingLeft: '0px', marginTop: '-7px'}}>
+              Идет рассылка
+            </CButton>
+          </CNavItem>
+          
           {/* + */}
           <CNavItem>
             <CButton onClick={plusSound} color="dark" style={{marginRight: '10px', textAlign:'center', padding: '0', background: shake2 ? '#262829' : '#595d5f', fontSize: '14px', width: '23px', height: '23px', marginTop: '-7px'}}>
