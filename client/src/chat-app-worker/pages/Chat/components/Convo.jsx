@@ -569,10 +569,12 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 													(message.content.split(' ').map((item, index) => (
 														item.startsWith('https://') ?
 														<a key={index} className="chat__href" href={item} target="_blank" rel="noreferrer">{item.length > 50 ? item.substring(0, 50) + "..." : item}</a> 
-														: (item.length > 50 ? 
-															<a key={index} className="chat__href" href={item} target="_blank" rel="noreferrer">{item.substring(0, 50) + "..."}</a>
-															:<span key={index}>{item + ' '}</span>
-														   )	
+														// : (item.length > 50 ? 
+														// 	<a key={index} className="chat__href" href={item} target="_blank" rel="noreferrer">{item.substring(0, 50) + "..."}</a>
+														// 	:<span key={index}>{item + ' '}</span>
+														//    )	
+														// ))
+														: <span key={index}>{item + ' '}</span>
 														))
 													)
 												}
