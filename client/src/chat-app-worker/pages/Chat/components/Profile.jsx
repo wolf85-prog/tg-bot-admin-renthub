@@ -13,7 +13,7 @@ import Trubka from './../../../../assets/images/trubka_green.png';
 
 import { $host } from './../../../../http/index';
 import sendSound from './../../../../chat-app-new/assets/sounds/sendmessage.mp3';
-import ishodCall from './../../../../assets/sound/ishod.mp3';
+import ishodCall from './../../../../assets/sound/call_out.mp3';
 
 
 const Profile = ({ user, closeSidebar }) => {

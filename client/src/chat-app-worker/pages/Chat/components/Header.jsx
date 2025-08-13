@@ -17,7 +17,7 @@ import CIcon from '@coreui/icons-react'
 import { cilPhone } from '@coreui/icons'
 
 import sendSound from './../../../../chat-app-new/assets/sounds/sendmessage.mp3';
-import ishodCall from './../../../../assets/sound/ishod.mp3';
+import ishodCall from './../../../../assets/sound/call_out.mp3';
 
 import { getSendCall } from './../../../../http/adminAPI';
   
