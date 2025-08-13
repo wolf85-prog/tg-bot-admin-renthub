@@ -55,16 +55,16 @@ const Header = ({ user, userH, manager, openProfileSidebar, openSearchSidebar, c
 	}
 
 
-	const clickToCall = async(id) => {
+	const clickToCall = async(id, type, managerId) => {
 		// Button begins to shake
 		setPress(true);
-		console.log(id)
+		//console.log(id)
         
 		// Buttons stops to shake after 2 seconds
 		setTimeout(() => setPress(false), 200);
 
 		audioIshodCall.play();
-		await getSendCall(id)
+		await getSendCall(id, type, managerId)
 	}
 
 	const CustomMenu = React.forwardRef(
@@ -129,9 +129,21 @@ const Header = ({ user, userH, manager, openProfileSidebar, openSearchSidebar, c
 			if (worker) {
 			  setManagerIshod({fio: worker?.fio, city: worker?.city, avatar: worker?.avatar})
 			  setShowCallCardManager(true)
-			  clickToCall(managerChatId, 'm')
+			  clickToCall(managerChatId, 'm', '12')
 			}
 		  }
+		} else if (eventkey.split(' ')[0] === '102' || eventkey === '102') {
+			const managerChatId = parseInt(eventkey.split(' ')[1]) //mainspec.find((item, index) => index === parseInt(eventkey.split(' ')[2]))
+	
+			if (managerChatId) {
+				const worker = workersAll.find(item2=> item2.chatId === managerChatId.toString())
+				//console.log("worker id: ", workersAll, worker)
+				if (worker) {
+				setManagerIshod({fio: worker?.fio, city: worker?.city, avatar: worker?.avatar})
+				setShowCallCardManager(true)
+				clickToCall(managerChatId, 'm', '10')
+				}
+			}
 		}
 	}
 
@@ -181,15 +193,6 @@ const Header = ({ user, userH, manager, openProfileSidebar, openSearchSidebar, c
 						<img src={editIcon} width={18} alt='' style={{verticalAlign: 'text-bottom'}} />
 					</button>
 				</Link>
-
-				{/*<button
-					className="chat__action"
-					aria-label="Phone"
-					onClick={()=>clickToCall(user?.id)} 
-					style={{transform: 'rotate(90deg)', color: '#aaabad'}}
-				>
-					<CIcon icon={cilPhone} size="lg"/>
-				</button>*/}
 				
 				<button
 					className="chat__action"

@@ -559,11 +559,12 @@ export const startSoundNotif = async()=>{
 //------------------------------------------------------------------------------------------
 
 //call
-export const getSendCall = async(tg_id)=>{
+export const getSendCall = async(tg_id, typeCall, manager_id)=>{
     try {
         const response = await $host_call.post('/calls', {
             "tg_id": tg_id,
-            "type": "m"
+            "type": typeCall,
+            "manager": manager_id
         });
         console.log("call: ", response.data);
         return response.data;

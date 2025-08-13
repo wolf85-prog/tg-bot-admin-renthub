@@ -645,7 +645,7 @@ const UsersProvider = ({ children }) => {
 		socket.on("getAdminRent", fetchAdmin);	
 		socket.on("getDelAdminRent", fetchDelAdminRent);
 		
-		socket.on("getNotifRent", fetchNotifAdmin);
+		socket.on("getNotif", fetchNotifAdmin);
 		
 	}, [socket]);
 
@@ -779,13 +779,9 @@ const fetchNotifAdmin = async (dataAll) => {
 		setCallIndex(1)
 		setCallIndex2(2)
 	}
-	//обновление данных
-	else if (task === 302) {
-		setShowUpdate(processUpdateD)
-		setManagerUpdate(managers_update)
-	}
+	
 	//рассылка
-	else if (task === 402) {
+	else if (task === 400) {
 		setShowDistrib(processDistrib)
 	}
 

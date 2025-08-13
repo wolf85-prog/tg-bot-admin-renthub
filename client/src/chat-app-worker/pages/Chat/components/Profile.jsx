@@ -130,7 +130,7 @@ const Profile = ({ user, closeSidebar }) => {
 		e.target.src = defaultAvatar
 	}
 
-	const clickToCall = async(id) => {
+	const clickToCall = async(id, type, managerId) => {
 		// Button begins to shake
 		setPress(true);
 		console.log(press)
@@ -139,7 +139,7 @@ const Profile = ({ user, closeSidebar }) => {
 		setTimeout(() => setPress(false), 200);
 
 		audioIshodCall.play();
-		await getSendCall(id)
+		await getSendCall(id, type, managerId)
 	}
 	
 	const CustomMenu = React.forwardRef(
@@ -249,7 +249,20 @@ const Profile = ({ user, closeSidebar }) => {
             if (managerItem) {
               setManagerIshod({fio: managerItem?.fio, city: managerItem?.city, avatar: managerItem?.avatar})
               setShowCallCardManager(true)
-              clickToCall(manager, 's')
+              clickToCall(manager, 'm', '12')
+            }
+          }
+        } else if (eventkey.split(' ')[0] === '102' || eventkey === '102') {
+
+          const manager = parseInt(eventkey.split(' ')[1]) //mainspec.find((item, index) => index === parseInt(eventkey.split(' ')[2]))
+      
+          if (manager) {
+            const managerItem = workersAll.find(item2=> item2.chatId === manager.toString())
+            //console.log("worker id: ", workersAll, worker)
+            if (managerItem) {
+              setManagerIshod({fio: managerItem?.fio, city: managerItem?.city, avatar: managerItem?.avatar})
+              setShowCallCardManager(true)
+              clickToCall(manager, 'm', '10')
             }
           }
         }
