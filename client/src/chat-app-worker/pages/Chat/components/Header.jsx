@@ -184,11 +184,10 @@ const Header = ({ user, userH, manager, openProfileSidebar, openSearchSidebar, c
 					</Dropdown.Menu>
 				</Dropdown>
 
-				<Link to={'http://proj.uley.team:3000/managers'} state={{ managerId: manager[0]?.id, }}>
+				<Link to={'http://localhost:3000/managers/' + manager[0]?.id}>
 					<button
 						className="chat__action"
 						aria-label="profile"
-						//onClick={()=>console.log(user?.id)}
 					>
 						<img src={editIcon} width={18} alt='' style={{verticalAlign: 'text-bottom'}} />
 					</button>

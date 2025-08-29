@@ -1,5 +1,6 @@
 import React, { Suspense, useEffect, useState } from 'react'
 import { AppSidebar, AppFooter, AppHeader } from '../components/index'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 import { 
   CContainer, 
@@ -12,6 +13,10 @@ import { useUsersContext } from "../chat-app-new/context/usersContext";
 
 //Workers.js
 const Managers = () => {
+
+  const location = useLocation()
+  const managerId= location.state?.managerId
+  console.log("managerId: ", location)
 
   const { setCountPretendent, pretendents, setPretendents } = useUsersContext();
 
