@@ -184,7 +184,7 @@ const Header = ({ user, userH, manager, openProfileSidebar, openSearchSidebar, c
 					</Dropdown.Menu>
 				</Dropdown>
 
-				<Link to={'http://localhost:3000/managers/' + manager[0]?.id}>
+				<Link to={'https://proj.uley.team:3000/managers/' + manager[0]?.id}>
 					<button
 						className="chat__action"
 						aria-label="profile"
