@@ -61,7 +61,7 @@ const Profile = ({ user, closeSidebar }) => {
 	const [crmId3, setCrmId3] = useState("")
 
 	useEffect(() => {
-		setImg(`${host}${user.avatar}`)
+		setImg(`${host}${user?.avatar}`)
 		//console.log(user)
 
 		//получить данные из ноушена по телеграм id
@@ -73,7 +73,7 @@ const Profile = ({ user, closeSidebar }) => {
 
 			//const avatars = await getWorkerChildrenId(fio_notion[0]?.id)
 			//const avatars = await getWorker(user.chatId)
-			setAvatar(user.avatar)
+			setAvatar(user?.avatar)
 		}
 
 		fetchData();
@@ -98,7 +98,7 @@ const Profile = ({ user, closeSidebar }) => {
 			imgsize.src = user?.avatar;
 		}, 2000)
 		
-		setPhone(user.phone)
+		setPhone(user?.phone)
 		
 		// if (user.phone?.includes('-')) {
 		// 	setPhone(user.phone)
@@ -341,7 +341,7 @@ const Profile = ({ user, closeSidebar }) => {
 							Сфера деятельности
 						</span>
 						<span className="profile__action-text--top profile__notion" style={{textAlign: 'right'}}>
-							<table className="table-noborder">{user.sfera ? JSON.parse(user.sfera).map((man, index) => <tr key={index}><td>{man.name}</td></tr> ) : '—'}</table> 
+							<table className="table-noborder">{user?.sfera ? JSON.parse(user.sfera).map((man, index) => <tr key={index}><td>{man.name}</td></tr> ) : '—'}</table> 
 						</span>	
 					</p>
 				</li>
@@ -353,8 +353,8 @@ const Profile = ({ user, closeSidebar }) => {
 						</span>
 						
 						<span className="profile__action-text--top profile__notion">
-							{user.chatId}
-							<div style={{fontSize: '16px', color: '#656565'}}>{user.username ? `@${user.username}` : user.username}</div>				
+							{user?.chatId}
+							<div style={{fontSize: '16px', color: '#656565'}}>{user?.username ? `@${user.username}` : user?.username}</div>				
 						</span>
 					</p>
 				</li>

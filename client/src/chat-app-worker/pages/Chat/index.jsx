@@ -1016,7 +1016,7 @@ https://t.me/ULEY_Office_Bot
 					clickClearFile={clickClearFile}
 				/>
 				<div className="chat__content">
-					<Convo lastMsgRef={lastMsgRef} messages={user.messages} convId={user.conversationId} />
+					<Convo lastMsgRef={lastMsgRef} messages={user?.messages} convId={user?.conversationId} />
 					<CModal alignment="center" visible={showErrorFile} onClose={() => setShowErrorFile(false)}>
                         <CModalHeader>
                         	<CModalTitle>Предупреждение</CModalTitle>

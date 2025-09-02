@@ -40,12 +40,12 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 	const { delRMessageContext } = useUsersContext();
 
 	useEffect(() => {
-		setDates(Object.keys(allMessages))  //['01/01/2023', 'Сегодня']
+		setDates(allMessages ? Object.keys(allMessages) : [])  //['01/01/2023', 'Сегодня']
 		setNewMessages(allMessages)
 
 		//console.log("array: ", allMessages)
 
-		const objDate = Object.keys(allMessages)
+		const objDate = allMessages ? Object.keys(allMessages) : []
 		
 		objDate.map((date, dateIndex) => {
 			array.push(...allMessages[date]) //allMessages[date];

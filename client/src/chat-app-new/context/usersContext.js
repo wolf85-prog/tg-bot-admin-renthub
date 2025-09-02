@@ -215,7 +215,7 @@ const UsersProvider = ({ children }) => {
 				arrayWorkerAll.push(newWorker)
 			})
 
-			//console.log("arrayWorkerAll: ", arrayWorkerAll)
+			console.log("arrayWorkerAll: ", arrayWorkerAll)
 		
 			setWorkersAll(arrayWorkerAll)
 
