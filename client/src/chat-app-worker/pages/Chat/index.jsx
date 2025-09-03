@@ -43,8 +43,8 @@ const Chat = () => {
 	const { setCountMessage } = useUsersContext();
 
 	const chatId = personW.id;
-	let user = userRenthub.filter((user) => user.chatId === chatId.toString())[0];
-	let convs = conversations.find((conv) => conv.members[0] === chatId.toString());
+	let user = userRenthub.find((user) => user.chatId === chatId?.toString());
+	let convs = conversations.find((conv) => conv.members[0] === chatId?.toString());
 
 	const lastMsgRef = useRef(null);
 	const [showAttach, setShowAttach] = useState(false);
@@ -1006,7 +1006,7 @@ https://t.me/ULEY_Office_Bot
 				<Header
 					user={personW}
 					userH={user}
-					manager={workersAll.filter((item)=> item.chatId === user.chatId)}
+					manager={workersAll.filter((item)=> item.chatId === user?.chatId)}
 					openProfileSidebar={() => openSidebar(setShowProfileSidebar)}
 					openSearchSidebar={() => openSidebar(setShowSearchSidebar)}
 					closeSidebar={() => closeSidebar(setShowProfileSidebar)}

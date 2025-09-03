@@ -172,7 +172,7 @@ const UsersProvider = ({ children }) => {
 		
 			//0 все специалисты
 			let managers = await getRManagers()
-			console.log("Managers: ", managers)
+			console.log("Managers: ", managers.length)
 			
 			const arrayWorkerAll = []
 
@@ -215,7 +215,7 @@ const UsersProvider = ({ children }) => {
 				arrayWorkerAll.push(newWorker)
 			})
 
-			console.log("arrayWorkerAll: ", arrayWorkerAll)
+			console.log("arrayWorkerAll: ", arrayWorkerAll.length)
 		
 			setWorkersAll(arrayWorkerAll)
 

@@ -32,8 +32,10 @@ const AppRouter = observer(() => {
       <Route exact path="/register" name="Register Page" element={<Register />} />
       <Route exact path="/404" name="Page 404" element={<Page404 />} />
       <Route exact path="/500" name="Page 500" element={<Page500 />} />
+
       <Route exact path="/chatrent" name="Renthub" element={<ChatWorker />} />
-      <Route exact path="/chatrent/:id" name="Renthub" element={<ChatRentPerson />} />
+      <Route exact path="/:id" name="Renthub" element={<ChatRentPerson />} />
+
       <Route exact path="/distributionr" name="Renthub" element={<DistributionR />} />
       <Route exact path="/distributionr_add" name="Renthub" element={<DistributionAddR />} />
       <Route exact path="/distributionr_planer" name="Renthub" element={<DistributionRPlaner />} />

@@ -56,7 +56,7 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 	}, [allMessages])
 
 	useEffect(() => {
-		setDates(Object.keys(newMessages))  //['01/01/2023', 'Сегодня']
+		setDates(newMessages ? Object.keys(newMessages) : [])  //['01/01/2023', 'Сегодня']
 		
 	}, [newMessages])
 
@@ -125,9 +125,9 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 
 	//прокрутка
 	const scrollToMsg = (id) => {
-		console.log(id)
+		console.log("scrollToMsg id:", id)
 		//alert(id)
-		console.log(msgRef.current)
+		console.log("msgRef: ", msgRef.current)
 		msgRef.current[id].scrollIntoView({transition: "smooth"});
 	};
 
