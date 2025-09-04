@@ -85,12 +85,16 @@ const Chat = () => {
 		//console.log("personW: ", personW.id)
 		if (user) {
 			console.log("personW: ", personW.id)
-			scrollToLastMsg();
+
 			//setUserAsUnread(user.chatId);
 			setCountMessage(0)
 			//обнулить кол-во сообщений
 			//const kol_mess = getCountMessage()
 			//newCountWMessage(kol_mess - 1)
+
+			setTimeout(()=> {
+				scrollToLastMsg();
+			}, 1000)
 		}
 	}, [user]);
 
@@ -99,7 +103,10 @@ const Chat = () => {
 	}, [userRenthub]);
 
 	useEffect(() => {
-		console.log("lastMsgRef: ", lastMsgRef.current)
+		//setTimeout(()=> {
+			console.log("lastMsgRef: ", lastMsgRef.current)
+		//}, 3000)
+		
 		//lastMsgRef.current = lastMsgRef.current + 1
 		//scrollToLastMsg();
 	}, [lastMsgRef.current]);
