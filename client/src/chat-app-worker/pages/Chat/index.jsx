@@ -84,6 +84,7 @@ const Chat = () => {
 	useEffect(() => {
 		//console.log("personW: ", personW.id)
 		if (user) {
+			console.log("personW: ", personW.id)
 			scrollToLastMsg();
 			//setUserAsUnread(user.chatId);
 			setCountMessage(0)
@@ -91,11 +92,17 @@ const Chat = () => {
 			//const kol_mess = getCountMessage()
 			//newCountWMessage(kol_mess - 1)
 		}
-	}, []);
+	}, [user]);
 
 	useEffect(() => {
 		user && scrollToLastMsg();
 	}, [userRenthub]);
+
+	useEffect(() => {
+		console.log("lastMsgRef: ", lastMsgRef.current)
+		//lastMsgRef.current = lastMsgRef.current + 1
+		//scrollToLastMsg();
+	}, [lastMsgRef.current]);
 
 	useEffect(() => {
 		console.log(selectedElement)
@@ -234,6 +241,7 @@ const Chat = () => {
 
 	//прокрутка
 	const scrollToLastMsg = () => {
+		//console.log("Прокрутка: ", lastMsgRef.current)
 		lastMsgRef.current?.scrollIntoView({transition: "smooth"});
 	};
 

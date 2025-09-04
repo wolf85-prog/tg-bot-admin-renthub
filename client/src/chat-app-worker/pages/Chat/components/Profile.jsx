@@ -80,7 +80,7 @@ const Profile = ({ user, closeSidebar }) => {
 	}, [user]);
 
 	useEffect(() => {
-		console.log("user: ", user)
+		//console.log("user: ", user)
 
 		setTimeout(()=>{
 			setHeightImage(divBlock.current.getBoundingClientRect())

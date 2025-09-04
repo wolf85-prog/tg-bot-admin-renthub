@@ -32,6 +32,8 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 
 	//const dates = Object.keys(allMessages);  //['01/01/2023', 'Сегодня']
 
+	//console.log("lastMsgRef: ", lastMsgRef.current)
+
 	const msgRef = useRef([]);
 
 	let replyMessage;
@@ -125,9 +127,9 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 
 	//прокрутка
 	const scrollToMsg = (id) => {
-		console.log("scrollToMsg id:", id)
+		//console.log("scrollToMsg id:", id)
 		//alert(id)
-		console.log("msgRef: ", msgRef.current)
+		//console.log("msgRef: ", msgRef.current)
 		msgRef.current[id].scrollIntoView({transition: "smooth"});
 	};
 
@@ -341,6 +343,10 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 							replyMessage = message?.content.split('_reply_')[0] //messages.find(mess=> mess.id === message.content.split('_reply_')[0])
 					   	} 
 
+						// console.log(date, message.content, msgIndex, dateIndex === dates.length - 1 && msgIndex === messages.length - 1
+						// 		? lastMsgRef.current
+						// 		: undefined)
+
 						const assignRef = () =>
 							dateIndex === dates.length - 1 && msgIndex === messages.length - 1
 								? lastMsgRef
@@ -388,8 +394,8 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 												</Dropdown.Menu>
 											</Dropdown>	
 										</figure>) : 
-											message.content.endsWith('.xlsx') 
-											? <figure> 
+											message.content.endsWith('.xlsx') ? 
+											<figure> 
 												<img src={xlsIcon} width={30}/>
 												<a href={message.content} target="_blank" rel="noreferrer">{message.content}</a> 
 												{/* footer */}
@@ -420,8 +426,8 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 													</Dropdown.Menu>
 												</Dropdown>	
 											</figure> 
-											: message.content.endsWith('.docx') 
-											? <figure> 
+											: message.content.endsWith('.docx') ? 
+											<figure> 
 												<img src={docIcon} width={30}/>
 												<a href={message.content} target="_blank" rel="noreferrer">{message.content}</a> 
 												{/* footer */}
