@@ -23,8 +23,13 @@ const Contact = ({ contact, worker }) => {
 	const { setUserRentAsUnread, setCountMessageRent } = useUsersContext();
 	const { userRenthub, setUserRenthub } = useUsersContext();
 
+	const [checkContact, setCheckContact] = useState(false)
+
 	//обработка нажатия на пользователя из списка
     const getUser = async () => {
+		setCheckContact(!checkContact)
+		console.log(checkContact)
+
         setPersonW({
             name: contact.name, 
             id: contact.chatId, 
@@ -133,8 +138,9 @@ const Contact = ({ contact, worker }) => {
 			key={contact.id}
 			className="sidebar-contact"
 			onClick={() => getUser()}
+			// style={{backgroundColor: checkContact ? '#3C4247' : ''}}
 		>
-			<div className="sidebar-contact__avatar-wrapper" style={{position: 'relative'}}>
+			<div className="sidebar-contact__avatar-wrapper" style={{position: 'relative' }}>
 				{
 					contact.avatar
 					? <img src={`${contact.avatar}`} alt='' onError={onImageError} className="avatar-adm" style={{position: 'absolute', top: '0', zIndex: '0'}} />
