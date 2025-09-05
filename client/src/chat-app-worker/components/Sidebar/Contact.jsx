@@ -23,11 +23,13 @@ const Contact = ({ contact, worker }) => {
 	const { setUserRentAsUnread, setCountMessageRent } = useUsersContext();
 	const { userRenthub, setUserRenthub } = useUsersContext();
 
-	const [checkContact, setCheckContact] = useState(false)
+	const [checkContact, setCheckContact] = useState([])
 
 	//обработка нажатия на пользователя из списка
-    const getUser = async () => {
-		setCheckContact(!checkContact)
+    const getUser = async (id) => {
+		let arr = []
+		arr[id] = true
+		setCheckContact(arr)
 		console.log(checkContact)
 
         setPersonW({
@@ -137,8 +139,8 @@ const Contact = ({ contact, worker }) => {
 		<Link
 			key={contact.id}
 			className="sidebar-contact"
-			onClick={() => getUser()}
-			// style={{backgroundColor: checkContact ? '#3C4247' : ''}}
+			onClick={() => getUser(contact.id)}
+			//style={{backgroundColor: checkContact[contact.id] ? '#3C4247' : ''}}
 		>
 			<div className="sidebar-contact__avatar-wrapper" style={{position: 'relative' }}>
 				{
