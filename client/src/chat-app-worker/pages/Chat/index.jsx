@@ -67,6 +67,7 @@ const Chat = () => {
 	//select
     const [selectedElement, setSelectedElement] = useState("")
 	const [scenari, setScenari] = useState("")
+	const [nameUser, setNameUser] = useState("")
 
 	// для хранения ответа от бекенда
 	const [data, getFile] = useState({ name: "", path: "" });
@@ -116,6 +117,13 @@ const Chat = () => {
 		setSelectedElement(selectedElement);
 		setScenari(selectedElement)
 
+		let nameUser = personW.name.replace(/\[.+\]/,'').replace(/\s+/g, ' ').split(' ')[1]
+        //console.log("nameUser: ", nameUser)
+        if (!nameUser || nameUser.length === 0) {
+            nameUser = personW.name.replace(/\[.+\]/,'').replace(/\s+/g, ' ').split(' ')[0]
+        }
+		setNameUser(nameUser)
+
 		let text = ''
 
 		//Приветстиве
@@ -137,112 +145,57 @@ const Chat = () => {
 			setMess(text)
 		}
 
-		//Список паспортных данных
+		//О себе
 		else if (selectedElement === 4) {
-			text = '🔵 Сценарий «Список паспортных данных»'
+			text = '🔵 Сценарий «О себе»'
 			console.log(text)
 			setMess(text)
 		}
 
-		//Реквизиты №1
+		//Реклама
 		else if (selectedElement === 5) {
-			text = '🔵 Cценарий «Реквизиты №1»'
+			text = '🔵 Cценарий «Реклама»'
 			setMess(text)
 		}
 
-		//Реквизиты №2
+//--------------------------------------------------------		
+		//Новый проект
 		else if (selectedElement === 6) {
-			text = '🔵 Сценарий «Реквизиты №2»'
+			text = `Для создания новой заявки:
+•⁠  ⁠Нажмите на кнопку «Проект» слева внизу
+•⁠  ⁠Далее кнопка «Новый проект»
+•⁠  ⁠Заполните заявку, нажимаем кнопку «Создать проект»
+
+В профиле есть окошко «Цена услуги». Там размещены все 14 отделов со стандартными ставками за смену. Вы всегда можете предложить свою ставку, в зависимости от сложности и особенностей проекта.
+
+Все вопросы пишите в этот чат, или звоните:
++7(499)500-14-11
+Ждем ваших заявок!` 
+
 			setMess(text)
+		}
+
+		else if (selectedElement === 7) {
+			text = `Ваша заявка принята, мы свяжемся с вами в ближайшее время.`
+
+			setMess(text)
+		}
+
+		else if (selectedElement === 8) {
+			text = `${nameUser}, к сожалению по Вашей заявке откликов пока нет. Продолжаем поиски.`
+			setMess(text)
+		}
+
+		else if (selectedElement === 9) {
+			text = `${nameUser}, по Вашей текущей заявке слабая конверсия кандидатов. 
+Можем предложить поднять ставку до ..0 рублей в час, это может исправить ситуацию в лучшую сторону, 
+Что скажете?`
+
+			setMess(text)
+
 		}
 		
-		//Стандартный ответ
-		else if (selectedElement === '0') {
-			text = `${user.name.split(' ')[1]}, я юный чат-бот и еще не всё умею. Любой вопрос поможет решить наш оператор: +7 (499) 500-14-11`
-			setMess(text)
-		}
-		//Паспорт
-		else if (selectedElement === '1') {
-			text = "Отправка запроса паспорта..."
-			setMess(text)
-		}
-		//Кнопка с номером
-		else if (selectedElement === '2') {
-			text = `+7 (499) 500-14-11 - Менеджер U.L.E.Y`
-			setMess(text)
-		}
-		//Запас
-		else if (selectedElement === '3') {
-			text = `${user.name.split(' ')[1]}, мы готовы поставить Вас в запас на этот проект. Запас оплачивается.
-			Сумму можно будет уточнить у менеджера. С большой вероятностью Вы будете на нём задействованы, 
-			но для начала придется проснуться вместе с основным составом и быть готовым выйти на работу. Готовы?`
-			
-			setMess(text)
-		}
-		//Офис U.L.E.Y
-		else if (selectedElement === '4') {
-			text = `Офис | U.L.E.Y
 
-			Адрес: г. Москва, ул. Дербеневская набережная, д. 7, стр. 2
-					
-			Карта: https://goo.gl/maps/uFrAfV5NmE2rUXsT8`
-
-			setMess(text)
-		}
-		//Оплата / смета
-		else if (selectedElement === '5') {
-			text = `Для согласования и получения оплаты: 
-			https://t.me/ULEY_Office_Bot`
-
-			setMess(text)
-		}
-		//Заявка отклонена
-		else if (selectedElement === '6') {
-			text = `Добрый день, ${user.name.split(' ')[1]}. Спасибо, что откликнулись на эту заявку. 
-			В настоящий момент основной состав уже сформирован.
-			До встречи на новых проектах!`
-
-			setMess(text)
-		}
-		//Заявка одобрена
-		else if (selectedElement === '7') {
-			text = `Добрый день, ${user.name.split(' ')[1]}. Спасибо, что откликнулись на заявку. 
-			Для согласования тех. задачи на проект позвоните по номеру:
-			+7 (499) 500-14-11`
-
-			setMess(text)
-		}
-		//Запрос ключевых данных
-		else if (selectedElement === '8') {
-			text = `Добрый день, ${user.name.split(' ')[1]}. Вы впервые откликнулись на заявку от компании U.L.E.Y
-			Чтобы мы смогли предложить Вам работу на этом проекте пришлите, пожалуйста, немного информации о себе:
-					
-			✅ ФИО
-					
-			✅ Контакты для связи
-					
-			✅ Год рождения
-					
-			✅ Специальность`
-
-			setMess(text)
-		}
-
-		//Правила
-		else if (selectedElement === '9') {
-			text = 'Отправка сценария "Первый проект"...'
-
-			setMess(text)
-		}
-
-		//Постер
-		else if (selectedElement === '10') {
-			setPoster('https://proj.uley.team/upload/2024-05-21T06:26:45.939Z.jpg')
-
-			text = 'https://proj.uley.team/upload/2024-05-21T06:26:45.939Z.jpg'
-
-			setMess(text)
-		}
 
 	}, [selectedElement]);
 
@@ -406,18 +359,72 @@ const Chat = () => {
 				
 			sendScenariy3()
 
-		} else if (selectedElement === 4 || temp === 'Паспорт' || temp === 'паспорт') { //выбран Правила
+		// } else if (selectedElement === 4 || temp === 'Паспорт' || temp === 'паспорт') { //выбран Правила
+		// 	//отправка сценария
+		// 	console.log("отправка сценария: ", selectedElement, temp)
+		// 	//setSelectedElement(1)
+
+		// 	//let sendToTelegram = await sendMessageToTelegram({user: personW.id, text: temp})
+		// 	const message = {
+		// 		senderId: chatAdminId, 
+		// 		receiverId: personW.id,
+		// 		conversationId: convs.id,
+		// 		type: "text",
+		// 		text: '🔵 Сценарий «Список паспортных данных»',
+		// 		isBot: null,
+		// 		messageId: null,
+		// 	}
+				
+		// 	// console.log("message send: ", message);
+		
+		// 	//сохранение сообщения в базе данных
+		// 	await newRMessage(message)
+		
+		// 	//сохранить в контексте
+		// 	addNewMessage(personW.id, '🔵 Сценарий «Список паспортных данных»', 'text', '', convs.id, null, null);
+				
+		// 	sendScenariy4()
+
+		// } else if (selectedElement === 5 || temp === 'Реквизиты1' || temp === 'реквизиты1') { //выбран Правила
+		// 	//отправка сценария
+		// 	console.log("отправка сценария: ", selectedElement, temp)
+		// 	//setSelectedElement(1)
+
+		// 	//let sendToTelegram = await sendMessageToTelegram({user: personW.id, text: temp})
+		// 	const message = {
+		// 		senderId: chatAdminId, 
+		// 		receiverId: personW.id,
+		// 		conversationId: convs.id,
+		// 		type: "text",
+		// 		text: '🔵 Сценарий «Реквизиты №1»',
+		// 		isBot: null,
+		// 		messageId: null,
+		// 	}
+				
+		// 	// console.log("message send: ", message);
+		
+		// 	//сохранение сообщения в базе данных
+		// 	await newRMessage(message)
+		
+		// 	//сохранить в контексте
+		// 	addNewMessage(personW.id, '🔵 Сценарий «Реквизиты №1»', 'text', '', convs.id, null, null);
+				
+		// 	sendScenariy5()
+
+		} else if (temp === 'Поиск' || temp === 'поиск') { //выбран Правила
 			//отправка сценария
 			console.log("отправка сценария: ", selectedElement, temp)
 			//setSelectedElement(1)
 
-			//let sendToTelegram = await sendMessageToTelegram({user: personW.id, text: temp})
+			const text = `${nameUser}, к сожалению по Вашей заявке откликов пока нет. Продолжаем поиски.`
+
+			let sendToTelegram = await sendMessageToTelegram({user: personW.id, text: text})
 			const message = {
 				senderId: chatAdminId, 
 				receiverId: personW.id,
 				conversationId: convs.id,
 				type: "text",
-				text: '🔵 Сценарий «Список паспортных данных»',
+				text: text,
 				isBot: null,
 				messageId: null,
 			}
@@ -428,76 +435,33 @@ const Chat = () => {
 			await newRMessage(message)
 		
 			//сохранить в контексте
-			addNewMessage(personW.id, '🔵 Сценарий «Список паспортных данных»', 'text', '', convs.id, null, null);
-				
-			sendScenariy4()
+			addNewMessage(personW.id, text, 'text', '', convs.id, null, null);
 
-		} else if (selectedElement === 5 || temp === 'Реквизиты1' || temp === 'реквизиты1') { //выбран Правила
+		} else if (temp === 'Конверсия' || temp === 'конверсия') { //выбран Правила
 			//отправка сценария
 			console.log("отправка сценария: ", selectedElement, temp)
-			//setSelectedElement(1)
 
-			//let sendToTelegram = await sendMessageToTelegram({user: personW.id, text: temp})
+			const text = `${nameUser}, по Вашей текущей заявке слабая конверсия кандидатов. 
+Можем предложить поднять ставку до ..0 рублей в час, это может исправить ситуацию в лучшую сторону, 
+Что скажете?`
+
+			let sendToTelegram = await sendMessageToTelegram({user: personW.id, text: text})
 			const message = {
 				senderId: chatAdminId, 
 				receiverId: personW.id,
 				conversationId: convs.id,
 				type: "text",
-				text: '🔵 Сценарий «Реквизиты №1»',
+				text: text,
 				isBot: null,
 				messageId: null,
 			}
-				
-			// console.log("message send: ", message);
 		
 			//сохранение сообщения в базе данных
 			await newRMessage(message)
 		
 			//сохранить в контексте
-			addNewMessage(personW.id, '🔵 Сценарий «Реквизиты №1»', 'text', '', convs.id, null, null);
-				
-			sendScenariy5()
-
-		} else if (selectedElement === 6 || temp === 'Реквизиты2' || temp === 'реквизиты2') { //выбран Правила
-			//отправка сценария
-			console.log("отправка сценария: ", selectedElement, temp)
-			//setSelectedElement(1)
-
-			//let sendToTelegram = await sendMessageToTelegram({user: personW.id, text: temp})
-			const message = {
-				senderId: chatAdminId, 
-				receiverId: personW.id,
-				conversationId: convs.id,
-				type: "text",
-				text: '🔵 Сценарий «Реквизиты №2»',
-				isBot: null,
-				messageId: null,
-			}
-				
-			// console.log("message send: ", message);
+			addNewMessage(personW.id, text, 'text', '', convs.id, null, null);
 		
-			//сохранение сообщения в базе данных
-			await newRMessage(message)
-		
-			//сохранить в контексте
-			addNewMessage(personW.id, '🔵 Сценарий «Реквизиты №2»', 'text', '', convs.id, null, null);
-				
-			sendScenariy6()
-		
-		}
-		else if (selectedElement === '1') { //выбран паспорт
-			//отправка сценария
-			console.log("отправка сценария: ", selectedElement)
-			sendMyMessage()
-
-		} else if (selectedElement === '9') { //выбран Правила
-				//отправка сценария
-				console.log("отправка сценария: ", selectedElement)
-				sendMyMessage2()
-
-		} else if (selectedElement === '10') { //выбран Постер
-			console.log("отправка сценария: ", selectedElement)
-			sendMyMessagePoster()
 	
 		} else {
 			//отправка сообщения
