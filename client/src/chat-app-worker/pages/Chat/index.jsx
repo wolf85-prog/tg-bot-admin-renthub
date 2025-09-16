@@ -194,7 +194,145 @@ const Chat = () => {
 			setMess(text)
 
 		}
-		
+
+		else if (selectedElement === 10) {
+			text = `Добрый день, ${nameUser}.
+Не можем до вас дозвониться уже несколько часов.
+Перезвоните, пожалуйста: +7(499)500-14-11 — менеджер «U.L.E.Y»`
+
+			setMess(text)
+
+		}
+
+		else if (selectedElement === 11) {
+			text = `Добрый день, ${nameUser}. 
+Для подачи новой заявки просим оплатить проекты, которые уже завершены. Спасибо за понимание.`
+
+			setMess(text)
+		}
+//-----------------------------------------------------------------
+
+		else if (selectedElement === 12) {
+			text = `${nameUser}, у нас есть претенденты на ваш проект.
+Как только мы проведем бриф со специалистами и получим от них подтверждение, вернемся к вам с подробной информацией.`
+
+			setMess(text)
+		}
+
+		else if (selectedElement === 13) {
+			text = `Добрый день, ${nameUser}.
+У нас есть еще претенденты на ваш проект, но мы пока не можем с ними связаться.
+Завтра проведем бриф и вернемся с информацией для вас.`
+
+			setMess(text)
+		}
+
+		else if (selectedElement === 14) {
+			text = `Добрый день, ${nameUser}. 
+Для вас уже есть претенденты на данный проект. Можно немного подробней по задачам, какой объем работы и ориентировочный диапазон времени?`
+
+			setMess(text)
+		}
+
+		else if (selectedElement === 15) {
+			text = `Добрый день, ${nameUser}.
+У нас есть претенденты на ваш проект. Когда вам будет удобно связаться со специалистами для проведения собеседования?`
+
+			setMess(text)
+		}
+
+		else if (selectedElement === 16) {
+			text = `Добрый день, ${nameUser}. 
+Подскажите, пожалуйста, с кем быть на связи после приезда на локацию?`
+
+			setMess(text)
+		}
+
+		else if (selectedElement === 17) {
+			text = `🔵 Старший от «U.L.E.Y»
+
+◉ 31.12 | 23:59 | Проект
+◉ +7(900)800-70-60 — ${nameUser}`
+
+			setMess(text)
+		}
+
+		else if (selectedElement === 18) {
+			text = `🔵 Старший от «R.O.Y»
+
+◉ 31.12 | 23:59 | Проект
+◉ +7(900)800-70-60 — ${nameUser}`
+
+			setMess(text)
+		}
+
+		else if (selectedElement === 19) {
+			text = `🔵 Сценарий «Список паспортных данных»`
+
+			setMess(text)
+		}
+
+		else if (selectedElement === 20) {
+			text = `В разработке`
+
+			setMess(text)
+		}
+
+		else if (selectedElement === 21) {
+			text = `Добрый день, ${nameUser}.
+У одного из наших специалистов форс-мажор, делаем всё возможное, чтобы найти ему замену. Как только это произойдет, мы сразу же отправим его на проект и обязательно вас оповестим. От имени нашей компании приносим извинения, и сделаем всё возможное, чтобы в будущем такого не повторилось.`
+
+			setMess(text)
+		}
+
+
+//--------------------------------------------------------------
+
+		//Быстрые ответы
+		else if (selectedElement === 34) {
+			text = 'Принято, спасибо.'
+			setMess(text)
+		}
+
+		else if (selectedElement === 35) {
+			text = `${nameUser}, информация принята. До встречи на новых проектах!`
+			setMess(text)
+		}
+
+		else if (selectedElement === 36) {
+			text = `Информация получена, ваш вопрос уже в работе, ${nameUser}.`
+			setMess(text)
+		}	
+
+		else if (selectedElement === 37) {
+			text = `Информация получена, мы уже работаем в этом направлении, ${nameUser}.`
+			setMess(text)
+		}
+
+		else if (selectedElement === 38) {
+			text = `Информация зафиксирована, мы уже работаем над этим, ${nameUser}.`
+			setMess(text)
+		}
+
+		else if (selectedElement === 39) {
+			text = `Спасибо за информацию, ${nameUser}. Сообщим вам, как только все будет готово.`
+			setMess(text)
+		}
+
+		else if (selectedElement === 40) {
+			text = `Мы работаем над вашим запросом и уже скоро предоставим результаты, ${nameUser}.`
+			setMess(text)
+		}
+
+		else if (selectedElement === 41) {
+			text = `Информация принята, постараемся ответить на ваш вопрос в ближайшее время, ${nameUser}.`
+			setMess(text)
+		}
+
+		else if (selectedElement === 42) {
+			text = `На данный момент мы изучаем ваш вопрос и постараемся вернуться к вам с ответом как можно скорее, ${nameUser}.`
+			setMess(text)
+		}
 
 
 	}, [selectedElement]);
@@ -461,7 +599,250 @@ const Chat = () => {
 		
 			//сохранить в контексте
 			addNewMessage(personW.id, text, 'text', '', convs.id, null, null);
+
+		} else if (temp === 'Долг' || temp === 'долг') { //выбран Правила
+			//отправка сценария
+			console.log("отправка сценария: ", selectedElement, temp)
+
+			const text = `Добрый день, ${nameUser}. 
+Для подачи новой заявки просим оплатить проекты, которые уже завершены. Спасибо за понимание.`
+
+			let sendToTelegram = await sendMessageToTelegram({user: personW.id, text: text})
+			const message = {
+				senderId: chatAdminId, 
+				receiverId: personW.id,
+				conversationId: convs.id,
+				type: "text",
+				text: text,
+				isBot: null,
+				messageId: null,
+			}
 		
+			//сохранение сообщения в базе данных
+			await newRMessage(message)
+		
+			//сохранить в контексте
+			addNewMessage(personW.id, text, 'text', '', convs.id, null, null);
+
+//--------------------------------------------------------------------------------
+		} else if (temp === 'Бриф' || temp === 'бриф') { //выбран Правила
+			//отправка сценария
+			console.log("отправка сценария: ", selectedElement, temp)
+
+			const text = `${nameUser}, у нас есть претенденты на ваш проект.
+Как только мы проведем бриф со специалистами и получим от них подтверждение, вернемся к вам с подробной информацией.`
+
+			let sendToTelegram = await sendMessageToTelegram({user: personW.id, text: text})
+			const message = {
+				senderId: chatAdminId, 
+				receiverId: personW.id,
+				conversationId: convs.id,
+				type: "text",
+				text: text,
+				isBot: null,
+				messageId: null,
+			}
+		
+			//сохранение сообщения в базе данных
+			await newRMessage(message)
+		
+			//сохранить в контексте
+			addNewMessage(personW.id, text, 'text', '', convs.id, null, null);
+
+		} else if (temp === 'Подробности' || temp === 'Подробности') { //выбран Правила
+			//отправка сценария
+			console.log("отправка сценария: ", selectedElement, temp)
+
+			const text = `Добрый день, ${nameUser}. 
+Для вас уже есть претенденты на данный проект. Можно немного подробней по задачам, какой объем работы и ориентировочный диапазон времени?`
+
+			let sendToTelegram = await sendMessageToTelegram({user: personW.id, text: text})
+			const message = {
+				senderId: chatAdminId, 
+				receiverId: personW.id,
+				conversationId: convs.id,
+				type: "text",
+				text: text,
+				isBot: null,
+				messageId: null,
+			}
+		
+			//сохранение сообщения в базе данных
+			await newRMessage(message)
+		
+			//сохранить в контексте
+			addNewMessage(personW.id, text, 'text', '', convs.id, null, null);
+
+		} else if (temp === 'Собес' || temp === 'собес') { //выбран Правила
+			//отправка сценария
+			console.log("отправка сценария: ", selectedElement, temp)
+
+			const text = `Добрый день, ${nameUser}.
+У нас есть претенденты на ваш проект. Когда вам будет удобно связаться со специалистами для проведения собеседования?`
+
+			let sendToTelegram = await sendMessageToTelegram({user: personW.id, text: text})
+			const message = {
+				senderId: chatAdminId, 
+				receiverId: personW.id,
+				conversationId: convs.id,
+				type: "text",
+				text: text,
+				isBot: null,
+				messageId: null,
+			}
+		
+			//сохранение сообщения в базе данных
+			await newRMessage(message)
+		
+			//сохранить в контексте
+			addNewMessage(personW.id, text, 'text', '', convs.id, null, null);
+
+		} else if (temp === 'Связь' || temp === 'связь') { //выбран Правила
+			//отправка сценария
+			console.log("отправка сценария: ", selectedElement, temp)
+
+			const text = `Добрый день, ${nameUser}. 
+Подскажите, пожалуйста, с кем быть на связи после приезда на локацию?`
+
+			let sendToTelegram = await sendMessageToTelegram({user: personW.id, text: text})
+			const message = {
+				senderId: chatAdminId, 
+				receiverId: personW.id,
+				conversationId: convs.id,
+				type: "text",
+				text: text,
+				isBot: null,
+				messageId: null,
+			}
+		
+			//сохранение сообщения в базе данных
+			await newRMessage(message)
+		
+			//сохранить в контексте
+			addNewMessage(personW.id, text, 'text', '', convs.id, null, null);
+
+		} else if (temp === 'Улей' || temp === 'улей') { //выбран Правила
+			//отправка сценария
+			console.log("отправка сценария: ", selectedElement, temp)
+
+			const text = `🔵 Старший от «U.L.E.Y»
+
+◉ 31.12 | 23:59 | Проект
+◉ +7(900)800-70-60 — ${nameUser}`
+
+			let sendToTelegram = await sendMessageToTelegram({user: personW.id, text: text})
+			const message = {
+				senderId: chatAdminId, 
+				receiverId: personW.id,
+				conversationId: convs.id,
+				type: "text",
+				text: text,
+				isBot: null,
+				messageId: null,
+			}
+		
+			//сохранение сообщения в базе данных
+			await newRMessage(message)
+		
+			//сохранить в контексте
+			addNewMessage(personW.id, text, 'text', '', convs.id, null, null);
+
+		} else if (temp === 'Рой' || temp === 'рой') { //выбран Правила
+			//отправка сценария
+			console.log("отправка сценария: ", selectedElement, temp)
+
+			const text = `🔵 Старший от «R.O.Y»
+
+◉ 31.12 | 23:59 | Проект
+◉ +7(900)800-70-60 — ${nameUser}`
+
+			let sendToTelegram = await sendMessageToTelegram({user: personW.id, text: text})
+			const message = {
+				senderId: chatAdminId, 
+				receiverId: personW.id,
+				conversationId: convs.id,
+				type: "text",
+				text: text,
+				isBot: null,
+				messageId: null,
+			}
+		
+			//сохранение сообщения в базе данных
+			await newRMessage(message)
+		
+			//сохранить в контексте
+			addNewMessage(personW.id, text, 'text', '', convs.id, null, null);
+
+		} else if (selectedElement === 19 && temp === '🔵 Сценарий «Список паспортных данных»' || temp === 'Паспорт' || temp === 'паспорт') { //выбран Правила
+			//отправка сценария
+			console.log("отправка сценария: ", selectedElement, temp)
+
+			const message = {
+				senderId: chatAdminId, 
+				receiverId: personW.id,
+				conversationId: convs.id,
+				type: "text",
+				text: '🔵 Сценарий «Список паспортных данных»',
+				isBot: null,
+				messageId: null,
+			}
+
+			//сохранение сообщения в базе данных
+			await newRMessage(message)	
+
+			//сохранить в контексте
+			addNewMessage(personW.id, '🔵 Сценарий «Список паспортных данных»', 'text', '', convs.id, null, null);
+
+			//сценарий
+			sendPassport()
+
+		} else if (temp === 'Нарушение' || temp === 'нарушение') { //выбран Правила
+			//отправка сценария
+			console.log("отправка сценария: ", selectedElement, temp)
+
+// 			const text = `Добрый день, ${nameUser}. 
+// Для подачи новой заявки просим оплатить проекты, которые уже завершены. Спасибо за понимание.`
+
+// 			let sendToTelegram = await sendMessageToTelegram({user: personW.id, text: text})
+// 			const message = {
+// 				senderId: chatAdminId, 
+// 				receiverId: personW.id,
+// 				conversationId: convs.id,
+// 				type: "text",
+// 				text: text,
+// 				isBot: null,
+// 				messageId: null,
+// 			}
+		
+// 			//сохранение сообщения в базе данных
+// 			await newRMessage(message)
+		
+// 			//сохранить в контексте
+// 			addNewMessage(personW.id, text, 'text', '', convs.id, null, null);
+
+		} else if (temp === 'Форс-мажор' || temp === 'форс мажор' || temp === 'форс') { //выбран Правила
+			//отправка сценария
+			console.log("отправка сценария: ", selectedElement, temp)
+
+			const text = `Добрый день, ${nameUser}.
+У одного из наших специалистов форс-мажор, делаем всё возможное, чтобы найти ему замену. Как только это произойдет, мы сразу же отправим его на проект и обязательно вас оповестим. От имени нашей компании приносим извинения, и сделаем всё возможное, чтобы в будущем такого не повторилось.`
+
+			let sendToTelegram = await sendMessageToTelegram({user: personW.id, text: text})
+			const message = {
+				senderId: chatAdminId, 
+				receiverId: personW.id,
+				conversationId: convs.id,
+				type: "text",
+				text: text,
+				isBot: null,
+				messageId: null,
+			}
+		
+			//сохранение сообщения в базе данных
+			await newRMessage(message)
+		
+			//сохранить в контексте
+			addNewMessage(personW.id, text, 'text', '', convs.id, null, null);
 	
 		} else {
 			//отправка сообщения
@@ -670,41 +1051,7 @@ const Chat = () => {
 		} 
     }
 
-	const sendScenariy4 = async() => {
-		console.log("send scenariy4")
-		//audio.play();
-
-		//let client = userWorkers.find((client) => client.chatId === user.chatId);
-
-		const keyboard = JSON.stringify({
-			inline_keyboard: [
-				[
-					{"text": "XLSX", url:'https://ya.ru'},
-                    {"text": "PDF", url:'https://ya.ru'},
-				],
-			]
-		});
-
-		//отправить в телеграмм
-		
-		//Правила
-		if (selectedElement === 4 || mess === 'Паспорт' || mess === 'паспорт') {
-			//send photo
-			let poster1 = 'https://proj.uley.team/upload/posters/akred.jpg' //poster 1
-
-			let arr = [poster1]
-
-			arr.map(async(item, index)=> {
-				setTimeout(async()=> {
-					await sendPhotoToTelegram({user: user.chatId, photo: item, keyboard: keyboard})
-
-					// setTimeout(async()=> {
-                    //     await delMessageToTelegram({user: user.chatId, messageId: sendToTelegram?.data.result.message_id}) 
-                    // }, 1200000) //20 мин.
-				}, 500 * ++index)
-			})			
-		} 
-    }
+	
 
 	const sendScenariy5 = async() => {
 		console.log("send scenariy5")
@@ -776,56 +1123,42 @@ const Chat = () => {
 		} 
     }
 
-	//отправка сценария
-	const sendMyMessage = async() => {
-		console.log("send passport")
+const sendPassport = async() => {
+		console.log("send scenariy4")
 		//audio.play();
 
-		let client = userRenthub.filter((client) => client.chatId === user.chatId)[0];
+		//let client = userWorkers.find((client) => client.chatId === user.chatId);
 
 		const keyboard = JSON.stringify({
 			inline_keyboard: [
 				[
-					{"text": "Заполнить анкету", web_app: {url: webAppAnketa}},
+					{"text": "XLSX", url:'https://ya.ru'},
+                    {"text": "PDF", url:'https://ya.ru'},
 				],
 			]
 		});
 
 		//отправить в телеграмм
-		let sendToTelegram
-		let text = ''
 		
-		//Паспорт
-		if (selectedElement === '1') {
+		//Правила
+		//if (selectedElement === 19 || mess === 'Паспорт' || mess === 'паспорт') {
 			//send photo
-			let anketa = 'https://proj.uley.team/upload/2023-11-10T15:12:36.770Z.png' //poster anketa
-			// const url_send_photo = `https://api.telegram.org/bot${token_work}/sendPhoto?chat_id=${user.chatId}&photo=${anketa}&reply_markup=${keyboard}`
-			// sendToTelegram = await $host.get(url_send_photo);
-			sendToTelegram = await sendPhotoToTelegram({user: user.chatId, image: anketa, keyboard: keyboard})
-		} 
-		
+			let poster1 = 'https://proj.uley.team/upload/posters/akred.jpg' //poster 1
 
-		//отправить в админку
-		let message = {};
-			
-		message = {
-			senderId: chatAdminId, 
-			receiverId: user.chatId,
-			conversationId: client.conversationId,
-			type: "text",
-			text: text,
-			messageId: sendToTelegram.data.result.message_id,
-			buttons: 'Согласен предоставить персональные данные',
-		}
-			
-		// console.log("message send: ", message);
-	
-		//сохранение сообщения в базе данных
-		await newRMessage(message)
-	
-		//сохранить в контексте
-		addNewMessage(user.chatId, text, 'text', 'Согласен предоставить персональные данные', client.conversationId, sendToTelegram.data.result.message_id);
+			let arr = [poster1]
+
+			arr.map(async(item, index)=> {
+				setTimeout(async()=> {
+					await sendPhotoToTelegram({user: user.chatId, photo: item, keyboard: keyboard})
+
+					// setTimeout(async()=> {
+                    //     await delMessageToTelegram({user: user.chatId, messageId: sendToTelegram?.data.result.message_id}) 
+                    // }, 1200000) //20 мин.
+				}, 500 * ++index)
+			})			
+		//} 
     }
+
 
 	//отправка сценария Правила
 	const sendMyMessage2 = async() => {

@@ -386,7 +386,7 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 														)}
 											</span>
 
-											<Dropdown onSelect={change}>
+											<Dropdown onSelect={change} style={{position: 'absolute', right: '0px'}}>
 												<Dropdown.Toggle as={CustomToggleBottom} id="dropdown-custom-components">											
 												</Dropdown.Toggle>
 												<Dropdown.Menu as={CustomMenuBottom}>
@@ -418,7 +418,7 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 															)}
 												</span>
 
-												<Dropdown onSelect={change}>
+												<Dropdown onSelect={change} style={{position: 'absolute', right: '0px'}}>
 													<Dropdown.Toggle as={CustomToggleBottom} id="dropdown-custom-components">											
 													</Dropdown.Toggle>
 													<Dropdown.Menu as={CustomMenuBottom}>
@@ -450,7 +450,7 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 															)}
 												</span>
 
-												<Dropdown onSelect={change}>
+												<Dropdown onSelect={change} style={{position: 'absolute', right: '0px'}}>
 													<Dropdown.Toggle as={CustomToggleBottom} id="dropdown-custom-components">											
 													</Dropdown.Toggle>
 													<Dropdown.Menu as={CustomMenuBottom}>
@@ -510,7 +510,7 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 													</div> 
 												</figcaption>*/}
 
-										<Dropdown onSelect={change}>
+										<Dropdown onSelect={change} style={{position: 'absolute', right: '0px'}}>
 											<Dropdown.Toggle as={CustomToggleBottom} id="dropdown-custom-components">											
 											</Dropdown.Toggle>
 											<Dropdown.Menu as={CustomMenuBottom}>
@@ -590,7 +590,7 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 												{formatTime(message.time)}
 											</span>
 										</div>	
-											<Dropdown onSelect={change}>
+											<Dropdown onSelect={change} style={{position: 'absolute', right: '0px'}}>
 												<Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
 												</Dropdown.Toggle>
 												<Dropdown.Menu as={CustomMenu}>
@@ -622,7 +622,7 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 												/>
 											</span>
 
-											<Dropdown onSelect={change}>
+											<Dropdown onSelect={change} style={{position: 'absolute', right: '0px'}}>
 												<Dropdown.Toggle as={CustomToggle2} id="dropdown-custom-components">											
 												</Dropdown.Toggle>
 												<Dropdown.Menu as={CustomMenu2}>
