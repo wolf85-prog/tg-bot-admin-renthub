@@ -388,28 +388,28 @@ const ChatInput = ({
 							&raquo;
 						</span>
 						<ul className="dropdown-menu dropdown-submenu" style={{display: showSave7 ? 'block' : 'none'}}>
-							<Dropdown.Item onClick={()=>change(42)}>
+							<Dropdown.Item onClick={()=>change(43)}>
 							Контакты
 							</Dropdown.Item>
-							<Dropdown.Item onClick={()=>change(43)}>
+							<Dropdown.Item onClick={()=>change(44)}>
 							Контакты [Белов]
 							</Dropdown.Item>
-							<Dropdown.Item onClick={()=>change(44)}>
+							<Dropdown.Item onClick={()=>change(45)}>
 							Офис «U.L.E.Y»
 							</Dropdown.Item>
-							<Dropdown.Item onClick={()=>change(45)}>
+							<Dropdown.Item onClick={()=>change(46)}>
 							Почта
 							</Dropdown.Item>
-							<Dropdown.Item onClick={()=>change(46)}>
+							<Dropdown.Item onClick={()=>change(47)}>
 							Реквизиты №1
 							</Dropdown.Item>
-							<Dropdown.Item onClick={()=>change(47)}>
+							<Dropdown.Item onClick={()=>change(48)}>
 							Реквизиты №2 [Белов]
 							</Dropdown.Item>
-							<Dropdown.Item onClick={()=>change(48)}>
+							<Dropdown.Item onClick={()=>change(49)}>
 							Сайт / Vk / Telegram
 							</Dropdown.Item>
-							<Dropdown.Item onClick={()=>change(49)}>
+							<Dropdown.Item onClick={()=>change(50)}>
 							Кабинет
 							</Dropdown.Item>
 						</ul>						
