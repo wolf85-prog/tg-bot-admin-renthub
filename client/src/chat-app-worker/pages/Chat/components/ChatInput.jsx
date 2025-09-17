@@ -333,7 +333,7 @@ const ChatInput = ({
 						<span style={{position: 'absolute', right: '15px'}}>
 							&raquo;
 						</span>
-						<ul className="dropdown-menu dropdown-submenu" style={{display: showSave5 ? 'block' : 'none'}}>
+						<ul className="dropdown-menu dropdown-submenu" style={{display: showSave5 ? 'block' : 'none', position: 'absolute', top: '170px'}}>
 							<Dropdown.Item onClick={()=>change(31)}>
 							Оборудование
 							</Dropdown.Item>
