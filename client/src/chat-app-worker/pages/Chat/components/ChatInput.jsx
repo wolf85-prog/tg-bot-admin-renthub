@@ -248,7 +248,7 @@ const ChatInput = ({
 							Недозвон
 							</Dropdown.Item>
 							<Dropdown.Item onClick={()=>change(11)}>
-							Долго по проекту
+							Долг по проекту
 							</Dropdown.Item>
 						</ul>						
 					</Dropdown.Item>
@@ -293,7 +293,7 @@ const ChatInput = ({
 					</Dropdown.Item>
 
 					<Dropdown.Item class="dropdown-menu" onMouseOver={()=>setShowSave4(true)} onMouseOut={()=>setShowSave4(false)}>
-						Условия 
+						Смета 
 						<span style={{position: 'absolute', right: '15px'}}>
 							&raquo;
 						</span>
@@ -389,28 +389,28 @@ const ChatInput = ({
 						</span>
 						<ul className="dropdown-menu dropdown-submenu" style={{display: showSave7 ? 'block' : 'none'}}>
 							<Dropdown.Item onClick={()=>change(43)}>
-							Контакты
+								Контакты
 							</Dropdown.Item>
 							<Dropdown.Item onClick={()=>change(44)}>
-							Контакты [Белов]
+								Контакты [Белов]
 							</Dropdown.Item>
 							<Dropdown.Item onClick={()=>change(45)}>
-							Офис «U.L.E.Y»
+								Офис «U.L.E.Y»
 							</Dropdown.Item>
 							<Dropdown.Item onClick={()=>change(46)}>
-							Почта
+								Почта
 							</Dropdown.Item>
 							<Dropdown.Item onClick={()=>change(47)}>
-							Реквизиты №1
+								Реквизиты №1
 							</Dropdown.Item>
 							<Dropdown.Item onClick={()=>change(48)}>
-							Реквизиты №2 [Белов]
+								Реквизиты №2 [Белов]
 							</Dropdown.Item>
 							<Dropdown.Item onClick={()=>change(49)}>
-							Сайт / Vk / Telegram
+								Сайт / Vk / Telegram
 							</Dropdown.Item>
 							<Dropdown.Item onClick={()=>change(50)}>
-							Кабинет
+								Кабинет
 							</Dropdown.Item>
 						</ul>						
 					</Dropdown.Item>
