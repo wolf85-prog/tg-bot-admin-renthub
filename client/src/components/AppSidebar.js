@@ -80,6 +80,7 @@ const AppSidebar = () => {
     {
       component: CNavLink,
       name: 'В эфире',
+      onClick: ()=>handleLinkClick2(`${host}/onair`),
       //href: 'https://www.notion.so/amusienko/On-Air-fc187957a95a4814ac365d6ce6188585',
       icon: <CIcon icon={cilMicrophone} customClassName="nav-icon" />,
       //onClick: ()=>handleLinkClick('https://www.notion.so/amusienko/On-Air-fc187957a95a4814ac365d6ce6188585'),
