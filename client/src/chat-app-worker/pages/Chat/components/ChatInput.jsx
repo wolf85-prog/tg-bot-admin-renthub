@@ -335,13 +335,16 @@ const ChatInput = ({
 						</span>
 						<ul className="dropdown-menu dropdown-submenu" style={{display: showSave5 ? 'block' : 'none', position: 'absolute', top: '170px'}}>
 							<Dropdown.Item onClick={()=>change(31)}>
-							Оборудование
+								Оборудование
+							</Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(312)}>
+								Начало работы
 							</Dropdown.Item>
 							<Dropdown.Item onClick={()=>change(32)}>
-							Обновление системы / ошибки
+								Обновление системы / ошибки
 							</Dropdown.Item>
 							<Dropdown.Item onClick={()=>change(33)}>
-							Обратная связь по работе сервиса
+								Обратная связь по работе сервиса
 							</Dropdown.Item>
 						</ul>						
 					</Dropdown.Item>
