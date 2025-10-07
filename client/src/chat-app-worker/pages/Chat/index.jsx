@@ -43,8 +43,11 @@ const Chat = () => {
 	const { setCountMessage } = useUsersContext();
 
 	const chatId = personW.id;
+	const managerId = personW.managerId
 	let user = userRenthub.find((user) => user.chatId === chatId?.toString());
 	let convs = conversations.find((conv) => conv.members[0] === chatId?.toString());
+
+	console.log("header chatId: ", personW, user)
 
 	const lastMsgRef = useRef(null);
 	const [showAttach, setShowAttach] = useState(false);
@@ -117,10 +120,10 @@ const Chat = () => {
 		setSelectedElement(selectedElement);
 		setScenari(selectedElement)
 
-		let nameUser = personW.name.replace(/\[.+\]/,'').replace(/\s+/g, ' ').split(' ')[1]
+		let nameUser = personW.name ? personW.name.replace(/\[.+\]/,'').replace(/\s+/g, ' ').split(' ')[1] : ''
         //console.log("nameUser: ", nameUser)
         if (!nameUser || nameUser.length === 0) {
-            nameUser = personW.name.replace(/\[.+\]/,'').replace(/\s+/g, ' ').split(' ')[0]
+            nameUser = personW.name ? personW.name.replace(/\[.+\]/,'').replace(/\s+/g, ' ').split(' ')[0] : ''
         }
 		setNameUser(nameUser)
 
@@ -1758,7 +1761,7 @@ https://t.me/ULEY_Office_Bot
 				<Header
 					user={personW}
 					userH={user}
-					manager={workersAll.filter((item)=> item.chatId === user?.chatId)}
+					manager={workersAll.filter((item)=> item.id === managerId)}
 					openProfileSidebar={() => openSidebar(setShowProfileSidebar)}
 					openSearchSidebar={() => openSidebar(setShowSearchSidebar)}
 					closeSidebar={() => closeSidebar(setShowProfileSidebar)}

@@ -33,16 +33,17 @@ const ChatRentPerson = () => {
 
     const users = localStorage.getItem("userRenthub");
 
-    console.log("userRenthub: ", JSON.parse(users).length)
+    console.log("userRenthub: ", userRenthub, JSON.parse(users).length)
     console.log("id: ", managerId)
     
     const contact = JSON.parse(users).find(item => item.id === parseInt(managerId))
-    //console.log("contact: ", contact)
+    console.log("contact: ", contact)
 
 		setPersonW({
       name: contact?.name, 
       id: contact?.chatId, 
-			avatar: contact?.avatar
+			avatar: contact?.avatar,
+      managerId: contact?.id
     });
 
 
@@ -99,9 +100,12 @@ const ChatRentPerson = () => {
     
             //сохранить сообщения в контексте пользователя
             setUserRenthub((userRenthub) => {
-              let userIndex = userRenthub.findIndex((user) => user.chatId === contact.chatId.toString());
+              let userIndex = userRenthub.findIndex((user) => user.chatId === contact?.chatId);
               const usersCopy = JSON.parse(JSON.stringify(userRenthub));
-              usersCopy[userIndex].messages = obj
+              console.log("userIndex: ", userIndex)
+              if (usersCopy.length > 0 && userIndex >= 0) {
+                usersCopy[userIndex].messages = obj
+              }           
     
               return usersCopy;
             })
