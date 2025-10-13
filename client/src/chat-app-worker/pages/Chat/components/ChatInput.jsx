@@ -233,22 +233,25 @@ const ChatInput = ({
 						</span>
 						<ul className="dropdown-menu dropdown-submenu" style={{display: showSave2 ? 'block' : 'none'}}>
 							<Dropdown.Item onClick={()=>change(6)}>
-							Новый проект
+								Новый проект
 							</Dropdown.Item>
 							<Dropdown.Item onClick={()=>change(7)}>
-							Заявка принята
+								Заявка принята
 							</Dropdown.Item>
 							<Dropdown.Item onClick={()=>change(8)}>
-							Продолжаем поиски
+								Продолжаем поиски
 							</Dropdown.Item>
 							<Dropdown.Item onClick={()=>change(9)}>
-							Слабая конверсия
+								Слабая конверсия
 							</Dropdown.Item>
 							<Dropdown.Item onClick={()=>change(10)}>
-							Недозвон
+								Недозвон
 							</Dropdown.Item>
 							<Dropdown.Item onClick={()=>change(11)}>
-							Долг по проекту
+								Долг по проекту
+							</Dropdown.Item>
+							<Dropdown.Item onClick={()=>change(29)}>
+								Способ оплаты
 							</Dropdown.Item>
 						</ul>						
 					</Dropdown.Item>
@@ -299,31 +302,31 @@ const ChatInput = ({
 						</span>
 						<ul className="dropdown-menu dropdown-submenu" style={{display: showSave4 ? 'block' : 'none'}}>
 							<Dropdown.Item onClick={()=>change(22)}>
-							Смета / Проект
+								Смета / Проект
 							</Dropdown.Item>
 							<Dropdown.Item onClick={()=>change(23)}>
-							Смета / Период
+								Смета / Период
 							</Dropdown.Item>
 							<Dropdown.Item onClick={()=>change(24)}>
-							Смета / Контроль
+								Смета / Контроль
 							</Dropdown.Item>
 							<Dropdown.Item onClick={()=>change(25)}>
-							Смета / Собрать
+								Смета / Собрать
 							</Dropdown.Item>
 							<Dropdown.Item onClick={()=>change(26)}>
-							Предварительная смета
+								Предварительная смета
 							</Dropdown.Item>
 							<Dropdown.Item onClick={()=>change(27)}>
-							Предварительная финалка
+								Предварительная финалка
 							</Dropdown.Item>
 							<Dropdown.Item onClick={()=>change(28)}>
-							Финальная смета
+								Финальная смета
 							</Dropdown.Item>
-							<Dropdown.Item onClick={()=>change(29)}>
+							{/* <Dropdown.Item onClick={()=>change(29)}>
 							Способ оплаты
-							</Dropdown.Item>
+							</Dropdown.Item> */}
 							<Dropdown.Item onClick={()=>change(30)}>
-							Рейтинг
+								Рейтинг
 							</Dropdown.Item>
 						</ul>						
 					</Dropdown.Item>
@@ -344,7 +347,7 @@ const ChatInput = ({
 								Обновление системы / ошибки
 							</Dropdown.Item>
 							<Dropdown.Item onClick={()=>change(33)}>
-								Обратная связь по работе сервиса
+								Обратная связь
 							</Dropdown.Item>
 						</ul>						
 					</Dropdown.Item>
@@ -355,6 +358,9 @@ const ChatInput = ({
 							&raquo;
 						</span>
 						<ul className="dropdown-menu dropdown-submenu" style={{display: showSave6 ? 'block' : 'none'}}>
+							<Dropdown.Item onClick={()=>change(341)}>
+								Вы на связи?
+							</Dropdown.Item>
 							<Dropdown.Item onClick={()=>change(34)}>
 								Принято, спасибо
 							</Dropdown.Item>
@@ -409,9 +415,9 @@ const ChatInput = ({
 							<Dropdown.Item onClick={()=>change(48)}>
 								Реквизиты №2 [Белов]
 							</Dropdown.Item>
-							<Dropdown.Item onClick={()=>change(49)}>
+							{/* <Dropdown.Item onClick={()=>change(49)}>
 								Сайт / Vk / Telegram
-							</Dropdown.Item>
+							</Dropdown.Item> */}
 							<Dropdown.Item onClick={()=>change(50)}>
 								Кабинет
 							</Dropdown.Item>

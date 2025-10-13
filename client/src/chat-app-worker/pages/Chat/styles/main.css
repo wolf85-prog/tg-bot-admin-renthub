@@ -923,7 +923,7 @@ textarea:focus {
     display: none;
     position: absolute;
     left: 100%;
-    top: 0px;
+    top: 40px;
 }
 .dropdown-menu .dropdown-submenu-left {
     right: 100%;

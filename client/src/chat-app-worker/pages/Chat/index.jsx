@@ -150,9 +150,9 @@ const Chat = () => {
 
 		//О себе
 		else if (selectedElement === 4) {
-			//text = '🔵 Сценарий «О себе»'
+			text = '🔵 Сценарий «О себе»'
 			//console.log(text)
-			//setMess(text)
+			setMess(text)
 		}
 
 		//Реклама
@@ -165,11 +165,11 @@ const Chat = () => {
 		//Новый проект
 		else if (selectedElement === 6) {
 			text = `Для создания новой заявки:
-•⁠  ⁠Нажмите на кнопку «Проект» слева внизу
-•⁠  ⁠Далее кнопка «Новый проект»
-•⁠  ⁠Заполните заявку, нажимаем кнопку «Создать проект»
+•⁠ ⁠Нажмите на кнопку «Проект» слева внизу
+•⁠ ⁠Далее кнопка «Новый проект»
+•⁠ ⁠Заполните заявку, нажимаем кнопку «Создать проект»
 
-В профиле есть окошко «Цена услуги». Там размещены все 14 отделов со стандартными ставками за смену. Вы всегда можете предложить свою ставку, в зависимости от сложности и особенностей проекта.
+«Цена услуги» — одно из окон вашего профиля, где указаны стандартные ставки за 1 смену. Вы всегда можете предложить свою ставку, в зависимости от сложности и особенностей проекта.
 
 Все вопросы пишите в этот чат, или звоните:
 +7(499)500-14-11
@@ -272,9 +272,10 @@ const Chat = () => {
 		}
 
 		else if (selectedElement === 20) {
-			//text = `В разработке`
+			text = `Добрый день, ${nameUser}.
+Опишите, пожалуйста, ситуацию, мы найдем всех причастных и привлечем к ответственности.`
 
-			//setMess(text)
+			setMess(text)
 		}
 
 		else if (selectedElement === 21) {
@@ -311,6 +312,13 @@ const Chat = () => {
 			setMess(text)
 		}
 
+		else if (selectedElement === 26) {
+			text = `Доброе утро, ${nameUser}.
+Система сгенерировала для вас новую предварительную смету. Обратите внимание, что ставка указана за 10 часов работы, далее переработка 10%`
+
+			setMess(text)
+		}
+
 
 		else if (selectedElement === 29) {
 			text = `Удобная для вас форма оплаты. Наличный расчет и безналичный расчет через договор и электронный документооборот, или подписание документов традиционным способом.`
@@ -325,8 +333,7 @@ const Chat = () => {
 		}
 
 		else if (selectedElement === 312) {
-			text = `${nameUser}, по регламенту специалисты по приезду на проект считаются находящимися на рабочем месте. В случае опоздания специалиста это считается нарушением. Если же все специалисты прибыли на площадку вовремя, встретились и связались с заказчиком, это является штатным состоянием проекта, и специалисты считаются уже на рабочем месте. На тех проектах, где доставка оборудования производится с какой-либо задержкой, специалисты фиксируют начало рабочего времени с момента своего прибытия на проект, а не с момента начала разгрузки`
-
+			text = `${nameUser}, по регламенту специалисты по приезду на проект считаются находящимися на рабочем месте. В случае опоздания специалиста это считается нарушением. Если же все специалисты прибыли на площадку вовремя, встретились и связались с заказчиком, это является штатным состоянием проекта, и специалисты считаются уже на рабочем месте. На тех проектах, где доставка оборудования производится с какой-либо задержкой, специалисты фиксируют начало рабочего времени с момента своего прибытия на проект, а не с момента начала разгрузки.` 
 			setMess(text)
 		}
 
@@ -346,6 +353,11 @@ const Chat = () => {
 //-------------------------Быстрые ответы-------------------------------------
 
 		//Быстрые ответы
+		else if (selectedElement === 341) {
+			text = `Добрый день, ${nameUser}. Вы на связи?`
+			setMess(text)
+		}
+
 		else if (selectedElement === 34) {
 			text = 'Принято, спасибо.'
 			setMess(text)
@@ -397,6 +409,11 @@ const Chat = () => {
 			setMess(text)
 		}
 
+		else if (selectedElement === 44) {
+			text = '🔵 Сценарий «Контакты [Белов]»'
+			setMess(text)
+		}
+
 		else if (selectedElement === 45) {
 			text = '🔵 Сценарий «Офис U.L.E.Y»'
 			setMess(text)
@@ -415,6 +432,11 @@ const Chat = () => {
 
 		else if (selectedElement === 48) {
 			text = '🔵 Сценарий «Реквизиты №2 [Белов]»'
+			setMess(text)
+		}
+
+		else if (selectedElement === 50) {
+			text = '🔵 Сценарий «Кабинет»'
 			setMess(text)
 		}
 
@@ -581,31 +603,31 @@ const Chat = () => {
 				
 			sendScenariy3()
 
-		// } else if (selectedElement === 4 || temp === 'Паспорт' || temp === 'паспорт') { //выбран Правила
-		// 	//отправка сценария
-		// 	console.log("отправка сценария: ", selectedElement, temp)
-		// 	//setSelectedElement(1)
+		} else if (selectedElement === 4) { //выбран О себе
+			//отправка сценария
+			console.log("отправка сценария: ", selectedElement, temp)
+			//setSelectedElement(1)
 
-		// 	//let sendToTelegram = await sendMessageToTelegram({user: personW.id, text: temp})
-		// 	const message = {
-		// 		senderId: chatAdminId, 
-		// 		receiverId: personW.id,
-		// 		conversationId: convs.id,
-		// 		type: "text",
-		// 		text: '🔵 Сценарий «Список паспортных данных»',
-		// 		isBot: null,
-		// 		messageId: null,
-		// 	}
+			//let sendToTelegram = await sendMessageToTelegram({user: personW.id, text: temp})
+			const message = {
+				senderId: chatAdminId, 
+				receiverId: personW.id,
+				conversationId: convs.id,
+				type: "text",
+				text: '🔵 Сценарий «О себе»',
+				isBot: null,
+				messageId: null,
+			}
 				
-		// 	// console.log("message send: ", message);
+			// console.log("message send: ", message);
 		
-		// 	//сохранение сообщения в базе данных
-		// 	await newRMessage(message)
+			//сохранение сообщения в базе данных
+			await newRMessage(message)
 		
-		// 	//сохранить в контексте
-		// 	addNewMessage(personW.id, '🔵 Сценарий «Список паспортных данных»', 'text', '', convs.id, null, null);
+			//сохранить в контексте
+			addNewMessage(personW.id, '🔵 Сценарий «О себе»', 'text', '', convs.id, null, null);
 				
-		// 	sendScenariy4()
+			sendScenariy4()
 
 		} else if (selectedElement === 5) { //выбран Правила
 			//отправка сценария
@@ -932,25 +954,25 @@ const Chat = () => {
 			//отправка сценария
 			console.log("отправка сценария: ", selectedElement, temp)
 
-// 			const text = `Добрый день, ${nameUser}. 
-// Для подачи новой заявки просим оплатить проекты, которые уже завершены. Спасибо за понимание.`
+			const text = `Добрый день, ${nameUser}. 
+Опишите, пожалуйста, ситуацию, мы найдем всех причастных и привлечем к ответственности.`
 
-// 			let sendToTelegram = await sendMessageToTelegram({user: personW.id, text: text})
-// 			const message = {
-// 				senderId: chatAdminId, 
-// 				receiverId: personW.id,
-// 				conversationId: convs.id,
-// 				type: "text",
-// 				text: text,
-// 				isBot: null,
-// 				messageId: null,
-// 			}
+			let sendToTelegram = await sendMessageToTelegram({user: personW.id, text: text})
+			const message = {
+				senderId: chatAdminId, 
+				receiverId: personW.id,
+				conversationId: convs.id,
+				type: "text",
+				text: text,
+				isBot: null,
+				messageId: null,
+			}
 		
-// 			//сохранение сообщения в базе данных
-// 			await newRMessage(message)
+			//сохранение сообщения в базе данных
+			await newRMessage(message)
 		
-// 			//сохранить в контексте
-// 			addNewMessage(personW.id, text, 'text', '', convs.id, null, null);
+			//сохранить в контексте
+			addNewMessage(personW.id, text, 'text', '', convs.id, null, null);
 
 		} else if (temp === 'Форс-мажор' || temp === 'форс мажор' || temp === 'форс') { //выбран Правила
 			//отправка сценария
@@ -1101,6 +1123,32 @@ const Chat = () => {
 				
 			sendScenariy43()
 
+		} else if (selectedElement === 44 && temp === '🔵 Сценарий «Контакты [Белов]»' || temp === 'Белов' || temp === 'белов') { //выбран Правила
+			//отправка сценария
+			console.log("отправка сценария: ", selectedElement, temp)
+			//setSelectedElement(1)
+
+			//let sendToTelegram = await sendMessageToTelegram({user: personW.id, text: temp})
+			const message = {
+				senderId: chatAdminId, 
+				receiverId: personW.id,
+				conversationId: convs.id,
+				type: "text",
+				text: '🔵 Сценарий «Контакты [Белов]»',
+				isBot: null,
+				messageId: null,
+			}
+				
+			// console.log("message send: ", message);
+		
+			//сохранение сообщения в базе данных
+			await newRMessage(message)
+		
+			//сохранить в контексте
+			addNewMessage(personW.id, '🔵 Сценарий «Контакты [Белов]»', 'text', '', convs.id, null, null);
+				
+			sendScenariy44()
+
 		} else if (selectedElement === 45 || temp === 'Офис' || temp === 'офис') { //выбран Правила
 			//отправка сценария
 			console.log("отправка сценария: ", selectedElement, temp)
@@ -1196,6 +1244,32 @@ const Chat = () => {
 			addNewMessage(personW.id, '🔵 Сценарий «Реквизиты №2 [Белов]»', 'text', '', convs.id, null, null);
 				
 			sendScenariy48()
+
+		} else if (selectedElement === 50 && temp === '🔵 Сценарий «Кабинет»' ) { //выбран Правила
+			//отправка сценария
+			console.log("отправка сценария: ", selectedElement, temp)
+			//setSelectedElement(1)
+
+			//let sendToTelegram = await sendMessageToTelegram({user: personW.id, text: temp})
+			const message = {
+				senderId: chatAdminId, 
+				receiverId: personW.id,
+				conversationId: convs.id,
+				type: "text",
+				text: '🔵 Сценарий «Кабинет»',
+				isBot: null,
+				messageId: null,
+			}
+				
+			// console.log("message send: ", message);
+		
+			//сохранение сообщения в базе данных
+			await newRMessage(message)
+		
+			//сохранить в контексте
+			addNewMessage(personW.id, '🔵 Сценарий «Кабинет»', 'text', '', convs.id, null, null);
+				
+			sendScenariy50()
 	
 		} else {
 			//отправка сообщения
@@ -1404,6 +1478,27 @@ const Chat = () => {
 		} 
     }
 
+	const sendScenariy4 = async() => {
+		console.log("send scenariy4")
+		//audio.play();
+
+		//отправить в телеграмм
+		
+		//send photo
+		let poster1 = 'https://proj.uley.team/upload/posters/about.jpg' //poster 1
+
+		let arr = [poster1]
+
+		arr.map(async(item, index)=> {
+			setTimeout(async()=> {
+				await sendPhotoToTelegram({user: user.chatId, photo: item, keyboard: ''})
+
+					// setTimeout(async()=> {
+                    //     await delMessageToTelegram({user: user.chatId, messageId: sendToTelegram?.data.result.message_id}) 
+                    // }, 1200000) //20 мин.
+			}, 500 * ++index)
+		})			
+    }
 	
 
 	const sendScenariy5 = async() => {
@@ -1412,11 +1507,11 @@ const Chat = () => {
 		const keyboard = JSON.stringify({
 			inline_keyboard: [
 				[
-					{"text": "Renthub", url:'https://proj.uley.team:7002'},
+					{"text": "Renthub", web_app: {url: webAppUrl}},
 					{"text": "Workhub", url:'https://t.me/ULEY_Workhub_Bot'},
 				],
 				[
-					{"text": "Позвонить", callback_data:'/send_contact'},
+					{"text": "Контакты", callback_data:'/send_contact'},
 				],
 			]
 		});
@@ -1436,7 +1531,7 @@ const Chat = () => {
     }
 
 	const sendScenariy43 = async() => {
-		console.log("send scenariy42")
+		console.log("send scenariy43")
 		//audio.play();
 
 		//let client = userWorkers.find((client) => client.chatId === user.chatId);
@@ -1444,7 +1539,7 @@ const Chat = () => {
 		const keyboard = JSON.stringify({
 			inline_keyboard: [
 				[
-					{"text": "Контакты", callback_data: '/send_contact'},
+					{"text": "Позвонить", callback_data: '/send_contact'},
 				],
 			]
 		});
@@ -1454,7 +1549,42 @@ const Chat = () => {
 		//Office
 		//if (selectedElement === 5 || mess === 'Реквизиты1' || mess === 'реквизиты1') {
 			//send photo
-			let poster1 = 'https://proj.uley.team/upload/posters/Contact2.jpg' //poster 1
+			let poster1 = 'https://proj.uley.team/upload/posters/contact.jpg' //poster 1
+
+			let arr = [poster1]
+
+			arr.map(async(item, index)=> {
+				setTimeout(async()=> {
+					await sendPhotoToTelegram({user: user.chatId, photo: item, keyboard: keyboard})
+
+					// setTimeout(async()=> {
+                    //     await delMessageToTelegram({user: user.chatId, messageId: sendToTelegram?.data.result.message_id}) 
+                    // }, 1200000) //20 мин.
+				}, 500 * ++index)
+			})			
+		//} 
+    }
+
+	const sendScenariy44 = async() => {
+		console.log("send scenariy44")
+		//audio.play();
+
+		//let client = userWorkers.find((client) => client.chatId === user.chatId);
+
+		const keyboard = JSON.stringify({
+			inline_keyboard: [
+				[
+					{"text": "Позвонить", callback_data: '/send_belov_contact'},
+				],
+			]
+		});
+
+		//отправить в телеграмм
+		
+		//Office
+		//if (selectedElement === 5 || mess === 'Реквизиты1' || mess === 'реквизиты1') {
+			//send photo
+			let poster1 = 'https://proj.uley.team/upload/posters/Belov.jpg' //poster 1
 
 			let arr = [poster1]
 
@@ -1539,12 +1669,12 @@ const Chat = () => {
 
 	const sendScenariy48 = async() => {
 		console.log("send scenariy48")
-
+		const str = `+7 (905) 793-51-49`
 
 		const keyboard = JSON.stringify({
 			inline_keyboard: [
 				[
-					{"text": "Реквизиты", copy_text: {text: '+7(905) 793-51-49'}},
+					{"text": "Реквизиты", copy_text: {text: `8(905) 793-51-49`}},
 				],
 			]
 		});
@@ -1555,6 +1685,34 @@ const Chat = () => {
 		//if (selectedElement === 6 || mess === 'Реквизиты2' || mess === 'реквизиты2') {
 			//send photo
 			let poster1 = 'https://proj.uley.team/upload/posters/rekviz_nal.jpg' //poster 1
+
+			let arr = [poster1]
+
+			arr.map(async(item, index)=> {
+				setTimeout(async()=> {
+					await sendPhotoToTelegram({user: user.chatId, photo: item, keyboard: keyboard})
+				}, 500 * ++index)
+			})			
+		//} 
+    }
+
+	const sendScenariy50 = async() => {
+		console.log("send scenariy50")
+
+		const keyboard = JSON.stringify({
+			inline_keyboard: [
+				[
+					{"text": "Открыть", url:'https://uley.company/'},
+				],
+			]
+		});
+
+		//отправить в телеграмм
+		
+		//Правила
+		//if (selectedElement === 6 || mess === 'Реквизиты2' || mess === 'реквизиты2') {
+			//send photo
+			let poster1 = 'https://proj.uley.team/upload/posters/maya_system.jpg' //poster 1
 
 			let arr = [poster1]
 
@@ -1603,143 +1761,7 @@ const Chat = () => {
     }
 
 
-	//отправка сценария Правила
-	const sendMyMessage2 = async() => {
-		console.log("send rule")
-		//audio.play();
 
-		let client = userRenthub.filter((client) => client.chatId === user.chatId)[0];
-
-		const keyboard = JSON.stringify({
-			inline_keyboard: [
-				[
-					{"text": "Прочитал правила", callback_data:'/accept_rule'},
-				],
-			]
-		});
-
-		//отправить в телеграмм
-		let sendToTelegram
-		let sendPhotoToTelegram
-
-		const text = `🔵 <b>Правила первого проекта</b>
-
-ВНИМАТЕЛЬНО прочитайте перед выходом на работу!
-
-✅ <b>Общие правила:</b>
-• Не опаздывать | Не флудить
-• Не покидать чат проекта без согласования
-• После подтверждения участия выход на проект обязателен
-• Форс-мажор — необходимо найти себе замену
-• Не нашли замену — едете на проект лично
-• Невыход — система вносит в чёрный список
-• Расходы на такси в ночное время компания берет на себя
-• Всегда с собой:
-— Паспорт
-— Зарядное устройство / Power Bank
-— Мерч [одежда с логотипом компании | получаете в офисе после нескольких отработаных проектов]
-• Рассчитывать время прибытия на площадку заранее
-• Вести себя культурно и выполнять задания заказчика
-• До выхода на проект зарегистрироваться, ответив на вопросы:
-https://t.me/ULEY_Office_Bot
-
-✅ <b>День проекта:</b>
-• Выйти на связь в чат проекта за 2 часа до начала
-• Кнопка «Подтвердить» — нажатие подтверждает, что вы на связи [обязательно]
-• Кнопка «В пути» — нажать в момент выхода из дома
-• Кнопка «На месте» — после прибытия на адрес
-• Встретиться с коллегами в указанном месте
-• Позвонить заказчику
-
-✅ <b>На проекте:</b>
-• Кнопка «Начал работу» — нажать после начала работы | подтвердить кнопкой «Да»
-• Кнопка «Закончил работу» — нажать по завершению работ | подтвердить кнопкой «Да»
-• Все вопросы в чат проекта, или по номеру: +7(499)500-14-11
-• Внимание! Обязательно фиксировать статусы — влияет на своевременную оплату
-• Оплата в течение 1-3 рабочих дней`
-
-		//Передаем данные боту
-		let temp=text.replace(/\n/g, '%0A'); //экранирование переноса строки
-		temp = temp.replace(/#/g, '%23'); 		 //экранирование решетки
-		temp = temp.replace(/&/g, '%26'); 		 //экранирование &
-		temp = temp.replace(/\+/g, '%2b'); 		 //экранирование +
-		temp = temp.replace(/>/g, '%3e'); 		 //экранирование >
-		temp = temp.replace(/</g, '%3c'); 		 //экранирование <
-		
-		//Правила
-		// const url_send_text = `https://api.telegram.org/bot${token_work}/sendMessage?chat_id=${user.chatId}&parse_mode=html&text=${temp}`	
-		// sendToTelegram = await $host.get(url_send_text);
-		sendToTelegram = await sendMessageToTelegram({user: user.chatId, text: temp})
-		
-
-		//отправить в админку
-		let message = {};
-			
-		message = {
-			senderId: chatAdminId, 
-			receiverId: user.chatId,
-			conversationId: client.conversationId,
-			type: "text",
-			text: 'Сценарий "Первый проект"',
-			isBot: null,
-			messageId: sendToTelegram.data.result.message_id,
-			buttons: '',
-		}
-			
-	
-		//сохранение сообщения в базе данных
-		await newRMessage(message)
-	
-		//сохранить в контексте
-		addNewMessage(user.chatId, 'Сценарий "Первый проект"', 'text', '', client.conversationId, sendToTelegram.data.result.message_id);
-    
-	}
-
-	//отправка сценария Постер
-	const sendMyMessagePoster = async() => {
-		console.log("send poster")
-		//audio.play();
-
-		let client = userRenthub.filter((client) => client.chatId === user.chatId)[0];
-
-		const keyboard = JSON.stringify({
-			inline_keyboard: [
-				[
-					{"text": "Принято / Понято", callback_data:'/poster_accept'},
-				],
-			]
-		});
-
-		let sendToTelegram
-		
-		//Постер
-		// const url_send_photo = `https://api.telegram.org/bot${token_work}/sendPhoto?chat_id=${user.chatId}&photo=${poster}&reply_markup=${keyboard}`
-		// sendToTelegram = await $host.get(url_send_photo);
-		sendToTelegram = await sendPhotoToTelegram({user: user.chatId, image: poster, keyboard: keyboard})
-		
-
-		//отправить в админку
-		let message = {};
-			
-		message = {
-			senderId: chatAdminId, 
-			receiverId: user.chatId,
-			conversationId: client.conversationId,
-			type: "image",
-			text: poster,
-			isBot: null,
-			messageId: sendToTelegram.data.result.message_id,
-			buttons: '',
-		}
-			
-	
-		//сохранение сообщения в базе данных
-		await newRMessage(message)
-	
-		//сохранить в контексте
-		addNewMessage(user.chatId, poster, 'image', '', client.conversationId, sendToTelegram.data.result.message_id);
-    
-	}
 
 	const clickClearFile = () => {
 		console.log("clear file...")
