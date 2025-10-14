@@ -1702,7 +1702,7 @@ const Chat = () => {
 		const keyboard = JSON.stringify({
 			inline_keyboard: [
 				[
-					{"text": "Открыть", url:'https://uley.company/'},
+					{"text": "Открыть", url:'https://uley.team/'},
 				],
 			]
 		});

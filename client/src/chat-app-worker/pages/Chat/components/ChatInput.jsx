@@ -344,7 +344,7 @@ const ChatInput = ({
 								Начало работы
 							</Dropdown.Item>
 							<Dropdown.Item onClick={()=>change(32)}>
-								Обновление системы / ошибки
+								Обновление системы
 							</Dropdown.Item>
 							<Dropdown.Item onClick={()=>change(33)}>
 								Обратная связь
