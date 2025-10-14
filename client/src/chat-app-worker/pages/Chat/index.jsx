@@ -354,7 +354,8 @@ const Chat = () => {
 
 		//Быстрые ответы
 		else if (selectedElement === 341) {
-			text = `Добрый день, ${nameUser}. Вы на связи?`
+			text = `Добрый день, ${nameUser}. 
+Вы на связи?`
 			setMess(text)
 		}
 
