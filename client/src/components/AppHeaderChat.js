@@ -192,7 +192,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
           {/* <h5>U.L.E.Y TEAM</h5> */}
         </CHeaderBrand>
         <CHeaderNav className="d-none d-md-flex me-auto">
-          <CNavItem>
+          {/* <CNavItem>
             <CNavLink 
               //to="/dashboard" 
               onClick={()=>handleLinkClick2(`${host}/dashboard`)} 
@@ -208,16 +208,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
             >
                 Менеджеры
             </CNavLink>
-          </CNavItem>
-          <CNavItem>
-            <CNavLink 
-              onClick={()=>handleLinkClick2(`${host}/chat3`)} 
-              //href="/chat2"
-              component={NavLink}
-            >
-              Проекты
-            </CNavLink>
-          </CNavItem>
+          </CNavItem>*/}
         </CHeaderNav>
         
         <CHeaderNav style={{marginTop: 'auto', display: 'flex', alignItems: 'center'}}>

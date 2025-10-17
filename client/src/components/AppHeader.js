@@ -200,7 +200,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
         </CHeaderBrand>
 
         <CHeaderNav className="d-none d-md-flex me-auto">
-          <CNavItem>
+          {/*<CNavItem>
             <CNavLink to="/dashboard" component={NavLink}>
               Пункт управления
             </CNavLink>
@@ -210,7 +210,7 @@ avatar: 'https://proj.uley.team/avatars/avatar_866043147_12-5-2024T14:38.jpg'})
           </CNavItem>
           <CNavItem>
             <CNavLink href="/chat3">Проекты</CNavLink>
-          </CNavItem>
+          </CNavItem>*/}
         </CHeaderNav>
 
         <CHeaderNav style={{marginTop: 'auto', display: 'flex', alignItems: 'center'}}>
