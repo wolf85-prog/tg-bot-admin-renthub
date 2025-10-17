@@ -16,7 +16,6 @@ const ChatWorker = React.lazy(() => import('./pages/ChatWorker'))
 const ChatRentPerson = React.lazy(() => import('./pages/ChatRentPerson'))
 const DistributionR = React.lazy(() => import('./pages/DistributionR'))
 const DistributionAddR = React.lazy(() => import('./pages/DistributionAddR'))
-const Managers = React.lazy(() => import('./pages/Managers'))
 
 const AppRouter = observer(() => {
 
@@ -39,7 +38,6 @@ const AppRouter = observer(() => {
       <Route exact path="/distributionr" name="Renthub" element={<DistributionR />} />
       <Route exact path="/distributionr_add" name="Renthub" element={<DistributionAddR />} />
       <Route exact path="/distributionr_planer" name="Renthub" element={<DistributionRPlaner />} />
-      <Route exact path="/managers" name="Renthub" element={<Managers />} />
     </Routes>
   );
 });
