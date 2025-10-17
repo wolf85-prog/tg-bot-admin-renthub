@@ -16,9 +16,9 @@ const routes = [
   // { path: "/chat2", name: 'Чаты 2.0', Component: Chats2 },
   { path: "/chatrent", name: 'Renthub', Component: ChatWorker }, 
   { path: "/managers", name: 'Renthub / Уведомления', Component: Managers },
-  { path: '/distributionr', name: 'Renthub / Рассылки', Component: DistributionR },
-  { path: '/distributionr_add', name: 'Renthub / Рассылки', Component: DistributionAddR },
-  { path: '/distributionr_planer', name: 'Renthub / Рассылки', Component: DistributionRPlaner },
+  { path: '/distributionr', name: 'Renthub', Component: DistributionR },
+  { path: '/distributionr_add', name: 'Renthub', Component: DistributionAddR },
+  { path: '/distributionr_planer', name: 'Renthub', Component: DistributionRPlaner },
 ]
 
 export default routes
