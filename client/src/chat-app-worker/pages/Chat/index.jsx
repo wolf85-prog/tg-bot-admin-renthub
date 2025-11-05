@@ -1784,7 +1784,7 @@ const Chat = () => {
 				<Header
 					user={personW}
 					userH={user}
-					manager={workersAll.filter((item)=> item.id === managerId)}
+					manager={workersAll.filter((item)=> item.chatId === chatId)}
 					openProfileSidebar={() => openSidebar(setShowProfileSidebar)}
 					openSearchSidebar={() => openSidebar(setShowSearchSidebar)}
 					closeSidebar={() => closeSidebar(setShowProfileSidebar)}
