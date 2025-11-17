@@ -544,7 +544,14 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 																</figure>
 																)} */}
 																{replyMessage?.startsWith('http') ?
-																	<a href={replyMessage} target="_blank" rel="noreferrer"><img src={replyMessage} alt='' width='50px' height='50px' /></a>
+																	
+																	<a href={replyMessage} target="_blank" rel="noreferrer">
+																		{(replyMessage?.endsWith('.pdf') ? 
+																			<img src={pdf} width={30}/> :
+																			<img src={replyMessage} alt='' width='50px' height='50px' />
+																		)}
+																	</a>
+					
 																	: replyMessage
 																}
 															</div>
