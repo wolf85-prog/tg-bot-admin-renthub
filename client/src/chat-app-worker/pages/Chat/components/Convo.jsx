@@ -192,7 +192,7 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 		  return (
 			<div
 			  ref={ref}
-			  style={{backgroundColor: '#20272b', left: 0, borderRadius: '15px', padding: '0 0 0 0', fontSize: '14px', top: '10px', minWidth:'50px'}}
+			  style={{backgroundColor: '#20272b', left: 0, borderRadius: '15px', padding: '0 0 0 0', fontSize: '14px', top: '68px', minWidth:'50px'}}
 			  className={className}
 			  aria-labelledby={labeledBy}
 			>
@@ -214,7 +214,7 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 		  return (
 			<div
 			  ref={ref}
-			  style={{backgroundColor: '#20272b', right: 0, borderRadius: '15px', padding: '0 0 0 0', fontSize: '14px', top: '10px', minWidth:'50px'}}
+			  style={{backgroundColor: '#20272b', right: 0, borderRadius: '15px', padding: '0 0 0 0', fontSize: '14px', top: '50px', minWidth:'50px'}}
 			  className={className}
 			  aria-labelledby={labeledBy}
 			>
@@ -260,27 +260,33 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 		const message = JSON.parse(eventkey);
 		console.log("message: ", message)
 
-		//удалить сообщение через сокет
-		delRMessageContext(message.id, message.date, message.chatId)
+		if (message.todo === 'Удалить'){
+			//удалить сообщение через сокет
+			delRMessageContext(message.id, message.date, message.chatId)
 
-		//удалить сообщение в базе данных
-		await delRMessage(message.id)
+			//удалить сообщение в базе данных
+			await delRMessage(message.id)
 
-		//const url_del_msg = `https://api.telegram.org/bot${tokenR}/deleteMessage?chat_id=${personW.id}&message_id=${message.id}`
-		//const delToTelegram = await $host.get(url_del_msg);
-		const delToTelegram = await delMessageToTelegram({user: personW.id, messageId: message.id})
+			//const url_del_msg = `https://api.telegram.org/bot${tokenR}/deleteMessage?chat_id=${personW.id}&message_id=${message.id}`
+			//const delToTelegram = await $host.get(url_del_msg);
+			const delToTelegram = await delMessageToTelegram({user: personW.id, messageId: message.id})
 
-		console.log("Удаляемое сообщение: ", message.id)
-		console.log("Дата сообщения: ", message.date)
+			console.log("Удаляемое сообщение: ", message.id)
+			console.log("Дата сообщения: ", message.date)
 
-		//Выводим сообщение об успешной отправке
-		if (delToTelegram) {
-			console.log('Ваше сообщение удалено из телеграм! ', delToTelegram);	
-		}           
-		//А здесь сообщение об ошибке при отправке
-		else {
-			console.log('Что-то пошло не так. Попробуйте ещё раз.');
-		}		
+			//Выводим сообщение об успешной отправке
+			if (delToTelegram) {
+				console.log('Ваше сообщение удалено из телеграм! ', delToTelegram);	
+			}           
+			//А здесь сообщение об ошибке при отправке
+			else {
+				console.log('Что-то пошло не так. Попробуйте ещё раз.');
+			}	
+		} else if (message.todo === 'Копировать') {
+			navigator.clipboard.writeText(message.text)
+		}
+
+			
 	}
 
 	const handleClick = (ind) => {
@@ -514,7 +520,7 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 											<Dropdown.Toggle as={CustomToggleBottom} id="dropdown-custom-components">											
 											</Dropdown.Toggle>
 											<Dropdown.Menu as={CustomMenuBottom}>
-											<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: personW.id})}>Удалить</Dropdown.Item>
+												<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: personW.id})}>Удалить</Dropdown.Item>
 											</Dropdown.Menu>
 										</Dropdown>	
 
@@ -600,8 +606,13 @@ const Convo = ({ lastMsgRef, messages: allMessages, convId }) => {
 											<Dropdown onSelect={change} style={{position: 'absolute', right: '0px'}}>
 												<Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">											
 												</Dropdown.Toggle>
-												<Dropdown.Menu as={CustomMenu}>
-												<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: personW.id})}>Удалить</Dropdown.Item>
+												<Dropdown.Menu as={CustomMenu} style='68px'>
+													<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: personW.id, todo: 'Удалить', text: ''})}>
+														Удалить
+													</Dropdown.Item>
+													<Dropdown.Item eventKey={JSON.stringify({id: message.id, date: message.date, chatId: personW.id, todo: 'Копировать', text: message.content })}>
+														Копировать
+													</Dropdown.Item>
 												</Dropdown.Menu>
 											</Dropdown>									
 									</p>
