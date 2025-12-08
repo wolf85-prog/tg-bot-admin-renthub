@@ -1257,6 +1257,8 @@ const onChangeSelectCity = (e) => {
 
       setValueSelect(0)
 
+      setTimeout(() => navigate('/distributionsr'), 1000);
+
     }
     else {
       setVisibleModal(!visibleModal)
