@@ -1225,7 +1225,7 @@ const onChangeSelectCity = (e) => {
 
       if (showCheckTarget) {
         console.log("Без цепочки")
-        //const res = await $host.get(hostServer + 'api/distributionsr/send/' + distrNew?.id); 
+        const res = await $host.get(hostServer + 'api/distributionsr/send/' + distrNew?.id); 
       } else {
         console.log("С цепочкой")
         if (valueCep === '1 | Принять участие') {
@@ -1233,7 +1233,7 @@ const onChangeSelectCity = (e) => {
           
         } else if (valueCep === '2 | Ссылки') {
           console.log(valueCep)
-          
+          const res = await $host.get(hostServer + 'api/distributionsr/customcep/send/' + distrNew?.id); 
         }
         
       }
