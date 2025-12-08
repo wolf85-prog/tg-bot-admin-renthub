@@ -129,6 +129,7 @@ const DistributionAddR = () => {
   const [image, setImage]= useState("");
 
   const [value2, setValue2] = useState("");
+  const [valueCep, setValueCep] = useState("");
 
   const [loader, setLoader] = useState(false);
   const [loaderStart, setLoaderStart] = useState(false);
@@ -1131,6 +1132,7 @@ const onChangeSelectCity = (e) => {
 
   const onChangeCheckTarget = (e) => {
     setShowCheckTarget(!showCheckTarget)
+    setValueCep("1 | Принять участие")
   }
 
   const onChangeTextUrl = (e) => {
@@ -1220,8 +1222,22 @@ const onChangeSelectCity = (e) => {
       const distrNew = await newDistributionR(message)
       console.log("distrNew: ", distrNew?.id)
       //console.log(hostServerTest + 'distributionsw/send/' + distrNew.id +'&'+ typeFile)
+
+      if (showCheckTarget) {
+        console.log("Без цепочки")
+        //const res = await $host.get(hostServer + 'api/distributionsr/send/' + distrNew?.id); 
+      } else {
+        console.log("С цепочкой")
+        if (valueCep === '1 | Принять участие') {
+          console.log(valueCep)
+          
+        } else if (valueCep === '2 | Ссылки') {
+          console.log(valueCep)
+          
+        }
+        
+      }
       
-      const res = await $host.get(hostServer + 'api/distributionsr/send/' + distrNew?.id); 
       //const res = await $host.get(hostServer + 'api/distributionsr/custom/send/' + distrNew?.id); 
       
       //const res = await $host.get(hostServer + 'distributionsr/send/' + distrNew?.id +'/'+ typeFile);
@@ -1663,7 +1679,9 @@ const onChangeSelectCity = (e) => {
                                             <CFormSelect 
                                               aria-label="Default select example"
                                               style={{marginTop: '10px'}}
-                                              options={[]}
+                                              options={["1 | Принять участие", "2 | Ссылки"]}
+                                              value={valueCep}
+                                              onChange={(e)=>setValueCep(e.target.value)}
                                             />
                                           </CCol>
 
