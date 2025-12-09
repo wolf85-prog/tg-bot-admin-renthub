@@ -1228,25 +1228,20 @@ const onChangeSelectCity = (e) => {
         const res = await $host.get(hostServer + 'api/distributionsr/send/' + distrNew?.id); 
       } else {
         console.log("С цепочкой")
-        if (valueCep === '1 | Принять участие') {
-          console.log(valueCep)
-          
-        } else if (valueCep === '2 | Ссылки') {
+        if (valueCep === '2 | Ссылки') {
           console.log(valueCep)
           const res = await $host.get(hostServer + 'api/distributionsr/customcep/send/' + distrNew?.id); 
         }
         
       }
       
-      //const res = await $host.get(hostServer + 'api/distributionsr/custom/send/' + distrNew?.id); 
-      
+      //const res = await $host.get(hostServer + 'api/distributionsr/custom/send/' + distrNew?.id);     
       //const res = await $host.get(hostServer + 'distributionsr/send/' + distrNew?.id +'/'+ typeFile);
-      //const res = await $host_bottest.get(hostServerTest + 'distributionsw/send/' + distrNew.id);
 
       setShowSend(false)
 
       //обновить список рассылок
-      addNewDistrib(true)
+      //addNewDistrib(true)
 
       setSelected([])
       setText('')
@@ -1257,7 +1252,7 @@ const onChangeSelectCity = (e) => {
 
       setValueSelect(0)
 
-      setTimeout(() => navigate('/distributionsr'), 1000);
+      setTimeout(() => navigate('/distributionr'), 1000);
 
     }
     else {

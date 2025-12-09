@@ -172,7 +172,7 @@ const UsersProvider = ({ children }) => {
 		
 			//0 все специалисты
 			let managers = await getRManagers()
-			console.log("Managers: ", managers.length)
+			console.log("Managers: ", managers?.length)
 			
 			const arrayWorkerAll = []
 
@@ -410,10 +410,10 @@ const UsersProvider = ({ children }) => {
 		const fetchData = async () => {
 			//1 все рассылки 20
 			let response = await getDistributionsCountR(10, distributionsRent.length);
-			//console.log("distributionW: ", response.length)
+			console.log("distributionW: ", response?.length)
 
 			let response2 = await getDistributionsRPlan();
-			//console.log("distributionWPlan: ", response2.length)
+			console.log("distributionWPlan: ", response2?.length)
 
 			//сортировка
 			const messageSort = [...response].sort((a, b) => {       
