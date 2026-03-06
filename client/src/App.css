@@ -301,8 +301,9 @@ fixed-table-container {
   }
 
 .dark-theme {
-    --cui-body-bg: #181924;
+    /* --cui-body-bg: #181924; */
     /* --cui-body-bg: #000000; */
+    --cui-body-bg: #131c21;
     --cui-heading-color: #dfdfdf;
     --cui-body-color: hsla(0,0%,100%,.87);
     --cui-elevation-base-color: 0,0,0;
