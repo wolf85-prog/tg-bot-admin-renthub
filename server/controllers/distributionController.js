@@ -7,6 +7,7 @@ const { Op } = require('sequelize')
 //fetch api
 //const fetch = require('node-fetch');
 const axios = require("axios");
+const tryParseInt = require('../utils/parser');
 
 const webAppAddStavka = process.env.WEBAPP_STAVKA
 const token = process.env.TELEGRAM_API_TOKEN_RENTHUB
@@ -1327,6 +1328,29 @@ class DistributionController {
             return res.status(500).json(error.message);
         }
     }
+
+    async getPaginatedDistributionR(req, res) {        
+        const page = tryParseInt(req.query.page, 0);
+        const limit = tryParseInt(req.query.limit, 20);
+      
+        try {
+          const { count, rows } = await Distribution.findAndCountAll({
+            order: [["id", "DESC"]],           
+            offset: limit * page,
+            limit: limit,
+            
+          });
+      
+          res.status(200).json({
+            page: page,
+            limit: limit,
+            total: count,
+            data: rows,
+        });
+        } catch (err) {
+          res.status(500).json({ error: err.message });
+        }
+    };  
 }
 
 module.exports = new DistributionController()

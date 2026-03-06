@@ -24,6 +24,160 @@
     color: #ffffff!important;
 } */
 
+.my-table {
+    width: 100%;
+}
+
+.table-head-content {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    right: 16px;
+    height: 40px;
+    background: #2b3337;
+    z-index: 1;
+}
+
+.table-head-content2 {
+  position: absolute;
+  top: 58px;
+  left: 16px;
+  width: 55px;
+  height: calc(100vh - 21rem);
+  background: #131c21;
+  z-index: 0;
+}
+.table-head-content3 {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: 55px;
+  height: 40px;
+  background: #2b3337;
+  z-index: 2;
+}
+
+.table-col-content {
+  position: absolute;
+  top: 60px;
+  /* left: 0px; */
+  height: 555px;
+  background: #131c21;
+  z-index: 0;
+  width: 51px;
+  border-left: 1px solid #242c31;
+  border-right: 1px solid #242c31;
+}
+  
+  
+th.my-th {
+    /* text-align: left; */
+    background: #2b3337;
+    position: sticky;
+    top: 0px;
+    z-index: 1;
+    cursor: pointer;
+}
+
+th.my-th2 {
+    text-align: center;
+    background: #2b3337;
+    position: sticky;
+    top: 0px;
+    z-index: 1;
+    cursor: pointer;
+}
+
+th.myid-th {
+  background: #2b3337;
+  position: sticky;
+  left: 0px;
+  top: 0px;
+  min-width: 50px;
+  z-index: 2;
+}
+
+th.myfio-th {
+  background: #2b3337;
+  position: sticky;
+  top: 0px;
+  min-width: 250px;
+  left: 50px;
+  z-index: 2;
+}
+
+td.my-td {
+    position: sticky;
+    left: 0;
+    min-width: 40px;
+    background-color: #131c21;
+}
+
+td.myfio-td {
+  position: sticky;
+  left: 50px;
+  /* min-width: 50px; */
+  background-color: #131c21;
+}
+
+.scroll-table {
+    overflow-y: auto;
+    height: calc(100vh - 17rem);
+    /* border: 1px solid #242c31; */
+}
+
+td.widthSpace {
+    white-space: nowrap; /* Текст не переносится */
+    overflow: hidden; /* Обрезаем всё за пределами блока */
+    text-overflow: ellipsis; /* Добавляем многоточие */
+    width: 1%; /* Форсирует сужение ячейки */
+}
+
+th.widthSpace {
+    white-space: nowrap; /* Текст не переносится */
+    width: 1%; /* Форсирует сужение ячейки */
+}
+
+fixed-table-container {
+    width: 100%;
+    height: 200px;
+    border: 1px solid #242c31;
+    margin: 10px auto;
+    background-color: #131c21;
+    /* above is decorative or flexible */
+    position: relative; /* could be absolute or relative */
+    padding-top: 30px; /* height of header */
+  }
+
+  .fixed-table-container-inner {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 100%;
+  }
+   
+  .header-background {
+    background-color: #2b3337;
+    height: 30px; /* height of header */
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+  }
+
+  .th-inner {
+    position: absolute;
+    top: 0;
+    line-height: 30px; /* height of header */
+    text-align: left;
+    border-left: 1px solid black;
+    padding-left: 5px;
+    margin-left: -5px;
+  }
+  .first .th-inner {
+      border-left: none;
+      padding-left: 6px;
+    }
+
 .thead{
     --cui-table-bg: #131c21;
     --cui-table-color: hsla(0,0%,100%,.87);

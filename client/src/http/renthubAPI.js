@@ -302,3 +302,15 @@ export const getPlan = async (date) => {
         console.log("error while calling getPlan api", error.message);
     }
 }
+
+export const getPageDistributionsR = async (page, limit) =>{
+    try {
+        //console.log("page: ", page, limit)
+       const params = page ? { page, limit } : {}
+       // param2 = limit ? { limit } : {}
+       let response = await $host.get(`api/distributionsr/paginate`, {params});
+       return response.data;
+    } catch (error) {
+        console.log("error while calling getPageDistributionsR api", error.message);
+    }
+}

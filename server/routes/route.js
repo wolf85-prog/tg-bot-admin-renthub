@@ -17,7 +17,7 @@ const { newConversationR, getConversationR, getConversationsR } = require( "../c
 
 const {newDistributionR, getDistributionsR, getDistributionsRPlan, delDistributionR, 
     delDistributionRPlan, editDistribR, editDistribRAll, sendDistribR, sendDistribR2, sendDistribR3, sendDistribR4,
-    editDistribRPlan, delMessagesDistribR, getDistributionsCount} = require("../controllers/distributionController.js")
+    editDistribRPlan, delMessagesDistribR, getDistributionsCount, getPaginatedDistributionR} = require("../controllers/distributionController.js")
 
 const { getCompanys, getCompanyCount, editCompany, getCompanyId, addCompany, 
         deleteCompany, getCompanyCountAll } = require('../controllers/companysController')
@@ -98,6 +98,8 @@ route.post('/distributionr/delete', delDistributionRPlan)
 route.patch('/distributionr/update/:id', editDistribR)
 route.patch('/distributionsrall/update/:id', editDistribRAll)
 route.post('/distributionr/plan/update', editDistribRPlan)
+route.get('/distributionsr/paginate', getPaginatedDistributionR)
+
 
 route.get('/distributionsr/send/:id', sendDistribR)
 route.get('/distributionsr/custom/send/:id', sendDistribR2) // С Новым годом

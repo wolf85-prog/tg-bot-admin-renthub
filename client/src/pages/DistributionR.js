@@ -28,11 +28,12 @@ import deleteIcon from 'src/assets/images/delete.png'
 import editIcon from 'src/assets/images/pencil.png'
 import copyIcon from 'src/assets/images/copy.png'
 import { useUsersContext } from "../chat-app-new/context/usersContext";
-import { delDistributionR, getDistributionsCountR, getDistributionsRPlan, getPlan, newPlan } from 'src/http/renthubAPI';
+import { delDistributionR, getPageDistributionsR, getDistributionsRPlan, getPlan, newPlan } from 'src/http/renthubAPI';
 
 import MyModal from "../components/MyModal/MyModal";
 import Close from "../assets/images/close.svg"
-import arrowDown from '../assets/images/arrowDown.svg'
+//import arrowDown from '../assets/images/arrowDown.svg'
+import Loader from './../components/LoaderMini/LoaderMini'
 
 const DistributionR = () => {
   const { distributionsRent: messages, addNewDistrib, workersAll } = useUsersContext();
@@ -41,7 +42,7 @@ const DistributionR = () => {
   const [users, setUsers]= useState([]);
   const [loading, setLoading]= useState(true);
   const [proj, setProj] = useState('');
-  const [seconds, setSeconds] = useState(1);
+  //const [seconds, setSeconds] = useState(1);
 
   const [visibleModal, setVisibleModal] = useState(false);
 
@@ -51,6 +52,10 @@ const DistributionR = () => {
   const [count2, setCount2] = useState(0)
 
   const [showTable, setShowTable] = useState([])
+
+  const [fetching, setFetching] = useState(true)
+  const [currentPage, setCurrentPage] = useState(0)
+  const [totalCount, setTotalCount] = useState(0)
 
   const [toast, addToast] = useState(0)
   const toaster = useRef()
@@ -210,39 +215,116 @@ const DistributionR = () => {
       }));
   }
 
-  const clickNext = async() => {
+  // const clickNext = async() => {
 
-    const fetchData = async () => {
-			//1 все рассылки 20
-			let response = await getDistributionsCountR(100, distributionsRent.length);
-			//console.log("distributionW: ", response.length)
+  //   const fetchData = async () => {
+	// 		//1 все рассылки 20
+	// 		let response = await getDistributionsCountR(100, distributionsRent.length);
+	// 		//console.log("distributionW: ", response.length)
 
-			let response2 = await getDistributionsRPlan();
-			//console.log("distributionWPlan: ", response2.length)
+	// 		let response2 = await getDistributionsRPlan();
+	// 		//console.log("distributionWPlan: ", response2.length)
 
-			//сортировка
-			const messageSort = [...response].sort((a, b) => {       
-				var dateA = new Date(a.datestart), dateB = new Date(b.datestart) 
-				return dateB-dateA  //сортировка по убывающей дате  
-			})
+	// 		//сортировка
+	// 		const messageSort = [...response].sort((a, b) => {       
+	// 			var dateA = new Date(a.datestart), dateB = new Date(b.datestart) 
+	// 			return dateB-dateA  //сортировка по убывающей дате  
+	// 		})
 
-			const messageSort2 = [...response2].sort((a, b) => {       
-				var dateA = new Date(a.datestart), dateB = new Date(b.datestart) 
-				return dateA-dateB  //сортировка по убывающей дате  
-			})
+	// 		const messageSort2 = [...response2].sort((a, b) => {       
+	// 			var dateA = new Date(a.datestart), dateB = new Date(b.datestart) 
+	// 			return dateA-dateB  //сортировка по убывающей дате  
+	// 		})
 
-			let all = [...messageSort2, ...messageSort]
+	// 		let all = [...messageSort2, ...messageSort]
 
-			setDistributionsRent(all)
-		}
+	// 		setDistributionsRent(all)
+	// 	}
 
-    //1 все рассылки
-		// let response = await getDistributionsCountR(100, distributionsRent.length);
-    // console.log("distrib size: ", response.length)
+  //   //1 все рассылки
+	// 	// let response = await getDistributionsCountR(100, distributionsRent.length);
+  //   // console.log("distrib size: ", response.length)
 
-    // const arrayDistrib = []
-		fetchData()
-  }
+  //   // const arrayDistrib = []
+	// 	fetchData()
+  // }
+
+  useEffect(()=> {
+    if (fetching) {
+      console.log("fetching")
+      //загрузка данныъх
+      //setLoadingPage(true)
+      
+      // 1 Все рассылки
+      getPageDistributionsR(currentPage, 20)
+      .then(response=> {
+        console.log("response: ", response)
+        let arrDistrib = []
+
+        response.data.map(async (distrib, i) => {
+          const d = new Date(distrib.datestart);
+          const year = d.getFullYear();
+          const month = String(d.getMonth()+1).padStart(2, "0");
+          const day = String(d.getDate()).padStart(2, "0");
+          const chas = d.getHours();
+          const minut = String(d.getMinutes()).padStart(2, "0");
+          const newDateMessage = `${day}.${month}.${year}`
+          const newTimeMessage = `${chas}:${minut}`
+
+          let space = /,/gi;
+
+          let deliv = distrib.delivered
+
+          const newDistrib = {
+            id: distrib.id,
+            text: distrib.text,
+            image: distrib.image !=='' ? distrib.image : '',
+            project: distrib.project,
+            projectId: distrib.projectId ? distrib.projectId : '',
+            receivers: distrib.receivers.replace(space, '<br/>'), //strReceivers,//JSON.parse(distrib.receivers)[index-1].label,
+            categories: distrib.receivers,
+            count: distrib.count,
+            date: newDateMessage,
+            timestart: newTimeMessage,
+            datestart: distrib.datestart,
+            status: deliv ? "отправлено" : "запланировано",
+            uuid: distrib.uuid,
+            success: distrib.success,
+            report: distrib.report,
+            delivered: deliv,
+            users: distrib.users,
+            button: distrib.button,
+            stavka: distrib.stavka,
+            editButton: distrib.editButton,
+            target: distrib.target,
+            cep: distrib.cep,
+            cepName: distrib.cepName,
+          }
+
+          arrDistrib.push(newDistrib) 
+        })
+
+        setDistributionsRent([...distributionsRent, ...arrDistrib])
+        //setDistrib0(arrDistrib)
+        setCurrentPage(prevState => prevState + 1)
+        setTotalCount(response.total)
+      })
+      .finally(()=> {
+        setFetching(false)
+        //setLoadingPage(false)
+        setLoading(false)
+      })
+
+    }
+  }, [fetching, currentPage, distributionsRent])  
+
+  const handleScroll = (e) => {
+		const { scrollTop, scrollHeight, clientHeight } = e.target;
+    //console.log(scrollTop, scrollHeight, clientHeight)
+    if (scrollHeight - (scrollTop + clientHeight) < 100 && distributionsRent.length < totalCount) {
+      setFetching(true)
+    }
+	};
 
   return (
     <div className='dark-theme'>
@@ -266,90 +348,92 @@ const DistributionR = () => {
 
                               {loading ? 
                                     
-                                <CSpinner/> :
-
-                                <CTable align="middle" className="mb-0 border" hover responsive>
-                                  <CTableHead className='table-light'>
-                                    <CTableRow>
-                                      <CTableHeaderCell className="text-center">Дата</CTableHeaderCell>
-                                      <CTableHeaderCell className="text-center">Время</CTableHeaderCell>
-                                      <CTableHeaderCell className="text-center">Название проекта</CTableHeaderCell>
-                                      {/* <CTableHeaderCell className="text-center">Картинка</CTableHeaderCell> */}
-                                      <CTableHeaderCell className="text-center">Категория</CTableHeaderCell> 
-                                      <CTableHeaderCell className="text-center">Получатели</CTableHeaderCell>    
-                                      <CTableHeaderCell className="text-center">Статус</CTableHeaderCell>
-                                      <CTableHeaderCell className="text-center">Управление</CTableHeaderCell>
-                                    </CTableRow>
-                                  </CTableHead>
-                                  <CTableBody>
-                                    {distributionsRent.map((item, index) => (
-                                      <CTableRow v-for="item in tableItems" key={index} >
-                                        {/* <CTableDataCell>
-                                          <div>{index+1}</div>
-                                        </CTableDataCell> */}
-                                        <CTableDataCell className="text-center" style={{width: '50px'}}>
-                                          <div>{item.date}</div>
-                                        </CTableDataCell>  
-                                        <CTableDataCell className="text-center" style={{width: '50px'}}>
-                                          <div>{item.timestart}</div>
-                                        </CTableDataCell>  
-                                        <CTableDataCell className="text-center">
-                                          <CTooltip
-                                            content={item.projectId}
-                                            placement="top"
-                                          >
-                                            <div>{item.project}</div>
-                                          </CTooltip>
-                                        </CTableDataCell>    
-                                        {/* <CTableDataCell className="text-center">
-                                          {item.image.endsWith('.pdf') ?
-                                          <iframe src={item.image} height="120px" width="200px" title="myFramePdf"/>
-                                          : <div>{item.image ? <a href={item.image} target='_blank' rel="noreferrer"><img src={item.image} alt='' width={230} height={120} style={{objectFit: 'contain'}}></img></a> : ''}</div>
-                                          }
-                                        </CTableDataCell> */}
-                                        <CTableDataCell className="text-center">
-                                          <div dangerouslySetInnerHTML={{__html: item.receivers}} />
-                                        </CTableDataCell>
-                                        <CTableDataCell className="text-center" onClick={()=>showReceivers(item.report)} style={{cursor: 'pointer'}}>
-                                          {
-                                            item.status === 'запланировано' ? 
-                                            <div style={{color: '#3887cd'}}>{item.count}</div>
-                                            :<div>{item.count} | {item.success ? item.success : "0"}</div>
-                                          }
-                                        </CTableDataCell>
-                                        <CTableDataCell className="text-center">
-                                          {
-                                            item.status === 'запланировано' ? 
-                                            <div style={{color: '#3887cd'}}>{item.status}</div>
-                                            :<div>{item.status}</div>
-                                          }
-                                        </CTableDataCell>
-                                        <CTableDataCell className="text-center">
-                                          {/* <Link to={'/distributionw_planer'} state={{ project: proj}}>
-                                            <CButton color="light" style={{marginRight: '10px'}}>
-                                              <img src={editIcon} alt='' width='10px' />
-                                            </CButton>
-                                          </Link> */}
-
-                                          {item.projectId ?   
-                                            <Link to={'/distributionw_edit'} state={{editD: true, delivered: item.delivered, project: item.projectId, id: item.id, category: item.categories, users: item.users, text: item.text, img: item.image, date: item.datestart, uuid: item.uuid, button: item.button, editButton: item.editButton, stavka: item.stavka, target: item.target}}><CButton color="light" style={{marginRight: '10px', borderColor: 'transparent', background: '#2b3338',}}><img src={item.delivered ? copyIcon : editIcon} alt='' width='10px' /></CButton></Link>
-                                            :<Link to={''} state={{ project: `${proj}`, }}><CButton color="light" style={{borderColor: 'transparent', background: '#2b3338', marginRight: '10px'}}><img src={item.delivered ? copyIcon : editIcon} alt='' width='10px' /></CButton></Link>
-                                          }
-                                          
-                                          <CButton color="light" style={{borderColor: 'transparent', background: '#2b3338'}} onClick={() => removeDescription(item)}>
-                                            <img src={deleteIcon} alt='' width='10px' />
-                                          </CButton>
-
-                                        </CTableDataCell>
+                                <Loader/> :
+                                <div className='scroll-table' style={{height: 'calc(100vh - 19rem)'}} onScroll={handleScroll}>
+                                  <div className="table-head-content"></div>
+                                  <CTable align="middle" className="mb-0 border my-table" hover>
+                                    <CTableHead className='table-light'>
+                                      <CTableRow>
+                                        <CTableHeaderCell className="my-th2 widthSpace">Дата</CTableHeaderCell>
+                                        <CTableHeaderCell className="my-th2 widthSpace">Время</CTableHeaderCell>
+                                        <CTableHeaderCell className="my-th2 widthSpace">Название проекта</CTableHeaderCell>
+                                        {/* <CTableHeaderCell className="text-center">Картинка</CTableHeaderCell> */}
+                                        <CTableHeaderCell className="my-th2 widthSpace">Категория</CTableHeaderCell> 
+                                        <CTableHeaderCell className="my-th2 widthSpace">Получатели</CTableHeaderCell>    
+                                        <CTableHeaderCell className="my-th2 widthSpace">Статус</CTableHeaderCell>
+                                        <CTableHeaderCell className="my-th2 widthSpace">Управление</CTableHeaderCell>
                                       </CTableRow>
-                                    ))}
-                                  </CTableBody>
-                                </CTable>
+                                    </CTableHead>
+                                    <CTableBody>
+                                      {distributionsRent.map((item, index) => (
+                                        <CTableRow v-for="item in tableItems" key={index} >
+                                          {/* <CTableDataCell>
+                                            <div>{index+1}</div>
+                                          </CTableDataCell> */}
+                                          <CTableDataCell className="text-center" style={{width: '50px'}}>
+                                            <div>{item.date}</div>
+                                          </CTableDataCell>  
+                                          <CTableDataCell className="text-center" style={{width: '50px'}}>
+                                            <div>{item.timestart}</div>
+                                          </CTableDataCell>  
+                                          <CTableDataCell className="text-center">
+                                            <CTooltip
+                                              content={item.projectId}
+                                              placement="top"
+                                            >
+                                              <div>{item.project}</div>
+                                            </CTooltip>
+                                          </CTableDataCell>    
+                                          {/* <CTableDataCell className="text-center">
+                                            {item.image.endsWith('.pdf') ?
+                                            <iframe src={item.image} height="120px" width="200px" title="myFramePdf"/>
+                                            : <div>{item.image ? <a href={item.image} target='_blank' rel="noreferrer"><img src={item.image} alt='' width={230} height={120} style={{objectFit: 'contain'}}></img></a> : ''}</div>
+                                            }
+                                          </CTableDataCell> */}
+                                          <CTableDataCell className="text-center">
+                                            <div dangerouslySetInnerHTML={{__html: item.receivers}} />
+                                          </CTableDataCell>
+                                          <CTableDataCell className="text-center" onClick={()=>showReceivers(item.report)} style={{cursor: 'pointer'}}>
+                                            {
+                                              item.status === 'запланировано' ? 
+                                              <div style={{color: '#3887cd'}}>{item.count}</div>
+                                              :<div>{item.count} | {item.success ? item.success : "0"}</div>
+                                            }
+                                          </CTableDataCell>
+                                          <CTableDataCell className="text-center">
+                                            {
+                                              item.status === 'запланировано' ? 
+                                              <div style={{color: '#3887cd'}}>{item.status}</div>
+                                              :<div>{item.status}</div>
+                                            }
+                                          </CTableDataCell>
+                                          <CTableDataCell className="text-center">
+                                            {/* <Link to={'/distributionw_planer'} state={{ project: proj}}>
+                                              <CButton color="light" style={{marginRight: '10px'}}>
+                                                <img src={editIcon} alt='' width='10px' />
+                                              </CButton>
+                                            </Link> */}
+
+                                            {item.projectId ?   
+                                              <Link to={'/distributionw_edit'} state={{editD: true, delivered: item.delivered, project: item.projectId, id: item.id, category: item.categories, users: item.users, text: item.text, img: item.image, date: item.datestart, uuid: item.uuid, button: item.button, editButton: item.editButton, stavka: item.stavka, target: item.target}}><CButton color="light" style={{marginRight: '10px', borderColor: 'transparent', background: '#2b3338',}}><img src={item.delivered ? copyIcon : editIcon} alt='' width='10px' /></CButton></Link>
+                                              :<Link to={''} state={{ project: `${proj}`, }}><CButton color="light" style={{borderColor: 'transparent', background: '#2b3338', marginRight: '10px'}}><img src={item.delivered ? copyIcon : editIcon} alt='' width='10px' /></CButton></Link>
+                                            }
+                                            
+                                            <CButton color="light" style={{borderColor: 'transparent', background: '#2b3338'}} onClick={() => removeDescription(item)}>
+                                              <img src={deleteIcon} alt='' width='10px' />
+                                            </CButton>
+
+                                          </CTableDataCell>
+                                        </CTableRow>
+                                      ))}
+                                    </CTableBody>
+                                  </CTable>
+                                </div>
                               } 
 
-                              <div style={{display: 'flex', justifyContent: 'center' }}>
+                              {/* <div style={{display: 'flex', justifyContent: 'center' }}>
                                 <img src={arrowDown} alt='' onClick={()=>clickNext()} style={{width: '50px', marginTop: '15px', cursor: 'pointer'}}></img>
-                              </div>                             
+                              </div>                              */}
                             </CCardBody>
                           </CCard>
 
