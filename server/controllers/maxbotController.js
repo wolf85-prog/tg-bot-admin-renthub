@@ -2,7 +2,7 @@ const { MaxUserBot } = require('../models/Maxbot')
 const ApiError = require('../error/ApiError')
 const { Op } = require('sequelize')
 
-const { connect } = require('../redisClient');
+//const { connect } = require('../redisClient');
 
 require("dotenv").config();
 
