@@ -81,7 +81,12 @@ const UsersProvider = ({ children }) => {
 	const [workers, setWorkers] = useState([]); //100 последних специалистов;
 	const [workersAll, setWorkersAll] = useState([]); //все специалисты;
 
+	const [maxs, setMaxs] = useState([]); //100 последних специалистов;
+	const [maxAll, setMaxAll] = useState([]); //все специалисты;
+
 	const [userRenthub, setUserRenthub] = useState([]); 
+	const [userMaxRenthub, setUserMaxRenthub] = useState([]); 
+
 	const [rmanagers, setRmanagers] = useState([]); //100 последних менеджеров;
 	const [rmanagersAll, setRmanagersAll] = useState([]); //все менеджеры;
 
@@ -413,7 +418,10 @@ const UsersProvider = ({ children }) => {
 		
 			//0 все специалисты
 			let managers = await getMContacts()
-			console.log("Managers Max: ", managers?.length)
+			console.log("Managers Max: ", managers)
+
+			let managersAll = await getRManagers()
+			//console.log("managersAll: ", managersAll)
 			
 			const arrayWorkerAll = []
 
@@ -426,39 +434,41 @@ const UsersProvider = ({ children }) => {
 			managers.map(async (user) => {
 				//console.log("user: ", user)
 				//поиск компании по id
-				let compName = ''
-				if (comps && user.companyId) {
-					//compName = comps.find(item=> item.id === parseInt(user.companyId) || item.GUID === user.companyId)
-					compName = comps.find(item=>user.companyId !== null && (item.id.toString() === user.companyId || item.GUID === user.companyId))
-					//console.log("compName: ", compName?.title)
-				}	
 
-				//const res = userbot.find(item2 => item2.chatId === user.chatId)
+				let compName = ''
+				// if (comps && user.companyId) {
+				// 	//compName = comps.find(item=> item.id === parseInt(user.companyId) || item.GUID === user.companyId)
+				// 	compName = comps.find(item=>user.companyId !== null && (item.managerId.toString() === user.companyId || item.GUID === user.companyId))
+				// 	//console.log("compName: ", compName?.title)
+				// }	
+
+				const resManager = managersAll.find(item2 => item2.id.toString() === user.managerId)
+				console.log("resManager: ", resManager)
 
 				const newWorker = {
-					id: user.id,
-					fio: user.fio,
+					id: resManager?.id,
+					fio: resManager?.fio,
 					username: '',//res ? res.username : '',
-					phone: user.phone,
-					dolgnost: user.dolgnost,
-					city: user.city, 
+					phone: resManager?.phone,
+					dolgnost: resManager?.dolgnost,
+					city: resManager?.city, 
 					company: compName ? compName?.title : '',
-					projects: user.projects,
-					worklist: user.worklist,
-					sfera: user.sfera,
-					chatId: user.chatId,
-					createDate: user.createdAt,
-					avatar: user.avatar ? user.avatar : (compName ? compName.profile : ''),
-					block: user.block,
-					deleted: user.deleted,
+					projects: resManager?.projects,
+					worklist: resManager?.worklist,
+					sfera: resManager?.sfera,
+					chatId: resManager?.chatId,
+					createDate: resManager?.createdAt,
+					avatar: resManager?.avatar ? resManager.avatar : (compName ? compName.profile : ''),
+					block: resManager?.block,
+					deleted: resManager?.deleted,
 				}
 		
 				arrayWorkerAll.push(newWorker)
 			})
 
-			console.log("arrayWorkerAll: ", arrayWorkerAll.length)
+			console.log("arrayWorkerAll: ", arrayWorkerAll)
 		
-			setWorkersAll(arrayWorkerAll)
+			setMaxAll(arrayWorkerAll)
 
 			//1 все специалисты 100
 			let response = await getRManagerCount(100, userRenthub.length);
@@ -488,10 +498,10 @@ const UsersProvider = ({ children }) => {
 				arrayWorker.push(newWorker)
 			})
 		
-			setWorkers(arrayWorker)	
+			setMaxs(arrayWorker)	
 		
 			//2 все пользователи бота
-			let wuserbots = await getRContacts();
+			let wuserbots = await getMContacts();
 			//console.log("wuserbots size: ", wuserbots.length)
 			const arrayContact = []
 
@@ -508,7 +518,7 @@ const UsersProvider = ({ children }) => {
 			convers.forEach(async (user, index) => {
 		
 				let manager = arrayWorkerAll.find((item)=> item.chatId === user.members[0])
-				//console.log("manager: ", manager)
+				console.log("manager: ", manager)
 				let userbot = wuserbots.find((item)=> item.chatId === manager?.chatId)	
 					
 				let conversationId = user.id //await getWConversation(user.members[0])
@@ -631,10 +641,10 @@ const UsersProvider = ({ children }) => {
 
 					//console.log("sortedClients: ", sortedClients.length)
 		
-					setUserRenthub(sortedClients)
+					setUserMaxRenthub(sortedClients)
 
 					//сохранить кэш
-					localStorage.setItem("userRenthub", JSON.stringify(sortedClients));
+					//localStorage.setItem("userRenthub", JSON.stringify(sortedClients));
 				}				
 			})	
 		}
@@ -1101,6 +1111,13 @@ function isObjectEmpty(obj) {
 			setSoundMute,
 			countMessageRent,
 			setCountMessageRent,
+
+			maxs,
+			setMaxs,
+			maxAll,
+			setMaxAll,
+			userMaxRenthub,
+			setUserMaxRenthub,
 		}}>
 			{children}
 		</UsersContext.Provider>

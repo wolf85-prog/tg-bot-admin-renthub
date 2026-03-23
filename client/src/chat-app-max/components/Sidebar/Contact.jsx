@@ -21,7 +21,7 @@ const Contact = ({ contact, worker }) => {
 	
 	//сделать пользователя непрочитанным
 	const { setUserRentAsUnread, setCountMessageRent } = useUsersContext();
-	const { userRenthub, setUserRenthub } = useUsersContext();
+	const { userRenthub, setUserMaxRenthub } = useUsersContext();
 
 	const [checkContact, setCheckContact] = useState([])
 
@@ -93,7 +93,7 @@ const Contact = ({ contact, worker }) => {
 				//console.log("obj: ", obj)
 
 				//сохранить сообщения в контексте пользователя
-				setUserRenthub((userRenthub) => {
+				setUserMaxRenthub((userRenthub) => {
 					let userIndex = userRenthub.findIndex((user) => user.chatId === contact.chatId.toString());
 					const usersCopy = JSON.parse(JSON.stringify(userRenthub));
 					usersCopy[userIndex].messages = obj

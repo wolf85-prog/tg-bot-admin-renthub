@@ -9,7 +9,7 @@ import { useUsersContext } from "../../../chat-app-new/context/usersContext";
 import { CSpinner} from '@coreui/react'
 
 const Sidebar = () => {
-	const { userRenthub, workersAll } = useUsersContext();
+	const { userMaxRenthub, maxAll } = useUsersContext();
     const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID 
 	const [contacts, setContacts]= useState([]);
 	const [text, setText]= useState("");
@@ -27,12 +27,12 @@ const Sidebar = () => {
 		// 	return dateB-dateA //сортировка по убывающей дате  
 		// })
 
-		//console.log("workersAll: ", workersAll.length)
-		//console.log("userRenthub: ", userRenthub)
+		console.log("maxAll: ", maxAll?.length)
+		console.log("userMaxRenthub: ", userMaxRenthub)
 		
 		const arr = []
 
-		for (const item of userRenthub) {		
+		for (const item of userMaxRenthub) {		
 			arr.push(item)
 			if (arr.length === CountWorkers)
 			  break;
@@ -46,17 +46,17 @@ const Sidebar = () => {
 			setLoading(false)
 		}		
 		
-	},[userRenthub])
+	},[userMaxRenthub])
 
 	
 	useEffect(() => {
 		const arr = []
-		for (const item of userRenthub) {			
+		for (const item of userMaxRenthub) {			
 			arr.push(item)
 			if (arr.length === CountWorkers)
 			  break;
 		}
-		const filteredData = userRenthub.filter(user=> (user.name + user.chatId + user.phone + user.company + user.username)?.toLowerCase().includes(text.toLowerCase()));
+		const filteredData = userMaxRenthub.filter(user=> (user.name + user.chatId + user.phone + user.company + user.username)?.toLowerCase().includes(text.toLowerCase()));
         
 		setContacts(text === '' ? arr : filteredData);      
     }, [text]);
@@ -95,7 +95,7 @@ const Sidebar = () => {
 				<div className="sidebar__avatar-wrapper">
 					<img src={avatar} alt='U.L.E.Y' className="avatar-adm" />
 				</div>
-				<div>Менеджеры / MAX: 0</div>
+				<div>Менеджеры / MAX: {maxAll?.length}</div>
 				<div className="sidebar__actions">
 					<OptionsBtn
 						className="sidebar__action"
@@ -137,7 +137,7 @@ const Sidebar = () => {
 				contacts.map((contact, ind) => (
 					contact.chatId !== chatAdminId &&
                     <>   
-						<Contact key={contact.chatId} contact={contact} worker={workersAll.filter((item)=> item.chatId === contact.chatId)} />
+						<Contact key={contact.chatId} contact={contact} worker={maxAll.filter((item)=> item.chatId === contact.chatId)} />
 					</>
 				))
 				}
