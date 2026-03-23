@@ -12,6 +12,8 @@ import { getRManagers, getRManager, getRManagerCount, newRMessage, getRContacts,
 	getRMessagesCount, getRCompanys, 
 	getRUserbot, getDistributionsCountR, getDistributionsRPlan,} from '../../http/renthubAPI'
 
+import { getMContacts, } from '../../http/maxAPI'
+
 import { getDistributions, 
 	getDistributionsW, 
 	getDistributionsCountW,
@@ -173,6 +175,245 @@ const UsersProvider = ({ children }) => {
 			//0 все специалисты
 			let managers = await getRManagers()
 			console.log("Managers: ", managers?.length)
+			
+			const arrayWorkerAll = []
+
+			let userbot = await getRUserbot()
+
+			//массив компаний
+			let comps = await getRCompanys()
+			//console.log("comps: ", comps)
+		
+			managers.map(async (user) => {
+				//console.log("user: ", user)
+				//поиск компании по id
+				let compName = ''
+				if (comps && user.companyId) {
+					//compName = comps.find(item=> item.id === parseInt(user.companyId) || item.GUID === user.companyId)
+					compName = comps.find(item=>user.companyId !== null && (item.id.toString() === user.companyId || item.GUID === user.companyId))
+					//console.log("compName: ", compName?.title)
+				}	
+
+				//const res = userbot.find(item2 => item2.chatId === user.chatId)
+
+				const newWorker = {
+					id: user.id,
+					fio: user.fio,
+					username: '',//res ? res.username : '',
+					phone: user.phone,
+					dolgnost: user.dolgnost,
+					city: user.city, 
+					company: compName ? compName?.title : '',
+					projects: user.projects,
+					worklist: user.worklist,
+					sfera: user.sfera,
+					chatId: user.chatId,
+					createDate: user.createdAt,
+					avatar: user.avatar ? user.avatar : (compName ? compName.profile : ''),
+					block: user.block,
+					deleted: user.deleted,
+				}
+		
+				arrayWorkerAll.push(newWorker)
+			})
+
+			console.log("arrayWorkerAll: ", arrayWorkerAll.length)
+		
+			setWorkersAll(arrayWorkerAll)
+
+			//1 все специалисты 100
+			let response = await getRManagerCount(100, userRenthub.length);
+			//console.log("manager size: ", response)
+		
+			const arrayWorker = []
+		
+			response.reverse().map(async (user) => {	
+				const newWorker = {
+					id: user.id,
+					fio: user.fio,
+					username: user.username,
+					phone: user.phone,
+					dolgnost: user.dolgnost,
+					city: user.city, 
+					company: user.companyId,
+					projects: user.projects,
+					worklist: user.worklist,
+					sfera: user.sfera,
+					chatId: user.chatId,
+					createDate: user.createdAt,
+					avatar: user.avatar,
+					block: user.block,
+					deleted: user.deleted,
+				}
+		
+				arrayWorker.push(newWorker)
+			})
+		
+			setWorkers(arrayWorker)	
+		
+			//2 все пользователи бота
+			let wuserbots = await getRContacts();
+			//console.log("wuserbots size: ", wuserbots.length)
+			const arrayContact = []
+
+			//3 все беседы (conversations)
+			let convers = await getRConversations()
+			//console.log("conversations: ", convers.length)
+			setConversations(convers)
+
+			//4 все сообщения бота
+			let messagesAll = await getRMessagesCount(1000) //getWMessagesCount(1000) //getAllWMessages()
+			//console.log("messagesAll: ", messagesAll.length)
+
+			let count = 0
+			convers.forEach(async (user, index) => {
+		
+				let manager = arrayWorkerAll.find((item)=> item.chatId === user.members[0])
+				//console.log("manager: ", manager)
+				let userbot = wuserbots.find((item)=> item.chatId === manager?.chatId)	
+					
+				let conversationId = user.id //await getWConversation(user.members[0])
+
+				let messages = []
+				let messages2 = []
+				
+				//messages = messagesAll.filter(item => item.conversationId === conversationId.toString()) //await getWMessages(conversationId)
+				//messagesAll.reverse()
+
+				//выбрать из всех сообщений только пользователя в кол-ве 10 шт.
+				for (let i = messagesAll.length-1; i >= 0; i--) {
+					if (messagesAll[i].conversationId === conversationId.toString())
+						messages.push(messagesAll[i])
+					
+					if (messages.length === 20)
+					break;
+				}
+
+				//console.log("messages: ", messages)
+
+				//получить последнее сообщение (без сообщений из рассылки)
+				if (messages.length > 0) {
+					[...messages].reverse().map((message) => {
+						if (message.isBot === false || message.isBot === null) {
+							messages2.push(message)
+						}	
+					})
+				}
+
+				//console.log("last messages: ", user, messages2)
+					
+				const messageDates = Object.keys(messages2); //messages
+
+				const recentMessageDate = messageDates[messageDates.length - 1];
+				const message = messages2[recentMessageDate];
+				
+				const dateMessage = message ? messages2[recentMessageDate].createdAt : "2000-01-01T00:00:00";
+				const lastMessage = message ? messages2[recentMessageDate].text : "";			
+				
+				const arrayMessage = []
+				const allDate = []
+				
+				if (messages) {
+					[...messages].reverse().map(message => {
+						const d = new Date(message.createdAt);
+						const year = d.getFullYear();
+						const month = String(d.getMonth()+1).padStart(2, "0");
+						const day = String(d.getDate()).padStart(2, "0");
+						const chas = d.getHours();
+						const minut = String(d.getMinutes()).padStart(2, "0");
+					
+						const newDateMessage = `${day}.${month}.${year}`
+				
+						const newMessage = {
+							date: newDateMessage,
+							content: message.text,
+							image: message.type === 'image' ? true : false,
+							descript: message.buttons ? message.buttons : '',
+							sender: message.senderId,
+							time: chas + ' : ' + minut,
+							status: 'sent',
+							id:message.messageId,
+							reply:message.replyId,
+						}
+						arrayMessage.push(newMessage)
+						allDate.push(newDateMessage)
+					})
+				}	
+				
+				const dates = [...allDate].filter((el, ind) => ind === allDate.indexOf(el));
+				
+				let obj = {};
+				for (let i = 0; i < dates.length; i++) {
+					const arrayDateMessage = []
+					for (let j = 0; j < arrayMessage.length; j++) {
+						if (arrayMessage[j].date === dates[i]) {
+							arrayDateMessage.push(arrayMessage[j])							
+						}
+					}	
+					obj[dates[i]] = arrayDateMessage;
+				}	
+
+				//console.log("manager: ", manager)
+				
+				if (manager) {
+					const newUser = {
+						id: manager.id,
+						username: manager.username ? manager.username : '',
+						name: manager?.fio, 
+						city: manager?.city, 
+						phone: manager?.phone, 
+						dolgnost: manager?.dolgnost, 
+						company: manager?.company,
+						worklist: manager?.worklist,
+						sfera: manager?.sfera,
+						chatId: manager?.chatId,
+						avatar: manager?.avatar ? manager?.avatar : '', //avatars[0]?.image ? avatars[0]?.image : '', //user.avatar,
+						conversationId: conversationId ? conversationId : 0,
+						block: '',
+						blockw: manager?.block,
+						unread: 0, 
+						pinned: false,
+						typing: false,
+						message:  lastMessage,
+						date: dateMessage,
+						messages: obj, // { "01/01/2023": arrayMessage,"Сегодня":[] },	
+					}
+					//console.log(newUser)
+					arrayContact.push(newUser)
+				}		
+						
+			
+				//если элемент массива последний
+				if (index === convers.length-1) {
+					const sortedClients = [...arrayContact].sort((a, b) => {       
+						var dateA = new Date(a.date), dateB = new Date(b.date) 
+						return dateB-dateA  //сортировка по убывающей дате  
+					})
+
+					//console.log("sortedClients: ", sortedClients.length)
+		
+					setUserRenthub(sortedClients)
+
+					//сохранить кэш
+					localStorage.setItem("userRenthub", JSON.stringify(sortedClients));
+				}				
+			})	
+		}
+		
+		//все сообщения менеджеров
+		fetchUserManagerData();
+		
+	},[])
+
+//---------get MAX Users----------------------------------------------------
+
+	useEffect(() => {
+		//---------get UserManagerы-----------------------------------------
+		const fetchUserManagerData = async () => {
+		
+			//0 все специалисты
+			let managers = await getMContacts()
+			console.log("Managers Max: ", managers?.length)
 			
 			const arrayWorkerAll = []
 
