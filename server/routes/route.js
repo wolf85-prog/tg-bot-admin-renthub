@@ -16,7 +16,7 @@ const { getUsersRenthub, getUserRenthub, editUserRenthub } = require( "../contro
 const { newConversationR, getConversationR, getConversationsR } = require( "../controllers/rconversationController.js")
 
 const {newDistributionR, getDistributionsR, getDistributionsRPlan, delDistributionR, 
-    delDistributionRPlan, editDistribR, editDistribRAll, sendDistribR, sendDistribR2, sendDistribR3, sendDistribR4,
+    delDistributionRPlan, editDistribR, editDistribRAll, sendDistribR, sendDistribR2, sendDistribR3, sendDistribR4, sendDistribR5,
     editDistribRPlan, delMessagesDistribR, getDistributionsCount, getPaginatedDistributionR} = require("../controllers/distributionController.js")
 
 const { getCompanys, getCompanyCount, editCompany, getCompanyId, addCompany, 
@@ -109,6 +109,7 @@ route.get('/distributionsr/send/:id', sendDistribR)
 route.get('/distributionsr/custom/send/:id', sendDistribR2) // С Новым годом
 route.get('/distributionsr/customcep/send/:id', sendDistribR3)
 route.get('/distributionsr/customcep2/send/:id', sendDistribR4)
+route.get('/distributionsr/customcep4/send/:id', sendDistribR5)
 
 route.get('/distributionr/delmessages/:id', delMessagesDistribR)
 

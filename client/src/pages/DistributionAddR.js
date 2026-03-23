@@ -1231,10 +1231,12 @@ const onChangeSelectCity = (e) => {
         if (valueCep === '2 | Ссылки') {
           console.log(valueCep)
           const res = await $host.get(hostServer + 'api/distributionsr/customcep/send/' + distrNew?.id); 
-        } else if ('1 | Принять участие') {
+        } else if (valueCep === '1 | Принять участие') {
           const res = await $host.get(hostServer + 'api/distributionsr/customcep2/send/' + distrNew?.id);
-        } else if ('3 | С Новым годом') {
+        } else if (valueCep === '3 | С Новым годом') {
           const res = await $host.get(hostServer + 'api/distributionsr/custom/send/' + distrNew?.id);
+        } else if (valueCep === '4 | Max'){
+          const res = await $host.get(hostServer + 'api/distributionsr/customcep4/send/' + distrNew?.id);
         }
         
       }
@@ -1680,7 +1682,7 @@ const onChangeSelectCity = (e) => {
                                             <CFormSelect 
                                               aria-label="Default select example"
                                               style={{marginTop: '10px'}}
-                                              options={["1 | Принять участие", "2 | Ссылки", "3 | С Новым годом"]}
+                                              options={["1 | Принять участие", "2 | Ссылки", "3 | С Новым годом | Max"]}
                                               value={valueCep}
                                               onChange={(e)=>setValueCep(e.target.value)}
                                             />
