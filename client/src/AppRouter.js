@@ -13,6 +13,7 @@ const Page404 = React.lazy(() => import('./views/pages/page404/Page404'))
 const Page500 = React.lazy(() => import('./views/pages/page500/Page500'))
 
 const ChatWorker = React.lazy(() => import('./pages/ChatWorker'))
+const ChatsMax = React.lazy(() => import('./pages/ChatMax'))
 const ChatRentPerson = React.lazy(() => import('./pages/ChatRentPerson'))
 const DistributionR = React.lazy(() => import('./pages/DistributionR'))
 const DistributionAddR = React.lazy(() => import('./pages/DistributionAddR'))
@@ -33,6 +34,7 @@ const AppRouter = observer(() => {
       <Route exact path="/500" name="Page 500" element={<Page500 />} />
 
       <Route exact path="/chatrent" name="Renthub" element={<ChatWorker />} />
+      <Route exact path="/chatmax" name="Renthub" element={<ChatsMax />} />
       <Route exact path="/:id" name="Renthub" element={<ChatRentPerson />} />
 
       <Route exact path="/distributionr" name="Renthub" element={<DistributionR />} />

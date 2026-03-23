@@ -121,6 +121,15 @@ const AppSidebar = () => {
       badge: countMessage !== 0 ? {color: 'info', text: countMessage,} : "",
       style: {backgroundColor: '#0078d421', cursor: 'pointer'},
     },
+
+    {
+      component: CNavItem,
+      name: 'MAX',
+      to: '/chatmax',
+      //onClick: ()=>handleLinkClick2(`${host}/distributionr`),
+      icon: <img src={ChatIcon} style={{width: '21px', marginRight: '20px', marginLeft: '6px'}} />,
+      style: {cursor: 'pointer'},
+    },
     
     {
       component: CNavItem,

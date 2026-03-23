@@ -1682,7 +1682,7 @@ const onChangeSelectCity = (e) => {
                                             <CFormSelect 
                                               aria-label="Default select example"
                                               style={{marginTop: '10px'}}
-                                              options={["1 | Принять участие", "2 | Ссылки", "3 | С Новым годом | Max"]}
+                                              options={["1 | Принять участие", "2 | Ссылки", "3 | С Новым годом", "4 | Max"]}
                                               value={valueCep}
                                               onChange={(e)=>setValueCep(e.target.value)}
                                             />
