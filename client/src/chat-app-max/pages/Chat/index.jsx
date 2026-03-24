@@ -28,7 +28,7 @@ import {
 	CModalBody,
 	CModalFooter
   } from '@coreui/react'
-import { sendMessageToTelegram, sendPhotoToTelegram, sendDocumentFormToTelegram } from "src/http/telegramAPI";
+import { newMaxMessage, sendMessageToMax, sendPhotoToMax } from "src/http/maxAPI";
 
 const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 const token_work = process.env.REACT_APP_TELEGRAM_API_TOKEN_RENTHUB
@@ -38,7 +38,7 @@ const webAppAnketa = process.env.REACT_APP_WEBAPP_ANKETA
 const webAppUrl = process.env.REACT_APP_WEBAPP_URL;
 
 const Chat = () => {
-	const { userRenthub, userMaxRenthub, addNewMessage, conversationsMax, workersAll } = useUsersContext();
+	const { userRenthub, userMaxRenthub, addNewMessageMax, conversationsMax, workersAll } = useUsersContext();
 	const { personW } = useContext(AccountContext);
 	const { setCountMessage } = useUsersContext();
 
@@ -218,7 +218,7 @@ const Chat = () => {
 			temp = temp.replace(/>/g, '%3e'); 		 //экранирование >
 			temp = temp.replace(/</g, '%3c'); 		 //экранирование <
 			
-			let sendToTelegram
+			let sendToMax
 
 			// const url_send_msg = `https://api.telegram.org/bot${token_work}/sendMessage?chat_id=${personW.id}&parse_mode=html&text=${temp}`
 			// const sendToTelegram = await $host.get(url_send_msg);
@@ -226,7 +226,7 @@ const Chat = () => {
 			if(!file) {
 				// const url_send_msg = `https://api.telegram.org/bot${token_work}/sendMessage?chat_id=${personW.id}&parse_mode=html&text=${temp}`				
 				// sendToTelegram = await $host.get(url_send_msg);
-				sendToTelegram = await sendMessageToTelegram({user: personW.id, text: temp})
+				sendToMax = await sendMessageToMax({user: personW.id, text: temp})
 			} else {
 				if (fileType === 'doc') { //(image.slice(-3) === 'gif' || image.slice(-3)==='zip') {
 					// if (image.slice(-3) === 'ocx' || image.slice(-3)==='doc' || image.slice(-3)==='lsx' || image.slice(-3)==='xls' || image.slice(-3)==='iff' || image.slice(-3)==='IFF') {
@@ -247,7 +247,7 @@ const Chat = () => {
 						form.append("chat_id", personW.id); // добавление имени файла
 						form.append("document", file); // добавление файла
 						//const form = new FormData();
-						sendToTelegram = await $host.post(`https://api.telegram.org/bot${token_work}/sendDocument`, form, {headers: { 'Content-Type': 'multipart/form-data' },})
+						sendToMax = await $host.post(`https://api.telegram.org/bot${token_work}/sendDocument`, form, {headers: { 'Content-Type': 'multipart/form-data' },})
 					//}		
 
 					//sendToTelegram = await sendDocumentFormToTelegram({chatId: personW.id, path: pathFile, filename:originalName})
@@ -255,16 +255,16 @@ const Chat = () => {
 					// if (image.slice(-3) !== 'png' || image.slice(-3)!=='jpg' || image.slice(-3)!=='peg' || image.slice(-3) !== 'PNG' || image.slice(-3)!=='JPG' || image.slice(-3)!=='PEG') {
 					// 	setShowErrorFile(true)
 					// } else {
-						const url_send_photo = `https://api.telegram.org/bot${token_work}/sendPhoto?chat_id=${personW.id}&photo=${host+image}`
-						sendToTelegram = await $host.get(url_send_photo);
-						//sendToTelegram = await sendPhotoToTelegram({user: personW.id, image: host+image})
+						//const url_send_photo = `https://api.telegram.org/bot${token_work}/sendPhoto?chat_id=${personW.id}&photo=${host+image}`
+						//sendToMax = await $host.get(url_send_photo);
+						sendToMax = await sendPhotoToMax({user: personW.id, image: host+image})
 					//}		
 				}	
 			}
 
 			//Выводим сообщение об успешной отправке
-			if (sendToTelegram) {
-				console.log('Спасибо! Ваша сообщение отправлено! ', sendToTelegram.data.result.message_id);
+			if (sendToMax) {
+				console.log('Спасибо! Ваша сообщение отправлено! ', sendToMax.data.result.message_id);
 			}           
 			//А здесь сообщение об ошибке при отправке
 			else {
@@ -281,14 +281,14 @@ const Chat = () => {
 					type: "text",
 					text: mess,
 					isBot: null,
-					messageId: sendToTelegram.data.result.message_id,
+					messageId: sendToMax.data.result.message_id,
 				}
 
 				//сохранение сообщения в базе данных
-				await newRMessage(message)	
+				await newMaxMessage(message)	
 
 				//сохранить в контексте
-				addNewMessage(user.chatId, mess, 'text', '', convs.id, sendToTelegram.data.result.message_id, null);
+				addNewMessageMax(user.chatId, mess, 'text', '', convs.id, sendToMax.data.result.message_id, null);
 			} else {
 				console.log("image")
 				message = {
@@ -298,14 +298,14 @@ const Chat = () => {
 					type: "image",
 					text: host + image,
 					isBot: null,
-					messageId: sendToTelegram.data.result.message_id,
+					messageId: sendToMax.data.result.message_id,
 				}
 
 				//сохранение сообщения в базе данных
-				await newRMessage(message)	
+				await newMaxMessage(message)	
 
 				//сохранить в контексте
-				addNewMessage(user.chatId, host + image, 'image', '', convs.id, sendToTelegram.data.result.message_id, null);
+				addNewMessageMax(user.chatId, host + image, 'image', '', convs.id, sendToMax.data.result.message_id, null);
 			}
 			console.log("message send: ", message);
 

@@ -6,6 +6,7 @@ const { Op } = require('sequelize')
 
 require("dotenv").config();
 
+const tokenMax = process.env.MAX_API_TOKEN
 
 class MaxbotController {
 
@@ -74,6 +75,93 @@ class MaxbotController {
                 ],
             })
             return res.status(200).json(conversations);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
+    //add message
+    async newMessageMax(req, res) {
+        const {conversationId, text, senderId, receiverId, type, isBot, messageId, buttons} = req.body
+        try {
+            await Message.create({conversationId, text, senderId, receiverId, type, isBot, messageId, buttons})
+            return res.status(200).json("MessageW has been sent successfully");
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
+    //delete message
+    async delMessageMax(req, res) {
+        const id = req.params.id
+        try {
+            await Message.destroy({
+                where: { messageId: String(id) },
+            })
+            return res.status(200).json("Message has been delete successfully");
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
+
+    //send message
+    async sendMessageToMax(req, res) {
+        const {user, text} = req.body 
+
+        try {   
+            //const url_send_msg = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user}&parse_mode=html&text=${text.replace(/\n/g, '%0A')}`
+            const url_send_msg = `https://platform-api.max.ru/messages?user_id=${user}`
+                            
+            const ressend = await $host.post(url_send_msg, 
+                                    { "text": text.replace(/\n/g, '%0A'),
+                                    },
+                                    {headers: {
+                                        "Access-Control-Allow-Origin" : "*",
+                                        "Content-type": "Application/json",
+                                        "Authorization": `${tokenMax}`
+                                        } 
+                                    }  
+
+                                )
+
+            return res.status(200).json(ressend.data);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
+    //send photo
+    async sendPhotoToMax(req, res) {
+        const {user, photo, keyboard} = req.body 
+
+        try {   
+            //const url_send_msg = `https://api.telegram.org/bot${token}/sendPhoto?chat_id=${user}&photo=${photo}&reply_markup=${keyboard ? keyboard : ''}`
+            const url_send_msg = `https://platform-api.max.ru/messages?user_id=${user}`
+                            
+            //const ressend = await $host.get(url_send_msg)
+
+            const ressend = await $host.post(url_send_msg, 
+                                    { "text": '',
+                                        "attachments": [
+                                            {
+                                            "type": "image", 
+                                            "payload": {
+                                                "url": photo
+                                            }
+                                            },
+                                        ] 
+                                    },
+                                    {headers: {
+                                        "Access-Control-Allow-Origin" : "*",
+                                        "Content-type": "Application/json",
+                                        "Authorization": `${tokenMax}`
+                                        } 
+                                    }  
+
+                                )
+
+            return res.status(200).json(ressend.data);
         } catch (error) {
             return res.status(500).json(error.message);
         }

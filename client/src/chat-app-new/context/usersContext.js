@@ -1093,6 +1093,24 @@ const UsersProvider = ({ children }) => {
 	}
 
 
+
+
+	//отправить сообщение из админки в max
+	const addNewMessageMax = (userId, message, type, textButton, convId, messageId, isBot) => {
+
+		socket.emit("sendAdminMax", { 
+			senderId: chatAdminId,
+			receiverId: userId,
+			text: message,
+			type: type,
+			buttons: textButton,
+			convId: convId,
+			messageId,
+			isBot: isBot,
+		})
+	};
+
+
 //===============================================================
 //                  Notifications
 //===============================================================
@@ -1229,6 +1247,7 @@ function isObjectEmpty(obj) {
 			setUserMaxRenthub,
 			conversationsMax, 
 			setConversationsMax,
+			addNewMessageMax,
 		}}>
 			{children}
 		</UsersContext.Provider>

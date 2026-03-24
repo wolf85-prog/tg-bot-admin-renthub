@@ -25,7 +25,8 @@ const { getCompanys, getCompanyCount, editCompany, getCompanyId, addCompany,
 const { sendMessageToTelegram, sendPhotoToTelegram, sendDocumentToTelegram, sendDocumentFormToTelegram,
     sendVideoToTelegram, sendAudioToTelegram, delMessageToTelegram } = require('../controllers/telegramController')
 
-const { getMaxbotChatId, getMaxUsersRenthub, getMessagesMaxCount, getConversationMax, getConversationsMax } = require('../controllers/maxbotController.js')
+const { getMaxbotChatId, getMaxUsersRenthub, getMessagesMaxCount, getConversationMax, getConversationsMax, 
+    newMessageMax, delMessageMax, sendMessageToMax, sendPhotoToMax } = require('../controllers/maxbotController.js')
 
 const upload = require('../middleware/file')
 const uploadDistrib = require('../middleware/fileDistrib') //папка для файлов в рассылках
@@ -46,6 +47,8 @@ route.patch('/userbots/update/:id', editUserRenthub)
 route.get('/maxbots/get', getMaxUsersRenthub)
 route.get("/maxbot/chat/:id", getMaxbotChatId);
 route.get('/message/maxbot/count/:count', getMessagesMaxCount)
+route.post('/message/maxbot/add', newMessageMax)
+route.delete('/message/maxbot/delete/:id', delMessageMax)
 route.get('/conversation/maxbot/:id', getConversationMax)
 route.get('/conversations/maxbot', getConversationsMax)
 
@@ -121,7 +124,7 @@ route.get('/distributionr/delmessages/:id', delMessagesDistribR)
 route.get('/distributionsr/count/get/:count/:prev', getDistributionsCount) //еще
 
 
-//----------------- Telegram Renthub---------------------------------
+//----------------- Telegram API Renthub---------------------------------
 route.post(`/botrenthub/sendmessage`, sendMessageToTelegram)
 route.post(`/botrenthub/sendphoto`, sendPhotoToTelegram)
 route.post(`/botrenthub/senddocument`, sendDocumentToTelegram)
@@ -129,6 +132,11 @@ route.post(`/botrenthub/senddocumentform`, sendDocumentFormToTelegram)
 route.post(`/botrenthub/sendvideo`, sendVideoToTelegram)
 route.post(`/botrenthub/sendaudio`, sendAudioToTelegram)
 route.post(`/botrenthub/delmessage`, delMessageToTelegram)
+
+
+//----------------- Max API Renthub---------------------------------
+route.post(`/botmaxrent/sendmessage`, sendMessageToMax)
+route.post(`/botmaxrent/sendphoto`, sendPhotoToMax)
 
 
 module.exports = route

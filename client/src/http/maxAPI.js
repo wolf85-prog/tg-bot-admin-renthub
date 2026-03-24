@@ -55,9 +55,49 @@ export const getMaxConversations= async ()=>{
 // message
 export const newMaxMessage = async (data) =>{
     try {
-        await $host.post(`api/message/add`, data); 
+        await $host.post(`api/message/maxbot/add`, data); 
     } catch (error) {
         console.log("error while calling newMaxMessage api",error.message);
+    }
+}
+
+
+export const delMaxMessage = async (id) =>{
+    try {
+        await $host.delete(`api/message/maxbot/delete/${id}`); 
+    } catch (error) {
+        console.log("error while calling delMaxMessage api",error.message);
+    }
+}
+
+
+export const sendMessageToMax = async (data) =>{
+    try {
+       let response = await $host.post('api/botmaxrent/sendmessage', data);
+       //console.log(response);
+       return response;
+    } catch (error) {
+        console.log("error while calling sendMessageToMax api", error.message);
+    }
+}
+
+export const delMessageToMax = async (data) =>{
+    try {
+       let response = await $host.post('api/botmaxrent/delmessage', data);
+       //console.log(response);
+       return response;
+    } catch (error) {
+        console.log("error while calling delMessageToMax api", error.message);
+    }
+}
+
+export const sendPhotoToMax = async (data) =>{
+    try {
+       let response = await $host.post('api/botmaxrent/sendphoto', data);
+       //console.log(response);
+       return response;
+    } catch (error) {
+        console.log("error while calling sendPhotoToMax api", error.message);
     }
 }
 
