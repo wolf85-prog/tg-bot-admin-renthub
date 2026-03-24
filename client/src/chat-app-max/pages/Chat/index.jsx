@@ -264,7 +264,7 @@ const Chat = () => {
 
 			//Выводим сообщение об успешной отправке
 			if (sendToMax) {
-				console.log('Спасибо! Ваша сообщение отправлено! ', sendToMax.data.result.message_id);
+				console.log('Спасибо! Ваша сообщение отправлено! ');
 			}           
 			//А здесь сообщение об ошибке при отправке
 			else {
@@ -281,14 +281,14 @@ const Chat = () => {
 					type: "text",
 					text: mess,
 					isBot: null,
-					messageId: sendToMax.data.result.message_id,
+					messageId: '', //sendToMax.data.result.message_id,
 				}
 
 				//сохранение сообщения в базе данных
 				await newMaxMessage(message)	
 
 				//сохранить в контексте
-				addNewMessageMax(user.chatId, mess, 'text', '', convs.id, sendToMax.data.result.message_id, null);
+				addNewMessageMax(user.chatId, mess, 'text', '', convs.id, '', null);
 			} else {
 				console.log("image")
 				message = {
@@ -298,14 +298,14 @@ const Chat = () => {
 					type: "image",
 					text: host + image,
 					isBot: null,
-					messageId: sendToMax.data.result.message_id,
+					messageId: '',//sendToMax.data.result.message_id,
 				}
 
 				//сохранение сообщения в базе данных
 				await newMaxMessage(message)	
 
 				//сохранить в контексте
-				addNewMessageMax(user.chatId, host + image, 'image', '', convs.id, sendToMax.data.result.message_id, null);
+				addNewMessageMax(user.chatId, host + image, 'image', '', convs.id, '', null);
 			}
 			console.log("message send: ", message);
 

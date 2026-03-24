@@ -426,7 +426,7 @@ const UsersProvider = ({ children }) => {
 			
 			const arrayWorkerAll = []
 
-			let userbot = await getRUserbot()
+			//let userbot = await getRUserbot()
 
 			//массив компаний
 			let comps = await getRCompanys()
@@ -457,7 +457,7 @@ const UsersProvider = ({ children }) => {
 					projects: resManager?.projects,
 					worklist: resManager?.worklist,
 					sfera: resManager?.sfera,
-					chatId: resManager?.chatId,
+					chatId: user?.chatId,
 					createDate: resManager?.createdAt,
 					avatar: resManager?.avatar ? resManager.avatar : (compName ? compName.profile : ''),
 					block: resManager?.block,
@@ -502,8 +502,8 @@ const UsersProvider = ({ children }) => {
 			setMaxs(arrayWorker)	
 		
 			//2 все пользователи бота
-			let muserbots = await getMContacts();
-			console.log("muserbots size: ", muserbots)
+			//let muserbots = await getMContacts();
+			//console.log("muserbots size: ", muserbots)
 			const arrayContact = []
 
 			//3 все беседы (conversations)
@@ -518,10 +518,10 @@ const UsersProvider = ({ children }) => {
 			let count = 0
 			convers.forEach(async (user, index) => {
 
-				let userbot = muserbots.find((item)=> item.chatId === user.members[0])	
-				console.log("userbot: ", userbot)
+				// let userbot = managers.find((item)=> item.chatId === user.members[0])	
+				// console.log("userbot: ", userbot)
 		
-				let manager = arrayWorkerAll.find((item)=> item.chatId === userbot.telegramId)
+				let manager = arrayWorkerAll.find((item)=> item.chatId === user.members[0])
 				console.log("manager: ", manager)
 
 				
