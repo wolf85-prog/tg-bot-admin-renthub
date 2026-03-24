@@ -143,6 +143,36 @@ io.on("connection", (socket) => {
         })
     })
 
+
+    //max
+    socket.on("sendMessageMax", ({senderId, receiverId, text, type, convId, messageId, replyId, isBot})=>{
+        const user = getUser(receiverId)
+        io.emit("getMessageMax", {
+            senderId,
+            text,
+            type,
+            convId,
+            messageId,
+            replyId,
+            isBot, 
+        })
+    })
+
+    //send and get message
+    socket.on("sendAdminMax", ({senderId, receiverId, text, type, buttons, convId, messageId, isBot})=>{
+        io.emit("getAdminMax", {
+            senderId,
+            receiverId,
+            text,
+            type,
+            buttons,
+            convId,
+            messageId,
+            isBot,
+        })
+    })
+
+
     // Notifications
     //------------------------------------------------------------------
     //send and get message in workers

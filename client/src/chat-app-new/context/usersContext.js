@@ -444,7 +444,7 @@ const UsersProvider = ({ children }) => {
 				// }	
 
 				const resManager = managersAll.find(item2 => item2.id.toString() === user.managerId)
-				console.log("resManager: ", resManager)
+				//console.log("resManager: ", resManager)
 
 				const newWorker = {
 					id: resManager?.id,
@@ -502,25 +502,29 @@ const UsersProvider = ({ children }) => {
 			setMaxs(arrayWorker)	
 		
 			//2 все пользователи бота
-			let wuserbots = await getMContacts();
-			//console.log("wuserbots size: ", wuserbots.length)
+			let muserbots = await getMContacts();
+			console.log("muserbots size: ", muserbots)
 			const arrayContact = []
 
 			//3 все беседы (conversations)
 			let convers = await getMaxConversations()
-			//console.log("conversations: ", convers.length)
+			console.log("conversations: ", convers.length)
 			setConversationsMax(convers)
 
 			//4 все сообщения бота
 			let messagesAll = await getMaxMessagesCount(1000) //getWMessagesCount(1000) //getAllWMessages()
-			//console.log("messagesAll: ", messagesAll.length)
+			console.log("messagesAll: ", messagesAll.length)
 
 			let count = 0
 			convers.forEach(async (user, index) => {
+
+				let userbot = muserbots.find((item)=> item.chatId === user.members[0])	
+				console.log("userbot: ", userbot)
 		
-				let manager = arrayWorkerAll.find((item)=> item.chatId === user.members[0])
+				let manager = arrayWorkerAll.find((item)=> item.chatId === userbot.telegramId)
 				console.log("manager: ", manager)
-				let userbot = wuserbots.find((item)=> item.chatId === manager?.chatId)	
+
+				
 					
 				let conversationId = user.id //await getWConversation(user.members[0])
 
@@ -818,6 +822,109 @@ const UsersProvider = ({ children }) => {
 		//_updateUserProp(data.senderId, "uread", value +1);
 	};
 
+	const fetchMessageMaxResponse = async(data) => {
+		//пришло новое сообщение
+		//const kol = await getCountMessage()
+		setCountMessageRent(count+1)
+		//const res = await newCountMessage(kol.managers + 1)
+		//console.log("Пришло новое сообщение в renthub: ", count + 1)
+		//setShowGetMess(true)
+
+
+		if (data.text.startsWith('Предварительная смета одобрена!')) {
+			
+		} else if (data.text.startsWith('Проект успешно создан') && !data.text.includes('_reply_')) {
+	
+		}
+		else {
+			console.log("Пришло новое сообщение в renthub: ", count+1)
+			//play sound
+			const savedVolume = localStorage.getItem("soundVolume");
+			const savedMute = localStorage.getItem("soundMute");
+
+			if (savedMute === 'false') {
+				console.log("savedMute: ", savedMute)
+				audioMessage.volume = parseFloat(savedVolume)
+				audioMessage.play();
+			}
+
+			//пришло новое сообщение
+			
+			//const res = await newCountWMessage(kol.workers + 1)
+			//console.log("Пришло новое сообщение в workhub: ", count + 1)
+
+		}
+
+		setUserMaxRenthub((userWorkers) => {
+			const { senderId, text, type, messageId, convId, replyId, isBot } = data;
+			//console.log("users: ", users)
+			let userIndex = userWorkers.findIndex((user) => user.chatId === senderId.toString());
+			const usersCopy = JSON.parse(JSON.stringify(userWorkers));
+	
+			if (userIndex === -1) {
+				const newUser = {
+					id: usersCopy.length,
+					name: 'Новый менеджер',
+					chatId: `${senderId}`,
+					avatar: '',
+					conversationId: convId,
+					unread: 0, 
+					pinned: false,
+					typing: false,
+					message:  '',
+					date: '2000-01-01T00:00:00',
+					messages: {}, 
+				}	
+				usersCopy.push(newUser)
+				//console.log("usersCopy: ", usersCopy)
+	
+				userIndex = usersCopy.length-1; //usersCopy.findIndex((user) => user.chatId === senderId.toString());
+	
+				//("userIndex new: ", userIndex)
+			}
+			
+			const newMsgObject = {
+				date: new Date().toLocaleDateString(),
+				content: text,
+				image: type === 'image' ? true : false,
+				sender: senderId,
+				time: new Date().toLocaleTimeString(),
+				status: null,
+				id: messageId,
+				reply: replyId,
+				isBot: isBot,  
+			};
+	
+			const currentDate = new Date().toLocaleDateString()
+	
+			if (usersCopy[userIndex].messages[currentDate]) {
+				usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+			} else {
+				usersCopy[userIndex].messages[currentDate] = [];
+				usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+			}
+			
+			const userObject = usersCopy[userIndex];
+			if (isBot) {
+				usersCopy[userIndex] = { ...userObject, ['date']: '2000-01-01T00:00:00', ['message']: newMsgObject.content};
+			} else {
+				usersCopy[userIndex] = { ...userObject, ['unread']: count + 1, ['date']: new Date(), ['message']: newMsgObject.content};
+			}
+			
+	
+			//сортировка
+			const userSort = [...usersCopy].sort((a, b) => {       
+				var dateA = new Date(a.date), dateB = new Date(b.date) 
+				return dateB-dateA  //сортировка по убывающей дате  
+			})
+	
+			return userSort;
+		});
+		
+
+		//_updateUserProp(data.senderId, "uread", value +1);
+	};
+
 
 	//получить исходящее сообщение в админку
 	const fetchAdmin = (data) => {
@@ -893,6 +1000,7 @@ const UsersProvider = ({ children }) => {
 		socket.on("getMessage", fetchMessage);
 		socket.on("getMessageSpec", fetchMessageSpecResponse);
 		socket.on("getMessageRent", fetchMessageRentResponse);
+		socket.on("getMessageMax", fetchMessageMaxResponse);
 		
 		socket.on("getAdminRent", fetchAdmin);	
 		socket.on("getDelAdminRent", fetchDelAdminRent);
