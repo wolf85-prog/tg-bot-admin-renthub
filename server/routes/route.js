@@ -25,7 +25,7 @@ const { getCompanys, getCompanyCount, editCompany, getCompanyId, addCompany,
 const { sendMessageToTelegram, sendPhotoToTelegram, sendDocumentToTelegram, sendDocumentFormToTelegram,
     sendVideoToTelegram, sendAudioToTelegram, delMessageToTelegram } = require('../controllers/telegramController')
 
-const { getMaxbotChatId, getMaxUsersRenthub } = require('../controllers/maxbotController.js')
+const { getMaxbotChatId, getMaxUsersRenthub, getMessagesMaxCount, getConversationMax, getConversationsMax } = require('../controllers/maxbotController.js')
 
 const upload = require('../middleware/file')
 const uploadDistrib = require('../middleware/fileDistrib') //папка для файлов в рассылках
@@ -42,8 +42,12 @@ route.get('/userbots/get', getUsersRenthub)
 route.get('/userbots/get/:id', getUserRenthub)
 route.patch('/userbots/update/:id', editUserRenthub)
 
+//------------------MAXBOT--------------------------
 route.get('/maxbots/get', getMaxUsersRenthub)
 route.get("/maxbot/chat/:id", getMaxbotChatId);
+route.get('/message/maxbot/count/:count', getMessagesMaxCount)
+route.get('/conversation/maxbot/:id', getConversationMax)
+route.get('/conversations/maxbot', getConversationsMax)
 
 route.post('/message/add', newMessageR)
 route.delete('/message/delete/:id', delMessageR)

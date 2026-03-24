@@ -12,7 +12,7 @@ import { getRManagers, getRManager, getRManagerCount, newRMessage, getRContacts,
 	getRMessagesCount, getRCompanys, 
 	getRUserbot, getDistributionsCountR, getDistributionsRPlan,} from '../../http/renthubAPI'
 
-import { getMContacts, } from '../../http/maxAPI'
+import { getMaxConversations, getMaxMessagesCount, getMContacts, } from '../../http/maxAPI'
 
 import { getDistributions, 
 	getDistributionsW, 
@@ -101,6 +101,7 @@ const UsersProvider = ({ children }) => {
 	const [countMessageRent, setCountMessageRent] = useState(0)
 
 	const [conversations, setConversations] = useState([]); 
+	const [conversationsMax, setConversationsMax] = useState([]); 
 	const [wuserbots, setWuserbots] = useState([]); 
 
 	const [rconversations, setRconversations] = useState([]); 
@@ -506,12 +507,12 @@ const UsersProvider = ({ children }) => {
 			const arrayContact = []
 
 			//3 все беседы (conversations)
-			let convers = await getRConversations()
+			let convers = await getMaxConversations()
 			//console.log("conversations: ", convers.length)
-			setConversations(convers)
+			setConversationsMax(convers)
 
 			//4 все сообщения бота
-			let messagesAll = await getRMessagesCount(1000) //getWMessagesCount(1000) //getAllWMessages()
+			let messagesAll = await getMaxMessagesCount(1000) //getWMessagesCount(1000) //getAllWMessages()
 			//console.log("messagesAll: ", messagesAll.length)
 
 			let count = 0
@@ -1118,6 +1119,8 @@ function isObjectEmpty(obj) {
 			setMaxAll,
 			userMaxRenthub,
 			setUserMaxRenthub,
+			conversationsMax, 
+			setConversationsMax,
 		}}>
 			{children}
 		</UsersContext.Provider>

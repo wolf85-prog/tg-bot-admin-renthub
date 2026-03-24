@@ -38,14 +38,14 @@ const webAppAnketa = process.env.REACT_APP_WEBAPP_ANKETA
 const webAppUrl = process.env.REACT_APP_WEBAPP_URL;
 
 const Chat = () => {
-	const { userRenthub, addNewMessage, conversations, workersAll } = useUsersContext();
+	const { userRenthub, addNewMessage, conversationsMax, workersAll } = useUsersContext();
 	const { personW } = useContext(AccountContext);
 	const { setCountMessage } = useUsersContext();
 
 	const chatId = personW.id;
 	const managerId = personW.managerId
 	let user = userRenthub.find((user) => user.chatId === chatId?.toString());
-	let convs = conversations.find((conv) => conv.members[0] === chatId?.toString());
+	let convs = conversationsMax.find((conv) => conv.members[0] === chatId?.toString());
 
 	console.log("header chatId: ", personW, user)
 
