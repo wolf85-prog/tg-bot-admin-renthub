@@ -99,6 +99,7 @@ const UsersProvider = ({ children }) => {
 	});
 
 	const [countMessageRent, setCountMessageRent] = useState(0)
+	const [countMessageMax, setCountMessageMax] = useState(0)
 
 	const [conversations, setConversations] = useState([]); 
 	const [conversationsMax, setConversationsMax] = useState([]); 
@@ -825,7 +826,7 @@ const UsersProvider = ({ children }) => {
 	const fetchMessageMaxResponse = async(data) => {
 		//пришло новое сообщение
 		//const kol = await getCountMessage()
-		setCountMessageRent(count+1)
+		setCountMessageMax(count+1)
 		//const res = await newCountMessage(kol.managers + 1)
 		//console.log("Пришло новое сообщение в renthub: ", count + 1)
 		//setShowGetMess(true)
@@ -837,7 +838,7 @@ const UsersProvider = ({ children }) => {
 	
 		}
 		else {
-			console.log("Пришло новое сообщение в renthub: ", count+1)
+			console.log("Пришло новое сообщение в renthub max: ", count+1)
 			//play sound
 			const savedVolume = localStorage.getItem("soundVolume");
 			const savedMute = localStorage.getItem("soundMute");
@@ -987,6 +988,66 @@ const UsersProvider = ({ children }) => {
 		});
 	}
 
+	const fetchAdminMax = (data) => {
+		console.log("Пришло сообщение в Админку Max: ", data)
+		//play send message
+		audioSend.play();
+
+		setUserMaxRenthub((userWorkers) => {
+			const { senderId, receiverId, text, type, buttons, messageId, isBot } = data;
+	
+			//console.log("userWorkers: ", userWorkers)
+	
+			let userIndex = userWorkers.findIndex((user) => user.chatId === receiverId.toString());
+			const usersCopy = JSON.parse(JSON.stringify(userWorkers));
+			//console.log("usersCopy: ", usersCopy)
+	
+			const newMsgObject = {
+				date: new Date().toLocaleDateString(),
+				content: text,
+				image: type === 'image' ? true : false,
+				descript: buttons ? buttons : '',
+				sender: senderId,
+				time: new Date().toLocaleTimeString(),
+				status: 'delivered',
+				id: messageId,
+			};
+	
+			const currentDate = new Date().toLocaleDateString()
+	
+			//if (usersCopy[userIndex].messages[currentDate]) {
+			if (!isObjectEmpty(usersCopy[userIndex].messages)) {
+				if (usersCopy[userIndex].messages[currentDate]) {
+					usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+				} else {
+					usersCopy[userIndex].messages[currentDate] = [];
+					usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+				}
+			} else {
+				usersCopy[userIndex].messages[currentDate] = [];
+				usersCopy[userIndex].messages[currentDate].push(newMsgObject);
+			}
+			
+			const userObject = usersCopy[userIndex];
+			if (isBot) {
+				usersCopy[userIndex] = { ...userObject, ['date']: '2000-01-01T00:00:00', ['message']: newMsgObject.content};
+			} else {
+				usersCopy[userIndex] = { ...userObject, ['date']: new Date(), ['message']: newMsgObject.content};
+			}
+			
+	
+			//сортировка
+			const userSort = [...usersCopy].sort((a, b) => {       
+				var dateA = new Date(a.date), dateB = new Date(b.date) 
+				return dateB-dateA  //сортировка по убывающей дате  
+			})
+	
+			//console.log(userSort)
+	
+			return userSort;
+		});
+	}
+
 	//получить исходящее сообщение в админку
 	const fetchDelAdmin = (data) => {
 		//console.log("Удаление сообщение в Админке: ", data)
@@ -1003,6 +1064,7 @@ const UsersProvider = ({ children }) => {
 		socket.on("getMessageMax", fetchMessageMaxResponse);
 		
 		socket.on("getAdminRent", fetchAdmin);	
+		socket.on("getAdminMax", fetchAdminMax);	
 		socket.on("getDelAdminRent", fetchDelAdminRent);
 		
 		socket.on("getNotif", fetchNotifAdmin);
@@ -1248,6 +1310,8 @@ function isObjectEmpty(obj) {
 			conversationsMax, 
 			setConversationsMax,
 			addNewMessageMax,
+			countMessageMax, 
+			setCountMessageMax,
 		}}>
 			{children}
 		</UsersContext.Provider>

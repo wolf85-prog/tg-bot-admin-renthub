@@ -20,7 +20,7 @@ const Contact = ({ contact, worker }) => {
 	const host = process.env.REACT_APP_API_URL
 	
 	//сделать пользователя непрочитанным
-	const { setUserRentAsUnread, setCountMessageRent } = useUsersContext();
+	const { setUserRentAsUnread, setCountMessageMax } = useUsersContext();
 	const { userRenthub, setUserMaxRenthub } = useUsersContext();
 
 	const [checkContact, setCheckContact] = useState([])
@@ -39,7 +39,7 @@ const Contact = ({ contact, worker }) => {
         });
 
 		setUserRentAsUnread(contact.chatId)
-		setCountMessageRent('0')
+		setCountMessageMax('0')
 		//await newCountWMessage(0)
 
 		if (Object.keys(contact.messages).length === 0) {
