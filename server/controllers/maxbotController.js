@@ -8,6 +8,10 @@ require("dotenv").config();
 
 const tokenMax = process.env.MAX_API_TOKEN
 
+const $host = axios.create({
+    baseURL: process.env.REACT_APP_API_URL
+})
+
 class MaxbotController {
 
     async getMaxUsersRenthub(req, res) {
