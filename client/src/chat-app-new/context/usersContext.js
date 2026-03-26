@@ -449,8 +449,8 @@ const UsersProvider = ({ children }) => {
 
 				const newWorker = {
 					id: resManager?.id,
-					fio: resManager?.fio,
-					username: '',//res ? res.username : '',
+					fio: resManager?.fio ? resManager?.fio : `${user.firstname} ${user.lastname}`,
+					username: '', //res ? res.username : '',
 					phone: resManager?.phone,
 					dolgnost: resManager?.dolgnost,
 					city: resManager?.city, 
