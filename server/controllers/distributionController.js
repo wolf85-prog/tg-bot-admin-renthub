@@ -13,6 +13,7 @@ const webAppAddStavka = process.env.WEBAPP_STAVKA
 const token = process.env.TELEGRAM_API_TOKEN_RENTHUB
 const chatAdminId = process.env.REACT_APP_CHAT_ADMIN_ID
 const host = process.env.HOST
+const maxBotUrl = process.env.MAX_BOT_URL
 
 const $host = axios.create({
     baseURL: process.env.REACT_APP_API_URL
@@ -1335,7 +1336,7 @@ class DistributionController {
                         keyboard = JSON.stringify({
                             inline_keyboard: [
                                 [
-                                    {"text": textButton, url:`https://max.ru/id503507841384_1_bot?start=${blockedWork?.dataValues.id}_${user}`},
+                                    {"text": textButton, url:`${maxBotUrl}?start=${blockedWork?.dataValues.id}_${user}`},
                                 ],
                             ]
                         });
