@@ -71,6 +71,16 @@ class RmanagersController {
         }
     }
 
+    async getRmanagerId(req, res) {
+        const {id} = req.params
+        try {
+            const managers = await Manager.findOne({where: {id: id}})
+            return res.status(200).json(managers);
+        } catch (err) {
+            return res.status(500).json(err);
+        }
+    }
+
     async editRmanager(req, res) { 
         const {id} = req.params      
         try {    
